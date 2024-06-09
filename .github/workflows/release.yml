@@ -59,10 +59,12 @@ jobs:
       - name: Run e2e tests
         run: yarn test:e2e
         env:
-          POSTGRES_HOST: postgres:5432
-          POSTGRES_DB: postgres
+          POSTGRES_URL: postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable
           POSTGRES_PASSWORD: postgres
           POSTGRES_USER: postgres
+          POSTGRES_DB: postgres
+          LOG_LEVEL: error
+          NODE_ENV: test
       - uses: actions/upload-artifact@v4
         if: always()
         with:

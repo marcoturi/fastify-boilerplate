@@ -22,7 +22,7 @@ const schema = Type.Object({
   LOG_LEVEL: Type.Enum(LogLevel),
   NODE_ENV: Type.Enum(NodeEnv),
   HOST: Type.String({ default: 'localhost' }),
-  PORT: Type.Number(),
+  PORT: Type.Number({ default: 3000 }),
 });
 
 const env = envSchema<Static<typeof schema>>({
