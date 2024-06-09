@@ -1,0 +1,8 @@
+services:
+  postgres:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    env_file:
+      - path: ./.env
+        required: true

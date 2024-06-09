@@ -1,0 +1,17 @@
+import { loadFiles } from '@graphql-tools/load-files';
+import { mergeTypeDefs } from '@graphql-tools/merge';
+import { print } from 'graphql';
+import path from 'node:path';
+
+const getGQL = async () => {
+  const typesArraySchema = await loadFiles(path.join(__dirname, '../../'), {
+    extensions: ['.graphql-schema.ts'],
+  });
+
+  const typeDefsSchema = mergeTypeDefs(typesArraySchema, {
+    throwOnConflict: true,
+  });
+  return print(typeDefsSchema);
+};
+
+export default getGQL;
