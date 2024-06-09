@@ -3,12 +3,10 @@ import { NotFoundException } from '@/shared/exceptions';
 
 export type DeleteUserCommandResult = Promise<boolean>;
 export const deleteUserCommand = userActionCreator<{ id: string }>('delete');
-export const deleteUserEvent = userActionCreator<string>('delete');
 
 export default function makeDeleteUser({
   userRepository,
   commandBus,
-  eventBus,
 }: Dependencies) {
   return {
     async handler({
@@ -19,7 +17,6 @@ export default function makeDeleteUser({
         throw new NotFoundException();
       }
       const result = await userRepository.delete(payload.id);
-      eventBus.emit(deleteUserEvent(payload.id));
       return result;
     },
     init() {
