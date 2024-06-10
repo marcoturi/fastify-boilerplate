@@ -111,7 +111,7 @@ Note: instead of using handler you can also use an application service to handle
 Using this pattern has several advantages:
 
 - You can implement middlewares in between the route and the handler. This way you can achieve things like authorization, rate limiting, caching, profiling, etc. It's easy to granular apply these middlewares to specific commands/queries by using simple regex i.e. by looking at `users/*` if you want to hit every command in the user module or `users/create` for specific ones. Example file: [middlewares.ts](src/shared/cqrs/middlewares.ts)
-- Reduce coupling between modules. Instead of explicitly defining dependencies between modules you can use commands/queries. At the moment you want to extract a module into a separate microservice you can just implement the same commands/queries interface, and you are good to go.
+- Reduce coupling between modules. Instead of explicitly defining dependencies between modules you can use commands/queries. At the moment you want to extract a module into a separate microservice you can just implement the GRPC request logic in the handler, and you are good to go.
 
 Example file: [find-users.handler.ts](src/modules/user/queries/find-users/find-users.handler.ts)
 
@@ -198,14 +198,6 @@ Example tools:
 
 - [k6](https://github.com/grafana/k6)
 - [Artillery](https://www.npmjs.com/package/artillery) (example file [create-user.artillery.yaml](tests/user/create-user/create-user.artillery.yaml))
-
-### DB Benchmarks
-
-- https://npmtrends.com/@prisma/client-vs-drizzle-orm-vs-knex-vs-kysely-vs-objection-vs-sequelize-vs-slonik-vs-typeorm
-- https://github.com/porsager/postgres-benchmarks -> tldr prefer [postgres](https://github.com/porsager/postgres) as client
-- https://github.com/ImBIOS/drizzle-northwind-benchmarks-pg/tree/rqb-patch-1
-- https://phiresky.github.io/blog/2020/sql-libs-for-typescript/
-- https://gist.github.com/mindplay-dk/befec30a2ad34acd59956862e123fa03
 
 ## <a name="client-types"></a>Client types generation
 
