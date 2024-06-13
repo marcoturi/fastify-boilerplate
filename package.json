@@ -65,7 +65,7 @@
     "env-schema": "5.2.1",
     "fastify": "4.27.0",
     "fastify-plugin": "4.5.1",
-    "graphql": "16.8.1",
+    "graphql": "16.8.2",
     "helmet": "7.1.0",
     "mercurius": "14.1.0",
     "pino": "9.1.0",
