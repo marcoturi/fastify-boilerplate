@@ -6,38 +6,9 @@ import Cors from '@fastify/cors';
 import Helmet from '@fastify/helmet';
 import { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 import UnderPressure from '@fastify/under-pressure';
-import {
-  ContextConfigDefault,
-  FastifyInstance,
-  FastifyReply,
-  FastifyRequest,
-  FastifySchema,
-  RawReplyDefaultExpression,
-  RawRequestDefaultExpression,
-  RawServerDefault,
-  RouteGenericInterface,
-} from 'fastify';
+import { FastifyInstance } from 'fastify';
 import mercurius from 'mercurius';
 import path from 'node:path';
-
-export type FastifyRequestTypebox<TSchema extends FastifySchema> =
-  FastifyRequest<
-    RouteGenericInterface,
-    RawServerDefault,
-    RawRequestDefaultExpression<RawServerDefault>,
-    TSchema,
-    TypeBoxTypeProvider
-  >;
-
-export type FastifyReplyTypebox<TSchema extends FastifySchema> = FastifyReply<
-  RawServerDefault,
-  RawRequestDefaultExpression,
-  RawReplyDefaultExpression,
-  RouteGenericInterface,
-  ContextConfigDefault,
-  TSchema,
-  TypeBoxTypeProvider
->;
 
 export default async function createServer(fastify: FastifyInstance) {
   // Graphql
