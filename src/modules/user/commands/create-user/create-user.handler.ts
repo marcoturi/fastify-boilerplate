@@ -1,5 +1,5 @@
+import { CreateUserRequestDto } from './create-user.schema';
 import { userActionCreator } from '@/modules/user';
-import { CreateUserRequestDto } from '@/modules/user/commands/create-user/create-user.schema';
 import { UserAlreadyExistsError } from '@/modules/user/domain/user.errors';
 import { ConflictException } from '@/shared/exceptions';
 

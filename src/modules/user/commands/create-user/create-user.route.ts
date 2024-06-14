@@ -3,26 +3,22 @@ import {
   CreateUserCommandResult,
 } from '@/modules/user/commands/create-user/create-user.handler';
 import { createUserRequestDtoSchema } from '@/modules/user/commands/create-user/create-user.schema';
-import { FastifyReplyTypebox, FastifyRequestTypebox } from '@/server';
 import { idDtoSchema } from '@/shared/api/id.response.dto';
+import { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 
 export default async function createUser(fastify: FastifyRouteInstance) {
-  const schema = {
-    description: 'Create user',
-    body: createUserRequestDtoSchema,
-    response: {
-      200: idDtoSchema,
-    },
-    tags: ['users'],
-  };
-  fastify.route({
+  fastify.withTypeProvider<TypeBoxTypeProvider>().route({
     method: 'POST',
     url: '/v1/users',
-    schema,
-    handler: async (
-      req: FastifyRequestTypebox<typeof schema>,
-      res: FastifyReplyTypebox<typeof schema>,
-    ) => {
+    schema: {
+      description: 'Create user',
+      body: createUserRequestDtoSchema,
+      response: {
+        200: idDtoSchema,
+      },
+      tags: ['users'],
+    },
+    handler: async (req, res) => {
       const id = await fastify.commandBus.execute<CreateUserCommandResult>(
         createUserCommand(req.body),
       );

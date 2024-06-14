@@ -1,28 +1,21 @@
+import { findUsersQuery, FindUsersQueryResult } from './find-users.handler';
+import { findUsersRequestDtoSchema } from './find-users.schema';
 import { userPaginatedResponseSchema } from '@/modules/user/dtos/user.paginated.response.dto';
-import {
-  FindUsersQueryResult,
-  findUsersQuery,
-} from '@/modules/user/queries/find-users/find-users.handler';
-import { findUsersRequestDtoSchema } from '@/modules/user/queries/find-users/find-users.schema';
-import { FastifyReplyTypebox, FastifyRequestTypebox } from '@/server';
+import { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 
 export default async function findUsers(fastify: FastifyRouteInstance) {
-  const schema = {
-    description: 'Find users',
-    querystring: findUsersRequestDtoSchema,
-    response: {
-      200: userPaginatedResponseSchema,
-    },
-    tags: ['users'],
-  };
-  fastify.route({
+  fastify.withTypeProvider<TypeBoxTypeProvider>().route({
     method: 'GET',
     url: '/v1/users',
-    schema,
-    handler: async (
-      req: FastifyRequestTypebox<typeof schema>,
-      res: FastifyReplyTypebox<typeof schema>,
-    ) => {
+    schema: {
+      description: 'Find users',
+      querystring: findUsersRequestDtoSchema,
+      response: {
+        200: userPaginatedResponseSchema,
+      },
+      tags: ['users'],
+    },
+    handler: async (req, res) => {
       const result = await fastify.queryBus.execute<FindUsersQueryResult>(
         findUsersQuery(req.query),
       );

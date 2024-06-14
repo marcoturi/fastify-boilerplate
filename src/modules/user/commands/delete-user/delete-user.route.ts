@@ -1,30 +1,26 @@
 import {
   deleteUserCommand,
   DeleteUserCommandResult,
-} from '@/modules/user/commands/delete-user/delete-user.handler';
-import { FastifyReplyTypebox, FastifyRequestTypebox } from '@/server';
+} from './delete-user.handler';
 import { idDtoSchema } from '@/shared/api/id.response.dto';
+import { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 
 export default async function deleteUser(fastify: FastifyRouteInstance) {
-  const schema = {
-    description: 'Delete a user',
-    params: idDtoSchema,
-    response: {
-      204: {
-        type: 'null',
-        description: 'User Deleted',
-      },
-    },
-    tags: ['users'],
-  };
-  fastify.route({
+  fastify.withTypeProvider<TypeBoxTypeProvider>().route({
     method: 'DELETE',
     url: '/v1/users/:id',
-    schema,
-    handler: async (
-      req: FastifyRequestTypebox<typeof schema>,
-      res: FastifyReplyTypebox<typeof schema>,
-    ) => {
+    schema: {
+      description: 'Delete a user',
+      params: idDtoSchema,
+      response: {
+        204: {
+          type: 'null',
+          description: 'User Deleted',
+        },
+      },
+      tags: ['users'],
+    },
+    handler: async (req, res) => {
       try {
         await fastify.commandBus.execute<DeleteUserCommandResult>(
           deleteUserCommand({ id: req.params.id }),

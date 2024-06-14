@@ -1,7 +1,4 @@
-import {
-  findUsersQuery,
-  FindUsersQueryResult,
-} from '@/modules/user/queries/find-users/find-users.handler';
+import { findUsersQuery, FindUsersQueryResult } from './find-users.handler';
 
 export default async function findUsersResolver(fastify: FastifyRouteInstance) {
   fastify.graphql.defineResolvers({

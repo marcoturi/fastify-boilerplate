@@ -1,7 +1,7 @@
 import {
   createUserCommand,
   CreateUserCommandResult,
-} from '@/modules/user/commands/create-user/create-user.handler';
+} from './create-user.handler';
 import { UserAlreadyExistsError } from '@/modules/user/domain/user.errors';
 import { ErrorWithProps } from 'mercurius';
 
