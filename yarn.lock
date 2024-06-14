@@ -1218,6 +1218,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cucumber/messages@npm:25.0.1":
+  version: 25.0.1
+  resolution: "@cucumber/messages@npm:25.0.1"
+  dependencies:
+    "@types/uuid": "npm:9.0.8"
+    class-transformer: "npm:0.5.1"
+    reflect-metadata: "npm:0.2.2"
+    uuid: "npm:9.0.1"
+  checksum: 10c0/ac15a2f4d5f21c437b5b9900c36eda9a41158cc191fd7e0e9c9d181bd1ce5d7d096f67208afc3b59faab2dcb98be1ed7d9a4c9b4aaddd0ad58dc4052e9e33f93
+  languageName: node
+  linkType: hard
+
 "@cucumber/pretty-formatter@npm:1.0.1":
   version: 1.0.1
   resolution: "@cucumber/pretty-formatter@npm:1.0.1"
@@ -1813,16 +1825,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fastify/swagger-ui@npm:3.1.0":
-  version: 3.1.0
-  resolution: "@fastify/swagger-ui@npm:3.1.0"
+"@fastify/swagger-ui@npm:4.0.0":
+  version: 4.0.0
+  resolution: "@fastify/swagger-ui@npm:4.0.0"
   dependencies:
     "@fastify/static": "npm:^7.0.0"
     fastify-plugin: "npm:^4.0.0"
     openapi-types: "npm:^12.0.2"
     rfdc: "npm:^1.3.0"
     yaml: "npm:^2.2.2"
-  checksum: 10c0/a758d1d062bc8c0d93911d949453e10efe50756799346f6a34303239b0898d4f6eac7c8b476b245e502a846fd44929f371bf7e70ce430269d5474305ac0c1c45
+  checksum: 10c0/1f6b80f371e884db07297d3c0d63db1e3cd04410db694a1371e77f0cb4920ab3e932750c959278d460875b641ebca6c1d4f80e5aae44468215b688550c6b2cdb
   languageName: node
   linkType: hard
 
@@ -7900,9 +7912,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-unicorn@npm:53.0.0":
-  version: 53.0.0
-  resolution: "eslint-plugin-unicorn@npm:53.0.0"
+"eslint-plugin-unicorn@npm:54.0.0":
+  version: 54.0.0
+  resolution: "eslint-plugin-unicorn@npm:54.0.0"
   dependencies:
     "@babel/helper-validator-identifier": "npm:^7.24.5"
     "@eslint-community/eslint-utils": "npm:^4.4.0"
@@ -7922,7 +7934,7 @@ __metadata:
     strip-indent: "npm:^3.0.0"
   peerDependencies:
     eslint: ">=8.56.0"
-  checksum: 10c0/da48048c21a68dd5410ed1f8abb1a80a7dabb5cf751e690dae435cb5359b3150f92682722bdb2e07258689ad1fdceaa9bd2dd08f211aaeb7ed19c62b98a32db5
+  checksum: 10c0/cca557df20f31f6a072de6eba28129ed68fff059bef7ba2d373be650bef46ba899aeba89b2be5a309657e638400eb9ae0d0cd7e2f900c22eca0a6b8e2d0f4661
   languageName: node
   linkType: hard
 
@@ -8323,7 +8335,7 @@ __metadata:
     "@commitlint/config-conventional": "npm:19.2.2"
     "@cucumber/cucumber": "npm:10.8.0"
     "@cucumber/html-formatter": "npm:21.3.1"
-    "@cucumber/messages": "npm:24.1.0"
+    "@cucumber/messages": "npm:25.0.1"
     "@cucumber/pretty-formatter": "npm:1.0.1"
     "@fastify/autoload": "npm:5.9.0"
     "@fastify/awilix": "npm:5.1.0"
@@ -8331,7 +8343,7 @@ __metadata:
     "@fastify/helmet": "npm:11.1.1"
     "@fastify/request-context": "npm:5.1.0"
     "@fastify/swagger": "npm:8.14.0"
-    "@fastify/swagger-ui": "npm:3.1.0"
+    "@fastify/swagger-ui": "npm:4.0.0"
     "@fastify/type-provider-json-schema-to-ts": "npm:3.0.0"
     "@fastify/type-provider-typebox": "npm:4.0.0"
     "@fastify/under-pressure": "npm:8.5.0"
@@ -8362,8 +8374,8 @@ __metadata:
     eslint-config-prettier: "npm:9.1.0"
     eslint-plugin-import: "npm:2.29.1"
     eslint-plugin-promise: "npm:6.2.0"
-    eslint-plugin-unicorn: "npm:53.0.0"
-    fastify: "npm:4.27.0"
+    eslint-plugin-unicorn: "npm:54.0.0"
+    fastify: "npm:4.28.0"
     fastify-plugin: "npm:4.5.1"
     graphql: "npm:16.8.2"
     helmet: "npm:7.1.0"
@@ -8393,9 +8405,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fastify@npm:4.27.0":
-  version: 4.27.0
-  resolution: "fastify@npm:4.27.0"
+"fastify@npm:4.28.0":
+  version: 4.28.0
+  resolution: "fastify@npm:4.28.0"
   dependencies:
     "@fastify/ajv-compiler": "npm:^3.5.0"
     "@fastify/error": "npm:^3.4.0"
@@ -8413,7 +8425,7 @@ __metadata:
     secure-json-parse: "npm:^2.7.0"
     semver: "npm:^7.5.4"
     toad-cache: "npm:^3.3.0"
-  checksum: 10c0/879e9d3f6b9521bea29255c79ca1ddf3dd4c017937a25e7348d7686625c7dd56f21af18e6db2ecdd41d07e5c73a779ab0bb1f5d6b081909bf3e8caadaf669160
+  checksum: 10c0/24307900a5ef5b8d6357d3cec40abf621859b8f6e3a046bfc5a45ec7fedec42c51bde0bb3c5913f7badd91d5d69a485e1f3e0e2310483103fabc472cb0e122cd
   languageName: node
   linkType: hard
 
@@ -13647,6 +13659,13 @@ __metadata:
   version: 0.2.1
   resolution: "reflect-metadata@npm:0.2.1"
   checksum: 10c0/6ca3c674bb43cf8ec3a3f5f38c8730a6116335f8e562fcdcdf3a492af168c5a7f0e8f17476a5710c3fe6bf9b5d22e8a463f14c0e26e326339cab65e099900ef7
+  languageName: node
+  linkType: hard
+
+"reflect-metadata@npm:0.2.2":
+  version: 0.2.2
+  resolution: "reflect-metadata@npm:0.2.2"
+  checksum: 10c0/1cd93a15ea291e420204955544637c264c216e7aac527470e393d54b4bb075f10a17e60d8168ec96600c7e0b9fcc0cb0bb6e91c3fbf5b0d8c9056f04e6ac1ec2
   languageName: node
   linkType: hard
 
