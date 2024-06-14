@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/marcoturi/fastify-boilerplate/compare/v1.0.5...v1.1.0) (2024-06-14)
+
+
+### Features
+
+* **Routes:** improve default routes definition ([559527b](https://github.com/marcoturi/fastify-boilerplate/commit/559527bbd24963bcee02eedd684717b2452ce959))
+
 ## [1.0.5](https://github.com/marcoturi/fastify-boilerplate/compare/v1.0.4...v1.0.5) (2024-06-14)
 
 
