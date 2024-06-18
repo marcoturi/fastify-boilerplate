@@ -87,7 +87,7 @@
     "@semantic-release/release-notes-generator": "14.0.0",
     "@trivago/prettier-plugin-sort-imports": "4.3.0",
     "@tsconfig/node20": "20.1.4",
-    "@types/node": "20.14.4",
+    "@types/node": "20.14.5",
     "@types/ramda": "0.30.0",
     "@typescript-eslint/eslint-plugin": "7.13.1",
     "@typescript-eslint/parser": "7.13.1",
