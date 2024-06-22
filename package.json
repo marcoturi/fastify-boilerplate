@@ -76,7 +76,7 @@
     "@commitlint/cli": "19.3.0",
     "@commitlint/config-conventional": "19.2.2",
     "@cucumber/cucumber": "10.8.0",
-    "@cucumber/html-formatter": "21.3.1",
+    "@cucumber/html-formatter": "21.4.0",
     "@cucumber/messages": "25.0.1",
     "@cucumber/pretty-formatter": "1.0.1",
     "@semantic-release/changelog": "6.0.3",
