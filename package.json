@@ -91,7 +91,7 @@
     "@types/ramda": "0.30.0",
     "@typescript-eslint/eslint-plugin": "7.13.1",
     "@typescript-eslint/parser": "7.13.1",
-    "artillery": "2.0.15",
+    "artillery": "2.0.16",
     "artillery-plugin-faker": "5.0.2",
     "dbmate": "2.17.0",
     "dependency-cruiser": "16.3.3",
