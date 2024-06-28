@@ -8421,7 +8421,7 @@ __metadata:
     ts-node: "npm:10.9.2"
     tsc-alias: "npm:1.8.10"
     tsconfig-paths: "npm:4.2.0"
-    tsx: "npm:4.15.7"
+    tsx: "npm:4.15.8"
     typescript: "npm:5.5.2"
     vitest: "npm:1.6.0"
   languageName: unknown
@@ -15617,9 +15617,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsx@npm:4.15.7":
-  version: 4.15.7
-  resolution: "tsx@npm:4.15.7"
+"tsx@npm:4.15.8":
+  version: 4.15.8
+  resolution: "tsx@npm:4.15.8"
   dependencies:
     esbuild: "npm:~0.21.4"
     fsevents: "npm:~2.3.3"
@@ -15629,7 +15629,7 @@ __metadata:
       optional: true
   bin:
     tsx: dist/cli.mjs
-  checksum: 10c0/e960f4ee084b48cd3183e65946725fd9b0de4afae32a0fd9cd47416a41259fb2c72838b7aeba26adaecc2d89d70e976add9722e72ea5c876b3b493f137cbbf12
+  checksum: 10c0/2e4e077e05e9ec324246f30be0b61e85c5a9c61e4dca160eec542eee410cc0fbcccf26f4d529a8d977d470dd0e13f6897cee5d5ebc3cbf6c2cdfbc5e4033b26c
   languageName: node
   linkType: hard
 
