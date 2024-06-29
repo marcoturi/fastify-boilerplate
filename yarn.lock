@@ -4918,14 +4918,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn-walk@npm:8.3.2, acorn-walk@npm:^8.1.1, acorn-walk@npm:^8.3.2":
+"acorn-walk@npm:8.3.3":
+  version: 8.3.3
+  resolution: "acorn-walk@npm:8.3.3"
+  dependencies:
+    acorn: "npm:^8.11.0"
+  checksum: 10c0/4a9e24313e6a0a7b389e712ba69b66b455b4cb25988903506a8d247e7b126f02060b05a8a5b738a9284214e4ca95f383dd93443a4ba84f1af9b528305c7f243b
+  languageName: node
+  linkType: hard
+
+"acorn-walk@npm:^8.1.1, acorn-walk@npm:^8.3.2":
   version: 8.3.2
   resolution: "acorn-walk@npm:8.3.2"
   checksum: 10c0/7e2a8dad5480df7f872569b9dccff2f3da7e65f5353686b1d6032ab9f4ddf6e3a2cb83a9b52cf50b1497fd522154dda92f0abf7153290cc79cd14721ff121e52
   languageName: node
   linkType: hard
 
-"acorn@npm:8.11.3, acorn@npm:^8.11.0, acorn@npm:^8.11.3, acorn@npm:^8.4.1, acorn@npm:^8.9.0":
+"acorn@npm:8.12.0":
+  version: 8.12.0
+  resolution: "acorn@npm:8.12.0"
+  bin:
+    acorn: bin/acorn
+  checksum: 10c0/a19f9dead009d3b430fa3c253710b47778cdaace15b316de6de93a68c355507bc1072a9956372b6c990cbeeb167d4a929249d0faeb8ae4bb6911d68d53299549
+  languageName: node
+  linkType: hard
+
+"acorn@npm:^8.11.0, acorn@npm:^8.11.3, acorn@npm:^8.4.1, acorn@npm:^8.9.0":
   version: 8.11.3
   resolution: "acorn@npm:8.11.3"
   bin:
@@ -7045,22 +7063,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:16.3.3":
-  version: 16.3.3
-  resolution: "dependency-cruiser@npm:16.3.3"
+"dependency-cruiser@npm:16.3.4":
+  version: 16.3.4
+  resolution: "dependency-cruiser@npm:16.3.4"
   dependencies:
-    acorn: "npm:8.11.3"
+    acorn: "npm:8.12.0"
     acorn-jsx: "npm:5.3.2"
     acorn-jsx-walk: "npm:2.0.0"
     acorn-loose: "npm:8.4.0"
-    acorn-walk: "npm:8.3.2"
+    acorn-walk: "npm:8.3.3"
     ajv: "npm:8.16.0"
     chalk: "npm:5.3.0"
     commander: "npm:12.1.0"
     enhanced-resolve: "npm:5.17.0"
-    figures: "npm:6.1.0"
     ignore: "npm:5.3.1"
-    indent-string: "npm:5.0.0"
     interpret: "npm:^3.1.1"
     is-installed-globally: "npm:1.0.0"
     json5: "npm:2.2.3"
@@ -7071,7 +7087,6 @@ __metadata:
     rechoir: "npm:^0.8.0"
     safe-regex: "npm:2.1.1"
     semver: "npm:^7.6.2"
-    semver-try-require: "npm:7.0.0"
     teamcity-service-messages: "npm:0.1.14"
     tsconfig-paths-webpack-plugin: "npm:4.1.0"
     watskeburt: "npm:4.0.2"
@@ -7083,7 +7098,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.mjs
     dependency-cruise: bin/dependency-cruise.mjs
     dependency-cruiser: bin/dependency-cruise.mjs
-  checksum: 10c0/a9f0064dc67e6b72deb279cc28bb3d1dd62d724971b1a770a3b9e37184d5183c0237765e106eb44a30019308c82a3870178db7074b42a68a40b03fd08c4da0d5
+  checksum: 10c0/7b78ff346ff3c3a1dca98d491488e740f23df0653e4b14b412464440263521cb35d6e898b4972903a9f7dbbe8bbd80a091657ef27a06ebf6735f20a3bc0b66ad
   languageName: node
   linkType: hard
 
@@ -8397,7 +8412,7 @@ __metadata:
     artillery-plugin-faker: "npm:5.0.2"
     awilix: "npm:10.0.2"
     dbmate: "npm:2.17.0"
-    dependency-cruiser: "npm:16.3.3"
+    dependency-cruiser: "npm:16.3.4"
     env-schema: "npm:5.2.1"
     eslint: "npm:8.57.0"
     eslint-config-prettier: "npm:9.1.0"
@@ -8484,15 +8499,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"figures@npm:6.1.0, figures@npm:^6.0.0, figures@npm:^6.1.0":
-  version: 6.1.0
-  resolution: "figures@npm:6.1.0"
-  dependencies:
-    is-unicode-supported: "npm:^2.0.0"
-  checksum: 10c0/9159df4264d62ef447a3931537de92f5012210cf5135c35c010df50a2169377581378149abfe1eb238bd6acbba1c0d547b1f18e0af6eee49e30363cedaffcfe4
-  languageName: node
-  linkType: hard
-
 "figures@npm:^2.0.0":
   version: 2.0.0
   resolution: "figures@npm:2.0.0"
@@ -8508,6 +8514,15 @@ __metadata:
   dependencies:
     escape-string-regexp: "npm:^1.0.5"
   checksum: 10c0/9c421646ede432829a50bc4e55c7a4eb4bcb7cc07b5bab2f471ef1ab9a344595bbebb6c5c21470093fbb730cd81bbca119624c40473a125293f656f49cb47629
+  languageName: node
+  linkType: hard
+
+"figures@npm:^6.0.0, figures@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "figures@npm:6.1.0"
+  dependencies:
+    is-unicode-supported: "npm:^2.0.0"
+  checksum: 10c0/9159df4264d62ef447a3931537de92f5012210cf5135c35c010df50a2169377581378149abfe1eb238bd6acbba1c0d547b1f18e0af6eee49e30363cedaffcfe4
   languageName: node
   linkType: hard
 
@@ -9657,17 +9672,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"indent-string@npm:5.0.0, indent-string@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "indent-string@npm:5.0.0"
-  checksum: 10c0/8ee77b57d92e71745e133f6f444d6fa3ed503ad0e1bcd7e80c8da08b42375c07117128d670589725ed07b1978065803fa86318c309ba45415b7fe13e7f170220
-  languageName: node
-  linkType: hard
-
 "indent-string@npm:^4.0.0":
   version: 4.0.0
   resolution: "indent-string@npm:4.0.0"
   checksum: 10c0/1e1904ddb0cb3d6cce7cd09e27a90184908b7a5d5c21b92e232c93579d314f0b83c246ffb035493d0504b1e9147ba2c9b21df0030f48673fba0496ecd698161f
+  languageName: node
+  linkType: hard
+
+"indent-string@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "indent-string@npm:5.0.0"
+  checksum: 10c0/8ee77b57d92e71745e133f6f444d6fa3ed503ad0e1bcd7e80c8da08b42375c07117128d670589725ed07b1978065803fa86318c309ba45415b7fe13e7f170220
   languageName: node
   linkType: hard
 
@@ -14214,15 +14229,6 @@ __metadata:
   version: 4.0.5
   resolution: "semver-regex@npm:4.0.5"
   checksum: 10c0/c270eda133691dfaab90318df995e96222e4c26c47b17f7c8bd5e5fe88b81ed67b59695fe27546e0314b0f0423c7faed1f93379ad9db47c816df2ddf770918ff
-  languageName: node
-  linkType: hard
-
-"semver-try-require@npm:7.0.0":
-  version: 7.0.0
-  resolution: "semver-try-require@npm:7.0.0"
-  dependencies:
-    semver: "npm:^7.6.0"
-  checksum: 10c0/b379d02ab4b8e331cf603221908129e2963af0e31210e9d6fcb2d6f168d0ccfba86cffd67a2f9bfff586a69981b61d20c19adf9af83413cd78920259fcc0a5d2
   languageName: node
   linkType: hard
 
