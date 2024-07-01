@@ -7063,9 +7063,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:16.3.4":
-  version: 16.3.4
-  resolution: "dependency-cruiser@npm:16.3.4"
+"dependency-cruiser@npm:16.3.5":
+  version: 16.3.5
+  resolution: "dependency-cruiser@npm:16.3.5"
   dependencies:
     acorn: "npm:8.12.0"
     acorn-jsx: "npm:5.3.2"
@@ -7098,7 +7098,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.mjs
     dependency-cruise: bin/dependency-cruise.mjs
     dependency-cruiser: bin/dependency-cruise.mjs
-  checksum: 10c0/7b78ff346ff3c3a1dca98d491488e740f23df0653e4b14b412464440263521cb35d6e898b4972903a9f7dbbe8bbd80a091657ef27a06ebf6735f20a3bc0b66ad
+  checksum: 10c0/c51d3ef03d762fc5b7b75876d2600814978f8b035c6690851d9d891123ca0140ee991cabe17ff9a06b4a6eaca345616631c141390989aca27669675fbe438500
   languageName: node
   linkType: hard
 
@@ -8412,7 +8412,7 @@ __metadata:
     artillery-plugin-faker: "npm:5.0.2"
     awilix: "npm:10.0.2"
     dbmate: "npm:2.17.0"
-    dependency-cruiser: "npm:16.3.4"
+    dependency-cruiser: "npm:16.3.5"
     env-schema: "npm:5.2.1"
     eslint: "npm:8.57.0"
     eslint-config-prettier: "npm:9.1.0"
