@@ -22,7 +22,7 @@ export default async function createUser(fastify: FastifyRouteInstance) {
       const id = await fastify.commandBus.execute<CreateUserCommandResult>(
         createUserCommand(req.body),
       );
-      return res.status(200).send({ id });
+      return res.status(201).send({ id });
     },
   });
 }
