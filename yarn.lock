@@ -4612,12 +4612,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/ramda@npm:0.30.0":
-  version: 0.30.0
-  resolution: "@types/ramda@npm:0.30.0"
+"@types/ramda@npm:0.30.1":
+  version: 0.30.1
+  resolution: "@types/ramda@npm:0.30.1"
   dependencies:
-    types-ramda: "npm:^0.30.0"
-  checksum: 10c0/6ae8c9fb879cb48bd10a7e347f4652e7c659e9d52c659a37afe00a3b0220630aaa51ee9e6c13947b057f3df0eca20f15cc58d2c8e8e391fd19cbe9561ef14f2c
+    types-ramda: "npm:^0.30.1"
+  checksum: 10c0/ab3f00c1dc88a647159e3654d6c9ceadd01b91bb64c6cdff1a897ba91630fed345635ffc20f3a00a4981354ea7480d09eb5632c7e2198757e389d9846fffab20
   languageName: node
   linkType: hard
 
@@ -8404,7 +8404,7 @@ __metadata:
     "@trivago/prettier-plugin-sort-imports": "npm:4.3.0"
     "@tsconfig/node20": "npm:20.1.4"
     "@types/node": "npm:20.14.10"
-    "@types/ramda": "npm:0.30.0"
+    "@types/ramda": "npm:0.30.1"
     "@typescript-eslint/eslint-plugin": "npm:7.15.0"
     "@typescript-eslint/parser": "npm:7.15.0"
     ajv-formats: "npm:3.0.1"
@@ -15795,12 +15795,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"types-ramda@npm:^0.30.0":
-  version: 0.30.0
-  resolution: "types-ramda@npm:0.30.0"
+"types-ramda@npm:^0.30.1":
+  version: 0.30.1
+  resolution: "types-ramda@npm:0.30.1"
   dependencies:
     ts-toolbelt: "npm:^9.6.0"
-  checksum: 10c0/8b0def1c98223ad2c16c0ffd2774a4e9363a5aaed9fd4be931db95bf10ee9dbb9408bb082fce49d2d2e73b93f99308f1cfe46315ab0fd91bb3c4e569af02c5ce
+  checksum: 10c0/4a8b230ae9772e6534f65b1a154dd5604bcd1d74e27b49686337a215e83aa8fc93e49f8c49af395418d2950cb9fb9b900662077c1d4b73ff6fe4f4bcb83ab2d6
   languageName: node
   linkType: hard
 
