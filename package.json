@@ -62,7 +62,7 @@
     "@sinclair/typebox": "0.32.34",
     "ajv-formats": "3.0.1",
     "awilix": "10.0.2",
-    "env-schema": "5.2.1",
+    "env-schema": "6.0.0",
     "fastify": "4.28.1",
     "fastify-plugin": "4.5.1",
     "graphql": "16.9.0",
