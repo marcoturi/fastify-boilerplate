@@ -4934,12 +4934,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:8.12.0":
-  version: 8.12.0
-  resolution: "acorn@npm:8.12.0"
+"acorn@npm:8.12.1":
+  version: 8.12.1
+  resolution: "acorn@npm:8.12.1"
   bin:
     acorn: bin/acorn
-  checksum: 10c0/a19f9dead009d3b430fa3c253710b47778cdaace15b316de6de93a68c355507bc1072a9956372b6c990cbeeb167d4a929249d0faeb8ae4bb6911d68d53299549
+  checksum: 10c0/51fb26cd678f914e13287e886da2d7021f8c2bc0ccc95e03d3e0447ee278dd3b40b9c57dc222acd5881adcf26f3edc40901a4953403232129e3876793cd17386
   languageName: node
   linkType: hard
 
@@ -6071,13 +6071,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:5.3.0, chalk@npm:^5.2.0, chalk@npm:^5.3.0, chalk@npm:~5.3.0":
-  version: 5.3.0
-  resolution: "chalk@npm:5.3.0"
-  checksum: 10c0/8297d436b2c0f95801103ff2ef67268d362021b8210daf8ddbe349695333eb3610a71122172ff3b0272f1ef2cf7cc2c41fdaa4715f52e49ffe04c56340feed09
-  languageName: node
-  linkType: hard
-
 "chalk@npm:^2.3.2, chalk@npm:^2.4.2":
   version: 2.4.2
   resolution: "chalk@npm:2.4.2"
@@ -6106,6 +6099,13 @@ __metadata:
     ansi-styles: "npm:^4.1.0"
     supports-color: "npm:^7.1.0"
   checksum: 10c0/4a3fef5cc34975c898ffe77141450f679721df9dde00f6c304353fa9c8b571929123b26a0e4617bde5018977eb655b31970c297b91b63ee83bb82aeb04666880
+  languageName: node
+  linkType: hard
+
+"chalk@npm:^5.2.0, chalk@npm:^5.3.0, chalk@npm:~5.3.0":
+  version: 5.3.0
+  resolution: "chalk@npm:5.3.0"
+  checksum: 10c0/8297d436b2c0f95801103ff2ef67268d362021b8210daf8ddbe349695333eb3610a71122172ff3b0272f1ef2cf7cc2c41fdaa4715f52e49ffe04c56340feed09
   languageName: node
   linkType: hard
 
@@ -7063,17 +7063,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:16.3.5":
-  version: 16.3.5
-  resolution: "dependency-cruiser@npm:16.3.5"
+"dependency-cruiser@npm:16.3.6":
+  version: 16.3.6
+  resolution: "dependency-cruiser@npm:16.3.6"
   dependencies:
-    acorn: "npm:8.12.0"
+    acorn: "npm:8.12.1"
     acorn-jsx: "npm:5.3.2"
     acorn-jsx-walk: "npm:2.0.0"
     acorn-loose: "npm:8.4.0"
     acorn-walk: "npm:8.3.3"
     ajv: "npm:8.16.0"
-    chalk: "npm:5.3.0"
     commander: "npm:12.1.0"
     enhanced-resolve: "npm:5.17.0"
     ignore: "npm:5.3.1"
@@ -7082,6 +7081,7 @@ __metadata:
     json5: "npm:2.2.3"
     lodash: "npm:4.17.21"
     memoize: "npm:10.0.0"
+    picocolors: "npm:1.0.1"
     picomatch: "npm:4.0.2"
     prompts: "npm:2.4.2"
     rechoir: "npm:^0.8.0"
@@ -7089,7 +7089,7 @@ __metadata:
     semver: "npm:^7.6.2"
     teamcity-service-messages: "npm:0.1.14"
     tsconfig-paths-webpack-plugin: "npm:4.1.0"
-    watskeburt: "npm:4.0.2"
+    watskeburt: "npm:4.1.0"
     wrap-ansi: "npm:9.0.0"
   bin:
     depcruise: bin/dependency-cruise.mjs
@@ -7098,7 +7098,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.mjs
     dependency-cruise: bin/dependency-cruise.mjs
     dependency-cruiser: bin/dependency-cruise.mjs
-  checksum: 10c0/c51d3ef03d762fc5b7b75876d2600814978f8b035c6690851d9d891123ca0140ee991cabe17ff9a06b4a6eaca345616631c141390989aca27669675fbe438500
+  checksum: 10c0/7c95f424b02c5a425e67cf19ca9d41524825bdbbd724df13e80e9ecd495628e793d5030da37a2d3e79af6ef477ec098099e4e37b77fc3ca40365c614a9bed2c0
   languageName: node
   linkType: hard
 
@@ -8412,7 +8412,7 @@ __metadata:
     artillery-plugin-faker: "npm:5.0.2"
     awilix: "npm:10.0.2"
     dbmate: "npm:2.18.0"
-    dependency-cruiser: "npm:16.3.5"
+    dependency-cruiser: "npm:16.3.6"
     env-schema: "npm:6.0.0"
     eslint: "npm:8.57.0"
     eslint-config-prettier: "npm:9.1.0"
@@ -12831,6 +12831,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"picocolors@npm:1.0.1":
+  version: 1.0.1
+  resolution: "picocolors@npm:1.0.1"
+  checksum: 10c0/c63cdad2bf812ef0d66c8db29583802355d4ca67b9285d846f390cc15c2f6ccb94e8cb7eb6a6e97fc5990a6d3ad4ae42d86c84d3146e667c739a4234ed50d400
+  languageName: node
+  linkType: hard
+
 "picocolors@npm:^1.0.0":
   version: 1.0.0
   resolution: "picocolors@npm:1.0.0"
@@ -16235,12 +16242,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"watskeburt@npm:4.0.2":
-  version: 4.0.2
-  resolution: "watskeburt@npm:4.0.2"
+"watskeburt@npm:4.1.0":
+  version: 4.1.0
+  resolution: "watskeburt@npm:4.1.0"
   bin:
     watskeburt: dist/run-cli.js
-  checksum: 10c0/1dd49b7434b33b72892102c9fb3b26da603e54c3f7c7fe680b8b7beadc586d95280468ee0e14b53a3bf8a6439a0b738dd101a102ab4d30518557cdc8cb7ce1dc
+  checksum: 10c0/ece154fe72dad3efeeebb525056b626456f035e23a4e2e40b0d1364e891ee15f770cadbf6e5095321f198d44d3f17282f4601c6930016774e71c6bc9890dd48a
   languageName: node
   linkType: hard
 
