@@ -1879,13 +1879,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fastify/under-pressure@npm:8.5.0":
-  version: 8.5.0
-  resolution: "@fastify/under-pressure@npm:8.5.0"
+"@fastify/under-pressure@npm:8.5.1":
+  version: 8.5.1
+  resolution: "@fastify/under-pressure@npm:8.5.1"
   dependencies:
     "@fastify/error": "npm:^3.0.0"
     fastify-plugin: "npm:^4.0.0"
-  checksum: 10c0/c04f91366ee554481bd392a7922530904c79e6da0449dff69c4b6e96f89b0e650e2fdf3f9293654b6e052137f4f2b16b543679a1d32b7725b081a79b258eb2ff
+  checksum: 10c0/d6f5fc8a9301c490cc0a7764d0006c64abec492224b064a651f0ffce01afe3dbc0810b1f8bebada3cac1ae1426671588c824e6b304e6427aeeffd56ccffd353e
   languageName: node
   linkType: hard
 
@@ -8390,7 +8390,7 @@ __metadata:
     "@fastify/swagger-ui": "npm:4.0.0"
     "@fastify/type-provider-json-schema-to-ts": "npm:3.0.0"
     "@fastify/type-provider-typebox": "npm:4.0.0"
-    "@fastify/under-pressure": "npm:8.5.0"
+    "@fastify/under-pressure": "npm:8.5.1"
     "@gquittet/graceful-server": "npm:5.2.0"
     "@graphql-tools/load-files": "npm:7.0.0"
     "@graphql-tools/merge": "npm:9.0.4"
