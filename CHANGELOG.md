@@ -1,3 +1,10 @@
+## [1.1.8](https://github.com/marcoturi/fastify-boilerplate/compare/v1.1.7...v1.1.8) (2024-07-16)
+
+
+### Bug Fixes
+
+* **deps:** update dependency pino to v9.3.1 ([b910c8b](https://github.com/marcoturi/fastify-boilerplate/commit/b910c8b6de09e36a6a21701376d295b15bcce602))
+
 ## [1.1.7](https://github.com/marcoturi/fastify-boilerplate/compare/v1.1.6...v1.1.7) (2024-07-06)
 
 
