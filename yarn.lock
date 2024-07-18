@@ -7075,9 +7075,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:16.3.7":
-  version: 16.3.7
-  resolution: "dependency-cruiser@npm:16.3.7"
+"dependency-cruiser@npm:16.3.9":
+  version: 16.3.9
+  resolution: "dependency-cruiser@npm:16.3.9"
   dependencies:
     acorn: "npm:8.12.1"
     acorn-jsx: "npm:5.3.2"
@@ -7098,7 +7098,7 @@ __metadata:
     prompts: "npm:2.4.2"
     rechoir: "npm:^0.8.0"
     safe-regex: "npm:2.1.1"
-    semver: "npm:^7.6.2"
+    semver: "npm:^7.6.3"
     teamcity-service-messages: "npm:0.1.14"
     tsconfig-paths-webpack-plugin: "npm:4.1.0"
     watskeburt: "npm:4.1.0"
@@ -7109,7 +7109,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.mjs
     dependency-cruise: bin/dependency-cruise.mjs
     dependency-cruiser: bin/dependency-cruise.mjs
-  checksum: 10c0/fb7ce43e1693ed133435c8183d321a9e9cec559abf2cd6dc86ece5d2dd007cbd80eccc80f1467f24ccd4411d46f363c7500fe64d379f3b0e0f38bce525d905d3
+  checksum: 10c0/449d1ddcb2760614fefa39be4281898be520d66aa74e41c4a1c4cc3d41deca6a69d6a5ee804e80a7be030bb17d57c05a0650838a561639eba20d8134b2294238
   languageName: node
   linkType: hard
 
@@ -8430,7 +8430,7 @@ __metadata:
     artillery-plugin-faker: "npm:5.0.2"
     awilix: "npm:10.0.2"
     dbmate: "npm:2.19.0"
-    dependency-cruiser: "npm:16.3.7"
+    dependency-cruiser: "npm:16.3.9"
     env-schema: "npm:6.0.0"
     eslint: "npm:8.57.0"
     eslint-config-prettier: "npm:9.1.0"
@@ -14297,12 +14297,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.6.1, semver@npm:^7.6.2":
+"semver@npm:^7.6.1":
   version: 7.6.2
   resolution: "semver@npm:7.6.2"
   bin:
     semver: bin/semver.js
   checksum: 10c0/97d3441e97ace8be4b1976433d1c32658f6afaff09f143e52c593bae7eef33de19e3e369c88bd985ce1042c6f441c80c6803078d1de2a9988080b66684cbb30c
+  languageName: node
+  linkType: hard
+
+"semver@npm:^7.6.3":
+  version: 7.6.3
+  resolution: "semver@npm:7.6.3"
+  bin:
+    semver: bin/semver.js
+  checksum: 10c0/88f33e148b210c153873cb08cfe1e281d518aaa9a666d4d148add6560db5cd3c582f3a08ccb91f38d5f379ead256da9931234ed122057f40bb5766e65e58adaf
   languageName: node
   linkType: hard
 
