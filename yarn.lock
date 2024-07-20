@@ -7958,12 +7958,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-promise@npm:6.5.0":
-  version: 6.5.0
-  resolution: "eslint-plugin-promise@npm:6.5.0"
+"eslint-plugin-promise@npm:6.5.1":
+  version: 6.5.1
+  resolution: "eslint-plugin-promise@npm:6.5.1"
   peerDependencies:
     eslint: ^7.0.0 || ^8.0.0 || ^9.0.0
-  checksum: 10c0/6a18869496e025de58df720a962d9e31c34f13ce5b9d31b437844e7b5530d1606c231783f87f8f37b9bf81a5b8a2033f21749ad8f5157d3eaa88dc9b6dad0868
+  checksum: 10c0/76ce8668aabea561e0497576ea599faef9a3220e2c5b801dc43ded70cbe0c2d6fc97189ca9eba143cd73f21ea26dcc88f35ae6a0b929bdbb8b36b21e87beb040
   languageName: node
   linkType: hard
 
@@ -8435,7 +8435,7 @@ __metadata:
     eslint: "npm:8.57.0"
     eslint-config-prettier: "npm:9.1.0"
     eslint-plugin-import: "npm:2.29.1"
-    eslint-plugin-promise: "npm:6.5.0"
+    eslint-plugin-promise: "npm:6.5.1"
     eslint-plugin-unicorn: "npm:54.0.0"
     fastify: "npm:4.28.1"
     fastify-plugin: "npm:4.5.1"
