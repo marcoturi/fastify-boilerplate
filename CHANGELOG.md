@@ -1,3 +1,10 @@
+## [1.1.9](https://github.com/marcoturi/fastify-boilerplate/compare/v1.1.8...v1.1.9) (2024-07-20)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/swagger-ui to v4.0.1 ([9c81fe1](https://github.com/marcoturi/fastify-boilerplate/commit/9c81fe1128f2c35266abb25c9c9b5e1a0633e46e))
+
 ## [1.1.8](https://github.com/marcoturi/fastify-boilerplate/compare/v1.1.7...v1.1.8) (2024-07-16)
 
 
