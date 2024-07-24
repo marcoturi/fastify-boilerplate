@@ -1847,16 +1847,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fastify/swagger@npm:8.14.0":
-  version: 8.14.0
-  resolution: "@fastify/swagger@npm:8.14.0"
+"@fastify/swagger@npm:8.15.0":
+  version: 8.15.0
+  resolution: "@fastify/swagger@npm:8.15.0"
   dependencies:
     fastify-plugin: "npm:^4.0.0"
     json-schema-resolver: "npm:^2.0.0"
     openapi-types: "npm:^12.0.0"
     rfdc: "npm:^1.3.0"
     yaml: "npm:^2.2.2"
-  checksum: 10c0/d7b8cd1b8794fcb0dc015b52772cbee547d88e05cd9225c475b25af2d0d69abda3b2905d0cde593680fa1b1cac381f671b5f00fd10ae448e72ed5f1f096e034b
+  checksum: 10c0/d77c650a56b647ba5abc828602d7a63d3c0779f00d17f5fe1882925f61cc1c7eae2f67f58f906df7a0cd46efbcb9564a74a0eb4892e063227d4ccf06b96dc5df
   languageName: node
   linkType: hard
 
@@ -8404,7 +8404,7 @@ __metadata:
     "@fastify/cors": "npm:9.0.1"
     "@fastify/helmet": "npm:11.1.1"
     "@fastify/request-context": "npm:5.1.0"
-    "@fastify/swagger": "npm:8.14.0"
+    "@fastify/swagger": "npm:8.15.0"
     "@fastify/swagger-ui": "npm:4.0.1"
     "@fastify/type-provider-json-schema-to-ts": "npm:3.0.0"
     "@fastify/type-provider-typebox": "npm:4.0.0"
