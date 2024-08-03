@@ -1,4 +1,4 @@
-npx lint-staged --allow-empty
-npm run type:check
-npm run deps:validate
-npm run test
+yarn lint-staged --allow-empty
+yarn type:check
+yarn deps:validate
+yarn test
