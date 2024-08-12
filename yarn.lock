@@ -2176,29 +2176,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/merge@npm:9.0.4":
-  version: 9.0.4
-  resolution: "@graphql-tools/merge@npm:9.0.4"
+"@graphql-tools/merge@npm:9.0.5":
+  version: 9.0.5
+  resolution: "@graphql-tools/merge@npm:9.0.5"
   dependencies:
-    "@graphql-tools/utils": "npm:^10.0.13"
+    "@graphql-tools/utils": "npm:^10.4.0"
     tslib: "npm:^2.4.0"
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: 10c0/baf8558955d2f5cefdad298be295e48564bd6d2e691eed1b6d4c62f58cea898c8269443181fe847ca2747ec179c5b2b620be9215323281b2d65afc29591ce52d
+  checksum: 10c0/5c829629df98f89bf6aa59a73982a5493b7f6e7725d541267e971f77f35853118e1fbee87e4564124c0ecf5be303e315413b2d2da2e88f253b353671a3a7cf21
   languageName: node
   linkType: hard
 
-"@graphql-tools/utils@npm:^10.0.13":
-  version: 10.2.1
-  resolution: "@graphql-tools/utils@npm:10.2.1"
+"@graphql-tools/utils@npm:^10.4.0":
+  version: 10.5.0
+  resolution: "@graphql-tools/utils@npm:10.5.0"
   dependencies:
     "@graphql-typed-document-node/core": "npm:^3.1.1"
-    cross-inspect: "npm:1.0.0"
+    cross-inspect: "npm:1.0.1"
     dset: "npm:^3.1.2"
     tslib: "npm:^2.4.0"
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: 10c0/725cfe00c3cedf9d2519f7750eb06c7487c3719f9a6abd3ff510393164b1dbdc5035eda5ef1612704141ff63ca504c3af051a7356ca1ea0563819c227217bbe3
+  checksum: 10c0/70609d2ad5dec6d7b0f2d13718eb9cbed9e9dae9f3beb9b44f0f83c7a63b4f1bf04d5e4a18c592f0c1e63dd124b34d6ba0854c30b76f31b5bc22e7459cbf8ac3
   languageName: node
   linkType: hard
 
@@ -7067,12 +7067,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-inspect@npm:1.0.0":
-  version: 1.0.0
-  resolution: "cross-inspect@npm:1.0.0"
+"cross-inspect@npm:1.0.1":
+  version: 1.0.1
+  resolution: "cross-inspect@npm:1.0.1"
   dependencies:
     tslib: "npm:^2.4.0"
-  checksum: 10c0/53530865c357c69a5a0543e2f2c61d3d46c9c316a19169372f5094cfb0a7c7e674f2daf2d5253a6731dfd9a8538aa4a4e13c6b4613b6f72b48bb0c41d2015ff4
+  checksum: 10c0/2493ee47a801b46ede1c42ca6242b8d2059f7319b5baf23887bbaf46a6ea8e536d2e271d0990176c05092f67b32d084ffd8c93e7c1227eff4a06cceadb49af47
   languageName: node
   linkType: hard
 
@@ -8720,7 +8720,7 @@ __metadata:
     "@fastify/under-pressure": "npm:8.5.1"
     "@gquittet/graceful-server": "npm:5.2.1"
     "@graphql-tools/load-files": "npm:7.0.0"
-    "@graphql-tools/merge": "npm:9.0.4"
+    "@graphql-tools/merge": "npm:9.0.5"
     "@semantic-release/changelog": "npm:6.0.3"
     "@semantic-release/commit-analyzer": "npm:13.0.0"
     "@semantic-release/git": "npm:10.0.1"
