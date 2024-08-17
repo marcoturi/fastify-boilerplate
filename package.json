@@ -105,7 +105,7 @@
     "pino-pretty": "11.2.2",
     "pinst": "3.0.0",
     "prettier": "3.3.3",
-    "semantic-release": "24.0.0",
+    "semantic-release": "24.1.0",
     "ts-node": "10.9.2",
     "tsc-alias": "1.8.10",
     "tsconfig-paths": "4.2.0",
