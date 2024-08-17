@@ -2122,12 +2122,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fastify/type-provider-typebox@npm:4.0.0":
-  version: 4.0.0
-  resolution: "@fastify/type-provider-typebox@npm:4.0.0"
+"@fastify/type-provider-typebox@npm:4.1.0":
+  version: 4.1.0
+  resolution: "@fastify/type-provider-typebox@npm:4.1.0"
   peerDependencies:
-    "@sinclair/typebox": ">=0.26 <=0.32"
-  checksum: 10c0/1134f9e8873c4057a2dc18fc85729e3ea3a33bcaaf91efd66bfca63ac2bf9715f33f3412643ecba0a5120e7861235580b13f4bc1a46dd12c5c6ecc4ed5574a46
+    "@sinclair/typebox": ">=0.26 <=0.33"
+  checksum: 10c0/4e3d0dc0982a28f3ec5af828e724b0295a74fa2e626791d63e16f152b8b8908cb285b4dd72cffe54274230844e1bb755926843add0da111c2a3272ffde51d3fa
   languageName: node
   linkType: hard
 
@@ -8717,7 +8717,7 @@ __metadata:
     "@fastify/swagger": "npm:8.15.0"
     "@fastify/swagger-ui": "npm:4.1.0"
     "@fastify/type-provider-json-schema-to-ts": "npm:3.0.0"
-    "@fastify/type-provider-typebox": "npm:4.0.0"
+    "@fastify/type-provider-typebox": "npm:4.1.0"
     "@fastify/under-pressure": "npm:8.5.1"
     "@gquittet/graceful-server": "npm:5.2.1"
     "@graphql-tools/load-files": "npm:7.0.0"
