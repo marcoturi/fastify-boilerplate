@@ -32,9 +32,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@artilleryio/int-commons@npm:2.10.0":
-  version: 2.10.0
-  resolution: "@artilleryio/int-commons@npm:2.10.0"
+"@artilleryio/int-commons@npm:2.11.0":
+  version: 2.11.0
+  resolution: "@artilleryio/int-commons@npm:2.11.0"
   dependencies:
     async: "npm:^2.6.4"
     cheerio: "npm:^1.0.0-rc.10"
@@ -44,15 +44,15 @@ __metadata:
     jsonpath-plus: "npm:^7.2.0"
     lodash: "npm:^4.17.19"
     ms: "npm:^2.1.3"
-  checksum: 10c0/5c3109338769e9fcdd4426b9bee44d04c07b1e21fc6068b25c447bcddf6d77abfcef9a30dbc598a9b8019e529aa8e840db54abc1b3aca65b5f369a8518e540e7
+  checksum: 10c0/a4c44221da3b1001839888beabaa13c1616da1b945cbe8721c71da3ae3e86c0770e511c01c0791b3df2aa1ffad004a979ec7939d9aa35a4a7fd80f93c44a294d
   languageName: node
   linkType: hard
 
-"@artilleryio/int-core@npm:2.14.0":
-  version: 2.14.0
-  resolution: "@artilleryio/int-core@npm:2.14.0"
+"@artilleryio/int-core@npm:2.15.0":
+  version: 2.15.0
+  resolution: "@artilleryio/int-core@npm:2.15.0"
   dependencies:
-    "@artilleryio/int-commons": "npm:2.10.0"
+    "@artilleryio/int-commons": "npm:2.11.0"
     "@artilleryio/sketches-js": "npm:^2.1.1"
     agentkeepalive: "npm:^4.1.0"
     arrivals: "npm:^2.1.2"
@@ -82,7 +82,7 @@ __metadata:
     try-require: "npm:^1.2.1"
     uuid: "npm:^8.0.0"
     ws: "npm:^7.5.7"
-  checksum: 10c0/837109fe74c80b69d292c3e98d81ae93bc052f05fcf2e911d1a754630d108683befc6134631cf7ca8ea20ee8c90f48b6cc8df55b82a99827a27a09f2ffa25d59
+  checksum: 10c0/89324a7ab025f361c4571adeeb0154a804c08b042184a38f0e668fc916948ed14c7e573511e3bef62fccb7ef720383577307737a16a7559ab3c0521c455939b5
   languageName: node
   linkType: hard
 
@@ -5647,56 +5647,56 @@ __metadata:
   languageName: node
   linkType: hard
 
-"artillery-engine-playwright@npm:1.16.0":
-  version: 1.16.0
-  resolution: "artillery-engine-playwright@npm:1.16.0"
+"artillery-engine-playwright@npm:1.17.0":
+  version: 1.17.0
+  resolution: "artillery-engine-playwright@npm:1.17.0"
   dependencies:
     "@playwright/browser-chromium": "npm:1.45.3"
     "@playwright/test": "npm:1.45.3"
     debug: "npm:^4.3.2"
     playwright: "npm:1.45.3"
-  checksum: 10c0/4f49ee0695a8b216792556bf25dcf203749ade1da0cbad3e6dbd758baa2b3f9c5d269f811b831323cf5a17c3f7fae4ddeda8dd12210b2191ce76da03d33954f4
+  checksum: 10c0/f98c775394ab7f94bcc5b04e3b122629475f2ad540179916bb802e1919effc26fa7330710857b95d77af46d33302f32f7169d2f1528814d5891ce47532471209
   languageName: node
   linkType: hard
 
-"artillery-plugin-apdex@npm:1.10.0":
-  version: 1.10.0
-  resolution: "artillery-plugin-apdex@npm:1.10.0"
+"artillery-plugin-apdex@npm:1.11.0":
+  version: 1.11.0
+  resolution: "artillery-plugin-apdex@npm:1.11.0"
   dependencies:
     tap: "npm:^19.0.2"
-  checksum: 10c0/d17195ae0a97da94a5df56021376d5b4b3e60fe906ec06a4e83a853e5555d9c8daad1495947f3b40e7ade83dd74e7abab1149e2cc4ca278c19db320793831632
+  checksum: 10c0/67c936a8caedbf8e23ffcbdd07436f743a0b470c1d2a301f575bade72941461ed819ca38de4c5856af315a5369202255decedb545789d11d6999ebb3b4d74049
   languageName: node
   linkType: hard
 
-"artillery-plugin-ensure@npm:1.13.0":
-  version: 1.13.0
-  resolution: "artillery-plugin-ensure@npm:1.13.0"
+"artillery-plugin-ensure@npm:1.14.0":
+  version: 1.14.0
+  resolution: "artillery-plugin-ensure@npm:1.14.0"
   dependencies:
     chalk: "npm:^2.4.2"
     debug: "npm:^4.3.3"
     filtrex: "npm:^2.2.3"
-  checksum: 10c0/1f963ac5bfc54d1dc0d155e3aefb3df403120f6a5ab37d1c2607ae069d10fe694ddb7f9b00a1c935fe2cf88c2ae5f7b5e14cf34ab88a2640daa7ae61e5074d5b
+  checksum: 10c0/9cb47dc1b9b5ec010fc229b44148e0de5e0e5eb36bb2bff8e9faee8b51cf10952ffb614f94fee4faa92686f4aec4033c0973a67001bcf6c06a59945e06aae4de
   languageName: node
   linkType: hard
 
-"artillery-plugin-expect@npm:2.13.0":
-  version: 2.13.0
-  resolution: "artillery-plugin-expect@npm:2.13.0"
+"artillery-plugin-expect@npm:2.14.0":
+  version: 2.14.0
+  resolution: "artillery-plugin-expect@npm:2.14.0"
   dependencies:
     chalk: "npm:^4.1.2"
     debug: "npm:^4.3.2"
     jmespath: "npm:^0.16.0"
     lodash: "npm:^4.17.21"
-  checksum: 10c0/575a211deb4734ea1794745250f24a1e265bf3ede8d3fbd6720b59b9d5079924b393123f1e29355ddffe60058cbef4738eebfd462aea0410d87add84c3892fb2
+  checksum: 10c0/3ee933fc2cf69ff975359f911ef98f2e49c18c41acaa981fc241d47beb654f28d5b1e3e1c2a2103e92ecd617b2b961481afefd8716fec0d937375068c2a6ac37
   languageName: node
   linkType: hard
 
-"artillery-plugin-fake-data@npm:1.10.0":
-  version: 1.10.0
-  resolution: "artillery-plugin-fake-data@npm:1.10.0"
+"artillery-plugin-fake-data@npm:1.11.0":
+  version: 1.11.0
+  resolution: "artillery-plugin-fake-data@npm:1.11.0"
   dependencies:
     "@ngneat/falso": "npm:^7.1.1"
-  checksum: 10c0/875a4f425c5569ccf1b94055e758c52322ebb49ddfd2ef387bddb8fd24282c20498e979698ea596f76e89ee1e1214180abb9da1f16ab9511e107a73f5adb8c92
+  checksum: 10c0/8d87a3215389411c429c60f4f1a80fc4a6e57d3bcb555e357d2d3023086a6e527b85512c027e6bb5104cf937d925f087b546613a0dce275165185847f6cb6333
   languageName: node
   linkType: hard
 
@@ -5711,18 +5711,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"artillery-plugin-metrics-by-endpoint@npm:1.13.0":
-  version: 1.13.0
-  resolution: "artillery-plugin-metrics-by-endpoint@npm:1.13.0"
+"artillery-plugin-metrics-by-endpoint@npm:1.14.0":
+  version: 1.14.0
+  resolution: "artillery-plugin-metrics-by-endpoint@npm:1.14.0"
   dependencies:
     debug: "npm:^4.3.2"
-  checksum: 10c0/0226cd85a0c3e560dc3a8140f3edf552063c60f3ff9e0bc243584f459e7fecbf1a4f811d1d6501fe1d26f0982cc4c8076e78f98bf35bdd1fdab0e4a1452e51d8
+  checksum: 10c0/a02f8f01db05eec07b1aa2595b0fffbb7014807743397ee2d6a231535d00a21a2060e44843c0e40d49ec454e0f9e2234c29fed42c52314eee3bd3e9ca1e887a0
   languageName: node
   linkType: hard
 
-"artillery-plugin-publish-metrics@npm:2.24.0":
-  version: 2.24.0
-  resolution: "artillery-plugin-publish-metrics@npm:2.24.0"
+"artillery-plugin-publish-metrics@npm:2.25.0":
+  version: 2.25.0
+  resolution: "artillery-plugin-publish-metrics@npm:2.25.0"
   dependencies:
     "@aws-sdk/client-cloudwatch": "npm:^3.370.0"
     "@opentelemetry/api": "npm:^1.4.1"
@@ -5749,26 +5749,26 @@ __metadata:
     prom-client: "npm:^14.0.1"
     semver: "npm:^7.3.5"
     uuid: "npm:^8.3.2"
-  checksum: 10c0/8d425831e00be01a4fecfd1a409ad0aaf7ef61edf9663a7ffec221c02adfea67c2346bac9d51ecb603c88c140949c090b47fe479533e17868ca4732b48a8fbdf
+  checksum: 10c0/6c556762b08d645214c055999762865f2a46f4b641a2aa179d28496a91ef559e5fb39970d0ac07f8e8f01e2cf58a18623fbc5496dce4dd9d91ddee030168e606
   languageName: node
   linkType: hard
 
-"artillery-plugin-slack@npm:1.8.0":
-  version: 1.8.0
-  resolution: "artillery-plugin-slack@npm:1.8.0"
+"artillery-plugin-slack@npm:1.9.0":
+  version: 1.9.0
+  resolution: "artillery-plugin-slack@npm:1.9.0"
   dependencies:
     debug: "npm:^4.3.4"
     got: "npm:^11.8.5"
-  checksum: 10c0/c556c1f6a04e6d6f022d4b44bc13a9df2447d0f4780de4bc19913f65f054e6cad049f200c5df663fa66482c3b121ae854463fd4a24937f73be7762008726d2ef
+  checksum: 10c0/140e314dcff1fd8398ac0dfdba5be5c952c3c697ca41cf1fec026d16694accd44a8c8f68c02d2a88f8a8120adefbea4137e0af7ebbdf1c209ac9283b3b7180ce
   languageName: node
   linkType: hard
 
-"artillery@npm:2.0.19":
-  version: 2.0.19
-  resolution: "artillery@npm:2.0.19"
+"artillery@npm:2.0.20":
+  version: 2.0.20
+  resolution: "artillery@npm:2.0.20"
   dependencies:
-    "@artilleryio/int-commons": "npm:2.10.0"
-    "@artilleryio/int-core": "npm:2.14.0"
+    "@artilleryio/int-commons": "npm:2.11.0"
+    "@artilleryio/int-core": "npm:2.15.0"
     "@aws-sdk/credential-providers": "npm:^3.127.0"
     "@azure/arm-containerinstance": "npm:^9.1.0"
     "@azure/identity": "npm:^4.2.0"
@@ -5778,14 +5778,14 @@ __metadata:
     "@oclif/plugin-help": "npm:^5.2.11"
     "@oclif/plugin-not-found": "npm:^2.3.1"
     archiver: "npm:^5.3.1"
-    artillery-engine-playwright: "npm:1.16.0"
-    artillery-plugin-apdex: "npm:1.10.0"
-    artillery-plugin-ensure: "npm:1.13.0"
-    artillery-plugin-expect: "npm:2.13.0"
-    artillery-plugin-fake-data: "npm:1.10.0"
-    artillery-plugin-metrics-by-endpoint: "npm:1.13.0"
-    artillery-plugin-publish-metrics: "npm:2.24.0"
-    artillery-plugin-slack: "npm:1.8.0"
+    artillery-engine-playwright: "npm:1.17.0"
+    artillery-plugin-apdex: "npm:1.11.0"
+    artillery-plugin-ensure: "npm:1.14.0"
+    artillery-plugin-expect: "npm:2.14.0"
+    artillery-plugin-fake-data: "npm:1.11.0"
+    artillery-plugin-metrics-by-endpoint: "npm:1.14.0"
+    artillery-plugin-publish-metrics: "npm:2.25.0"
+    artillery-plugin-slack: "npm:1.9.0"
     async: "npm:^2.6.4"
     aws-sdk: "npm:^2.1338.0"
     chalk: "npm:^2.4.2"
@@ -5820,7 +5820,7 @@ __metadata:
     yaml-js: "npm:^0.2.3"
   bin:
     artillery: bin/run
-  checksum: 10c0/887c9f9cc9637d1ecce64f37565702f5b77cadbee36337d5353246a50989e125223fdb8a47c16ffacff38a23d2f116d97e07f764861e3d9bb88b34653ed047b8
+  checksum: 10c0/cfe7373c1752b4e4e4c4b8aeb2dce426baa0ff1513c11f2433322638858af84b226e28a0c8367dc2abec3924ff29cc06e0e20d3a9b6bcc52e80fb418a513f889
   languageName: node
   linkType: hard
 
@@ -8736,7 +8736,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:7.18.0"
     "@typescript-eslint/parser": "npm:7.18.0"
     ajv-formats: "npm:3.0.1"
-    artillery: "npm:2.0.19"
+    artillery: "npm:2.0.20"
     artillery-plugin-faker: "npm:5.0.2"
     awilix: "npm:10.0.2"
     dbmate: "npm:2.20.0"
