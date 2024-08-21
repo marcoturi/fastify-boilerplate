@@ -93,7 +93,7 @@
     "@typescript-eslint/parser": "7.18.0",
     "artillery": "2.0.19",
     "artillery-plugin-faker": "5.0.2",
-    "dbmate": "2.19.0",
+    "dbmate": "2.20.0",
     "dependency-cruiser": "16.4.0",
     "eslint": "8.57.0",
     "eslint-config-prettier": "9.1.0",
