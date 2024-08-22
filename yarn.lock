@@ -4830,12 +4830,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:22.4.2":
-  version: 22.4.2
-  resolution: "@types/node@npm:22.4.2"
+"@types/node@npm:22.5.0":
+  version: 22.5.0
+  resolution: "@types/node@npm:22.5.0"
   dependencies:
     undici-types: "npm:~6.19.2"
-  checksum: 10c0/db583e83230eed29eb73e24cc03637f5bdc8c01883ae0ba0a6ab9356065f93d0355a91ad1c89b985631006bd77c529d6a3ce042b3667b69c8851d05e1f965db1
+  checksum: 10c0/45aa75c5e71645fac42dced4eff7f197c3fdfff6e8a9fdacd0eb2e748ff21ee70ffb73982f068a58e8d73b2c088a63613142c125236cdcf3c072ea97eada1559
   languageName: node
   linkType: hard
 
@@ -8731,7 +8731,7 @@ __metadata:
     "@sinclair/typebox": "npm:0.33.7"
     "@trivago/prettier-plugin-sort-imports": "npm:4.3.0"
     "@tsconfig/node20": "npm:20.1.4"
-    "@types/node": "npm:22.4.2"
+    "@types/node": "npm:22.5.0"
     "@types/ramda": "npm:0.30.1"
     "@typescript-eslint/eslint-plugin": "npm:7.18.0"
     "@typescript-eslint/parser": "npm:7.18.0"
