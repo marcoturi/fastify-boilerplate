@@ -7,7 +7,8 @@
   "scripts": {
     "create:env": "node -r fs -e \"fs.copyFileSync('.env.example', '.env', fs.constants.COPYFILE_EXCL)\"",
     "start": "tsx watch src --env-file=.env | pino-pretty",
-    "build": "tsc --project tsconfig.build.json",
+    "start:prod": "node ./dist/index.js --env-file=.env",
+    "build": "rm -rf ./dist && tsc --project tsconfig.build.json && resolve-tspaths -p tsconfig.build.json -s ./src -o ./dist",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:unit": "vitest --selectProjects unit-tests",
@@ -105,6 +106,7 @@
     "pino-pretty": "11.2.2",
     "pinst": "3.0.0",
     "prettier": "3.3.3",
+    "resolve-tspaths": "0.8.19",
     "semantic-release": "24.1.0",
     "ts-node": "10.9.2",
     "tsc-alias": "1.8.10",

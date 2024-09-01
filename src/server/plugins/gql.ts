@@ -5,7 +5,7 @@ import path from 'node:path';
 
 const getGQL = async () => {
   const typesArraySchema = await loadFiles(path.join(__dirname, '../../'), {
-    extensions: ['.graphql-schema.ts'],
+    extensions: ['.graphql-schema.ts', '.graphql-schema.js'], // js needed for the production build
   });
 
   const typeDefsSchema = mergeTypeDefs(typesArraySchema, {
