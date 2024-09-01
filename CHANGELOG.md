@@ -1,3 +1,10 @@
+## [1.1.25](https://github.com/marcoturi/fastify-boilerplate/compare/v1.1.24...v1.1.25) (2024-09-01)
+
+
+### Bug Fixes
+
+* **app:** production build ([3b8baef](https://github.com/marcoturi/fastify-boilerplate/commit/3b8baef29418b6f035a31ce4b683a2a6709eb414))
+
 ## [1.1.24](https://github.com/marcoturi/fastify-boilerplate/compare/v1.1.23...v1.1.24) (2024-08-30)
 
 
