@@ -50,12 +50,16 @@ jobs:
           cache: 'yarn'
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+      - name: Check lint, types, and formatting
+        run: yarn lint:ci && yarn format:ci && yarn type:check
       - name: Run tests
         run: yarn test
       - name: Seed DB
         run: yarn db:migrate
         env:
           DBMATE_DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable
+      - name: Run build
+        run: yarn build
       - name: Run e2e tests
         run: yarn test:e2e
         env:
