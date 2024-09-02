@@ -1,3 +1,10 @@
+## [1.1.26](https://github.com/marcoturi/fastify-boilerplate/compare/v1.1.25...v1.1.26) (2024-09-02)
+
+
+### Bug Fixes
+
+* **app:** add DI files in the production build ([2731fd9](https://github.com/marcoturi/fastify-boilerplate/commit/2731fd9c89ea2f64b69eb78ae4e269bfcb0a5327))
+
 ## [1.1.25](https://github.com/marcoturi/fastify-boilerplate/compare/v1.1.24...v1.1.25) (2024-09-01)
 
 
