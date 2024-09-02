@@ -19,7 +19,7 @@ export async function di(fastify: FastifyInstance) {
       [
         path.join(
           __dirname,
-          '../../modules/**/*.{repository,mapper,service,domain}.ts',
+          '../../modules/**/*.{repository,mapper,service,domain}.{js,ts}',
         ),
       ],
       {
@@ -31,7 +31,12 @@ export async function di(fastify: FastifyInstance) {
       },
     )
     .loadModules(
-      [path.join(__dirname, '../../modules/**/*.{handler,event-handler}.ts')],
+      [
+        path.join(
+          __dirname,
+          '../../modules/**/*.{handler,event-handler}.{js,ts}',
+        ),
+      ],
       {
         formatName,
         resolverOptions: {
