@@ -103,7 +103,7 @@
     "eslint-plugin-import": "2.30.0",
     "eslint-plugin-promise": "7.1.0",
     "eslint-plugin-unicorn": "55.0.0",
-    "husky": "9.1.5",
+    "husky": "9.1.6",
     "lint-staged": "15.2.10",
     "pino-pretty": "11.2.2",
     "pinst": "3.0.0",
