@@ -30,7 +30,7 @@ const CQRSPlugin = fastifyPlugin<CQRSPluginOption>(
   },
   {
     name: 'fastify-cqrs',
-    fastify: '4.x',
+    fastify: '5.x',
   },
 );
 

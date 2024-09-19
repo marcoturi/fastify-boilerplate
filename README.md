@@ -6,7 +6,7 @@ This meticulously crafted boilerplate serves as a solid foundation for building 
 
 ## ⚡ Features
 
-- Framework: [Fastify](https://github.com/fastify/fastify) with [Awilix](https://github.com/jeffijoe/awilix) for the dependency injection and [Pino](https://github.com/pinojs/pino) for logging
+- Framework: [Fastify 5](https://github.com/fastify/fastify) with [Awilix](https://github.com/jeffijoe/awilix) for the dependency injection and [Pino](https://github.com/pinojs/pino) for logging
 - Plugins: [@fastify/helmet](https://github.com/fastify/fastify-helmet) for security headers, [@fastify/swagger](https://github.com/fastify/fastify-swagger) for Swagger documentation, [@fastify/under-pressure](https://github.com/fastify/under-pressure) for automatic handling of "Service Unavailable", [@fastify/awilix](https://github.com/fastify/fastify-awilix) for dependency injection, [typebox](https://github.com/sinclairzx81/typebox) for JSON schema and TS generation and validation
 - DB: [Postgres](https://github.com/porsager/postgres) as client + [DBMate](https://github.com/amacneil/dbmate) for seeds and migrations
 - Graphql: [Mercurius](https://github.com/mercurius-js/mercurius)
