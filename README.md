@@ -10,7 +10,7 @@ This meticulously crafted boilerplate serves as a solid foundation for building 
 - Plugins: [@fastify/helmet](https://github.com/fastify/fastify-helmet) for security headers, [@fastify/swagger](https://github.com/fastify/fastify-swagger) for Swagger documentation, [@fastify/under-pressure](https://github.com/fastify/under-pressure) for automatic handling of "Service Unavailable", [@fastify/awilix](https://github.com/fastify/fastify-awilix) for dependency injection, [typebox](https://github.com/sinclairzx81/typebox) for JSON schema and TS generation and validation
 - DB: [Postgres](https://github.com/porsager/postgres) as client + [DBMate](https://github.com/amacneil/dbmate) for seeds and migrations
 - Graphql: [Mercurius](https://github.com/mercurius-js/mercurius)
-- Format and Style: [Eslint](https://eslint.org/) + [Prettier](https://prettier.io/)
+- Format and Style: [Eslint 9](https://eslint.org/) + [Prettier](https://prettier.io/)
 - Dependencies validation: [depcruise](https://github.com/sverweij/dependency-cruiser)
 - Release flow: [Husky](https://github.com/typicode/husky) + [Commitlint](https://commitlint.js.org/) + [Semantic-release](https://github.com/semantic-release/semantic-release)
 - Tests: E2E tests with [Cucumber](https://cucumber.io/docs/installation/javascript/), and unit and integration tests with [Vitest](https://vitest.dev/)

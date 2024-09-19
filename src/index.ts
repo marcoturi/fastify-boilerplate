@@ -46,7 +46,8 @@ async function init() {
     gracefulServer.setReady();
   } catch (error) {
     fastify.log.error(error);
-    process.exit(1); // eslint-disable-line
+    // eslint-disable-next-line n/no-process-exit,unicorn/no-process-exit
+    process.exit(1);
   }
 }
 

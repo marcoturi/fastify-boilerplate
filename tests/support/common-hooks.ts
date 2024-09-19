@@ -29,7 +29,7 @@ Before(async function (this: ICustomWorld, { pickle }: ITestCaseHookParameter) {
 After(async function (this: ICustomWorld, { result }: ITestCaseHookParameter) {
   if (result) {
     this.attach(
-      `Status: ${result?.status}. Duration:${result.duration?.seconds}s`,
+      `Status: ${result.status}. Duration:${result.duration.seconds}s`,
     );
   }
   await this.server.close();

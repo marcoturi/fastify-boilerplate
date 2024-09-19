@@ -21,14 +21,10 @@ export default async function deleteUser(fastify: FastifyRouteInstance) {
       tags: ['users'],
     },
     handler: async (req, res) => {
-      try {
-        await fastify.commandBus.execute<DeleteUserCommandResult>(
-          deleteUserCommand({ id: req.params.id }),
-        );
-        return res.status(204).send();
-      } catch (error) {
-        throw error;
-      }
+      await fastify.commandBus.execute<DeleteUserCommandResult>(
+        deleteUserCommand({ id: req.params.id }),
+      );
+      return res.status(204).send();
     },
   });
 }

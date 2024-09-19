@@ -9,7 +9,7 @@ const sql = postgres(env.db.url, {
     params: unknown[],
     paramTypes: unknown[],
   ) => {
-    env.log.level === LogLevel.debug &&
+    if (env.log.level === LogLevel.debug) {
       console.debug(`
     SQL::
       Executing query: "${query.trim()}"
@@ -17,6 +17,7 @@ const sql = postgres(env.db.url, {
       Param Types: ${JSON.stringify(paramTypes)}
       Connection: ${conn}
     `);
+    }
   },
 });
 

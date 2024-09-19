@@ -38,7 +38,7 @@ export function SqlRepositoryBase<
     ): Promise<Paginated<Entity>> {
       const result =
         await db`SELECT * FROM ${tableName} LIMIT ${params.limit} OFFSET ${params.offset}`;
-      const entities = result?.map(mapper.toDomain);
+      const entities = result.map(mapper.toDomain);
       return {
         data: entities,
         count: entities.length || 0,
