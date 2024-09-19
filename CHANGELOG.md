@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/marcoturi/fastify-boilerplate/compare/v1.1.32...v1.2.0) (2024-09-19)
+
+
+### Features
+
+* **app:** update to fastify 5 ([b354aaa](https://github.com/marcoturi/fastify-boilerplate/commit/b354aaa219f6c7aaffa20243b99642f878b81206))
+
 ## [1.1.32](https://github.com/marcoturi/fastify-boilerplate/compare/v1.1.31...v1.1.32) (2024-09-19)
 
 
