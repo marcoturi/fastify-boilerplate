@@ -99,7 +99,7 @@
     "artillery-plugin-faker": "5.0.2",
     "dbmate": "2.21.0",
     "dependency-cruiser": "16.4.1",
-    "eslint": "8.57.1",
+    "eslint": "9.10.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-import": "2.30.0",
     "eslint-plugin-promise": "7.1.0",
