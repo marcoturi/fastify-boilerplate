@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/marcoturi/fastify-boilerplate/compare/v1.2.0...v1.3.0) (2024-09-19)
+
+
+### Features
+
+* **app:** update to eslint 9 ([2a6c682](https://github.com/marcoturi/fastify-boilerplate/commit/2a6c682e524a75cb8227113546abea302193a8cf))
+
 # [1.2.0](https://github.com/marcoturi/fastify-boilerplate/compare/v1.1.32...v1.2.0) (2024-09-19)
 
 
