@@ -68,7 +68,7 @@
     "awilix": "11.0.0",
     "env-schema": "6.0.0",
     "fastify": "5.0.0",
-    "fastify-plugin": "5.0.0",
+    "fastify-plugin": "5.0.1",
     "graphql": "16.9.0",
     "helmet": "7.1.0",
     "mercurius": "15.0.0",
