@@ -5156,7 +5156,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn-walk@npm:^8.1.1, acorn-walk@npm:^8.3.3":
+"acorn-walk@npm:^8.1.1, acorn-walk@npm:^8.3.4":
   version: 8.3.4
   resolution: "acorn-walk@npm:8.3.4"
   dependencies:
@@ -7096,24 +7096,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:16.4.1":
-  version: 16.4.1
-  resolution: "dependency-cruiser@npm:16.4.1"
+"dependency-cruiser@npm:16.4.2":
+  version: 16.4.2
+  resolution: "dependency-cruiser@npm:16.4.2"
   dependencies:
     acorn: "npm:^8.12.1"
     acorn-jsx: "npm:^5.3.2"
     acorn-jsx-walk: "npm:^2.0.0"
     acorn-loose: "npm:^8.4.0"
-    acorn-walk: "npm:^8.3.3"
+    acorn-walk: "npm:^8.3.4"
     ajv: "npm:^8.17.1"
     commander: "npm:^12.1.0"
     enhanced-resolve: "npm:^5.17.1"
-    ignore: "npm:^5.3.2"
+    ignore: "npm:^6.0.2"
     interpret: "npm:^3.1.1"
     is-installed-globally: "npm:^1.0.0"
     json5: "npm:^2.2.3"
     memoize: "npm:^10.0.0"
-    picocolors: "npm:^1.0.1"
+    picocolors: "npm:^1.1.0"
     picomatch: "npm:^4.0.2"
     prompts: "npm:^2.4.2"
     rechoir: "npm:^0.8.0"
@@ -7129,7 +7129,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.mjs
     dependency-cruise: bin/dependency-cruise.mjs
     dependency-cruiser: bin/dependency-cruise.mjs
-  checksum: 10c0/190ae17c0abfb6ccd7f3c860a9f194e007184ca590f587a4c281a4aabb2aa69dcc5f2c6f64f466f70bf3955dc404f45db99dc099b5469a29eccd90cb5c4c3fdf
+  checksum: 10c0/92e2f27ffde3d3da417528a901ea8543f0e78eedeb9eea9d21c7d2e16cc0a908e47b897916df2c7b9925b94f57493ceb8f5429f658844412973a1dd6912736e1
   languageName: node
   linkType: hard
 
@@ -8354,7 +8354,7 @@ __metadata:
     artillery-plugin-faker: "npm:5.0.2"
     awilix: "npm:11.0.0"
     dbmate: "npm:2.21.0"
-    dependency-cruiser: "npm:16.4.1"
+    dependency-cruiser: "npm:16.4.2"
     env-schema: "npm:6.0.0"
     eslint: "npm:9.11.0"
     eslint-config-prettier: "npm:9.1.0"
@@ -9512,10 +9512,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ignore@npm:^5.2.0, ignore@npm:^5.2.4, ignore@npm:^5.3.1, ignore@npm:^5.3.2":
+"ignore@npm:^5.2.0, ignore@npm:^5.2.4, ignore@npm:^5.3.1":
   version: 5.3.2
   resolution: "ignore@npm:5.3.2"
   checksum: 10c0/f9f652c957983634ded1e7f02da3b559a0d4cc210fca3792cb67f1b153623c9c42efdc1c4121af171e295444459fc4a9201101fb041b1104a3c000bccb188337
+  languageName: node
+  linkType: hard
+
+"ignore@npm:^6.0.2":
+  version: 6.0.2
+  resolution: "ignore@npm:6.0.2"
+  checksum: 10c0/9a38feac1861906a78ba0f03e8ef3cd6b0526dce2a1a84e1009324b557763afeb9c3ebcc04666b21f7bbf71adda45e76781bb9e2eaa0903d45dcaded634454f5
   languageName: node
   linkType: hard
 
