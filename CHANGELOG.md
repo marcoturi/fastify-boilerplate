@@ -1,3 +1,10 @@
+## [1.3.4](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.3...v1.3.4) (2024-09-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/awilix to v6.0.1 ([3e75680](https://github.com/marcoturi/fastify-boilerplate/commit/3e756800466dbf221bdd5e7b435f57ec872010c4))
+
 ## [1.3.3](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.2...v1.3.3) (2024-09-22)
 
 
