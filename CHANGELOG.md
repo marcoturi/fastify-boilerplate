@@ -1,3 +1,10 @@
+## [1.3.5](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.4...v1.3.5) (2024-09-23)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/cors to v10.0.1 ([2c9ea74](https://github.com/marcoturi/fastify-boilerplate/commit/2c9ea7429a154124dea80d9ff141960fc73222fc))
+
 ## [1.3.4](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.3...v1.3.4) (2024-09-22)
 
 
