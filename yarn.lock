@@ -8384,7 +8384,7 @@ __metadata:
     fastify-plugin: "npm:5.0.1"
     globals: "npm:15.9.0"
     graphql: "npm:16.9.0"
-    helmet: "npm:7.1.0"
+    helmet: "npm:7.2.0"
     husky: "npm:9.1.6"
     lint-staged: "npm:15.2.10"
     mercurius: "npm:15.0.0"
@@ -9285,7 +9285,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"helmet@npm:7.1.0, helmet@npm:^7.1.0":
+"helmet@npm:7.2.0":
+  version: 7.2.0
+  resolution: "helmet@npm:7.2.0"
+  checksum: 10c0/7ba8503519cabc1d6410330b710da3ac01a4ff66e7e10cb68c4d73c96803a2e86ce45c71f3127dfb8ef3ea2e91c7b8316726191873f80d0572f8826878b2854e
+  languageName: node
+  linkType: hard
+
+"helmet@npm:^7.1.0":
   version: 7.1.0
   resolution: "helmet@npm:7.1.0"
   checksum: 10c0/8c3370d07487be11ac918577c68952e05d779a1a2c037023c1ba763034c381a025899bc52f8acfab5209304a1dc618a3764dbfd26386a0d1173befe4fb932e84
