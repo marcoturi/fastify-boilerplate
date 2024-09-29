@@ -1,3 +1,10 @@
+## [1.3.8](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.7...v1.3.8) (2024-09-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency helmet to v7.2.0 ([4913ffa](https://github.com/marcoturi/fastify-boilerplate/commit/4913ffa791e138fe3996e47c51ceaf58411e2bad))
+
 ## [1.3.7](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.6...v1.3.7) (2024-09-27)
 
 
