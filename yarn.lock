@@ -5821,13 +5821,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"awilix@npm:11.0.0":
-  version: 11.0.0
-  resolution: "awilix@npm:11.0.0"
+"awilix@npm:11.0.4":
+  version: 11.0.4
+  resolution: "awilix@npm:11.0.4"
   dependencies:
     camel-case: "npm:^4.1.2"
     fast-glob: "npm:^3.3.2"
-  checksum: 10c0/b531f561198cba8dddbdbceaa4db38802beb89278f33f28019241644c4a8b0b077002e604f58b94b3a4039349257eab157dd34741d408b8a25073dcf45487bfa
+  checksum: 10c0/83f0c84c6ee8c8ed135ad0ec3fd82fd6e83438c0a556370d9d30d4678fc0536ea64f5d92ea31af08bbf1ef72435b7abf74d26d2166cae090f5f79115091d68d5
   languageName: node
   linkType: hard
 
@@ -8380,7 +8380,7 @@ __metadata:
     ajv-formats: "npm:3.0.1"
     artillery: "npm:2.0.20"
     artillery-plugin-faker: "npm:5.0.2"
-    awilix: "npm:11.0.0"
+    awilix: "npm:11.0.4"
     dbmate: "npm:2.21.0"
     dependency-cruiser: "npm:16.4.2"
     env-schema: "npm:6.0.0"
