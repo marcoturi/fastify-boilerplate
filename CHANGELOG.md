@@ -1,3 +1,10 @@
+## [1.3.10](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.9...v1.3.10) (2024-10-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency awilix to v11.0.4 ([758e084](https://github.com/marcoturi/fastify-boilerplate/commit/758e084150a94df53a468a14b44bcc7ea01d3de4))
+
 ## [1.3.9](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.8...v1.3.9) (2024-10-03)
 
 
