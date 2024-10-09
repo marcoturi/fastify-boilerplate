@@ -117,7 +117,7 @@
     "tsc-alias": "1.8.10",
     "tsconfig-paths": "4.2.0",
     "tsx": "4.19.1",
-    "typescript": "5.6.2",
+    "typescript": "5.6.3",
     "typescript-eslint": "8.8.1",
     "vitest": "2.1.2"
   },
