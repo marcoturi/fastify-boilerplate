@@ -63,7 +63,7 @@
     "@gquittet/graceful-server": "5.2.6",
     "@graphql-tools/load-files": "7.0.0",
     "@graphql-tools/merge": "9.0.7",
-    "@sinclair/typebox": "0.33.15",
+    "@sinclair/typebox": "0.33.16",
     "ajv-formats": "3.0.1",
     "awilix": "11.0.4",
     "env-schema": "6.0.0",
