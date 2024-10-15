@@ -8434,7 +8434,7 @@ __metadata:
     lint-staged: "npm:15.2.10"
     mercurius: "npm:15.1.0"
     pino: "npm:9.4.0"
-    pino-pretty: "npm:11.2.2"
+    pino-pretty: "npm:11.3.0"
     pinst: "npm:3.0.0"
     postgres: "npm:3.4.4"
     prettier: "npm:3.3.3"
@@ -12680,7 +12680,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pino-abstract-transport@npm:^1.0.0, pino-abstract-transport@npm:^1.2.0":
+"pino-abstract-transport@npm:^1.2.0":
   version: 1.2.0
   resolution: "pino-abstract-transport@npm:1.2.0"
   dependencies:
@@ -12690,9 +12690,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pino-pretty@npm:11.2.2":
-  version: 11.2.2
-  resolution: "pino-pretty@npm:11.2.2"
+"pino-abstract-transport@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "pino-abstract-transport@npm:2.0.0"
+  dependencies:
+    split2: "npm:^4.0.0"
+  checksum: 10c0/02c05b8f2ffce0d7c774c8e588f61e8b77de8ccb5f8125afd4a7325c9ea0e6af7fb78168999657712ae843e4462bb70ac550dfd6284f930ee57f17f486f25a9f
+  languageName: node
+  linkType: hard
+
+"pino-pretty@npm:11.3.0":
+  version: 11.3.0
+  resolution: "pino-pretty@npm:11.3.0"
   dependencies:
     colorette: "npm:^2.0.7"
     dateformat: "npm:^4.6.3"
@@ -12702,7 +12711,7 @@ __metadata:
     joycon: "npm:^3.1.1"
     minimist: "npm:^1.2.6"
     on-exit-leak-free: "npm:^2.1.0"
-    pino-abstract-transport: "npm:^1.0.0"
+    pino-abstract-transport: "npm:^2.0.0"
     pump: "npm:^3.0.0"
     readable-stream: "npm:^4.0.0"
     secure-json-parse: "npm:^2.4.0"
@@ -12710,7 +12719,7 @@ __metadata:
     strip-json-comments: "npm:^3.1.1"
   bin:
     pino-pretty: bin.js
-  checksum: 10c0/3ce1769907886a5584f6c8123d9bc987712ad10a375797733a0fe95a238df587dac8e2b709bab291c4e30d41b0cf65808c708c96f8eb98b2778b6df60afa7e66
+  checksum: 10c0/8e4d842bfce5fa3fc69d3a6adb1bca873051e000f0fb4879ae1cc5d1410387b2464a7208f6ecc70ec49bb149a9617ec233cb3ec7a5f017ec141cb482d79917c2
   languageName: node
   linkType: hard
 
