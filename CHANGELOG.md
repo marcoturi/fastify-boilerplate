@@ -1,3 +1,10 @@
+## [1.3.17](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.16...v1.3.17) (2024-10-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @graphql-tools/merge to v9.0.8 ([20715f3](https://github.com/marcoturi/fastify-boilerplate/commit/20715f378c599bd49ddd0659700191764423255f))
+
 ## [1.3.16](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.15...v1.3.16) (2024-10-15)
 
 
