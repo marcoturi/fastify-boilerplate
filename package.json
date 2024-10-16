@@ -72,7 +72,7 @@
     "graphql": "16.9.0",
     "helmet": "7.2.0",
     "mercurius": "15.1.0",
-    "pino": "9.4.0",
+    "pino": "9.5.0",
     "postgres": "3.4.4",
     "ramda": "0.30.1"
   },
