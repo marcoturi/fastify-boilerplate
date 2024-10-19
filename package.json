@@ -112,7 +112,7 @@
     "pinst": "3.0.0",
     "prettier": "3.3.3",
     "resolve-tspaths": "0.8.22",
-    "semantic-release": "24.1.2",
+    "semantic-release": "24.1.3",
     "ts-node": "10.9.2",
     "tsc-alias": "1.8.10",
     "tsconfig-paths": "4.2.0",
