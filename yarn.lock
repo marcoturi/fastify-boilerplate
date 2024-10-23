@@ -5289,12 +5289,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^8.11.0, acorn@npm:^8.12.0, acorn@npm:^8.12.1, acorn@npm:^8.4.1, acorn@npm:^8.9.0":
+"acorn@npm:^8.11.0, acorn@npm:^8.12.0, acorn@npm:^8.4.1, acorn@npm:^8.9.0":
   version: 8.12.1
   resolution: "acorn@npm:8.12.1"
   bin:
     acorn: bin/acorn
   checksum: 10c0/51fb26cd678f914e13287e886da2d7021f8c2bc0ccc95e03d3e0447ee278dd3b40b9c57dc222acd5881adcf26f3edc40901a4953403232129e3876793cd17386
+  languageName: node
+  linkType: hard
+
+"acorn@npm:^8.13.0":
+  version: 8.13.0
+  resolution: "acorn@npm:8.13.0"
+  bin:
+    acorn: bin/acorn
+  checksum: 10c0/f35dd53d68177c90699f4c37d0bb205b8abe036d955d0eb011ddb7f14a81e6fd0f18893731c457c1b5bd96754683f4c3d80d9a5585ddecaa53cdf84e0b3d68f7
   languageName: node
   linkType: hard
 
@@ -7198,11 +7207,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:16.4.2":
-  version: 16.4.2
-  resolution: "dependency-cruiser@npm:16.4.2"
+"dependency-cruiser@npm:16.5.0":
+  version: 16.5.0
+  resolution: "dependency-cruiser@npm:16.5.0"
   dependencies:
-    acorn: "npm:^8.12.1"
+    acorn: "npm:^8.13.0"
     acorn-jsx: "npm:^5.3.2"
     acorn-jsx-walk: "npm:^2.0.0"
     acorn-loose: "npm:^8.4.0"
@@ -7215,7 +7224,7 @@ __metadata:
     is-installed-globally: "npm:^1.0.0"
     json5: "npm:^2.2.3"
     memoize: "npm:^10.0.0"
-    picocolors: "npm:^1.1.0"
+    picocolors: "npm:^1.1.1"
     picomatch: "npm:^4.0.2"
     prompts: "npm:^2.4.2"
     rechoir: "npm:^0.8.0"
@@ -7231,7 +7240,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.mjs
     dependency-cruise: bin/dependency-cruise.mjs
     dependency-cruiser: bin/dependency-cruise.mjs
-  checksum: 10c0/92e2f27ffde3d3da417528a901ea8543f0e78eedeb9eea9d21c7d2e16cc0a908e47b897916df2c7b9925b94f57493ceb8f5429f658844412973a1dd6912736e1
+  checksum: 10c0/6d36d286ec61203456376a2355cefe08fe9600fc5ab79ce8882ca12e29190fce548ca8bb41d6db0ac11e5c19fbda25f51071fb060c76e1ef3eda805ce5b7e6e4
   languageName: node
   linkType: hard
 
@@ -8475,7 +8484,7 @@ __metadata:
     artillery-plugin-faker: "npm:5.0.2"
     awilix: "npm:11.0.4"
     dbmate: "npm:2.21.0"
-    dependency-cruiser: "npm:16.4.2"
+    dependency-cruiser: "npm:16.5.0"
     env-schema: "npm:6.0.0"
     eslint: "npm:9.13.0"
     eslint-config-prettier: "npm:9.1.0"
@@ -12716,6 +12725,13 @@ __metadata:
   version: 1.1.0
   resolution: "picocolors@npm:1.1.0"
   checksum: 10c0/86946f6032148801ef09c051c6fb13b5cf942eaf147e30ea79edb91dd32d700934edebe782a1078ff859fb2b816792e97ef4dab03d7f0b804f6b01a0df35e023
+  languageName: node
+  linkType: hard
+
+"picocolors@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "picocolors@npm:1.1.1"
+  checksum: 10c0/e2e3e8170ab9d7c7421969adaa7e1b31434f789afb9b3f115f6b96d91945041ac3ceb02e9ec6fe6510ff036bcc0bf91e69a1772edc0b707e12b19c0f2d6bcf58
   languageName: node
   linkType: hard
 
