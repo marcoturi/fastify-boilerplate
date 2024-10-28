@@ -1876,15 +1876,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/compat@npm:1.2.1":
-  version: 1.2.1
-  resolution: "@eslint/compat@npm:1.2.1"
+"@eslint/compat@npm:1.2.2":
+  version: 1.2.2
+  resolution: "@eslint/compat@npm:1.2.2"
   peerDependencies:
     eslint: ^9.10.0
   peerDependenciesMeta:
     eslint:
       optional: true
-  checksum: 10c0/50b0aa4e1472e76b175de4e15c2a0e3a9702560635c9e3aec69e36da32dc6970eaff43e6427371c36539ec827754d113fb92b97c42a67d4fc241f51b24732bbb
+  checksum: 10c0/c19e1765673520daf6f08bb82f957c6b42079389725ceda99a4387c403fccd5f9a99d142feec43ed032cb240038ea67db9748b17bf8de4ceb8b2fba382089780
   languageName: node
   linkType: hard
 
@@ -8452,7 +8452,7 @@ __metadata:
     "@cucumber/html-formatter": "npm:21.7.0"
     "@cucumber/messages": "npm:26.0.1"
     "@cucumber/pretty-formatter": "npm:1.0.1"
-    "@eslint/compat": "npm:1.2.1"
+    "@eslint/compat": "npm:1.2.2"
     "@eslint/js": "npm:9.13.0"
     "@fastify/autoload": "npm:6.0.2"
     "@fastify/awilix": "npm:6.0.1"
