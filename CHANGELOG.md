@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.21...v1.4.0) (2024-10-29)
+
+
+### Features
+
+* update to node22 ([dad37cf](https://github.com/marcoturi/fastify-boilerplate/commit/dad37cfd4384a0555824a653a4a61d013a8332e3))
+
 ## [1.3.21](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.20...v1.3.21) (2024-10-26)
 
 
