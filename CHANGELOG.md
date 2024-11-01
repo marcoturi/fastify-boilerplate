@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/marcoturi/fastify-boilerplate/compare/v1.4.0...v1.4.1) (2024-11-01)
+
+
+### Bug Fixes
+
+* **deps:** update dependency fastify to v5.1.0 ([21b6a5c](https://github.com/marcoturi/fastify-boilerplate/commit/21b6a5cee6dde8678cd5fa20d94bbb292ff2b941))
+
 # [1.4.0](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.21...v1.4.0) (2024-10-29)
 
 
