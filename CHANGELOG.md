@@ -1,3 +1,178 @@
+## [1.4.3](https://github.com/marcoturi/fastify-boilerplate/compare/v1.4.2...v1.4.3) (2024-11-02)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @gquittet/graceful-server to v5.2.7 ([bbeccfd](https://github.com/marcoturi/fastify-boilerplate/commit/bbeccfd70726baaefd154253cdf059fd67d83364))
+
+## [1.4.2](https://github.com/marcoturi/fastify-boilerplate/compare/v1.4.1...v1.4.2) (2024-11-02)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/type-provider-typebox to v5.0.1 ([74bfe06](https://github.com/marcoturi/fastify-boilerplate/commit/74bfe0693bba41b14c960954becf5c390592d6f9))
+
+## [1.4.1](https://github.com/marcoturi/fastify-boilerplate/compare/v1.4.0...v1.4.1) (2024-11-01)
+
+
+### Bug Fixes
+
+* **deps:** update dependency fastify to v5.1.0 ([21b6a5c](https://github.com/marcoturi/fastify-boilerplate/commit/21b6a5cee6dde8678cd5fa20d94bbb292ff2b941))
+
+# [1.4.0](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.21...v1.4.0) (2024-10-29)
+
+
+### Features
+
+* update to node22 ([dad37cf](https://github.com/marcoturi/fastify-boilerplate/commit/dad37cfd4384a0555824a653a4a61d013a8332e3))
+
+## [1.3.21](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.20...v1.3.21) (2024-10-26)
+
+
+### Bug Fixes
+
+* **deps:** update dependency postgres to v3.4.5 ([a1e111f](https://github.com/marcoturi/fastify-boilerplate/commit/a1e111ff637c353e14319c8afce106aca0f2291c))
+
+## [1.3.20](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.19...v1.3.20) (2024-10-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @sinclair/typebox to v0.33.17 ([7ff4ba3](https://github.com/marcoturi/fastify-boilerplate/commit/7ff4ba3f6307ace0abed08da43de1b51dc6180e7))
+
+## [1.3.19](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.18...v1.3.19) (2024-10-16)
+
+
+### Bug Fixes
+
+* **deps:** update dependency pino to v9.5.0 ([5e3ed51](https://github.com/marcoturi/fastify-boilerplate/commit/5e3ed51405aeaccf1e565fc991fd7816748fbd83))
+
+## [1.3.18](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.17...v1.3.18) (2024-10-16)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/swagger-ui to v5.1.0 ([19f1077](https://github.com/marcoturi/fastify-boilerplate/commit/19f107789ce60380448a033e119f4bb492928bcc))
+
+## [1.3.17](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.16...v1.3.17) (2024-10-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @graphql-tools/merge to v9.0.8 ([20715f3](https://github.com/marcoturi/fastify-boilerplate/commit/20715f378c599bd49ddd0659700191764423255f))
+
+## [1.3.16](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.15...v1.3.16) (2024-10-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency mercurius to v15.1.0 ([0eaada2](https://github.com/marcoturi/fastify-boilerplate/commit/0eaada2a50eb62df87b9dae12ec79eca7e2f51ca))
+
+## [1.3.15](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.14...v1.3.15) (2024-10-12)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/swagger to v9.2.0 ([d243900](https://github.com/marcoturi/fastify-boilerplate/commit/d2439001fc43ee8048d055990e635a28859ede38))
+
+## [1.3.14](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.13...v1.3.14) (2024-10-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @sinclair/typebox to v0.33.16 ([43e469d](https://github.com/marcoturi/fastify-boilerplate/commit/43e469d36312bbf59ebb20d6a46d657a034137fb))
+
+## [1.3.13](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.12...v1.3.13) (2024-10-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/autoload to v6.0.2 ([3c2ddbc](https://github.com/marcoturi/fastify-boilerplate/commit/3c2ddbc80d6bce290d046868701157757f3b93e7))
+
+## [1.3.12](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.11...v1.3.12) (2024-10-08)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @sinclair/typebox to v0.33.15 ([f1b32ab](https://github.com/marcoturi/fastify-boilerplate/commit/f1b32ab8b66221ecaba4c29673eb1a5ccd4ee046))
+
+## [1.3.11](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.10...v1.3.11) (2024-10-05)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @sinclair/typebox to v0.33.14 ([644b674](https://github.com/marcoturi/fastify-boilerplate/commit/644b674eb16962f7329593941901046282b9d594))
+
+## [1.3.10](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.9...v1.3.10) (2024-10-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency awilix to v11.0.4 ([758e084](https://github.com/marcoturi/fastify-boilerplate/commit/758e084150a94df53a468a14b44bcc7ea01d3de4))
+
+## [1.3.9](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.8...v1.3.9) (2024-10-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @sinclair/typebox to v0.33.13 ([bee0a1f](https://github.com/marcoturi/fastify-boilerplate/commit/bee0a1f481e26b75df92f5fd02557308ab0accc8))
+
+## [1.3.8](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.7...v1.3.8) (2024-09-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency helmet to v7.2.0 ([4913ffa](https://github.com/marcoturi/fastify-boilerplate/commit/4913ffa791e138fe3996e47c51ceaf58411e2bad))
+
+## [1.3.7](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.6...v1.3.7) (2024-09-27)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/swagger to v9.1.0 ([477b45d](https://github.com/marcoturi/fastify-boilerplate/commit/477b45d664db83de4b89ce406cb70ebad580eb78))
+
+## [1.3.6](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.5...v1.3.6) (2024-09-23)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/helmet to v12.0.1 ([4bb5ff6](https://github.com/marcoturi/fastify-boilerplate/commit/4bb5ff6e7d6a102e7d4200f5d68de9fe122c8d51))
+
+## [1.3.5](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.4...v1.3.5) (2024-09-23)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/cors to v10.0.1 ([2c9ea74](https://github.com/marcoturi/fastify-boilerplate/commit/2c9ea7429a154124dea80d9ff141960fc73222fc))
+
+## [1.3.4](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.3...v1.3.4) (2024-09-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/awilix to v6.0.1 ([3e75680](https://github.com/marcoturi/fastify-boilerplate/commit/3e756800466dbf221bdd5e7b435f57ec872010c4))
+
+## [1.3.3](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.2...v1.3.3) (2024-09-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/autoload to v6.0.1 ([f998e89](https://github.com/marcoturi/fastify-boilerplate/commit/f998e89213ee4418beff37b016ebab35554b0ef7))
+
+## [1.3.2](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.1...v1.3.2) (2024-09-21)
+
+
+### Bug Fixes
+
+* **deps:** update dependency fastify-plugin to v5.0.1 ([17bb983](https://github.com/marcoturi/fastify-boilerplate/commit/17bb983b387805e3c2011777cf443ee61b411ee7))
+
+## [1.3.1](https://github.com/marcoturi/fastify-boilerplate/compare/v1.3.0...v1.3.1) (2024-09-21)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/under-pressure to v9.0.1 ([78ab5ed](https://github.com/marcoturi/fastify-boilerplate/commit/78ab5edbf544dc1f7fa3532e1ae825215ebe6382))
+
 # [1.3.0](https://github.com/marcoturi/fastify-boilerplate/compare/v1.2.0...v1.3.0) (2024-09-19)
 
 
