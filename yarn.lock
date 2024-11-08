@@ -8531,7 +8531,7 @@ __metadata:
     lint-staged: "npm:15.2.10"
     mercurius: "npm:15.1.0"
     pino: "npm:9.5.0"
-    pino-pretty: "npm:11.3.0"
+    pino-pretty: "npm:12.1.0"
     pinst: "npm:3.0.0"
     postgres: "npm:3.4.5"
     prettier: "npm:3.3.3"
@@ -12822,9 +12822,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pino-pretty@npm:11.3.0":
-  version: 11.3.0
-  resolution: "pino-pretty@npm:11.3.0"
+"pino-pretty@npm:12.1.0":
+  version: 12.1.0
+  resolution: "pino-pretty@npm:12.1.0"
   dependencies:
     colorette: "npm:^2.0.7"
     dateformat: "npm:^4.6.3"
@@ -12842,7 +12842,7 @@ __metadata:
     strip-json-comments: "npm:^3.1.1"
   bin:
     pino-pretty: bin.js
-  checksum: 10c0/8e4d842bfce5fa3fc69d3a6adb1bca873051e000f0fb4879ae1cc5d1410387b2464a7208f6ecc70ec49bb149a9617ec233cb3ec7a5f017ec141cb482d79917c2
+  checksum: 10c0/76518ced4e6612ff29918288acd0cd3a89f9b3e81024b2e2f364ccd6547c2f8977d41875c005da10ee9c9bdd7b020dfdca0917f3c2f8b003d2e42e60696626c6
   languageName: node
   linkType: hard
 
