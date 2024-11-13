@@ -1,3 +1,10 @@
+## [1.4.6](https://github.com/marcoturi/fastify-boilerplate/compare/v1.4.5...v1.4.6) (2024-11-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/type-provider-json-schema-to-ts to v4.0.1 ([#259](https://github.com/marcoturi/fastify-boilerplate/issues/259)) ([d97e890](https://github.com/marcoturi/fastify-boilerplate/commit/d97e8908da0b04b0482eb540b94eece41d78aa3c))
+
 ## [1.4.5](https://github.com/marcoturi/fastify-boilerplate/compare/v1.4.4...v1.4.5) (2024-11-09)
 
 
