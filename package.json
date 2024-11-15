@@ -83,7 +83,7 @@
     "@cucumber/html-formatter": "21.7.0",
     "@cucumber/messages": "27.0.0",
     "@cucumber/pretty-formatter": "1.0.1",
-    "@eslint/compat": "1.2.2",
+    "@eslint/compat": "1.2.3",
     "@eslint/js": "9.14.0",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "13.0.0",
