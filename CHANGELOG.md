@@ -1,3 +1,38 @@
+## [1.4.8](https://github.com/marcoturi/fastify-boilerplate/compare/v1.4.7...v1.4.8) (2024-11-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @sinclair/typebox to v0.34.0 ([#262](https://github.com/marcoturi/fastify-boilerplate/issues/262)) ([8849227](https://github.com/marcoturi/fastify-boilerplate/commit/884922717155d0d2bc31d734eb7d14b6689f432a))
+
+## [1.4.7](https://github.com/marcoturi/fastify-boilerplate/compare/v1.4.6...v1.4.7) (2024-11-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @graphql-tools/merge to v9.0.9 ([#261](https://github.com/marcoturi/fastify-boilerplate/issues/261)) ([4990b76](https://github.com/marcoturi/fastify-boilerplate/commit/4990b76dc0ed7c81191fd8fc43a4eef7825fb614))
+
+## [1.4.6](https://github.com/marcoturi/fastify-boilerplate/compare/v1.4.5...v1.4.6) (2024-11-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/type-provider-json-schema-to-ts to v4.0.1 ([#259](https://github.com/marcoturi/fastify-boilerplate/issues/259)) ([d97e890](https://github.com/marcoturi/fastify-boilerplate/commit/d97e8908da0b04b0482eb540b94eece41d78aa3c))
+
+## [1.4.5](https://github.com/marcoturi/fastify-boilerplate/compare/v1.4.4...v1.4.5) (2024-11-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @sinclair/typebox to v0.33.22 ([#253](https://github.com/marcoturi/fastify-boilerplate/issues/253)) ([ad43f3f](https://github.com/marcoturi/fastify-boilerplate/commit/ad43f3fbba53d6faa0215917a5ba9671899fe6b5))
+
+## [1.4.4](https://github.com/marcoturi/fastify-boilerplate/compare/v1.4.3...v1.4.4) (2024-11-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @sinclair/typebox to v0.33.19 ([43e21e1](https://github.com/marcoturi/fastify-boilerplate/commit/43e21e113d4c760be9a6e4f1999185f887f1cc78))
+
 ## [1.4.3](https://github.com/marcoturi/fastify-boilerplate/compare/v1.4.2...v1.4.3) (2024-11-02)
 
 
