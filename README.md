@@ -13,7 +13,7 @@ This meticulously crafted boilerplate serves as a solid foundation for building 
 - Format and Style: [Eslint 9](https://eslint.org/) + [Prettier](https://prettier.io/)
 - Dependencies validation: [depcruise](https://github.com/sverweij/dependency-cruiser)
 - Release flow: [Husky](https://github.com/typicode/husky) + [Commitlint](https://commitlint.js.org/) + [Semantic-release](https://github.com/semantic-release/semantic-release)
-- Tests: E2E tests with [Cucumber](https://cucumber.io/docs/installation/javascript/), and unit and integration tests with [Vitest](https://vitest.dev/)
+- Tests: E2E tests with [Cucumber](https://cucumber.io/docs/installation/javascript/), and unit and integration tests with node:test
 
 ## 👉 Table of Contents
 

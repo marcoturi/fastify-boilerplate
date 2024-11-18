@@ -42,7 +42,6 @@ export default tseslint.config(
       '.dependency-cruiser.js',
       'cucumber.setup.js',
       'eslint.config.mjs',
-      'vitest.config.js',
     ],
   },
   {
