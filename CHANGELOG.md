@@ -1,3 +1,18 @@
+# [1.5.0](https://github.com/marcoturi/fastify-boilerplate/compare/v1.4.8...v1.5.0) (2024-11-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/swagger to v9.3.0 ([#267](https://github.com/marcoturi/fastify-boilerplate/issues/267)) ([911f01a](https://github.com/marcoturi/fastify-boilerplate/commit/911f01aa5d065ae2379d2ca2bf413ec7528db421))
+* **deps:** update dependency @gquittet/graceful-server to v5.2.8 ([#268](https://github.com/marcoturi/fastify-boilerplate/issues/268)) ([dd0731f](https://github.com/marcoturi/fastify-boilerplate/commit/dd0731f7d116b56a91836d6b3a6fff2bb15f9ee6))
+* **deps:** update dependency @sinclair/typebox to v0.34.2 ([#269](https://github.com/marcoturi/fastify-boilerplate/issues/269)) ([15d6e3d](https://github.com/marcoturi/fastify-boilerplate/commit/15d6e3d95fe80626afd165e34c4679b30258ccfb))
+* **deps:** update dependency @sinclair/typebox to v0.34.3 ([#271](https://github.com/marcoturi/fastify-boilerplate/issues/271)) ([a815a51](https://github.com/marcoturi/fastify-boilerplate/commit/a815a510810b83354ef45bc2e0736e7ad5ff9412))
+
+
+### Features
+
+* **test:** use node:test instead of vitest ([14e06aa](https://github.com/marcoturi/fastify-boilerplate/commit/14e06aa6ce9d706933499331a2ec1f7263537ae9))
+
 ## [1.4.8](https://github.com/marcoturi/fastify-boilerplate/compare/v1.4.7...v1.4.8) (2024-11-14)
 
 
