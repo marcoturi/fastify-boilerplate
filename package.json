@@ -76,8 +76,8 @@
     "ramda": "0.30.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "19.5.0",
-    "@commitlint/config-conventional": "19.5.0",
+    "@commitlint/cli": "19.6.0",
+    "@commitlint/config-conventional": "19.6.0",
     "@cucumber/cucumber": "11.1.0",
     "@cucumber/html-formatter": "21.7.0",
     "@cucumber/messages": "27.0.2",
