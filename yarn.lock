@@ -1898,13 +1898,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fastify/helmet@npm:12.0.1":
-  version: 12.0.1
-  resolution: "@fastify/helmet@npm:12.0.1"
+"@fastify/helmet@npm:13.0.0":
+  version: 13.0.0
+  resolution: "@fastify/helmet@npm:13.0.0"
   dependencies:
     fastify-plugin: "npm:^5.0.0"
-    helmet: "npm:^7.1.0"
-  checksum: 10c0/2d2d6706b9fa348f5e217492d276b02a23ebfd488e490598b1d5607ceef65556fa6290356c1b5c63a21fc93f68410a6b425c10d2fa784fd5db4b5d4396b527a5
+    helmet: "npm:^8.0.0"
+  checksum: 10c0/bb14ae08175f0b4e8dff0aeb87eddae8f397b7d28846579a232d56e4c2067ea250aafd48c429772bd22ddca2e427b50c4780260390e72892bfe855fd8bb22305
   languageName: node
   linkType: hard
 
@@ -8080,7 +8080,7 @@ __metadata:
     "@fastify/autoload": "npm:6.0.2"
     "@fastify/awilix": "npm:6.0.2"
     "@fastify/cors": "npm:10.0.1"
-    "@fastify/helmet": "npm:12.0.1"
+    "@fastify/helmet": "npm:13.0.0"
     "@fastify/request-context": "npm:6.0.1"
     "@fastify/swagger": "npm:9.4.0"
     "@fastify/swagger-ui": "npm:5.1.0"
@@ -9019,17 +9019,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"helmet@npm:8.0.0":
+"helmet@npm:8.0.0, helmet@npm:^8.0.0":
   version: 8.0.0
   resolution: "helmet@npm:8.0.0"
   checksum: 10c0/c3d273df206cbb4e5e830ea68afdbd3d0f8e055b2707f67f651ebb4b679c7fd4d6ac77ce6188a2cee32e853d4e24aa00548f787989bbe6e5f98ebfb703855d09
-  languageName: node
-  linkType: hard
-
-"helmet@npm:^7.1.0":
-  version: 7.1.0
-  resolution: "helmet@npm:7.1.0"
-  checksum: 10c0/8c3370d07487be11ac918577c68952e05d779a1a2c037023c1ba763034c381a025899bc52f8acfab5209304a1dc618a3764dbfd26386a0d1173befe4fb932e84
   languageName: node
   linkType: hard
 
