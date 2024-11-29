@@ -8131,7 +8131,7 @@ __metadata:
     postgres: "npm:3.4.5"
     prettier: "npm:3.4.1"
     ramda: "npm:0.30.1"
-    resolve-tspaths: "npm:0.8.22"
+    resolve-tspaths: "npm:0.8.23"
     semantic-release: "npm:24.2.0"
     ts-node: "npm:10.9.2"
     tsc-alias: "npm:1.8.10"
@@ -13324,9 +13324,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve-tspaths@npm:0.8.22":
-  version: 0.8.22
-  resolution: "resolve-tspaths@npm:0.8.22"
+"resolve-tspaths@npm:0.8.23":
+  version: 0.8.23
+  resolution: "resolve-tspaths@npm:0.8.23"
   dependencies:
     ansi-colors: "npm:4.1.3"
     commander: "npm:12.1.0"
@@ -13335,7 +13335,7 @@ __metadata:
     typescript: ">=3.0.3"
   bin:
     resolve-tspaths: dist/main.js
-  checksum: 10c0/b3e2db8aba58287b6ed528fb46c1f39e06bfd8955d6726e6212bb99faca2029afcd2d36ed9a91ce176af162eb7d27981c2f8dfdc216fbc65105957c087d967da
+  checksum: 10c0/826839f0740fd9beae14474e116b69ed8e0155e5f3f2431ce4c621727dfd3b001b8cb5ed2379fb31114a327895e3c2082624d15c77989fe75ebe93a8186f9e24
   languageName: node
   linkType: hard
 
