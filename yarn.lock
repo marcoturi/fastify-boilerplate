@@ -6919,9 +6919,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:16.6.0":
-  version: 16.6.0
-  resolution: "dependency-cruiser@npm:16.6.0"
+"dependency-cruiser@npm:16.7.0":
+  version: 16.7.0
+  resolution: "dependency-cruiser@npm:16.7.0"
   dependencies:
     acorn: "npm:^8.14.0"
     acorn-jsx: "npm:^5.3.2"
@@ -6943,8 +6943,8 @@ __metadata:
     safe-regex: "npm:^2.1.1"
     semver: "npm:^7.6.3"
     teamcity-service-messages: "npm:^0.1.14"
-    tsconfig-paths-webpack-plugin: "npm:^4.1.0"
-    watskeburt: "npm:^4.1.0"
+    tsconfig-paths-webpack-plugin: "npm:^4.2.0"
+    watskeburt: "npm:^4.1.1"
   bin:
     depcruise: bin/dependency-cruise.mjs
     depcruise-baseline: bin/depcruise-baseline.mjs
@@ -6952,7 +6952,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.mjs
     dependency-cruise: bin/dependency-cruise.mjs
     dependency-cruiser: bin/dependency-cruise.mjs
-  checksum: 10c0/6bf69c89773f29b23c2810455e653b076e5303f2910e30fb81528e4eca747d26aed95766493de2b82cab45422f422cd7bd1fa29ed6a6f4b8fb24d39f04ec3b9e
+  checksum: 10c0/e0e034fc8fdab301adb9eca2bf78012483ca8a4aa320e226eee6e37c14dc5e1b164e4de69a36fc5fb4a376fc559caaa3706ec6790721980c9d4fd33b266031b2
   languageName: node
   linkType: hard
 
@@ -8109,7 +8109,7 @@ __metadata:
     awilix: "npm:12.0.3"
     c8: "npm:10.1.2"
     dbmate: "npm:2.23.0"
-    dependency-cruiser: "npm:16.6.0"
+    dependency-cruiser: "npm:16.7.0"
     env-schema: "npm:6.0.0"
     eslint: "npm:9.16.0"
     eslint-config-prettier: "npm:9.1.0"
@@ -14373,7 +14373,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tapable@npm:^2.2.0":
+"tapable@npm:^2.2.0, tapable@npm:^2.2.1":
   version: 2.2.1
   resolution: "tapable@npm:2.2.1"
   checksum: 10c0/bc40e6efe1e554d075469cedaba69a30eeb373552aaf41caeaaa45bf56ffacc2674261b106245bd566b35d8f3329b52d838e851ee0a852120acae26e622925c9
@@ -14777,14 +14777,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsconfig-paths-webpack-plugin@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "tsconfig-paths-webpack-plugin@npm:4.1.0"
+"tsconfig-paths-webpack-plugin@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "tsconfig-paths-webpack-plugin@npm:4.2.0"
   dependencies:
     chalk: "npm:^4.1.0"
     enhanced-resolve: "npm:^5.7.0"
+    tapable: "npm:^2.2.1"
     tsconfig-paths: "npm:^4.1.2"
-  checksum: 10c0/c030e867e70a3f6d1799fdffa209c3a35e1435ad99aac01946b9ebb0fa8208b7b508c1dfe8c8e13d6a2ef70c75b4db062fbfd3c1f3362c69b6c65ffd4a50e226
+  checksum: 10c0/495c5ab7c1cb079217d98fe25d61def01e4bab38047c7ab25ec11876cc8c697ff01f43ea6c9933181875e51e49835407fc71afd92ea6cca1ba1bebf513dfb510
   languageName: node
   linkType: hard
 
@@ -15291,12 +15292,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"watskeburt@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "watskeburt@npm:4.1.0"
+"watskeburt@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "watskeburt@npm:4.1.1"
   bin:
     watskeburt: dist/run-cli.js
-  checksum: 10c0/ece154fe72dad3efeeebb525056b626456f035e23a4e2e40b0d1364e891ee15f770cadbf6e5095321f198d44d3f17282f4601c6930016774e71c6bc9890dd48a
+  checksum: 10c0/fb93fdd790a89be2112e7dbfa7c91a85b6eb4c44fe87b1fb21e3844b9fb19ea65dbf598d9413b173b4e8b36731783658045289b851cae8099cb343a115b08448
   languageName: node
   linkType: hard
 
