@@ -57,7 +57,7 @@
     "@fastify/swagger": "9.4.0",
     "@fastify/swagger-ui": "5.2.0",
     "@fastify/type-provider-json-schema-to-ts": "4.0.1",
-    "@fastify/type-provider-typebox": "5.0.1",
+    "@fastify/type-provider-typebox": "5.1.0",
     "@fastify/under-pressure": "9.0.1",
     "@gquittet/graceful-server": "5.2.8",
     "@graphql-tools/load-files": "7.0.0",
