@@ -1494,51 +1494,51 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dbmate/darwin-arm64@npm:2.23.0":
-  version: 2.23.0
-  resolution: "@dbmate/darwin-arm64@npm:2.23.0"
+"@dbmate/darwin-arm64@npm:2.24.0":
+  version: 2.24.0
+  resolution: "@dbmate/darwin-arm64@npm:2.24.0"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@dbmate/darwin-x64@npm:2.23.0":
-  version: 2.23.0
-  resolution: "@dbmate/darwin-x64@npm:2.23.0"
+"@dbmate/darwin-x64@npm:2.24.0":
+  version: 2.24.0
+  resolution: "@dbmate/darwin-x64@npm:2.24.0"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@dbmate/linux-arm64@npm:2.23.0":
-  version: 2.23.0
-  resolution: "@dbmate/linux-arm64@npm:2.23.0"
+"@dbmate/linux-arm64@npm:2.24.0":
+  version: 2.24.0
+  resolution: "@dbmate/linux-arm64@npm:2.24.0"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"@dbmate/linux-arm@npm:2.23.0":
-  version: 2.23.0
-  resolution: "@dbmate/linux-arm@npm:2.23.0"
+"@dbmate/linux-arm@npm:2.24.0":
+  version: 2.24.0
+  resolution: "@dbmate/linux-arm@npm:2.24.0"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@dbmate/linux-ia32@npm:2.23.0":
-  version: 2.23.0
-  resolution: "@dbmate/linux-ia32@npm:2.23.0"
+"@dbmate/linux-ia32@npm:2.24.0":
+  version: 2.24.0
+  resolution: "@dbmate/linux-ia32@npm:2.24.0"
   conditions: os=linux & cpu=ia32
   languageName: node
   linkType: hard
 
-"@dbmate/linux-x64@npm:2.23.0":
-  version: 2.23.0
-  resolution: "@dbmate/linux-x64@npm:2.23.0"
+"@dbmate/linux-x64@npm:2.24.0":
+  version: 2.24.0
+  resolution: "@dbmate/linux-x64@npm:2.24.0"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"@dbmate/win32-x64@npm:2.23.0":
-  version: 2.23.0
-  resolution: "@dbmate/win32-x64@npm:2.23.0"
+"@dbmate/win32-x64@npm:2.24.0":
+  version: 2.24.0
+  resolution: "@dbmate/win32-x64@npm:2.24.0"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -6766,17 +6766,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dbmate@npm:2.23.0":
-  version: 2.23.0
-  resolution: "dbmate@npm:2.23.0"
+"dbmate@npm:2.24.0":
+  version: 2.24.0
+  resolution: "dbmate@npm:2.24.0"
   dependencies:
-    "@dbmate/darwin-arm64": "npm:2.23.0"
-    "@dbmate/darwin-x64": "npm:2.23.0"
-    "@dbmate/linux-arm": "npm:2.23.0"
-    "@dbmate/linux-arm64": "npm:2.23.0"
-    "@dbmate/linux-ia32": "npm:2.23.0"
-    "@dbmate/linux-x64": "npm:2.23.0"
-    "@dbmate/win32-x64": "npm:2.23.0"
+    "@dbmate/darwin-arm64": "npm:2.24.0"
+    "@dbmate/darwin-x64": "npm:2.24.0"
+    "@dbmate/linux-arm": "npm:2.24.0"
+    "@dbmate/linux-arm64": "npm:2.24.0"
+    "@dbmate/linux-ia32": "npm:2.24.0"
+    "@dbmate/linux-x64": "npm:2.24.0"
+    "@dbmate/win32-x64": "npm:2.24.0"
   dependenciesMeta:
     "@dbmate/darwin-arm64":
       optional: true
@@ -6794,7 +6794,7 @@ __metadata:
       optional: true
   bin:
     dbmate: dist/cli.js
-  checksum: 10c0/77fa20b8e2295f1cd59d23ed9470bc863c096420d2f19c7c20000ee60b5d945cc69687449ccf5f71b27f3003ed35eb05ebb50c8654db1229bb1036146ec26a4a
+  checksum: 10c0/502da8f81d43e808104748f7e6f9e231d40175401f45a51cf370b0b8ad76b4929391610b9ae114ac51a89e218e1e18de77ba708b379aa1c2359800766254d1ac
   languageName: node
   linkType: hard
 
@@ -8099,7 +8099,7 @@ __metadata:
     artillery-plugin-faker: "npm:5.0.2"
     awilix: "npm:12.0.4"
     c8: "npm:10.1.2"
-    dbmate: "npm:2.23.0"
+    dbmate: "npm:2.24.0"
     dependency-cruiser: "npm:16.7.0"
     env-schema: "npm:6.0.0"
     eslint: "npm:9.16.0"
