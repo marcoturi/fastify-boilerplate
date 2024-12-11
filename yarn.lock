@@ -1298,9 +1298,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cucumber/cucumber@npm:11.1.0":
-  version: 11.1.0
-  resolution: "@cucumber/cucumber@npm:11.1.0"
+"@cucumber/cucumber@npm:11.1.1":
+  version: 11.1.1
+  resolution: "@cucumber/cucumber@npm:11.1.1"
   dependencies:
     "@cucumber/ci-environment": "npm:10.0.1"
     "@cucumber/cucumber-expressions": "npm:17.1.0"
@@ -1311,7 +1311,7 @@ __metadata:
     "@cucumber/junit-xml-formatter": "npm:0.6.0"
     "@cucumber/message-streams": "npm:4.0.1"
     "@cucumber/messages": "npm:24.1.0"
-    "@cucumber/tag-expressions": "npm:6.1.0"
+    "@cucumber/tag-expressions": "npm:6.1.1"
     assertion-error-formatter: "npm:^3.0.0"
     capital-case: "npm:^1.0.4"
     chalk: "npm:^4.1.2"
@@ -1345,7 +1345,7 @@ __metadata:
     yup: "npm:1.2.0"
   bin:
     cucumber-js: bin/cucumber.js
-  checksum: 10c0/1e726334effc9c1524ebb7d438943ab8dbd68b7e84e24c6fa5e07605f5d1ae15c0531539691bb0a23a83979417e2e478507fecbf08694985fa9ad92ef7a48dd0
+  checksum: 10c0/a807dcd21f5718be3d540d46c4be35744e873c2767a178dcef2e7c564fe130beecd4064d632615b54722eef9a3e7999d01fc760b655afaf70913aadb90ae6de1
   languageName: node
   linkType: hard
 
@@ -1480,10 +1480,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cucumber/tag-expressions@npm:6.1.0":
-  version: 6.1.0
-  resolution: "@cucumber/tag-expressions@npm:6.1.0"
-  checksum: 10c0/b108bf7d0cc974024d29aaa6c63f8c21fdaa10cd319254f6e9a902b66bdcdbcc431132b94c3cbe5c03261a910d1a5d8ad7021ae44318a4a717f97b5906094b27
+"@cucumber/tag-expressions@npm:6.1.1":
+  version: 6.1.1
+  resolution: "@cucumber/tag-expressions@npm:6.1.1"
+  checksum: 10c0/5899b7e29dee9aa445df8de1fa09e7f7db6de0d63b73994a41cfa6d64f1104239a3f978463c41016751ad13f70349dabcab1c88ed3f948d13cbb409ea5646f3b
   languageName: node
   linkType: hard
 
@@ -8074,7 +8074,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": "npm:19.6.0"
     "@commitlint/config-conventional": "npm:19.6.0"
-    "@cucumber/cucumber": "npm:11.1.0"
+    "@cucumber/cucumber": "npm:11.1.1"
     "@cucumber/html-formatter": "npm:21.7.0"
     "@cucumber/messages": "npm:27.0.2"
     "@cucumber/pretty-formatter": "npm:1.0.1"
