@@ -8121,7 +8121,7 @@ __metadata:
     fastify: "npm:5.2.0"
     fastify-plugin: "npm:5.0.1"
     globals: "npm:15.13.0"
-    graphql: "npm:16.9.0"
+    graphql: "npm:16.10.0"
     helmet: "npm:8.0.0"
     husky: "npm:9.1.7"
     lint-staged: "npm:15.2.11"
@@ -8933,10 +8933,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql@npm:16.9.0":
-  version: 16.9.0
-  resolution: "graphql@npm:16.9.0"
-  checksum: 10c0/a8850f077ff767377237d1f8b1da2ec70aeb7623cdf1dfc9e1c7ae93accc0c8149c85abe68923be9871a2934b1bce5a2496f846d4d56e1cfb03eaaa7ddba9b6a
+"graphql@npm:16.10.0":
+  version: 16.10.0
+  resolution: "graphql@npm:16.10.0"
+  checksum: 10c0/303730675538c8bd6c76b447dc6f03e61242e2d2596b408c34759666ec4877409e5593a7a0467d590ac5407b8c663b093b599556a77f24f281abea69ddc53de6
   languageName: node
   linkType: hard
 
