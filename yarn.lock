@@ -7976,7 +7976,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-json-stringify@npm:^5.8.0":
+"fast-json-stringify@npm:^5.16.1":
   version: 5.16.1
   resolution: "fast-json-stringify@npm:5.16.1"
   dependencies:
@@ -8145,7 +8145,7 @@ __metadata:
     helmet: "npm:8.0.0"
     husky: "npm:9.1.7"
     lint-staged: "npm:15.2.11"
-    mercurius: "npm:15.1.0"
+    mercurius: "npm:16.0.0"
     pino: "npm:9.6.0"
     pino-pretty: "npm:13.0.0"
     pinst: "npm:3.0.0"
@@ -8937,19 +8937,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql-jit@npm:0.8.6":
-  version: 0.8.6
-  resolution: "graphql-jit@npm:0.8.6"
+"graphql-jit@npm:0.8.7":
+  version: 0.8.7
+  resolution: "graphql-jit@npm:0.8.7"
   dependencies:
     "@graphql-typed-document-node/core": "npm:^3.2.0"
-    fast-json-stringify: "npm:^5.8.0"
+    fast-json-stringify: "npm:^5.16.1"
     generate-function: "npm:^2.3.1"
     lodash.memoize: "npm:^4.1.2"
     lodash.merge: "npm:4.6.2"
     lodash.mergewith: "npm:4.6.2"
   peerDependencies:
     graphql: ">=15"
-  checksum: 10c0/b83d469e14d482f00046c0028cf9228344b3d9bd890902a522b8976ef88f4f38ed43f7db798b33ce281fa476c0b89a7a060d80a8b2b4657b3d5aed2251c8c235
+  checksum: 10c0/b261c259ec5db6c1291d002fba87a3b99faf4104b5c7dd90d35904eedaa2fe7e6b1a56c20e46a05211a7029f92304105f68af739d341637fdb9234e12466a611
   languageName: node
   linkType: hard
 
@@ -10961,28 +10961,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mercurius@npm:15.1.0":
-  version: 15.1.0
-  resolution: "mercurius@npm:15.1.0"
+"mercurius@npm:16.0.0":
+  version: 16.0.0
+  resolution: "mercurius@npm:16.0.0"
   dependencies:
     "@fastify/error": "npm:^4.0.0"
     "@fastify/static": "npm:^8.0.0"
     "@fastify/websocket": "npm:^11.0.0"
     fastify-plugin: "npm:^5.0.0"
-    graphql-jit: "npm:0.8.6"
+    graphql-jit: "npm:0.8.7"
     mqemitter: "npm:^6.0.0"
     p-map: "npm:^4.0.0"
     quick-lru: "npm:^7.0.0"
     readable-stream: "npm:^4.0.0"
     safe-stable-stringify: "npm:^2.3.0"
-    secure-json-parse: "npm:^2.7.0"
+    secure-json-parse: "npm:^3.0.0"
     single-user-cache: "npm:^1.0.0"
     tiny-lru: "npm:^11.0.0"
-    undici: "npm:^6.19.8"
     ws: "npm:^8.2.2"
   peerDependencies:
     graphql: ^16.0.0
-  checksum: 10c0/45c006b2de76bd9432736b611ba59fefecfde4063409ea9e4f37842053b8ef179176cf6f9aca047ae9a15fe141b2e7c490723c3774987a75745d4dd4d4abe7c9
+  checksum: 10c0/abeec81e100dc045dc6197d1f9936289359e5d8db6562edde1e55a5ab322216998614e621a91b7dd3c8a96676ca5189bd784b556c324a312d48cd71abb1e1f33
   languageName: node
   linkType: hard
 
@@ -13566,14 +13565,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"secure-json-parse@npm:^2.4.0, secure-json-parse@npm:^2.7.0":
+"secure-json-parse@npm:^2.4.0":
   version: 2.7.0
   resolution: "secure-json-parse@npm:2.7.0"
   checksum: 10c0/f57eb6a44a38a3eeaf3548228585d769d788f59007454214fab9ed7f01fbf2e0f1929111da6db28cf0bcc1a2e89db5219a59e83eeaec3a54e413a0197ce879e4
   languageName: node
   linkType: hard
 
-"secure-json-parse@npm:^3.0.1":
+"secure-json-parse@npm:^3.0.0, secure-json-parse@npm:^3.0.1":
   version: 3.0.1
   resolution: "secure-json-parse@npm:3.0.1"
   checksum: 10c0/4e4555f62a570fd11a37fe7853fb0fd6661084e53ed11324c68496128f5300309c81279d890fe5145e8ec79887c58682be33e67693392c44cc835859c041dd12
@@ -15050,7 +15049,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:^6.19.5, undici@npm:^6.19.8":
+"undici@npm:^6.19.5":
   version: 6.19.8
   resolution: "undici@npm:6.19.8"
   checksum: 10c0/07fd8520bce7e34ea29c07ef0de27b734183042cdb4e2f1262cd1fb9b755a6b04ff2471040395dfb1770fb7786069a97c5178bcf706b80a34075994f46feb37c
