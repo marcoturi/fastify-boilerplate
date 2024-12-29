@@ -1,3 +1,10 @@
+## [1.5.25](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.24...v1.5.25) (2024-12-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @gquittet/graceful-server to v5.2.9 ([#342](https://github.com/marcoturi/fastify-boilerplate/issues/342)) ([28f503d](https://github.com/marcoturi/fastify-boilerplate/commit/28f503dcff24c840cde5422b87c448c8cfc50648))
+
 ## [1.5.24](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.23...v1.5.24) (2024-12-25)
 
 
