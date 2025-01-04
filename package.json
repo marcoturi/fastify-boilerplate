@@ -52,7 +52,7 @@
     "@fastify/autoload": "6.0.3",
     "@fastify/awilix": "6.0.2",
     "@fastify/cors": "10.0.1",
-    "@fastify/helmet": "13.0.0",
+    "@fastify/helmet": "13.0.1",
     "@fastify/request-context": "6.0.1",
     "@fastify/swagger": "9.4.0",
     "@fastify/swagger-ui": "5.2.0",
