@@ -1865,13 +1865,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fastify/cors@npm:10.0.1":
-  version: 10.0.1
-  resolution: "@fastify/cors@npm:10.0.1"
+"@fastify/cors@npm:10.0.2":
+  version: 10.0.2
+  resolution: "@fastify/cors@npm:10.0.2"
   dependencies:
     fastify-plugin: "npm:^5.0.0"
     mnemonist: "npm:0.39.8"
-  checksum: 10c0/95aec2445b25a7df09bab557800a07245b58a00661b693bb04b8083d4c66b48f11696ca334d1488cff6aebbf8cbe2ae09d462972ac12502ba49a360662a249ba
+  checksum: 10c0/2d95e6580a9ac3258dc1bdbd3d5f52ff7c5e310c52640baa06230b8fd137b3c502615d3f55892d09df440c0451501e942af098e65d74db5235da9ea380eb99ca
   languageName: node
   linkType: hard
 
@@ -8127,7 +8127,7 @@ __metadata:
     "@eslint/js": "npm:9.17.0"
     "@fastify/autoload": "npm:6.0.3"
     "@fastify/awilix": "npm:6.0.2"
-    "@fastify/cors": "npm:10.0.1"
+    "@fastify/cors": "npm:10.0.2"
     "@fastify/helmet": "npm:13.0.1"
     "@fastify/request-context": "npm:6.0.1"
     "@fastify/swagger": "npm:9.4.0"
