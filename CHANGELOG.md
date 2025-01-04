@@ -1,3 +1,10 @@
+## [1.5.28](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.27...v1.5.28) (2025-01-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency env-schema to v6.0.1 ([#352](https://github.com/marcoturi/fastify-boilerplate/issues/352)) ([1f50d09](https://github.com/marcoturi/fastify-boilerplate/commit/1f50d09eecd70e0a81f279832de638c30cad7d00))
+
 ## [1.5.27](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.26...v1.5.27) (2025-01-04)
 
 
