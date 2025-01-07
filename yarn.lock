@@ -2036,29 +2036,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/merge@npm:9.0.16":
-  version: 9.0.16
-  resolution: "@graphql-tools/merge@npm:9.0.16"
+"@graphql-tools/merge@npm:9.0.17":
+  version: 9.0.17
+  resolution: "@graphql-tools/merge@npm:9.0.17"
   dependencies:
-    "@graphql-tools/utils": "npm:^10.7.1"
+    "@graphql-tools/utils": "npm:^10.7.2"
     tslib: "npm:^2.4.0"
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: 10c0/2db91a00d64057e9376837f39cf83b0556280f83bc176b2dba27b93f30bdcee32fa5ab0a0688abab6e8b305b00b3a9ff754e2b34887e6f5af3c65c4ac5403e1b
+  checksum: 10c0/5dc25bd8875adaa0c4c3efb928f514b8828b36b71aaba4aeef02c36975e6ab897168e9370b0955ad6c569d3671cea1c84b4c54646ae3287992f458641deea8a2
   languageName: node
   linkType: hard
 
-"@graphql-tools/utils@npm:^10.7.1":
-  version: 10.7.1
-  resolution: "@graphql-tools/utils@npm:10.7.1"
+"@graphql-tools/utils@npm:^10.7.2":
+  version: 10.7.2
+  resolution: "@graphql-tools/utils@npm:10.7.2"
   dependencies:
     "@graphql-typed-document-node/core": "npm:^3.1.1"
     cross-inspect: "npm:1.0.1"
-    dset: "npm:^3.1.2"
+    dset: "npm:^3.1.4"
     tslib: "npm:^2.4.0"
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: 10c0/56975695cd0f753d3da42bda60a24da4f638daa34520398fa0b9009de70139940ec054e3c24b996c9d3e954e742a24b83ec95524b6b9b7805834b19c5ece2e12
+  checksum: 10c0/1e73eaf482437e2d20c1241d3fd422587a7cba93bc67d1572974053788fda22cca745f2e3048150a0af5b0cd9132b7ee49b661ada7a4a0e40e4732afcb53c549
   languageName: node
   linkType: hard
 
@@ -7208,7 +7208,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dset@npm:^3.1.2":
+"dset@npm:^3.1.4":
   version: 3.1.4
   resolution: "dset@npm:3.1.4"
   checksum: 10c0/b67bbd28dd8a539e90c15ffb61100eb64ef995c5270a124d4f99bbb53f4d82f55a051b731ba81f3215dd9dce2b4c8d69927dc20b3be1c5fc88bab159467aa438
@@ -8137,7 +8137,7 @@ __metadata:
     "@fastify/under-pressure": "npm:9.0.2"
     "@gquittet/graceful-server": "npm:5.2.9"
     "@graphql-tools/load-files": "npm:7.0.0"
-    "@graphql-tools/merge": "npm:9.0.16"
+    "@graphql-tools/merge": "npm:9.0.17"
     "@semantic-release/changelog": "npm:6.0.3"
     "@semantic-release/commit-analyzer": "npm:13.0.1"
     "@semantic-release/git": "npm:10.0.1"
