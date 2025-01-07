@@ -1,3 +1,10 @@
+## [1.5.30](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.29...v1.5.30) (2025-01-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/request-context to v6.0.2 ([#355](https://github.com/marcoturi/fastify-boilerplate/issues/355)) ([313a12d](https://github.com/marcoturi/fastify-boilerplate/commit/313a12df00b9eacbde5b2ed608c09ab4c07e08c5))
+
 ## [1.5.29](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.28...v1.5.29) (2025-01-04)
 
 
