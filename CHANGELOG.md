@@ -1,3 +1,10 @@
+## [1.5.32](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.31...v1.5.32) (2025-01-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency fastify to v5.2.1 ([#357](https://github.com/marcoturi/fastify-boilerplate/issues/357)) ([53da789](https://github.com/marcoturi/fastify-boilerplate/commit/53da789b6767a6fd1720f8c5d18de8aa69808427))
+
 ## [1.5.31](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.30...v1.5.31) (2025-01-07)
 
 
