@@ -1,3 +1,10 @@
+## [1.5.34](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.33...v1.5.34) (2025-01-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/under-pressure to v9.0.3 ([#363](https://github.com/marcoturi/fastify-boilerplate/issues/363)) ([1959479](https://github.com/marcoturi/fastify-boilerplate/commit/1959479ae12af3b396267f7fa611b48e78647799))
+
 ## [1.5.33](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.32...v1.5.33) (2025-01-11)
 
 
