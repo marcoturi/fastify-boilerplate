@@ -93,7 +93,7 @@
     "@trivago/prettier-plugin-sort-imports": "5.2.1",
     "@tsconfig/node22": "22.0.0",
     "@types/eslint__js": "8.42.3",
-    "@types/node": "22.10.6",
+    "@types/node": "22.10.7",
     "@types/ramda": "0.30.2",
     "artillery": "2.0.22",
     "artillery-plugin-faker": "5.0.2",
