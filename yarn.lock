@@ -2056,16 +2056,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/load-files@npm:7.0.0":
-  version: 7.0.0
-  resolution: "@graphql-tools/load-files@npm:7.0.0"
+"@graphql-tools/load-files@npm:7.0.1":
+  version: 7.0.1
+  resolution: "@graphql-tools/load-files@npm:7.0.1"
   dependencies:
     globby: "npm:11.1.0"
     tslib: "npm:^2.4.0"
-    unixify: "npm:1.0.0"
+    unixify: "npm:^1.0.0"
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: 10c0/422e3890d8e70e0811c4de78bd6e2c623564b67eddb0938e0115a50c2c6d0400b790bbf6bf4c2010b8bd73898bb65cc02874194ccff9c4d82198903bd2ecb5dd
+  checksum: 10c0/2e0903363481aece6ce7e34a506cd6b4cdfcd046d1a69bb0b036f71a29856f309d6250e1241c20323412afa9c4a7a2679403423bab7b9b941799fc42ad188d85
   languageName: node
   linkType: hard
 
@@ -8187,7 +8187,7 @@ __metadata:
     "@fastify/type-provider-typebox": "npm:5.1.0"
     "@fastify/under-pressure": "npm:9.0.3"
     "@gquittet/graceful-server": "npm:5.2.9"
-    "@graphql-tools/load-files": "npm:7.0.0"
+    "@graphql-tools/load-files": "npm:7.0.1"
     "@graphql-tools/merge": "npm:9.0.17"
     "@semantic-release/changelog": "npm:6.0.3"
     "@semantic-release/commit-analyzer": "npm:13.0.1"
@@ -15221,7 +15221,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unixify@npm:1.0.0":
+"unixify@npm:^1.0.0":
   version: 1.0.0
   resolution: "unixify@npm:1.0.0"
   dependencies:
