@@ -1,3 +1,10 @@
+## [1.5.36](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.35...v1.5.36) (2025-01-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @graphql-tools/load-files to v7.0.1 ([#371](https://github.com/marcoturi/fastify-boilerplate/issues/371)) ([a49cbc1](https://github.com/marcoturi/fastify-boilerplate/commit/a49cbc1bc4f9c65ce844abb1a7f4e55ec89e737a))
+
 ## [1.5.35](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.34...v1.5.35) (2025-01-11)
 
 
