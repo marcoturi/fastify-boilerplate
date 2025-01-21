@@ -118,7 +118,7 @@
     "tsconfig-paths": "4.2.0",
     "tsx": "4.19.2",
     "typescript": "5.7.3",
-    "typescript-eslint": "8.20.0"
+    "typescript-eslint": "8.21.0"
   },
   "keywords": [
     "fastify",
