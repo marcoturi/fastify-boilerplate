@@ -8294,7 +8294,7 @@ __metadata:
     prettier: "npm:3.5.0"
     ramda: "npm:0.30.1"
     resolve-tspaths: "npm:0.8.23"
-    semantic-release: "npm:24.2.1"
+    semantic-release: "npm:24.2.2"
     ts-node: "npm:10.9.2"
     tsc-alias: "npm:1.8.10"
     tsconfig-paths: "npm:4.2.0"
@@ -13750,9 +13750,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semantic-release@npm:24.2.1":
-  version: 24.2.1
-  resolution: "semantic-release@npm:24.2.1"
+"semantic-release@npm:24.2.2":
+  version: 24.2.2
+  resolution: "semantic-release@npm:24.2.2"
   dependencies:
     "@semantic-release/commit-analyzer": "npm:^13.0.0-beta.1"
     "@semantic-release/error": "npm:^4.0.0"
@@ -13785,7 +13785,7 @@ __metadata:
     yargs: "npm:^17.5.1"
   bin:
     semantic-release: bin/semantic-release.js
-  checksum: 10c0/c27b187e84b3410e1fd3c9c8d92fad7b4905e6d8719c75f03e684d1ca1d1bf2c843e4e12a0cf54cd6292608af3c50ac17ff9e383add2619dbd0d643a77424ae4
+  checksum: 10c0/82b3f4654badbb80bf20be563ab232531aa721b1aeb17b9e24edf68dc0a6d1c7e10eddb38b6d2eb059ae5c09b6026787743a2f41eaccf0febb7bedebffa7c479
   languageName: node
   linkType: hard
 
