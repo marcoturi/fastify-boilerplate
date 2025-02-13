@@ -1,3 +1,10 @@
+## [1.5.44](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.43...v1.5.44) (2025-02-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @sinclair/typebox to v0.34.20 ([#403](https://github.com/marcoturi/fastify-boilerplate/issues/403)) ([30c73bb](https://github.com/marcoturi/fastify-boilerplate/commit/30c73bb13e47818f027187a5a70be1c681e74165))
+
 ## [1.5.43](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.42...v1.5.43) (2025-02-11)
 
 
