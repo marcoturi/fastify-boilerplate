@@ -1,3 +1,10 @@
+## [1.5.47](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.46...v1.5.47) (2025-02-16)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/swagger-ui to v5.2.2 ([#410](https://github.com/marcoturi/fastify-boilerplate/issues/410)) ([66b1039](https://github.com/marcoturi/fastify-boilerplate/commit/66b1039e66131c02841da1f08882a2cccd27cf77))
+
 ## [1.5.46](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.45...v1.5.46) (2025-02-16)
 
 
