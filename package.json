@@ -110,7 +110,7 @@
     "lint-staged": "15.4.3",
     "pino-pretty": "13.0.0",
     "pinst": "3.0.0",
-    "prettier": "3.5.1",
+    "prettier": "3.5.2",
     "resolve-tspaths": "0.8.23",
     "semantic-release": "24.2.3",
     "ts-node": "10.9.2",
