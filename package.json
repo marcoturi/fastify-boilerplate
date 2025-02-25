@@ -70,7 +70,7 @@
     "fastify-plugin": "5.0.1",
     "graphql": "16.10.0",
     "helmet": "8.0.0",
-    "mercurius": "16.0.1",
+    "mercurius": "16.1.0",
     "pino": "9.6.0",
     "postgres": "3.4.5",
     "ramda": "0.30.1"
