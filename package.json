@@ -61,7 +61,7 @@
     "@fastify/under-pressure": "9.0.3",
     "@gquittet/graceful-server": "5.2.10",
     "@graphql-tools/load-files": "7.0.1",
-    "@graphql-tools/merge": "9.0.20",
+    "@graphql-tools/merge": "9.0.21",
     "@sinclair/typebox": "0.34.28",
     "ajv-formats": "3.0.1",
     "awilix": "12.0.4",
