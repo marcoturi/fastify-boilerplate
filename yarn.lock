@@ -2118,21 +2118,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/merge@npm:9.0.21":
-  version: 9.0.21
-  resolution: "@graphql-tools/merge@npm:9.0.21"
+"@graphql-tools/merge@npm:9.0.22":
+  version: 9.0.22
+  resolution: "@graphql-tools/merge@npm:9.0.22"
   dependencies:
-    "@graphql-tools/utils": "npm:^10.8.3"
+    "@graphql-tools/utils": "npm:^10.8.4"
     tslib: "npm:^2.4.0"
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: 10c0/35bbaea2bbc9e86a631019397e3ca1f53705e2fb608c688aed1d162426de826192b74fc7a8f90d95aa91e2d2bef12ded88674c91d5f42a26b6eb9f516c07fbd6
+  checksum: 10c0/1c196f33549bd17a420fabe59710ecd5c59edf6879a076ccfe874403063b2b2f1acb394115ff61310357bc0f476ce8400b04788f2ed89ce49a37766f1cb85b04
   languageName: node
   linkType: hard
 
-"@graphql-tools/utils@npm:^10.8.3":
-  version: 10.8.3
-  resolution: "@graphql-tools/utils@npm:10.8.3"
+"@graphql-tools/utils@npm:^10.8.4":
+  version: 10.8.4
+  resolution: "@graphql-tools/utils@npm:10.8.4"
   dependencies:
     "@graphql-typed-document-node/core": "npm:^3.1.1"
     "@whatwg-node/promise-helpers": "npm:^1.0.0"
@@ -2141,7 +2141,7 @@ __metadata:
     tslib: "npm:^2.4.0"
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: 10c0/0a3b67e3984adae28955be018ee54c919ba6be5aff88365b26103cb7f7a98bdbc2213289234224fcc094b9f30a85bacc70151d2d9d16318a127877bbe6b57a76
+  checksum: 10c0/c9bd473b79a6029194934965284df0c752cd44d607c65ebcfc20a2cacb9351859e97bab759faac1282db72e31ea6a7a87b0007671064bf3cbc89d907510e503a
   languageName: node
   linkType: hard
 
@@ -8247,7 +8247,7 @@ __metadata:
     "@fastify/under-pressure": "npm:9.0.3"
     "@gquittet/graceful-server": "npm:5.2.10"
     "@graphql-tools/load-files": "npm:7.0.1"
-    "@graphql-tools/merge": "npm:9.0.21"
+    "@graphql-tools/merge": "npm:9.0.22"
     "@semantic-release/changelog": "npm:6.0.3"
     "@semantic-release/commit-analyzer": "npm:13.0.1"
     "@semantic-release/git": "npm:10.0.1"
