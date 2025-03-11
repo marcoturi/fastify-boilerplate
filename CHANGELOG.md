@@ -1,3 +1,10 @@
+## [1.5.59](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.58...v1.5.59) (2025-03-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/autoload to v6.2.0 ([#450](https://github.com/marcoturi/fastify-boilerplate/issues/450)) ([ca003a3](https://github.com/marcoturi/fastify-boilerplate/commit/ca003a330f146be4212c931e08164302a6a6d807))
+
 ## [1.5.58](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.57...v1.5.58) (2025-03-11)
 
 
