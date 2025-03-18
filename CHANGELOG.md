@@ -1,3 +1,10 @@
+## [1.5.63](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.62...v1.5.63) (2025-03-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency helmet to v8.1.0 ([#455](https://github.com/marcoturi/fastify-boilerplate/issues/455)) ([449d3a2](https://github.com/marcoturi/fastify-boilerplate/commit/449d3a2f5ad2b7533ca514ac4c9d27a173f7dd51))
+
 ## [1.5.62](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.61...v1.5.62) (2025-03-15)
 
 
