@@ -1419,21 +1419,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cucumber/html-formatter@npm:21.10.0":
+  version: 21.10.0
+  resolution: "@cucumber/html-formatter@npm:21.10.0"
+  peerDependencies:
+    "@cucumber/messages": ">=18"
+  checksum: 10c0/8af9d303fb8381dedbe9da79af97659776e99178fdfcae925492a400e8b979a2960624b8b7bbf219481eff96b1afdac2596102e6e4fad196441e4ead3ec799e3
+  languageName: node
+  linkType: hard
+
 "@cucumber/html-formatter@npm:21.7.0":
   version: 21.7.0
   resolution: "@cucumber/html-formatter@npm:21.7.0"
   peerDependencies:
     "@cucumber/messages": ">=18"
   checksum: 10c0/ca7f54dcd2b4c023de4a900f538ae2eaaca0bc457f63630635dcd90298c444798a4fde8d164627d20b194d12e30e3de7e63fca45fc42f92031d9d2e8daff87cc
-  languageName: node
-  linkType: hard
-
-"@cucumber/html-formatter@npm:21.9.0":
-  version: 21.9.0
-  resolution: "@cucumber/html-formatter@npm:21.9.0"
-  peerDependencies:
-    "@cucumber/messages": ">=18"
-  checksum: 10c0/50cbb287e0822dbeda7dde70488ce7035f93c9ce14b70c867ae16f7319065e8916f0bca1118b7c977bcc55346da6c4b965f017b67313abaa85d13545dcebb2ca
   languageName: node
   linkType: hard
 
@@ -8260,7 +8260,7 @@ __metadata:
     "@commitlint/cli": "npm:19.8.0"
     "@commitlint/config-conventional": "npm:19.8.0"
     "@cucumber/cucumber": "npm:11.2.0"
-    "@cucumber/html-formatter": "npm:21.9.0"
+    "@cucumber/html-formatter": "npm:21.10.0"
     "@cucumber/messages": "npm:27.2.0"
     "@cucumber/pretty-formatter": "npm:1.0.1"
     "@eslint/compat": "npm:1.2.7"
