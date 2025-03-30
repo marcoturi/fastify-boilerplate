@@ -8319,7 +8319,7 @@ __metadata:
     resolve-tspaths: "npm:0.8.23"
     semantic-release: "npm:24.2.3"
     ts-node: "npm:10.9.2"
-    tsc-alias: "npm:1.8.12"
+    tsc-alias: "npm:1.8.13"
     tsconfig-paths: "npm:4.2.0"
     tsx: "npm:4.19.3"
     typescript: "npm:5.8.2"
@@ -14887,9 +14887,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsc-alias@npm:1.8.12":
-  version: 1.8.12
-  resolution: "tsc-alias@npm:1.8.12"
+"tsc-alias@npm:1.8.13":
+  version: 1.8.13
+  resolution: "tsc-alias@npm:1.8.13"
   dependencies:
     chokidar: "npm:^3.5.3"
     commander: "npm:^9.0.0"
@@ -14899,7 +14899,7 @@ __metadata:
     plimit-lit: "npm:^1.2.6"
   bin:
     tsc-alias: dist/bin/index.js
-  checksum: 10c0/2d222039809007bf62abfe52d36c962ad5cdfb2020f40e63ed29bacfc38214cc7bb4a4409955f46f13c21103515d4e860c9ae3ccc03771a5d045d86dffe23be6
+  checksum: 10c0/3f27c5cd92eb2704b5705b72b76fa08a187e7149f573fb0af26d38a757b88563a891150738c35e9f09d5825bffbbdecf536baa39b17c5f7906ea5eb658cffab8
   languageName: node
   linkType: hard
 
