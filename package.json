@@ -49,7 +49,7 @@
     ]
   },
   "dependencies": {
-    "@fastify/autoload": "6.2.0",
+    "@fastify/autoload": "6.3.0",
     "@fastify/awilix": "7.0.0",
     "@fastify/cors": "10.1.0",
     "@fastify/helmet": "13.0.1",
