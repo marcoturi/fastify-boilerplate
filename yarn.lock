@@ -1928,10 +1928,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fastify/autoload@npm:6.2.0":
-  version: 6.2.0
-  resolution: "@fastify/autoload@npm:6.2.0"
-  checksum: 10c0/9cc08d0ab69deb8979bc9c7e91604be3904875f1a031963bb8662786d9aff6525483fb538f3d5a9a481c7fa24ef8e3550593dd5c27ad25321b08b238b5b14e7d
+"@fastify/autoload@npm:6.3.0":
+  version: 6.3.0
+  resolution: "@fastify/autoload@npm:6.3.0"
+  checksum: 10c0/2edb260be1f6cdb1a49c1c7edf592834a1c87ea09bc53d74f754e46b1152aa49bc34969b001197647dad15cbd3b39a89402522f900a679488451a4f734a267bd
   languageName: node
   linkType: hard
 
@@ -8274,7 +8274,7 @@ __metadata:
     "@cucumber/pretty-formatter": "npm:1.0.1"
     "@eslint/compat": "npm:1.2.8"
     "@eslint/js": "npm:9.24.0"
-    "@fastify/autoload": "npm:6.2.0"
+    "@fastify/autoload": "npm:6.3.0"
     "@fastify/awilix": "npm:7.0.0"
     "@fastify/cors": "npm:10.1.0"
     "@fastify/helmet": "npm:13.0.1"
