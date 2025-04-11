@@ -113,7 +113,7 @@
     "resolve-tspaths": "0.8.23",
     "semantic-release": "24.2.3",
     "ts-node": "10.9.2",
-    "tsc-alias": "1.8.14",
+    "tsc-alias": "1.8.15",
     "tsconfig-paths": "4.2.0",
     "tsx": "4.19.3",
     "typescript": "5.8.3",
