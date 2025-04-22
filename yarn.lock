@@ -2010,12 +2010,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fastify/request-context@npm:6.1.0":
-  version: 6.1.0
-  resolution: "@fastify/request-context@npm:6.1.0"
+"@fastify/request-context@npm:6.2.0":
+  version: 6.2.0
+  resolution: "@fastify/request-context@npm:6.2.0"
   dependencies:
     fastify-plugin: "npm:^5.0.0"
-  checksum: 10c0/a266146e47d732b139d8a04b6a3c1555113a73557533d73efd2005d1008e0d39f2fedfefdcd89695dde99d68c0e0b805c76311886063389429640aa9a3cf7920
+  checksum: 10c0/76758e97851e8660964367771272f402808bd3c290e3c848dfd996ac7064bb8954fdd75eb147ffe0c57873eb4629fdb95b7b683760be7fc880c9555a6674dd24
   languageName: node
   linkType: hard
 
@@ -8278,7 +8278,7 @@ __metadata:
     "@fastify/awilix": "npm:7.0.0"
     "@fastify/cors": "npm:10.1.0"
     "@fastify/helmet": "npm:13.0.1"
-    "@fastify/request-context": "npm:6.1.0"
+    "@fastify/request-context": "npm:6.2.0"
     "@fastify/swagger": "npm:9.5.0"
     "@fastify/swagger-ui": "npm:5.2.2"
     "@fastify/type-provider-json-schema-to-ts": "npm:5.0.0"
