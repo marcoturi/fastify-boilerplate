@@ -1,3 +1,10 @@
+## [1.5.74](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.73...v1.5.74) (2025-05-08)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/swagger to v9.5.1 ([#518](https://github.com/marcoturi/fastify-boilerplate/issues/518)) ([b69bce4](https://github.com/marcoturi/fastify-boilerplate/commit/b69bce4067c4ea2341695dc749fb5fa9103db15a))
+
 ## [1.5.73](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.72...v1.5.73) (2025-04-26)
 
 
