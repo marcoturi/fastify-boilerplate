@@ -8574,7 +8574,7 @@ __metadata:
     eslint-plugin-unicorn: "npm:57.0.0"
     fastify: "npm:5.3.2"
     fastify-plugin: "npm:5.0.1"
-    globals: "npm:16.0.0"
+    globals: "npm:16.1.0"
     graphql: "npm:16.11.0"
     helmet: "npm:8.1.0"
     husky: "npm:9.1.7"
@@ -9296,10 +9296,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:16.0.0":
-  version: 16.0.0
-  resolution: "globals@npm:16.0.0"
-  checksum: 10c0/8906d5f01838df64a81d6c2a7b7214312e2216cf65c5ed1546dc9a7d0febddf55ffa906cf04efd5b01eec2534d6f14859a89535d1a68241832810e41ef3fd5bb
+"globals@npm:16.1.0":
+  version: 16.1.0
+  resolution: "globals@npm:16.1.0"
+  checksum: 10c0/51df6319b5b9e679338baf058ecf1125af0d3148b97e57592deabd65fca5c5dcdcca321d7589282bd6afbea9f5a40bc7329c746f46d56780813d7d1c457209a2
   languageName: node
   linkType: hard
 
