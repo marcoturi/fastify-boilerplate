@@ -8529,7 +8529,7 @@ __metadata:
     husky: "npm:9.1.7"
     lint-staged: "npm:15.5.2"
     mercurius: "npm:16.1.0"
-    pino: "npm:9.6.0"
+    pino: "npm:9.7.0"
     pino-pretty: "npm:13.0.0"
     pinst: "npm:3.0.0"
     postgres: "npm:3.4.5"
@@ -12952,16 +12952,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pino@npm:9.6.0":
-  version: 9.6.0
-  resolution: "pino@npm:9.6.0"
+"pino@npm:9.7.0":
+  version: 9.7.0
+  resolution: "pino@npm:9.7.0"
   dependencies:
     atomic-sleep: "npm:^1.0.0"
     fast-redact: "npm:^3.1.1"
     on-exit-leak-free: "npm:^2.1.0"
     pino-abstract-transport: "npm:^2.0.0"
     pino-std-serializers: "npm:^7.0.0"
-    process-warning: "npm:^4.0.0"
+    process-warning: "npm:^5.0.0"
     quick-format-unescaped: "npm:^4.0.3"
     real-require: "npm:^0.2.0"
     safe-stable-stringify: "npm:^2.3.1"
@@ -12969,7 +12969,7 @@ __metadata:
     thread-stream: "npm:^3.0.0"
   bin:
     pino: bin.js
-  checksum: 10c0/bcd1e9d9b301bea13b95689ca9ad7105ae9451928fb6c0b67b3e58c5fe37cea1d40665f3d6641e3da00be0bbc17b89031e67abbc8ea6aac6164f399309fd78e7
+  checksum: 10c0/c7f8a83a9a9d728b4eff6d0f4b9367f031c91bcaa5806fbf0eedcc8e77faba593d59baf11a8fba0dd1c778bb17ca7ed01418ac1df4ec129faeedd4f3ecaff66f
   languageName: node
   linkType: hard
 
