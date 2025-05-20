@@ -4719,10 +4719,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsconfig/node22@npm:22.0.1":
-  version: 22.0.1
-  resolution: "@tsconfig/node22@npm:22.0.1"
-  checksum: 10c0/9448a14da65ebdafe10bef2582df11c8c8a769b919854747ad97f127eedc188f5e383b5b08df74bd895fa3738f17a442f9de153c0b326f870f2b335f36b51c43
+"@tsconfig/node22@npm:22.0.2":
+  version: 22.0.2
+  resolution: "@tsconfig/node22@npm:22.0.2"
+  checksum: 10c0/c75e6b9ea86ec2a384adefac0e2f16a6c08202ae5cf6c8c745944396a6931ffb38e742809491c1882d1868c2af1c33744193701779674bfb1e05f6a130045a18
   languageName: node
   linkType: hard
 
@@ -8283,7 +8283,7 @@ __metadata:
     "@semantic-release/release-notes-generator": "npm:14.0.3"
     "@sinclair/typebox": "npm:0.34.33"
     "@trivago/prettier-plugin-sort-imports": "npm:5.2.2"
-    "@tsconfig/node22": "npm:22.0.1"
+    "@tsconfig/node22": "npm:22.0.2"
     "@types/node": "npm:22.15.19"
     "@types/ramda": "npm:0.30.2"
     ajv-formats: "npm:3.0.1"
