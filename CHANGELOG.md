@@ -1,3 +1,10 @@
+## [1.5.78](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.77...v1.5.78) (2025-05-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency postgres to v3.4.7 ([#539](https://github.com/marcoturi/fastify-boilerplate/issues/539)) ([6139359](https://github.com/marcoturi/fastify-boilerplate/commit/61393596adfd0ce532a5e3d55fe10ab6be075309))
+
 ## [1.5.77](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.76...v1.5.77) (2025-05-22)
 
 
