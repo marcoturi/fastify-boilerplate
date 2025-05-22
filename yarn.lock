@@ -8310,7 +8310,7 @@ __metadata:
     pino: "npm:9.7.0"
     pino-pretty: "npm:13.0.0"
     pinst: "npm:3.0.0"
-    postgres: "npm:3.4.5"
+    postgres: "npm:3.4.7"
     prettier: "npm:3.5.3"
     ramda: "npm:0.30.1"
     resolve-tspaths: "npm:0.8.23"
@@ -12735,10 +12735,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postgres@npm:3.4.5":
-  version: 3.4.5
-  resolution: "postgres@npm:3.4.5"
-  checksum: 10c0/53415acea77e97bdc1eeb861048f34964e2236e4d4d42f408fc9b901e62bfcf7443a487ebfdad18b57b468c6e297bf8d22097106a200f62eb1262eb5a71355df
+"postgres@npm:3.4.7":
+  version: 3.4.7
+  resolution: "postgres@npm:3.4.7"
+  checksum: 10c0/b2e61b1064d38e7e1df8291f6d5a7e11f892a3240e00cf2b5e5542bf9abbfe97f3963164aeb56b42c1ab6b8aae3454c57f5bbc1791df0769375542740a7cde72
   languageName: node
   linkType: hard
 
