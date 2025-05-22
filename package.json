@@ -72,7 +72,7 @@
     "helmet": "8.1.0",
     "mercurius": "16.1.0",
     "pino": "9.7.0",
-    "postgres": "3.4.5",
+    "postgres": "3.4.7",
     "ramda": "0.30.1"
   },
   "devDependencies": {
