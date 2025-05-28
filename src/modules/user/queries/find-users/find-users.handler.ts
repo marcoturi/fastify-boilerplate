@@ -37,7 +37,7 @@ export default function makeFindUsersQuery({
             AS t) AS  rows
           `;
       return {
-        data: users[0].rows.map((user) => userMapper.toDomain(user)),
+        data: users[0].rows?.map((user) => userMapper.toDomain(user)) ?? [],
         count: users[0].count,
         limit: query.limit,
         page: query.page,

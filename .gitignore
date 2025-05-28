@@ -44,3 +44,4 @@ coverage
 .env
 .specstory
 .history
+.cursor
