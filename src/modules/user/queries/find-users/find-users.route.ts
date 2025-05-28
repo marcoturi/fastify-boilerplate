@@ -19,7 +19,13 @@ export default async function findUsers(fastify: FastifyRouteInstance) {
       const result = await fastify.queryBus.execute<FindUsersQueryResult>(
         findUsersQuery(req.query),
       );
-      return res.status(200).send(result);
+      const response = {
+        ...result,
+        data: result.data?.map(
+          fastify.diContainer.cradle.userMapper.toResponse,
+        ),
+      };
+      return res.status(200).send(response);
     },
   });
 }

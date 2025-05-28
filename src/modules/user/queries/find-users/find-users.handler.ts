@@ -1,10 +1,11 @@
+import { UserEntity } from '../../domain/user.types';
 import { userActionCreator } from '@/modules/user';
 import { UserModel } from '@/modules/user/database/user.repository';
 import { joinConditions } from '@/shared/db/postgres';
 import { Paginated, PaginatedQueryParams } from '@/shared/db/repository.port';
 import { paginatedQueryBase } from '@/shared/ddd/query.base';
 
-export type FindUsersQueryResult = Promise<Paginated<UserModel>>;
+export type FindUsersQueryResult = Promise<Paginated<UserEntity>>;
 export const findUsersQuery = userActionCreator<
   Partial<PaginatedQueryParams> & {
     country?: string;
@@ -13,7 +14,11 @@ export const findUsersQuery = userActionCreator<
   }
 >('find-all-paginated');
 
-export default function makeFindUsersQuery({ db, queryBus }: Dependencies) {
+export default function makeFindUsersQuery({
+  db,
+  queryBus,
+  userMapper,
+}: Dependencies) {
   return {
     async handler({
       payload,
@@ -32,7 +37,7 @@ export default function makeFindUsersQuery({ db, queryBus }: Dependencies) {
             AS t) AS  rows
           `;
       return {
-        data: users[0].rows,
+        data: users[0].rows.map((user) => userMapper.toDomain(user)),
         count: users[0].count,
         limit: query.limit,
         page: query.page,
