@@ -1,3 +1,17 @@
+# [1.6.0](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.78...v1.6.0) (2025-05-28)
+
+
+### Bug Fixes
+
+* **build:** routes loading, closes [#512](https://github.com/marcoturi/fastify-boilerplate/issues/512) ([ce6b728](https://github.com/marcoturi/fastify-boilerplate/commit/ce6b728a315f331920631229480c30cc5ad2c373))
+* **server:** update matchFilter regex for production and development environments ([b53384c](https://github.com/marcoturi/fastify-boilerplate/commit/b53384c3065b4838261da8914473554aeea90927))
+* **users:** handle potential undefined rows in user mapping ([1dd74f0](https://github.com/marcoturi/fastify-boilerplate/commit/1dd74f088b2b0021033fde2cfad006356b965385))
+
+
+### Features
+
+* **users:** add mapper usage examples ([10aed7b](https://github.com/marcoturi/fastify-boilerplate/commit/10aed7b4f27cfb73bdc1b1b398dffe2b67f4be2c))
+
 ## [1.5.78](https://github.com/marcoturi/fastify-boilerplate/compare/v1.5.77...v1.5.78) (2025-05-22)
 
 
