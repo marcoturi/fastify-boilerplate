@@ -49,9 +49,9 @@ export default async function createServer(fastify: FastifyInstance) {
       autoPrefix: 'api',
     },
     matchFilter: (path) => {
-      const regex = env.isDevelopment
-        ? /.(route|resolver).(ts|js)$/
-        : /.(route|resolver).js$/;
+      const regex = env.isProduction
+        ? /.(route|resolver).js$/
+        : /.(route|resolver).(ts|js)$/;
       return regex.test(path);
     },
   });
