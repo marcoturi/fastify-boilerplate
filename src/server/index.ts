@@ -48,8 +48,12 @@ export default async function createServer(fastify: FastifyInstance) {
     options: {
       autoPrefix: 'api',
     },
-    matchFilter: (path) =>
-      ['.route.ts', '.resolver.ts'].some((e) => path.endsWith(e)),
+    matchFilter: (path) => {
+      const regex = env.isDevelopment
+        ? /.(route|resolver).(ts|js)$/
+        : /.(route|resolver).js$/;
+      return regex.test(path);
+    },
   });
 
   await fastify.register(UnderPressure);
