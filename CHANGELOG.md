@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/marcoturi/fastify-boilerplate/compare/v1.6.1...v1.7.0) (2025-06-05)
+
+
+### Features
+
+* **lint:** update lint configuration ([67efcb6](https://github.com/marcoturi/fastify-boilerplate/commit/67efcb663ceb097a5b48bc689bb6e30d4ed318b2))
+
 ## [1.6.1](https://github.com/marcoturi/fastify-boilerplate/compare/v1.6.0...v1.6.1) (2025-05-31)
 
 
