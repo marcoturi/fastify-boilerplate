@@ -1,5 +1,13 @@
 import { ExceptionBase } from './exception-base';
 
+enum ExceptionError {
+  BAD_REQUEST = 'Bad Request',
+  CONFLICT = 'Conflict',
+  NOT_FOUND = 'Not Found',
+  INTERNAL_SERVER_ERROR = 'Internal Server Error',
+  DATABASE_ERROR = 'Database Error',
+}
+
 /**
  * Used to indicate that an incorrect argument was provided to a method/function/class constructor
  *
@@ -8,7 +16,7 @@ import { ExceptionBase } from './exception-base';
  */
 export class ArgumentInvalidException extends ExceptionBase {
   readonly statusCode = 400;
-  readonly error = 'Bad Request';
+  readonly error = ExceptionError.BAD_REQUEST;
 }
 
 /**
@@ -18,7 +26,7 @@ export class ArgumentInvalidException extends ExceptionBase {
  * @extends {ExceptionBase}
  */
 export class ConflictException extends ExceptionBase {
-  readonly error = 'Conflict';
+  readonly error = ExceptionError.CONFLICT;
   readonly statusCode = 409;
 }
 
@@ -29,11 +37,11 @@ export class ConflictException extends ExceptionBase {
  * @extends {ExceptionBase}
  */
 export class NotFoundException extends ExceptionBase {
-  static readonly message = 'Not found';
-  readonly error = 'Not Found';
+  static readonly message = ExceptionError.NOT_FOUND;
+  readonly error = ExceptionError.NOT_FOUND;
   readonly statusCode = 404;
 
-  constructor(message = NotFoundException.message) {
+  constructor(message: string = NotFoundException.message) {
     super(message);
   }
 }
@@ -45,9 +53,9 @@ export class NotFoundException extends ExceptionBase {
  * @extends {ExceptionBase}
  */
 export class InternalServerErrorException extends ExceptionBase {
-  static readonly message = 'Internal server error';
-  readonly error = 'Internal server error';
-  constructor(message = InternalServerErrorException.message) {
+  static readonly message = ExceptionError.INTERNAL_SERVER_ERROR;
+  readonly error = ExceptionError.INTERNAL_SERVER_ERROR;
+  constructor(message: string = InternalServerErrorException.message) {
     super(message);
   }
 
@@ -56,8 +64,24 @@ export class InternalServerErrorException extends ExceptionBase {
 
 export class DatabaseErrorException extends ExceptionBase {
   static readonly message = 'Database error';
-  readonly error = 'Internal server error';
-  constructor(message = InternalServerErrorException.message, cause?: Error) {
+  readonly error = ExceptionError.INTERNAL_SERVER_ERROR;
+  constructor(
+    message: string = InternalServerErrorException.message,
+    cause?: Error,
+  ) {
+    super(message, cause);
+  }
+
+  readonly statusCode = 500;
+}
+
+export class ProviderErrorException extends ExceptionBase {
+  static readonly message = 'Provider error';
+  readonly error = ExceptionError.INTERNAL_SERVER_ERROR;
+  constructor(
+    message: string = InternalServerErrorException.message,
+    cause?: Error,
+  ) {
     super(message, cause);
   }
 

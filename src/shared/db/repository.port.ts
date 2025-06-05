@@ -5,7 +5,10 @@ export interface Paginated<T> {
   data: T[];
 }
 
-export type OrderBy = { field: string | boolean; param: 'asc' | 'desc' };
+export interface OrderBy {
+  field: string | boolean;
+  param: 'asc' | 'desc';
+}
 
 export interface PaginatedQueryParams {
   limit: number;

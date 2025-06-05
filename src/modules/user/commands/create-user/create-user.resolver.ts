@@ -12,10 +12,9 @@ export default async function createUserResolver(
     Mutation: {
       putUser: async (_, args) => {
         try {
-          const id = await fastify.commandBus.execute<CreateUserCommandResult>(
-            createUserCommand(args.user || {}),
+          return await fastify.commandBus.execute<CreateUserCommandResult>(
+            createUserCommand(args.user ?? {}),
           );
-          return id;
         } catch (error) {
           if (error instanceof UserAlreadyExistsError) {
             throw new ErrorWithProps(error.message, {

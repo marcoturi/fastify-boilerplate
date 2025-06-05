@@ -16,8 +16,7 @@ export default function makeDeleteUser({
       if (!user) {
         throw new NotFoundException();
       }
-      const result = await userRepository.delete(payload.id);
-      return result;
+      return await userRepository.delete(payload.id);
     },
     init() {
       commandBus.register(deleteUserCommand.type, this.handler);

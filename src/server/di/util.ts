@@ -1,6 +1,6 @@
 export function formatName(fileName: string): string {
   // Split the filename by delimiters (".", "-")
-  const parts = fileName.split(/\.|-/);
+  const parts = fileName.split(/[.-]/);
 
   // Capitalize the first letter of each word (except the first)
   const formattedParts = parts.map((part, index) =>

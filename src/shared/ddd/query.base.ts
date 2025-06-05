@@ -1,14 +1,14 @@
-type OrderBy = {
+interface OrderBy {
   field: string | boolean;
   param: 'asc' | 'desc';
-};
+}
 
-type PaginatedQueryParams = {
+interface PaginatedQueryParams {
   limit?: number;
   offset?: number;
   orderBy?: OrderBy;
   page?: number;
-};
+}
 
 type PaginatedQueryBaseI<TProps> = TProps & {
   limit: number;

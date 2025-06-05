@@ -8,8 +8,8 @@ export function decorateWithMetadata(
 ) {
   action.meta = {
     ...action.meta,
-    correlationId: action.meta?.correlationId || getRequestId(),
-    timestamp: action.meta?.timestamp || Date.now(),
+    correlationId: action.meta?.correlationId ?? getRequestId(),
+    timestamp: action.meta?.timestamp ?? Date.now(),
   };
   return handler(action) as Promise<CommandHandler | EventHandler>;
 }

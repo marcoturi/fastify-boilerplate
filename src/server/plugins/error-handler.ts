@@ -25,6 +25,7 @@ const fastifyErrorCodesMap = {
 };
 
 async function errorHandlerPlugin(fastify: FastifyInstance) {
+  // eslint-disable-next-line promise/prefer-await-to-callbacks
   fastify.setErrorHandler((error: FastifyError | Error, _, res) => {
     // Handle fastify errors
     const fastifyError =

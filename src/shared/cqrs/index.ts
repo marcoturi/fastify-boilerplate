@@ -7,9 +7,7 @@ import {
 } from '@/shared/cqrs/middlewares';
 import fastifyPlugin from 'fastify-plugin';
 
-interface CQRSPluginOption {}
-
-const CQRSPlugin = fastifyPlugin<CQRSPluginOption>(
+const CQRSPlugin = fastifyPlugin(
   (fastify, _opts, done) => {
     if (fastify.queryBus || fastify.commandBus || fastify.eventBus) {
       throw new Error('This plugin is already registered');
