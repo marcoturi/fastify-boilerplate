@@ -8806,7 +8806,7 @@ __metadata:
     ts-node: "npm:10.9.2"
     tsc-alias: "npm:1.8.16"
     tsconfig-paths: "npm:4.2.0"
-    tsx: "npm:4.19.4"
+    tsx: "npm:4.20.0"
     typescript: "npm:5.8.3"
     typescript-eslint: "npm:8.34.0"
   languageName: unknown
@@ -16123,9 +16123,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsx@npm:4.19.4":
-  version: 4.19.4
-  resolution: "tsx@npm:4.19.4"
+"tsx@npm:4.20.0":
+  version: 4.20.0
+  resolution: "tsx@npm:4.20.0"
   dependencies:
     esbuild: "npm:~0.25.0"
     fsevents: "npm:~2.3.3"
@@ -16135,7 +16135,7 @@ __metadata:
       optional: true
   bin:
     tsx: dist/cli.mjs
-  checksum: 10c0/f7b8d44362343fbde1f2ecc9832d243a450e1168dd09702a545ebe5f699aa6912e45b431a54b885466db414cceda48e5067b36d182027c43b2c02a4f99d8721e
+  checksum: 10c0/17a247c1949f3eb8c1a49cd77c7fa5cb6844a6519b158d58fdb325ffc48e6eac6890d38addce1db28d146968be9e0a775252feb5eb4612f2cabffef400b517e6
   languageName: node
   linkType: hard
 
