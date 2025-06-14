@@ -5288,12 +5288,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn-loose@npm:^8.5.0":
-  version: 8.5.0
-  resolution: "acorn-loose@npm:8.5.0"
+"acorn-loose@npm:^8.5.1":
+  version: 8.5.1
+  resolution: "acorn-loose@npm:8.5.1"
   dependencies:
     acorn: "npm:^8.14.0"
-  checksum: 10c0/221df4224ccad267d46775323d956636dd0e4ef263d18450258daff1a33d99e8e00e6214465bdc658fc961cc77fc60cef2f0f4710ec93543ce179f287da0ea80
+  checksum: 10c0/f3aee342516bc8b2a9094ebe83c7a90b54d6fd24ff0e1bcee36ca18aa3aa199579784e7ca9dff522608322e82749086f4e161635040897306e8959f1cf67bc6e
   languageName: node
   linkType: hard
 
@@ -5306,12 +5306,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^8.11.0, acorn@npm:^8.14.0, acorn@npm:^8.14.1, acorn@npm:^8.4.1, acorn@npm:^8.9.0":
+"acorn@npm:^8.11.0, acorn@npm:^8.14.0, acorn@npm:^8.4.1, acorn@npm:^8.9.0":
   version: 8.14.1
   resolution: "acorn@npm:8.14.1"
   bin:
     acorn: bin/acorn
   checksum: 10c0/dbd36c1ed1d2fa3550140000371fcf721578095b18777b85a79df231ca093b08edc6858d75d6e48c73e431c174dcf9214edbd7e6fa5911b93bd8abfa54e47123
+  languageName: node
+  linkType: hard
+
+"acorn@npm:^8.15.0":
+  version: 8.15.0
+  resolution: "acorn@npm:8.15.0"
+  bin:
+    acorn: bin/acorn
+  checksum: 10c0/dec73ff59b7d6628a01eebaece7f2bdb8bb62b9b5926dcad0f8931f2b8b79c2be21f6c68ac095592adb5adb15831a3635d9343e6a91d028bbe85d564875ec3ec
   languageName: node
   linkType: hard
 
@@ -7402,19 +7411,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:16.10.2":
-  version: 16.10.2
-  resolution: "dependency-cruiser@npm:16.10.2"
+"dependency-cruiser@npm:16.10.3":
+  version: 16.10.3
+  resolution: "dependency-cruiser@npm:16.10.3"
   dependencies:
-    acorn: "npm:^8.14.1"
+    acorn: "npm:^8.15.0"
     acorn-jsx: "npm:^5.3.2"
     acorn-jsx-walk: "npm:^2.0.0"
-    acorn-loose: "npm:^8.5.0"
+    acorn-loose: "npm:^8.5.1"
     acorn-walk: "npm:^8.3.4"
     ajv: "npm:^8.17.1"
     commander: "npm:^13.1.0"
     enhanced-resolve: "npm:^5.18.1"
-    ignore: "npm:^7.0.4"
+    ignore: "npm:^7.0.5"
     interpret: "npm:^3.1.1"
     is-installed-globally: "npm:^1.0.0"
     json5: "npm:^2.2.3"
@@ -7424,7 +7433,7 @@ __metadata:
     prompts: "npm:^2.4.2"
     rechoir: "npm:^0.8.0"
     safe-regex: "npm:^2.1.1"
-    semver: "npm:^7.7.1"
+    semver: "npm:^7.7.2"
     teamcity-service-messages: "npm:^0.1.14"
     tsconfig-paths-webpack-plugin: "npm:^4.2.0"
     watskeburt: "npm:^4.2.3"
@@ -7435,7 +7444,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.mjs
     dependency-cruise: bin/dependency-cruise.mjs
     dependency-cruiser: bin/dependency-cruise.mjs
-  checksum: 10c0/ead0ce58c53ef018e2585e6c1ffb650c8ba13f3841568c65e2c983b71d55104e721450832b1afad44da7b507d27e91f6aabc80a0c24230f7466a8a0f191b5499
+  checksum: 10c0/a9eb60e8bf4ac483e7c532411ce6099a1ce798ebcf277741df848a53c0e2059e97c40b7d4850ab584d0c795fbffc0e5bf28a8bd659408f8f568b27d3f597d3e2
   languageName: node
   linkType: hard
 
@@ -8777,7 +8786,7 @@ __metadata:
     awilix: "npm:12.0.5"
     c8: "npm:10.1.3"
     dbmate: "npm:2.27.0"
-    dependency-cruiser: "npm:16.10.2"
+    dependency-cruiser: "npm:16.10.3"
     env-schema: "npm:6.0.1"
     eslint: "npm:9.28.0"
     eslint-config-prettier: "npm:10.1.5"
@@ -10009,10 +10018,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ignore@npm:^7.0.0, ignore@npm:^7.0.3, ignore@npm:^7.0.4":
+"ignore@npm:^7.0.0, ignore@npm:^7.0.3":
   version: 7.0.4
   resolution: "ignore@npm:7.0.4"
   checksum: 10c0/90e1f69ce352b9555caecd9cbfd07abe7626d312a6f90efbbb52c7edca6ea8df065d66303863b30154ab1502afb2da8bc59d5b04e1719a52ef75bbf675c488eb
+  languageName: node
+  linkType: hard
+
+"ignore@npm:^7.0.5":
+  version: 7.0.5
+  resolution: "ignore@npm:7.0.5"
+  checksum: 10c0/ae00db89fe873064a093b8999fe4cc284b13ef2a178636211842cceb650b9c3e390d3339191acb145d81ed5379d2074840cf0c33a20bdbd6f32821f79eb4ad5d
   languageName: node
   linkType: hard
 
@@ -14760,7 +14776,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.1.1, semver@npm:^7.1.2, semver@npm:^7.3.2, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.5.2, semver@npm:^7.5.3, semver@npm:^7.5.4, semver@npm:^7.6.0, semver@npm:^7.6.3, semver@npm:^7.7.1":
+"semver@npm:^7.1.1, semver@npm:^7.1.2, semver@npm:^7.3.2, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.5.2, semver@npm:^7.5.3, semver@npm:^7.5.4, semver@npm:^7.6.0, semver@npm:^7.6.3, semver@npm:^7.7.1, semver@npm:^7.7.2":
   version: 7.7.2
   resolution: "semver@npm:7.7.2"
   bin:
