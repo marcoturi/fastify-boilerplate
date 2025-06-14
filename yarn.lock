@@ -3828,10 +3828,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sinclair/typebox@npm:0.34.33":
-  version: 0.34.33
-  resolution: "@sinclair/typebox@npm:0.34.33"
-  checksum: 10c0/88ab4f7afc7514d576602dce5c892462a89f9082d77dde0e8e21342b3a5c8891ddfc51a65e7dbd5b3f5cbd8f5cb76aded0c0edcfcfb5730f189c2819de9583a7
+"@sinclair/typebox@npm:0.34.35":
+  version: 0.34.35
+  resolution: "@sinclair/typebox@npm:0.34.35"
+  checksum: 10c0/2e10a655eafeee803d16abeb270d4e365caf26178842c4d64c5fa81f1e85de75a41310098299c460c54b1ed14f1cd196e726fc7fc54c263a31b42479d53379ac
   languageName: node
   linkType: hard
 
@@ -8775,7 +8775,7 @@ __metadata:
     "@semantic-release/github": "npm:11.0.3"
     "@semantic-release/npm": "npm:12.0.1"
     "@semantic-release/release-notes-generator": "npm:14.0.3"
-    "@sinclair/typebox": "npm:0.34.33"
+    "@sinclair/typebox": "npm:0.34.35"
     "@trivago/prettier-plugin-sort-imports": "npm:5.2.2"
     "@tsconfig/node22": "npm:22.0.2"
     "@types/node": "npm:22.15.31"
