@@ -92,7 +92,7 @@
     "@semantic-release/release-notes-generator": "14.0.3",
     "@trivago/prettier-plugin-sort-imports": "5.2.2",
     "@tsconfig/node22": "22.0.2",
-    "@types/node": "22.15.31",
+    "@types/node": "22.15.32",
     "@types/ramda": "0.30.2",
     "artillery": "2.0.23",
     "artillery-plugin-faker": "5.0.2",
