@@ -59,7 +59,7 @@
     "@fastify/type-provider-json-schema-to-ts": "5.0.0",
     "@fastify/type-provider-typebox": "5.1.0",
     "@fastify/under-pressure": "9.0.3",
-    "@gquittet/graceful-server": "5.2.12",
+    "@gquittet/graceful-server": "5.2.13",
     "@graphql-tools/load-files": "7.0.1",
     "@graphql-tools/merge": "9.0.24",
     "@sinclair/typebox": "0.34.35",
