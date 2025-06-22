@@ -1,3 +1,10 @@
+## [1.7.6](https://github.com/marcoturi/fastify-boilerplate/compare/v1.7.5...v1.7.6) (2025-06-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency ramda to v0.31.3 ([#573](https://github.com/marcoturi/fastify-boilerplate/issues/573)) ([133997c](https://github.com/marcoturi/fastify-boilerplate/commit/133997cfb1dfd059d5c59c8c4fcefa6964786e81))
+
 ## [1.7.5](https://github.com/marcoturi/fastify-boilerplate/compare/v1.7.4...v1.7.5) (2025-06-22)
 
 
