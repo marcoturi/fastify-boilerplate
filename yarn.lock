@@ -5288,12 +5288,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn-loose@npm:^8.5.1":
-  version: 8.5.1
-  resolution: "acorn-loose@npm:8.5.1"
+"acorn-loose@npm:^8.5.2":
+  version: 8.5.2
+  resolution: "acorn-loose@npm:8.5.2"
   dependencies:
-    acorn: "npm:^8.14.0"
-  checksum: 10c0/f3aee342516bc8b2a9094ebe83c7a90b54d6fd24ff0e1bcee36ca18aa3aa199579784e7ca9dff522608322e82749086f4e161635040897306e8959f1cf67bc6e
+    acorn: "npm:^8.15.0"
+  checksum: 10c0/169a85ad2df888586fe6eda2af9ff8fbcca7174ce83d00632cea5fffa73476218012af91be0cd6b68e4df6183baffa463506fd2ab54800903378140e679302fd
   languageName: node
   linkType: hard
 
@@ -7411,18 +7411,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:16.10.3":
-  version: 16.10.3
-  resolution: "dependency-cruiser@npm:16.10.3"
+"dependency-cruiser@npm:16.10.4":
+  version: 16.10.4
+  resolution: "dependency-cruiser@npm:16.10.4"
   dependencies:
     acorn: "npm:^8.15.0"
     acorn-jsx: "npm:^5.3.2"
     acorn-jsx-walk: "npm:^2.0.0"
-    acorn-loose: "npm:^8.5.1"
+    acorn-loose: "npm:^8.5.2"
     acorn-walk: "npm:^8.3.4"
     ajv: "npm:^8.17.1"
     commander: "npm:^13.1.0"
-    enhanced-resolve: "npm:^5.18.1"
+    enhanced-resolve: "npm:^5.18.2"
     ignore: "npm:^7.0.5"
     interpret: "npm:^3.1.1"
     is-installed-globally: "npm:^1.0.0"
@@ -7444,7 +7444,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.mjs
     dependency-cruise: bin/dependency-cruise.mjs
     dependency-cruiser: bin/dependency-cruise.mjs
-  checksum: 10c0/a9eb60e8bf4ac483e7c532411ce6099a1ce798ebcf277741df848a53c0e2059e97c40b7d4850ab584d0c795fbffc0e5bf28a8bd659408f8f568b27d3f597d3e2
+  checksum: 10c0/918957a560095ae9aa9111ab56c25ae7802e1a8860f42614b27880424224f3987fe1308d4e0ac5385fd1e19b42e1581ca07579a6cd7590db65e5a7f843f00b77
   languageName: node
   linkType: hard
 
@@ -7809,13 +7809,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"enhanced-resolve@npm:^5.14.1, enhanced-resolve@npm:^5.17.1, enhanced-resolve@npm:^5.18.1, enhanced-resolve@npm:^5.7.0":
+"enhanced-resolve@npm:^5.14.1, enhanced-resolve@npm:^5.17.1, enhanced-resolve@npm:^5.7.0":
   version: 5.18.1
   resolution: "enhanced-resolve@npm:5.18.1"
   dependencies:
     graceful-fs: "npm:^4.2.4"
     tapable: "npm:^2.2.0"
   checksum: 10c0/4cffd9b125225184e2abed9fdf0ed3dbd2224c873b165d0838fd066cde32e0918626cba2f1f4bf6860762f13a7e2364fd89a82b99566be2873d813573ac71846
+  languageName: node
+  linkType: hard
+
+"enhanced-resolve@npm:^5.18.2":
+  version: 5.18.2
+  resolution: "enhanced-resolve@npm:5.18.2"
+  dependencies:
+    graceful-fs: "npm:^4.2.4"
+    tapable: "npm:^2.2.0"
+  checksum: 10c0/2a45105daded694304b0298d1c0351a981842249a9867513d55e41321a4ccf37dfd35b0c1e9ceae290eab73654b09aa7a910d618ea6f9441e97c52bc424a2372
   languageName: node
   linkType: hard
 
@@ -8805,7 +8815,7 @@ __metadata:
     awilix: "npm:12.0.5"
     c8: "npm:10.1.3"
     dbmate: "npm:2.27.0"
-    dependency-cruiser: "npm:16.10.3"
+    dependency-cruiser: "npm:16.10.4"
     env-schema: "npm:6.0.1"
     eslint: "npm:9.30.1"
     eslint-config-prettier: "npm:10.1.5"
