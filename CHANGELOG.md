@@ -1,3 +1,10 @@
+## [1.7.8](https://github.com/marcoturi/fastify-boilerplate/compare/v1.7.7...v1.7.8) (2025-07-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/type-provider-typebox to v5.2.0 ([#601](https://github.com/marcoturi/fastify-boilerplate/issues/601)) ([43d38ef](https://github.com/marcoturi/fastify-boilerplate/commit/43d38ef8c88f17b8c4961ace0826c0711c66e670))
+
 ## [1.7.7](https://github.com/marcoturi/fastify-boilerplate/compare/v1.7.6...v1.7.7) (2025-06-25)
 
 
