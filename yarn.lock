@@ -1192,20 +1192,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cucumber/cucumber@npm:11.3.0":
-  version: 11.3.0
-  resolution: "@cucumber/cucumber@npm:11.3.0"
+"@cucumber/cucumber@npm:12.1.0":
+  version: 12.1.0
+  resolution: "@cucumber/cucumber@npm:12.1.0"
   dependencies:
     "@cucumber/ci-environment": "npm:10.0.1"
     "@cucumber/cucumber-expressions": "npm:18.0.1"
-    "@cucumber/gherkin": "npm:30.0.4"
+    "@cucumber/gherkin": "npm:32.2.0"
     "@cucumber/gherkin-streams": "npm:5.0.1"
     "@cucumber/gherkin-utils": "npm:9.2.0"
-    "@cucumber/html-formatter": "npm:21.10.1"
+    "@cucumber/html-formatter": "npm:21.13.0"
     "@cucumber/junit-xml-formatter": "npm:0.7.1"
     "@cucumber/message-streams": "npm:4.0.1"
     "@cucumber/messages": "npm:27.2.0"
-    "@cucumber/tag-expressions": "npm:6.1.2"
+    "@cucumber/tag-expressions": "npm:6.2.0"
     assertion-error-formatter: "npm:^3.0.0"
     capital-case: "npm:^1.0.4"
     chalk: "npm:^4.1.2"
@@ -1214,7 +1214,7 @@ __metadata:
     debug: "npm:^4.3.4"
     error-stack-parser: "npm:^2.1.4"
     figures: "npm:^3.2.0"
-    glob: "npm:^10.3.10"
+    glob: "npm:^11.0.0"
     has-ansi: "npm:^4.0.1"
     indent-string: "npm:^4.0.0"
     is-installed-globally: "npm:^0.4.0"
@@ -1228,7 +1228,7 @@ __metadata:
     mz: "npm:^2.7.0"
     progress: "npm:^2.0.3"
     read-package-up: "npm:^11.0.0"
-    semver: "npm:7.7.1"
+    semver: "npm:7.7.2"
     string-argv: "npm:0.3.1"
     supports-color: "npm:^8.1.1"
     type-fest: "npm:^4.41.0"
@@ -1237,7 +1237,7 @@ __metadata:
     yup: "npm:1.6.1"
   bin:
     cucumber-js: bin/cucumber.js
-  checksum: 10c0/a26fafcc09a24a831a838dece53ddcdd4d41fab3c9580d15f95c1f7e4e58cfdfa14eee4ebec98948de2ee70b28c5d6765eccf598121ffcae28f122a647bfdc45
+  checksum: 10c0/e46fca2455a9bb5f826330b2d8e073165a2f16e6ab30c2dcff6ba6ceb6c96d5d2de823e2dac677acb405a6de8861034780d6abfd5e935b4a441b3419ef325a89
   languageName: node
   linkType: hard
 
@@ -1272,12 +1272,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cucumber/gherkin@npm:30.0.4":
-  version: 30.0.4
-  resolution: "@cucumber/gherkin@npm:30.0.4"
+"@cucumber/gherkin@npm:32.2.0":
+  version: 32.2.0
+  resolution: "@cucumber/gherkin@npm:32.2.0"
   dependencies:
-    "@cucumber/messages": "npm:>=19.1.4 <=26"
-  checksum: 10c0/e373d48bd744cecb45a91a220b7e55bd7e88669eb9518edda1a29fb156f411346c69a7661e595ce5ac97e80ab02d091255e253e39047f5bd15bb475d5449de3e
+    "@cucumber/messages": "npm:>=19.1.4 <28"
+  checksum: 10c0/43794c59ad1a43b09637455bad18f010fcb76e0b62103102f39007d43c09419027ee652cba329cc3c4f3ba07595246f197e13f618e0f92cfa3111373e5a41073
   languageName: node
   linkType: hard
 
@@ -1287,15 +1287,6 @@ __metadata:
   dependencies:
     "@cucumber/messages": "npm:>=19.1.4 <=26"
   checksum: 10c0/aa9746f5055e2387130c923e858da8c71775630379a527d48fbeb2f3e6a5dce92185201e29389e55c72a99bf5563ce4397d7907272dac8f7953266b7b825c54a
-  languageName: node
-  linkType: hard
-
-"@cucumber/html-formatter@npm:21.10.1":
-  version: 21.10.1
-  resolution: "@cucumber/html-formatter@npm:21.10.1"
-  peerDependencies:
-    "@cucumber/messages": ">=18"
-  checksum: 10c0/3d07955e466ac168f275ee297f14361bd8d5e4a8a2e45a1f703de2e080bb8e93842f50f27f2478af53ffacffef517456f5192dd5bbde89e704485656f5587ace
   languageName: node
   linkType: hard
 
@@ -1331,7 +1322,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cucumber/messages@npm:27.2.0, @cucumber/messages@npm:^27.0.0":
+"@cucumber/messages@npm:27.2.0, @cucumber/messages@npm:>=19.1.4 <28, @cucumber/messages@npm:^27.0.0":
   version: 27.2.0
   resolution: "@cucumber/messages@npm:27.2.0"
   dependencies:
@@ -1381,10 +1372,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cucumber/tag-expressions@npm:6.1.2":
-  version: 6.1.2
-  resolution: "@cucumber/tag-expressions@npm:6.1.2"
-  checksum: 10c0/29af4bf9d8530c34c5aaecd25217c6715fbf4b0985b01c0d902ee82bfb2addcac378ac6b6cfe3ca6e9ab3013e74af1935863df0f7c28b5a8097b7f408a13cae1
+"@cucumber/tag-expressions@npm:6.2.0":
+  version: 6.2.0
+  resolution: "@cucumber/tag-expressions@npm:6.2.0"
+  checksum: 10c0/bcfe3ea0c34f489603da66796513da8e7b62a4cb4032689acfea27c634455efd121b95ba0453b6f67b780b41fbc8dc5de210a7a7a9cdd8a671a0d6345df6829a
   languageName: node
   linkType: hard
 
@@ -8730,7 +8721,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": "npm:19.8.1"
     "@commitlint/config-conventional": "npm:19.8.1"
-    "@cucumber/cucumber": "npm:11.3.0"
+    "@cucumber/cucumber": "npm:12.1.0"
     "@cucumber/html-formatter": "npm:21.13.0"
     "@cucumber/messages": "npm:27.2.0"
     "@cucumber/pretty-formatter": "npm:1.0.1"
@@ -14758,15 +14749,6 @@ __metadata:
   version: 4.0.5
   resolution: "semver-regex@npm:4.0.5"
   checksum: 10c0/c270eda133691dfaab90318df995e96222e4c26c47b17f7c8bd5e5fe88b81ed67b59695fe27546e0314b0f0423c7faed1f93379ad9db47c816df2ddf770918ff
-  languageName: node
-  linkType: hard
-
-"semver@npm:7.7.1":
-  version: 7.7.1
-  resolution: "semver@npm:7.7.1"
-  bin:
-    semver: bin/semver.js
-  checksum: 10c0/fd603a6fb9c399c6054015433051bdbe7b99a940a8fb44b85c2b524c4004b023d7928d47cb22154f8d054ea7ee8597f586605e05b52047f048278e4ac56ae958
   languageName: node
   linkType: hard
 
