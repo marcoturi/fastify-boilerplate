@@ -8134,22 +8134,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-n@npm:17.21.0":
-  version: 17.21.0
-  resolution: "eslint-plugin-n@npm:17.21.0"
+"eslint-plugin-n@npm:17.21.1":
+  version: 17.21.1
+  resolution: "eslint-plugin-n@npm:17.21.1"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.5.0"
     enhanced-resolve: "npm:^5.17.1"
     eslint-plugin-es-x: "npm:^7.8.0"
     get-tsconfig: "npm:^4.8.1"
     globals: "npm:^15.11.0"
+    globrex: "npm:^0.1.2"
     ignore: "npm:^5.3.2"
     minimatch: "npm:^9.0.5"
     semver: "npm:^7.6.3"
     ts-declaration-location: "npm:^1.0.6"
   peerDependencies:
     eslint: ">=8.23.0"
-  checksum: 10c0/23a27f7ddbefa5a11c37b944050245f9cf3590622e974431179e65a0dd76ff27909a439201279e4561d1979cdfeb93e434ae099526e91412e2f62ef2dd1f0b39
+  checksum: 10c0/ea1cf2cd4899f88a0e0aeea6f67428ecc615b329e9f5a748b2a7a339b428db4a1018d79ccd0b699cfb3267e9e6e0c7f4d063650bf058251862a731681a7b7116
   languageName: node
   linkType: hard
 
@@ -8735,7 +8736,7 @@ __metadata:
     env-schema: "npm:6.0.1"
     eslint: "npm:9.32.0"
     eslint-config-prettier: "npm:10.1.8"
-    eslint-plugin-n: "npm:17.21.0"
+    eslint-plugin-n: "npm:17.21.1"
     eslint-plugin-promise: "npm:7.2.1"
     eslint-plugin-security: "npm:3.0.1"
     eslint-plugin-sonarjs: "npm:3.0.4"
@@ -9531,6 +9532,13 @@ __metadata:
     slash: "npm:^5.1.0"
     unicorn-magic: "npm:^0.3.0"
   checksum: 10c0/527a1063c5958255969620c6fa4444a2b2e9278caddd571d46dfbfa307cb15977afb746e84d682ba5b6c94fc081e8997f80ff05dd235441ba1cb16f86153e58e
+  languageName: node
+  linkType: hard
+
+"globrex@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "globrex@npm:0.1.2"
+  checksum: 10c0/a54c029520cf58bda1d8884f72bd49b4cd74e977883268d931fd83bcbd1a9eb96d57c7dbd4ad80148fb9247467ebfb9b215630b2ed7563b2a8de02e1ff7f89d1
   languageName: node
   linkType: hard
 
