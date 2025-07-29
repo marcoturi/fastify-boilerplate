@@ -8134,9 +8134,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-n@npm:17.21.2":
-  version: 17.21.2
-  resolution: "eslint-plugin-n@npm:17.21.2"
+"eslint-plugin-n@npm:17.21.3":
+  version: 17.21.3
+  resolution: "eslint-plugin-n@npm:17.21.3"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.5.0"
     enhanced-resolve: "npm:^5.17.1"
@@ -8149,7 +8149,7 @@ __metadata:
     ts-declaration-location: "npm:^1.0.6"
   peerDependencies:
     eslint: ">=8.23.0"
-  checksum: 10c0/cae80ed2ea227cba764a11fad132952499ea53a83f30dbd06ef2b54fd2e1f69962fc2ca6728bb254d80ab37962ca94a51b136332c4780576580a343c9c788f31
+  checksum: 10c0/3d8b279aaf477ddde06f9b63f032e22da3d3c1edda75ff509c93a871fc36bbdd7e1005403113f2bc421d970d52e2c361f69d05a2bfbad14146c16f910952a764
   languageName: node
   linkType: hard
 
@@ -8735,7 +8735,7 @@ __metadata:
     env-schema: "npm:6.0.1"
     eslint: "npm:9.32.0"
     eslint-config-prettier: "npm:10.1.8"
-    eslint-plugin-n: "npm:17.21.2"
+    eslint-plugin-n: "npm:17.21.3"
     eslint-plugin-promise: "npm:7.2.1"
     eslint-plugin-security: "npm:3.0.1"
     eslint-plugin-sonarjs: "npm:3.0.4"
