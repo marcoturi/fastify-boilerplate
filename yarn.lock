@@ -1956,15 +1956,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gquittet/graceful-server@npm:5.2.13":
-  version: 5.2.13
-  resolution: "@gquittet/graceful-server@npm:5.2.13"
+"@gquittet/graceful-server@npm:5.2.14":
+  version: 5.2.14
+  resolution: "@gquittet/graceful-server@npm:5.2.14"
   dependencies:
     fsevents: "npm:^2.3.3"
   dependenciesMeta:
     fsevents:
       optional: true
-  checksum: 10c0/45b21758de6aa365f1ad34c725bb29d79bbc730d4e68e2e9dd286ae42e1e2ac19e2ecde3f9f50586497457ac34647d835c2736d100d28356574746415a9c5386
+  checksum: 10c0/f379aeddb26ac60f5bfc3d58eebdc8c24e04e7ad2382e14fe17a1fd43c43581c2d3fa4be5c6225cabdf3c8d46eb929c192253e867d831d9a53de16e808096252
   languageName: node
   linkType: hard
 
@@ -8711,7 +8711,7 @@ __metadata:
     "@fastify/type-provider-json-schema-to-ts": "npm:5.0.0"
     "@fastify/type-provider-typebox": "npm:5.2.0"
     "@fastify/under-pressure": "npm:9.0.3"
-    "@gquittet/graceful-server": "npm:5.2.13"
+    "@gquittet/graceful-server": "npm:5.2.14"
     "@graphql-tools/load-files": "npm:7.0.1"
     "@graphql-tools/merge": "npm:9.1.1"
     "@semantic-release/changelog": "npm:6.0.3"
