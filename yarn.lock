@@ -4023,7 +4023,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/release-notes-generator@npm:14.0.3, @semantic-release/release-notes-generator@npm:^14.0.0-beta.1":
+"@semantic-release/release-notes-generator@npm:14.1.0":
+  version: 14.1.0
+  resolution: "@semantic-release/release-notes-generator@npm:14.1.0"
+  dependencies:
+    conventional-changelog-angular: "npm:^8.0.0"
+    conventional-changelog-writer: "npm:^8.0.0"
+    conventional-commits-filter: "npm:^5.0.0"
+    conventional-commits-parser: "npm:^6.0.0"
+    debug: "npm:^4.0.0"
+    get-stream: "npm:^7.0.0"
+    import-from-esm: "npm:^2.0.0"
+    into-stream: "npm:^7.0.0"
+    lodash-es: "npm:^4.17.21"
+    read-package-up: "npm:^11.0.0"
+  peerDependencies:
+    semantic-release: ">=20.1.0"
+  checksum: 10c0/6b6bc729274d2f67712a982daee6eb931fcd36377f4bd184ad8c3fcd204a77e77c500f571df1950264a0c43c1d3ce1ec9311a0a2ab90b0ab9fc7b070cd88c495
+  languageName: node
+  linkType: hard
+
+"@semantic-release/release-notes-generator@npm:^14.0.0-beta.1":
   version: 14.0.3
   resolution: "@semantic-release/release-notes-generator@npm:14.0.3"
   dependencies:
@@ -8676,7 +8696,7 @@ __metadata:
     "@semantic-release/git": "npm:10.0.1"
     "@semantic-release/github": "npm:11.0.5"
     "@semantic-release/npm": "npm:12.0.2"
-    "@semantic-release/release-notes-generator": "npm:14.0.3"
+    "@semantic-release/release-notes-generator": "npm:14.1.0"
     "@sinclair/typebox": "npm:0.34.41"
     "@trivago/prettier-plugin-sort-imports": "npm:5.2.2"
     "@tsconfig/node22": "npm:22.0.2"

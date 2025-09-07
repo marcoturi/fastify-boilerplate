@@ -89,7 +89,7 @@
     "@semantic-release/git": "10.0.1",
     "@semantic-release/github": "11.0.5",
     "@semantic-release/npm": "12.0.2",
-    "@semantic-release/release-notes-generator": "14.0.3",
+    "@semantic-release/release-notes-generator": "14.1.0",
     "@trivago/prettier-plugin-sort-imports": "5.2.2",
     "@tsconfig/node22": "22.0.2",
     "@types/node": "22.18.1",
