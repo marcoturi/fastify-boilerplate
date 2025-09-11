@@ -5242,12 +5242,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/ramda@npm:0.31.0":
-  version: 0.31.0
-  resolution: "@types/ramda@npm:0.31.0"
+"@types/ramda@npm:0.31.1":
+  version: 0.31.1
+  resolution: "@types/ramda@npm:0.31.1"
   dependencies:
     types-ramda: "npm:^0.31.0"
-  checksum: 10c0/d979b1eb08e7b614369622675c6c0c5dde6e7c232c0fbff1b6975a771a2ea2e663ccad27779486b4942e29a832f10da7afd53994c4638559ecdd69ea8d4fd35b
+  checksum: 10c0/60c11e66730e2d1c96d480a9e4474be0ae82a84700a34937032c1e46147b8625e1a977361c37ca65e8b29d4368dc942354c7942aebda91b0fd416beac87646d6
   languageName: node
   linkType: hard
 
@@ -8712,7 +8712,7 @@ __metadata:
     "@trivago/prettier-plugin-sort-imports": "npm:5.2.2"
     "@tsconfig/node22": "npm:22.0.2"
     "@types/node": "npm:22.18.1"
-    "@types/ramda": "npm:0.31.0"
+    "@types/ramda": "npm:0.31.1"
     ajv-formats: "npm:3.0.1"
     artillery: "npm:2.0.24"
     artillery-plugin-faker: "npm:5.0.2"
