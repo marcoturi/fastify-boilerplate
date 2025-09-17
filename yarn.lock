@@ -5226,12 +5226,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:22.18.3":
-  version: 22.18.3
-  resolution: "@types/node@npm:22.18.3"
+"@types/node@npm:22.18.5":
+  version: 22.18.5
+  resolution: "@types/node@npm:22.18.5"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10c0/29ec5674a7eaac50c4c779e937c4449e813ff70c411eb525b6e12837e7b88c39219c3c2f29e39ea8f72cd6b7975f8696dc05f78c07bce35a241e0c9eaf5523a8
+  checksum: 10c0/2a664e24f1b4bc7d49905cd2a416c2e2dbf8dd09d35d783922e447983817100fb637135a9d3fa1d98b790b48f214a68fda941afed56641c172bd2ce23b5cf57a
   languageName: node
   linkType: hard
 
@@ -8711,7 +8711,7 @@ __metadata:
     "@sinclair/typebox": "npm:0.34.41"
     "@trivago/prettier-plugin-sort-imports": "npm:5.2.2"
     "@tsconfig/node22": "npm:22.0.2"
-    "@types/node": "npm:22.18.3"
+    "@types/node": "npm:22.18.5"
     "@types/ramda": "npm:0.31.1"
     ajv-formats: "npm:3.0.1"
     artillery: "npm:2.0.24"
