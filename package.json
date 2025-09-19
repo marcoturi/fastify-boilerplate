@@ -38,7 +38,7 @@
     "node": ">=22.11.0",
     "yarn": ">=4.0.0"
   },
-  "packageManager": "yarn@4.9.4",
+  "packageManager": "yarn@4.10.0",
   "lint-staged": {
     "*.ts": [
       "eslint --fix",
