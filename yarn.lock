@@ -10371,7 +10371,7 @@ __metadata:
     husky: "npm:9.1.7"
     lint-staged: "npm:16.1.6"
     mercurius: "npm:16.2.0"
-    pino: "npm:9.10.0"
+    pino: "npm:9.11.0"
     pino-pretty: "npm:13.1.1"
     pinst: "npm:3.0.0"
     postgres: "npm:3.4.7"
@@ -14307,9 +14307,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pino@npm:9.10.0":
-  version: 9.10.0
-  resolution: "pino@npm:9.10.0"
+"pino@npm:9.11.0":
+  version: 9.11.0
+  resolution: "pino@npm:9.11.0"
   dependencies:
     atomic-sleep: "npm:^1.0.0"
     fast-redact: "npm:^3.1.1"
@@ -14324,7 +14324,7 @@ __metadata:
     thread-stream: "npm:^3.0.0"
   bin:
     pino: bin.js
-  checksum: 10c0/42fb5a800e51e8cacf3ec0f0b03183775219e4248bd10f0638741f21eabfb58f904ec2ed4ec79d40850bc42725c7414ec3c3e69f7c0a21450ce12d181deeb278
+  checksum: 10c0/ba908f95b61fa2c2d6c432e1f39a4394cc0dbf356c4f8837bd9c07538d749699b78204a5557e6050870f2988c25c3f0b6a88693d4bd185ebeef57d75a3b25e38
   languageName: node
   linkType: hard
 
