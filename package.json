@@ -80,7 +80,7 @@
     "@commitlint/config-conventional": "19.8.1",
     "@cucumber/cucumber": "11.3.0",
     "@cucumber/html-formatter": "21.15.1",
-    "@cucumber/messages": "27.2.0",
+    "@cucumber/messages": "29.0.1",
     "@cucumber/pretty-formatter": "1.0.1",
     "@eslint/compat": "1.4.0",
     "@eslint/js": "9.36.0",
