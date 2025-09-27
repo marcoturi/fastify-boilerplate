@@ -10433,7 +10433,7 @@ __metadata:
     helmet: "npm:8.1.0"
     husky: "npm:9.1.7"
     lint-staged: "npm:16.2.1"
-    mercurius: "npm:16.2.0"
+    mercurius: "npm:16.3.0"
     pino: "npm:9.11.0"
     pino-pretty: "npm:13.1.1"
     pinst: "npm:3.0.0"
@@ -12990,9 +12990,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mercurius@npm:16.2.0":
-  version: 16.2.0
-  resolution: "mercurius@npm:16.2.0"
+"mercurius@npm:16.3.0":
+  version: 16.3.0
+  resolution: "mercurius@npm:16.3.0"
   dependencies:
     "@fastify/error": "npm:^4.0.0"
     "@fastify/static": "npm:^8.0.0"
@@ -13010,7 +13010,7 @@ __metadata:
     ws: "npm:^8.2.2"
   peerDependencies:
     graphql: ^16.0.0
-  checksum: 10c0/efcb501a51525ab503b07d4a8ad7b2e0c34c1053acdbb1f2150f7197659d60ba9fda72d9d9f39bb13a2303563e5fb70ec15e1bd433494fe0adfe4ebb02748c1c
+  checksum: 10c0/4740c422d9ecd59332cd8e59972bd48cefa8e3f9501d1b05ff600e2ae1f0c0ecba504638154a3cf78d7dbcda1c00da270666ce8aaf47f0cbecaf473c22d3ef47
   languageName: node
   linkType: hard
 
