@@ -73,7 +73,7 @@
     "mercurius": "16.5.0",
     "pino": "9.14.0",
     "postgres": "3.4.7",
-    "ramda": "0.31.3"
+    "ramda": "0.32.0"
   },
   "devDependencies": {
     "@commitlint/cli": "19.8.1",
