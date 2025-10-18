@@ -9332,10 +9332,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:^16.0.1, dotenv@npm:^16.4.5":
+"dotenv@npm:^16.0.1":
   version: 16.5.0
   resolution: "dotenv@npm:16.5.0"
   checksum: 10c0/5bc94c919fbd955bf0ba44d33922a1e93d1078e64a1db5c30faeded1d996e7a83c55332cb8ea4fae5a9ca4d0be44cbceb95c5811e70f9f095298df09d1997dd9
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:^17.0.0":
+  version: 17.2.3
+  resolution: "dotenv@npm:17.2.3"
+  checksum: 10c0/c884403209f713214a1b64d4d1defa4934c2aa5b0002f5a670ae298a51e3c3ad3ba79dfee2f8df49f01ae74290fcd9acdb1ab1d09c7bfb42b539036108bb2ba0
   languageName: node
   linkType: hard
 
@@ -9565,14 +9572,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"env-schema@npm:6.0.1":
-  version: 6.0.1
-  resolution: "env-schema@npm:6.0.1"
+"env-schema@npm:6.1.0":
+  version: 6.1.0
+  resolution: "env-schema@npm:6.1.0"
   dependencies:
     ajv: "npm:^8.12.0"
-    dotenv: "npm:^16.4.5"
+    dotenv: "npm:^17.0.0"
     dotenv-expand: "npm:10.0.0"
-  checksum: 10c0/912b1ff4b8e1e469cdd0852b9c777c1abc6285e7a0823f1d5210afa92e6c903ffc44834125c3bf13698679ef10786d1b2c7c8b02b0b86462e00ea57590b841fd
+  checksum: 10c0/cb6c40b6118faa175dbfdfa7e7442ae90a391f5394a119ce280c9d20fcf8095be441824be9169fc530c641dd0efdb81475621124f3d04ebd7e13e78e7f2840df
   languageName: node
   linkType: hard
 
@@ -10409,7 +10416,7 @@ __metadata:
     c8: "npm:10.1.3"
     dbmate: "npm:2.28.0"
     dependency-cruiser: "npm:16.10.4"
-    env-schema: "npm:6.0.1"
+    env-schema: "npm:6.1.0"
     eslint: "npm:9.38.0"
     eslint-config-prettier: "npm:10.1.8"
     eslint-plugin-n: "npm:17.23.1"
