@@ -2867,6 +2867,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cucumber/messages@npm:30.1.0":
+  version: 30.1.0
+  resolution: "@cucumber/messages@npm:30.1.0"
+  dependencies:
+    class-transformer: "npm:0.5.1"
+    reflect-metadata: "npm:0.2.2"
+  checksum: 10c0/805f5aa6f1f059ba94229630c4b2172a4de109d3ee9c4f1c678fc06e7ac197b667b14cb57a9d2fbd9c3d680e95f45263f25a20b269843b0c5dc65a783206e3ba
+  languageName: node
+  linkType: hard
+
 "@cucumber/messages@npm:>=19.1.4 <=26":
   version: 26.0.1
   resolution: "@cucumber/messages@npm:26.0.1"
@@ -10464,7 +10474,7 @@ __metadata:
     "@commitlint/config-conventional": "npm:19.8.1"
     "@cucumber/cucumber": "npm:11.3.0"
     "@cucumber/html-formatter": "npm:21.15.1"
-    "@cucumber/messages": "npm:27.2.0"
+    "@cucumber/messages": "npm:30.1.0"
     "@cucumber/pretty-formatter": "npm:1.0.1"
     "@eslint/compat": "npm:1.4.0"
     "@eslint/js": "npm:9.38.0"
