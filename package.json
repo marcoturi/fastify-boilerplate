@@ -24,6 +24,8 @@
     "db:create-seed": "dbmate -e DBMATE_DATABASE_URL -d ./db/seeds/ new",
     "db:seed": "dbmate -e DBMATE_DATABASE_URL -d ./db/seeds/ up",
     "db:seed:users": "artillery run ./tests/user/create-user/create-user.artillery.yaml",
+    "hepha": "node script/hepha.js",
+    "hepha:help": "node script/hepha.js --help",
     "generate:client-types": "npx openapi-typescript http://127.0.0.1:3000/api-docs/json -o ./client.schema.d.ts",
     "depcruise": "depcruise",
     "deps:validate": "depcruise src --config .dependency-cruiser.js --output-type err-long",
