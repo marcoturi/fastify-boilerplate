@@ -8627,7 +8627,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:13.1.0, commander@npm:^13.1.0":
+"commander@npm:13.1.0":
   version: 13.1.0
   resolution: "commander@npm:13.1.0"
   checksum: 10c0/7b8c5544bba704fbe84b7cab2e043df8586d5c114a4c5b607f83ae5060708940ed0b5bd5838cf8ce27539cde265c1cbd59ce3c8c6b017ed3eec8943e3a415164
@@ -8652,6 +8652,13 @@ __metadata:
   version: 14.0.1
   resolution: "commander@npm:14.0.1"
   checksum: 10c0/64439c0651ddd01c1d0f48c8f08e97c18a0a1fa693879451f1203ad01132af2c2aa85da24cf0d8e098ab9e6dc385a756be670d2999a3c628ec745c3ec124587b
+  languageName: node
+  linkType: hard
+
+"commander@npm:^14.0.2":
+  version: 14.0.2
+  resolution: "commander@npm:14.0.2"
+  checksum: 10c0/245abd1349dbad5414cb6517b7b5c584895c02c4f7836ff5395f301192b8566f9796c82d7bd6c92d07eba8775fe4df86602fca5d86d8d10bcc2aded1e21c2aeb
   languageName: node
   linkType: hard
 
@@ -9147,9 +9154,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:16.10.4":
-  version: 16.10.4
-  resolution: "dependency-cruiser@npm:16.10.4"
+"dependency-cruiser@npm:17.2.0":
+  version: 17.2.0
+  resolution: "dependency-cruiser@npm:17.2.0"
   dependencies:
     acorn: "npm:^8.15.0"
     acorn-jsx: "npm:^5.3.2"
@@ -9157,20 +9164,18 @@ __metadata:
     acorn-loose: "npm:^8.5.2"
     acorn-walk: "npm:^8.3.4"
     ajv: "npm:^8.17.1"
-    commander: "npm:^13.1.0"
-    enhanced-resolve: "npm:^5.18.2"
+    commander: "npm:^14.0.2"
+    enhanced-resolve: "npm:^5.18.3"
     ignore: "npm:^7.0.5"
     interpret: "npm:^3.1.1"
     is-installed-globally: "npm:^1.0.0"
     json5: "npm:^2.2.3"
-    memoize: "npm:^10.1.0"
-    picocolors: "npm:^1.1.1"
-    picomatch: "npm:^4.0.2"
+    memoize: "npm:^10.2.0"
+    picomatch: "npm:^4.0.3"
     prompts: "npm:^2.4.2"
     rechoir: "npm:^0.8.0"
     safe-regex: "npm:^2.1.1"
-    semver: "npm:^7.7.2"
-    teamcity-service-messages: "npm:^0.1.14"
+    semver: "npm:^7.7.3"
     tsconfig-paths-webpack-plugin: "npm:^4.2.0"
     watskeburt: "npm:^4.2.3"
   bin:
@@ -9180,7 +9185,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.mjs
     dependency-cruise: bin/dependency-cruise.mjs
     dependency-cruiser: bin/dependency-cruise.mjs
-  checksum: 10c0/918957a560095ae9aa9111ab56c25ae7802e1a8860f42614b27880424224f3987fe1308d4e0ac5385fd1e19b42e1581ca07579a6cd7590db65e5a7f843f00b77
+  checksum: 10c0/b0775f6589a170cd41c4fa37cde252720e40421a72b11107a4cf316518177336a2a53eeec921141bab6c8a692be18fa0af4ec95bf1f5e9cf4981623e0b1dc1a1
   languageName: node
   linkType: hard
 
@@ -9590,23 +9595,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"enhanced-resolve@npm:^5.18.0":
+"enhanced-resolve@npm:^5.18.0, enhanced-resolve@npm:^5.18.3":
   version: 5.18.3
   resolution: "enhanced-resolve@npm:5.18.3"
   dependencies:
     graceful-fs: "npm:^4.2.4"
     tapable: "npm:^2.2.0"
   checksum: 10c0/d413c23c2d494e4c1c9c9ac7d60b812083dc6d446699ed495e69c920988af0a3c66bf3f8d0e7a45cb1686c2d4c1df9f4e7352d973f5b56fe63d8d711dd0ccc54
-  languageName: node
-  linkType: hard
-
-"enhanced-resolve@npm:^5.18.2":
-  version: 5.18.2
-  resolution: "enhanced-resolve@npm:5.18.2"
-  dependencies:
-    graceful-fs: "npm:^4.2.4"
-    tapable: "npm:^2.2.0"
-  checksum: 10c0/2a45105daded694304b0298d1c0351a981842249a9867513d55e41321a4ccf37dfd35b0c1e9ceae290eab73654b09aa7a910d618ea6f9441e97c52bc424a2372
   languageName: node
   linkType: hard
 
@@ -10498,7 +10493,7 @@ __metadata:
     awilix: "npm:12.0.5"
     c8: "npm:10.1.3"
     dbmate: "npm:2.28.0"
-    dependency-cruiser: "npm:16.10.4"
+    dependency-cruiser: "npm:17.2.0"
     env-schema: "npm:6.1.0"
     eslint: "npm:9.38.0"
     eslint-config-prettier: "npm:10.1.8"
@@ -13056,12 +13051,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"memoize@npm:^10.1.0":
-  version: 10.1.0
-  resolution: "memoize@npm:10.1.0"
+"memoize@npm:^10.2.0":
+  version: 10.2.0
+  resolution: "memoize@npm:10.2.0"
   dependencies:
     mimic-function: "npm:^5.0.1"
-  checksum: 10c0/6cf71f673b89778b05cd1131f573ba858627daa8fec60f2197328386acf7ab184a89e52527abbd5a605b5ccf5ee12dc0cb96efb651d9a30dcfcc89e9baacc84d
+  checksum: 10c0/8a5891f313e8db82bab4bb9694752aab40c11ce3bf9b8cc32228ebaf87e14e8109a23b37ceef32baadbedc09af2c4dd0d361a93e9e591bb0ed9e23f728e1ce9f
   languageName: node
   linkType: hard
 
@@ -14391,6 +14386,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"picomatch@npm:^4.0.3":
+  version: 4.0.3
+  resolution: "picomatch@npm:4.0.3"
+  checksum: 10c0/9582c951e95eebee5434f59e426cddd228a7b97a0161a375aed4be244bd3fe8e3a31b846808ea14ef2c8a2527a6eeab7b3946a67d5979e81694654f939473ae2
+  languageName: node
+  linkType: hard
+
 "pidtree@npm:^0.6.0":
   version: 0.6.0
   resolution: "pidtree@npm:0.6.0"
@@ -15432,6 +15434,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"semver@npm:^7.7.3":
+  version: 7.7.3
+  resolution: "semver@npm:7.7.3"
+  bin:
+    semver: bin/semver.js
+  checksum: 10c0/4afe5c986567db82f44c8c6faef8fe9df2a9b1d98098fc1721f57c696c4c21cebd572f297fc21002f81889492345b8470473bc6f4aff5fb032a6ea59ea2bc45e
+  languageName: node
+  linkType: hard
+
 "set-cookie-parser@npm:^2.6.0":
   version: 2.7.1
   resolution: "set-cookie-parser@npm:2.7.1"
@@ -16084,13 +16095,6 @@ __metadata:
   dependencies:
     bintrees: "npm:1.0.2"
   checksum: 10c0/10187b8144b112fcdfd3a5e4e9068efa42c990b1e30cd0d4f35ee8f58f16d1b41bc587e668fa7a6f6ca31308961cbd06cd5d4a4ae1dc388335902ae04f7d57df
-  languageName: node
-  linkType: hard
-
-"teamcity-service-messages@npm:^0.1.14":
-  version: 0.1.14
-  resolution: "teamcity-service-messages@npm:0.1.14"
-  checksum: 10c0/e2e45647861f898428f20315f8172f1c6c24d688db0a77d7638ab5c0dace53e703c11ca5e0eed6f6b905ec9860b8e012b006790d82ddad250ba20429e5097d1b
   languageName: node
   linkType: hard
 
