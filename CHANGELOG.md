@@ -1,3 +1,40 @@
+# [1.8.0](https://github.com/marcoturi/fastify-boilerplate/compare/v1.7.14...v1.8.0) (2025-11-06)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/helmet to v13.0.2 ([#697](https://github.com/marcoturi/fastify-boilerplate/issues/697)) ([9ec65b3](https://github.com/marcoturi/fastify-boilerplate/commit/9ec65b3229e163a631e311d34180d9ba51dedaaf))
+* **deps:** update dependency @fastify/request-context to v6.2.1 ([#636](https://github.com/marcoturi/fastify-boilerplate/issues/636)) ([e576910](https://github.com/marcoturi/fastify-boilerplate/commit/e576910f1c98d3617c86b25aff4495c0ffba7480))
+* **deps:** update dependency @fastify/swagger to v9.5.2 ([#693](https://github.com/marcoturi/fastify-boilerplate/issues/693)) ([9bc787f](https://github.com/marcoturi/fastify-boilerplate/commit/9bc787fb14bf77dca6c6284665827ebcaff33f80))
+* **deps:** update dependency @gquittet/graceful-server to v5.2.15 ([#651](https://github.com/marcoturi/fastify-boilerplate/issues/651)) ([9995b45](https://github.com/marcoturi/fastify-boilerplate/commit/9995b4541ec46033c0adc5b2fdfefb41e9e8796e))
+* **deps:** update dependency @gquittet/graceful-server to v5.2.16 ([#682](https://github.com/marcoturi/fastify-boilerplate/issues/682)) ([9657a76](https://github.com/marcoturi/fastify-boilerplate/commit/9657a7691a448c73199e97427902207ec43696b1))
+* **deps:** update dependency @sinclair/typebox to v0.34.39 ([#640](https://github.com/marcoturi/fastify-boilerplate/issues/640)) ([6408dff](https://github.com/marcoturi/fastify-boilerplate/commit/6408dffe82decbcb2a96cdfa63505abda56fa81d))
+* **deps:** update dependency @sinclair/typebox to v0.34.40 ([#641](https://github.com/marcoturi/fastify-boilerplate/issues/641)) ([7ec1926](https://github.com/marcoturi/fastify-boilerplate/commit/7ec1926f4087fd66f772f94fd3c370ff6e717889))
+* **deps:** update dependency @sinclair/typebox to v0.34.41 ([#653](https://github.com/marcoturi/fastify-boilerplate/issues/653)) ([8d31a79](https://github.com/marcoturi/fastify-boilerplate/commit/8d31a792d93e2b33c29ddd3700db7780fc8ebaec))
+* **deps:** update dependency env-schema to v6.1.0 ([#716](https://github.com/marcoturi/fastify-boilerplate/issues/716)) ([4d55f4f](https://github.com/marcoturi/fastify-boilerplate/commit/4d55f4fb86939e15bd703be94c0fbf88346280f7))
+* **deps:** update dependency fastify to v5.5.0 ([#634](https://github.com/marcoturi/fastify-boilerplate/issues/634)) ([4f78462](https://github.com/marcoturi/fastify-boilerplate/commit/4f784622e59c6dacafe98fc4edb2b774ccae88ef))
+* **deps:** update dependency fastify to v5.6.0 ([#660](https://github.com/marcoturi/fastify-boilerplate/issues/660)) ([f8bdc71](https://github.com/marcoturi/fastify-boilerplate/commit/f8bdc71b14a1ceb8ea004b7c9afa6ce6b8a6432e))
+* **deps:** update dependency fastify to v5.6.1 ([#686](https://github.com/marcoturi/fastify-boilerplate/issues/686)) ([f5d8897](https://github.com/marcoturi/fastify-boilerplate/commit/f5d88973262cc5a99b7482a6d036205ac7d6c63b))
+* **deps:** update dependency fastify-plugin to v5.1.0 ([#698](https://github.com/marcoturi/fastify-boilerplate/issues/698)) ([dfb86d9](https://github.com/marcoturi/fastify-boilerplate/commit/dfb86d9a3a3aec356d8565c84e7ccc6af3983bd5))
+* **deps:** update dependency mercurius to v16.3.0 ([#694](https://github.com/marcoturi/fastify-boilerplate/issues/694)) ([6587b9b](https://github.com/marcoturi/fastify-boilerplate/commit/6587b9b37114f521e70e4fe801f8301872b37963))
+* **deps:** update dependency mercurius to v16.4.0 ([#704](https://github.com/marcoturi/fastify-boilerplate/issues/704)) ([3efd0c4](https://github.com/marcoturi/fastify-boilerplate/commit/3efd0c4ae5ec665300990f7002195e4db256427f))
+* **deps:** update dependency mercurius to v16.5.0 ([#717](https://github.com/marcoturi/fastify-boilerplate/issues/717)) ([bbf1a87](https://github.com/marcoturi/fastify-boilerplate/commit/bbf1a875f07ad453ce6edb30788a174b77871006))
+* **deps:** update dependency pino to v9.10.0 ([#675](https://github.com/marcoturi/fastify-boilerplate/issues/675)) ([d95dd8f](https://github.com/marcoturi/fastify-boilerplate/commit/d95dd8f90fc6a442d9463bf58ffd059ee1a66dbc))
+* **deps:** update dependency pino to v9.11.0 ([#683](https://github.com/marcoturi/fastify-boilerplate/issues/683)) ([1018f8f](https://github.com/marcoturi/fastify-boilerplate/commit/1018f8f1d7f2fe41141714423730b6d75b03a8f7))
+* **deps:** update dependency pino to v9.12.0 ([#699](https://github.com/marcoturi/fastify-boilerplate/issues/699)) ([77ff89f](https://github.com/marcoturi/fastify-boilerplate/commit/77ff89ff74e26c865cd17f38b5376bd73a8cf80b))
+* **deps:** update dependency pino to v9.13.0 ([#705](https://github.com/marcoturi/fastify-boilerplate/issues/705)) ([2b90131](https://github.com/marcoturi/fastify-boilerplate/commit/2b901315d2ced3710a7de0a03378e0b4a8ea1d2e))
+* **deps:** update dependency pino to v9.13.1 ([#706](https://github.com/marcoturi/fastify-boilerplate/issues/706)) ([24a4aef](https://github.com/marcoturi/fastify-boilerplate/commit/24a4aef8a8a6045b30e5d75c67b33f206d5862b6))
+* **deps:** update dependency pino to v9.14.0 ([#718](https://github.com/marcoturi/fastify-boilerplate/issues/718)) ([e5139c4](https://github.com/marcoturi/fastify-boilerplate/commit/e5139c44cdb1ee016278f63b9b20d02fc3b5bdab))
+* **deps:** update dependency pino to v9.9.0 ([#637](https://github.com/marcoturi/fastify-boilerplate/issues/637)) ([4a3d156](https://github.com/marcoturi/fastify-boilerplate/commit/4a3d1565e0cbf88cbf8d9e8424e9e7cb0696aa9a))
+* **deps:** update dependency pino to v9.9.4 ([#656](https://github.com/marcoturi/fastify-boilerplate/issues/656)) ([beb3e75](https://github.com/marcoturi/fastify-boilerplate/commit/beb3e755cb8b8d1a8d61d787dd0827388d3f6d65))
+* **deps:** update dependency pino to v9.9.5 ([#668](https://github.com/marcoturi/fastify-boilerplate/issues/668)) ([7515dc7](https://github.com/marcoturi/fastify-boilerplate/commit/7515dc702eb984bb411887cb383944fb13a71080))
+* **deps:** update dependency ramda to v0.32.0 ([#719](https://github.com/marcoturi/fastify-boilerplate/issues/719)) ([86179dc](https://github.com/marcoturi/fastify-boilerplate/commit/86179dc80ef61986733fb9bb72ff1c2e16d73dff))
+
+
+### Features
+
+* bump to node 24, update deps ([a196272](https://github.com/marcoturi/fastify-boilerplate/commit/a19627236a138ac4de98513693c5305a3011bc80))
+
 ## [1.7.14](https://github.com/marcoturi/fastify-boilerplate/compare/v1.7.13...v1.7.14) (2025-08-08)
 
 
