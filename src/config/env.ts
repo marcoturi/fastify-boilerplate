@@ -1,5 +1,5 @@
-import { Static, Type } from '@sinclair/typebox';
 import envSchema from 'env-schema';
+import { Static, Type } from 'typebox';
 
 enum NodeEnv {
   development = 'development',

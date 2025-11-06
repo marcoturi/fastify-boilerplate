@@ -1,7 +1,7 @@
 import { idDtoSchema } from '@/shared/api/id.response.dto';
-import { Type } from '@sinclair/typebox';
+import { Type } from 'typebox';
 
-export const baseResponseDtoSchema = Type.Composite([
+export const baseResponseDtoSchema = Type.Intersect([
   idDtoSchema,
   Type.Object({
     createdAt: Type.String({

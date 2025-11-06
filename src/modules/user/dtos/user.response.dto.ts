@@ -1,7 +1,7 @@
 import { baseResponseDtoSchema } from '@/shared/api/response.base';
-import { Static, Type } from '@sinclair/typebox';
+import { Static, Type } from 'typebox';
 
-export const userResponseDtoSchema = Type.Composite([
+export const userResponseDtoSchema = Type.Intersect([
   baseResponseDtoSchema,
   Type.Object({
     email: Type.String({

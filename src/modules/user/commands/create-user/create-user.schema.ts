@@ -1,4 +1,4 @@
-import { Static, Type } from '@sinclair/typebox';
+import { Static, Type } from 'typebox';
 
 export const createUserRequestDtoSchema = Type.Object({
   email: Type.String({

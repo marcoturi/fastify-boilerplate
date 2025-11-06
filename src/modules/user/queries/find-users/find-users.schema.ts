@@ -1,7 +1,7 @@
 import { paginatedQueryRequestDtoSchema } from '@/shared/api/paginated-query.request.dto';
-import { Type } from '@sinclair/typebox';
+import { Type } from 'typebox';
 
-export const findUsersRequestDtoSchema = Type.Composite([
+export const findUsersRequestDtoSchema = Type.Intersect([
   paginatedQueryRequestDtoSchema,
   Type.Object({
     country: Type.Optional(

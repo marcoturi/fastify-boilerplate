@@ -1,6 +1,6 @@
 import { UserRepository } from '@/modules/user/database/user.repository.port';
 import { UserEntity, UserRoles } from '@/modules/user/domain/user.types';
-import { Static, Type } from '@sinclair/typebox';
+import { Static, Type } from 'typebox';
 
 export const userSchema = Type.Object({
   id: Type.String({ format: 'uuid' }),

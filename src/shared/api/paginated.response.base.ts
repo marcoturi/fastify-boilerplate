@@ -1,4 +1,4 @@
-import { Type } from '@sinclair/typebox';
+import { Type } from 'typebox';
 
 export const paginatedResponseBaseSchema = Type.Object({
   count: Type.Number({ example: 5, description: 'Total number of items' }),

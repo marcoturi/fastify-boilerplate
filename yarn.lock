@@ -3564,12 +3564,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fastify/type-provider-typebox@npm:5.2.0":
-  version: 5.2.0
-  resolution: "@fastify/type-provider-typebox@npm:5.2.0"
+"@fastify/type-provider-typebox@npm:6.1.0":
+  version: 6.1.0
+  resolution: "@fastify/type-provider-typebox@npm:6.1.0"
   peerDependencies:
-    "@sinclair/typebox": ">=0.26 <=0.34"
-  checksum: 10c0/e195df44a0f92a670529e1c6dcf4e948292600bf67a50cc2b5a77eefcbe4e052af65839216cb5d5dee1307bb36a149b71bdf98408c505050f1a4ef4bb09ddc26
+    typebox: ^1.0.13
+  checksum: 10c0/a1411b5292bdbf48fa473650b751861b9f7a2f1b0412f442f2a5f86a1503eb39e6147829832987bf5dba3e389e47704bff92c9a669e6d4398fcb486d92f90e28
   languageName: node
   linkType: hard
 
@@ -5408,13 +5408,6 @@ __metadata:
     "@sigstore/core": "npm:^3.0.0"
     "@sigstore/protobuf-specs": "npm:^0.5.0"
   checksum: 10c0/d4e4f117266974cc50d5f31715ca7a2a9641aa8020522e9947e3806fd0c18161e54edbb9d1e22442c3aec6e43bbf88a5b839754a71c5f95dc204af7c8d83dff4
-  languageName: node
-  linkType: hard
-
-"@sinclair/typebox@npm:0.34.41":
-  version: 0.34.41
-  resolution: "@sinclair/typebox@npm:0.34.41"
-  checksum: 10c0/0fb61fc2f90c25e30b19b0096eb8ab3ccef401d3e2acfce42168ff0ee877ba5981c8243fa6b1035ac756cde95316724e978b2837dd642d7e4e095de03a999c90
   languageName: node
   linkType: hard
 
@@ -10635,7 +10628,7 @@ __metadata:
     "@fastify/swagger": "npm:9.5.2"
     "@fastify/swagger-ui": "npm:5.2.3"
     "@fastify/type-provider-json-schema-to-ts": "npm:5.0.0"
-    "@fastify/type-provider-typebox": "npm:5.2.0"
+    "@fastify/type-provider-typebox": "npm:6.1.0"
     "@fastify/under-pressure": "npm:9.0.3"
     "@gquittet/graceful-server": "npm:6.0.0"
     "@graphql-tools/load-files": "npm:7.0.1"
@@ -10646,7 +10639,6 @@ __metadata:
     "@semantic-release/github": "npm:12.0.1"
     "@semantic-release/npm": "npm:13.1.1"
     "@semantic-release/release-notes-generator": "npm:14.1.0"
-    "@sinclair/typebox": "npm:0.34.41"
     "@trivago/prettier-plugin-sort-imports": "npm:6.0.0"
     "@tsconfig/node24": "npm:24.0.1"
     "@types/node": "npm:24.10.0"
@@ -10687,6 +10679,7 @@ __metadata:
     tsc-alias: "npm:1.8.16"
     tsconfig-paths: "npm:4.2.0"
     tsx: "npm:4.20.6"
+    typebox: "npm:^1.0.0"
     typescript: "npm:5.9.3"
     typescript-eslint: "npm:8.46.3"
   languageName: unknown
@@ -16639,6 +16632,13 @@ __metadata:
   version: 4.41.0
   resolution: "type-fest@npm:4.41.0"
   checksum: 10c0/f5ca697797ed5e88d33ac8f1fec21921839871f808dc59345c9cf67345bfb958ce41bd821165dbf3ae591cedec2bf6fe8882098dfdd8dc54320b859711a2c1e4
+  languageName: node
+  linkType: hard
+
+"typebox@npm:^1.0.0":
+  version: 1.0.51
+  resolution: "typebox@npm:1.0.51"
+  checksum: 10c0/7d0b269d28a2678aaa08a893552a4a934993465472dcd617a1cd8bcd4d9bf761a611810b8fce35f07f5d8d56284e77652d2685a7ef499b47b9ceeeeff0bed5c5
   languageName: node
   linkType: hard
 
