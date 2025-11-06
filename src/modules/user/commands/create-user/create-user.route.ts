@@ -14,7 +14,7 @@ export default async function createUser(fastify: FastifyRouteInstance) {
       description: 'Create user',
       body: createUserRequestDtoSchema,
       response: {
-        200: idDtoSchema,
+        201: idDtoSchema,
       },
       tags: ['users'],
     },

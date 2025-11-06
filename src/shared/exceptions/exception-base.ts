@@ -31,7 +31,7 @@ export abstract class ExceptionBase extends Error {
     readonly metadata?: unknown,
   ) {
     super(message);
-    Error.captureStackTrace(this, this.constructor);
+
     this.correlationId = getRequestId();
   }
 
