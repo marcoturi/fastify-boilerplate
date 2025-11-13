@@ -1,3 +1,10 @@
+## [1.8.5](https://github.com/marcoturi/fastify-boilerplate/compare/v1.8.4...v1.8.5) (2025-11-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/awilix to v8.1.0 ([#736](https://github.com/marcoturi/fastify-boilerplate/issues/736)) ([601f6bd](https://github.com/marcoturi/fastify-boilerplate/commit/601f6bd5c6670757830f13e889f02b165b4a6e23))
+
 ## [1.8.4](https://github.com/marcoturi/fastify-boilerplate/compare/v1.8.3...v1.8.4) (2025-11-13)
 
 
