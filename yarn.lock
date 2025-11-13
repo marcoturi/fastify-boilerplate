@@ -2530,16 +2530,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fastify/awilix@npm:8.0.0":
-  version: 8.0.0
-  resolution: "@fastify/awilix@npm:8.0.0"
+"@fastify/awilix@npm:8.1.0":
+  version: 8.1.0
+  resolution: "@fastify/awilix@npm:8.1.0"
   dependencies:
     awilix-manager: "npm:^6.0.0"
     fastify-plugin: "npm:^5.0.1"
   peerDependencies:
     awilix: ">=9.0.0"
     fastify: ^5.0.0
-  checksum: 10c0/ba3b322b1747df33e7b485c848e237172f6e7ea64cdaffdbc9056394bb3c944eeb56e1333ca17a00cbad141a24b96f0f021cd3bb9d1ab0232319345705e0c674
+  checksum: 10c0/baae673cb90a361e24a6ead2696302fe0dcb5ea42b2f5a6a072cb37e3237c241b1855ae00475d172d68d51030c14a32c9e6e5f648fd5e868546c75e866318c5e
   languageName: node
   linkType: hard
 
@@ -8796,7 +8796,7 @@ __metadata:
     "@eslint/compat": "npm:1.4.1"
     "@eslint/js": "npm:9.39.1"
     "@fastify/autoload": "npm:6.3.1"
-    "@fastify/awilix": "npm:8.0.0"
+    "@fastify/awilix": "npm:8.1.0"
     "@fastify/cors": "npm:11.1.0"
     "@fastify/helmet": "npm:13.0.2"
     "@fastify/request-context": "npm:6.2.1"
