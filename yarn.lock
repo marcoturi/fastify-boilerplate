@@ -4375,7 +4375,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/npm@npm:13.1.1, @semantic-release/npm@npm:^13.1.1":
+"@semantic-release/npm@npm:13.1.2":
+  version: 13.1.2
+  resolution: "@semantic-release/npm@npm:13.1.2"
+  dependencies:
+    "@actions/core": "npm:^1.11.1"
+    "@semantic-release/error": "npm:^4.0.0"
+    aggregate-error: "npm:^5.0.0"
+    env-ci: "npm:^11.2.0"
+    execa: "npm:^9.0.0"
+    fs-extra: "npm:^11.0.0"
+    lodash-es: "npm:^4.17.21"
+    nerf-dart: "npm:^1.0.0"
+    normalize-url: "npm:^8.0.0"
+    npm: "npm:^11.6.2"
+    rc: "npm:^1.2.8"
+    read-pkg: "npm:^10.0.0"
+    registry-auth-token: "npm:^5.0.0"
+    semver: "npm:^7.1.2"
+    tempy: "npm:^3.0.0"
+  peerDependencies:
+    semantic-release: ">=20.1.0"
+  checksum: 10c0/97652841882814e2e2f6bf7e5504a3b08cbec4628d02267e2c4a427389619a5dc4dfd1706c06e5f71e661a2b32a0cd79d3c4097d8979b967fe8ce6a17f74fb19
+  languageName: node
+  linkType: hard
+
+"@semantic-release/npm@npm:^13.1.1":
   version: 13.1.1
   resolution: "@semantic-release/npm@npm:13.1.1"
   dependencies:
@@ -8812,7 +8837,7 @@ __metadata:
     "@semantic-release/commit-analyzer": "npm:13.0.1"
     "@semantic-release/git": "npm:10.0.1"
     "@semantic-release/github": "npm:12.0.2"
-    "@semantic-release/npm": "npm:13.1.1"
+    "@semantic-release/npm": "npm:13.1.2"
     "@semantic-release/release-notes-generator": "npm:14.1.0"
     "@trivago/prettier-plugin-sort-imports": "npm:6.0.0"
     "@tsconfig/node24": "npm:24.0.2"
