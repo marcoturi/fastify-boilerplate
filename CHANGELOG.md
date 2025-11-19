@@ -1,3 +1,11 @@
+## [1.8.6](https://github.com/marcoturi/fastify-boilerplate/compare/v1.8.5...v1.8.6) (2025-11-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency mercurius to v16.6.0 ([#741](https://github.com/marcoturi/fastify-boilerplate/issues/741)) ([2c9cd46](https://github.com/marcoturi/fastify-boilerplate/commit/2c9cd46734df7b524ff02f2f122560af0c4af047))
+* **deps:** update dependency typebox to v1.0.53 ([#740](https://github.com/marcoturi/fastify-boilerplate/issues/740)) ([559057c](https://github.com/marcoturi/fastify-boilerplate/commit/559057cf8a91b12bd7fdb009af9d8982d8f3a687))
+
 ## [1.8.5](https://github.com/marcoturi/fastify-boilerplate/compare/v1.8.4...v1.8.5) (2025-11-13)
 
 
