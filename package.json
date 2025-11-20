@@ -109,7 +109,7 @@
     "eslint-plugin-unused-imports": "4.3.0",
     "globals": "16.5.0",
     "husky": "9.1.7",
-    "lint-staged": "16.2.6",
+    "lint-staged": "16.2.7",
     "pino-pretty": "13.1.2",
     "pinst": "3.0.0",
     "prettier": "3.6.2",
