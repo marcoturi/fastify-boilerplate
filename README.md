@@ -10,6 +10,7 @@ This meticulously crafted boilerplate serves as a solid foundation for building 
 - Plugins: [@fastify/helmet](https://github.com/fastify/fastify-helmet) for security headers, [@fastify/swagger](https://github.com/fastify/fastify-swagger) for Swagger documentation, [@fastify/under-pressure](https://github.com/fastify/under-pressure) for automatic handling of "Service Unavailable", [@fastify/awilix](https://github.com/fastify/fastify-awilix) for dependency injection, [typebox](https://github.com/sinclairzx81/typebox) for JSON schema and TS generation and validation
 - DB: [Postgres](https://github.com/porsager/postgres) as client + [DBMate](https://github.com/amacneil/dbmate) for seeds and migrations
 - Graphql: [Mercurius](https://github.com/mercurius-js/mercurius)
+- Code Generator: **[Hepha](script/HEPHA.md)** 🔨 - CLI tool to generate feature modules (commands, queries, DTOs, domains, repositories) following the project's architecture
 - Format and Style: [Eslint 9](https://eslint.org/) + [Prettier](https://prettier.io/)
 - Dependencies validation: [depcruise](https://github.com/sverweij/dependency-cruiser)
 - Release flow: [Husky](https://github.com/typicode/husky) + [Commitlint](https://commitlint.js.org/) + [Semantic-release](https://github.com/semantic-release/semantic-release)
@@ -51,6 +52,8 @@ yarn #Install dependencies.
 - `yarn db:migrate` - start db migrations.
 - `yarn db:create-seed` - creates a new db seed.
 - `yarn db:seed` - start db seeds.
+- `yarn hepha <module> [options]` - generate feature modules with commands, queries, DTOs, domains, and repositories.
+- `yarn hepha:help` - show Hepha CLI help and options.
 
 ## <a name="principles"></a>🧱 Principles
 
@@ -210,6 +213,43 @@ npx openapi-typescript http://127.0.0.1:3000/api-docs/json -o ./client.schema.d.
 
 With a little effort you can add this process in the pipeline and have a package published with each version of the backend.
 Same concept apply for graphql schemas using [graphql-code-generator](https://the-guild.dev/graphql/codegen).
+
+## Hepha - Feature Generator
+
+**Hepha** is a powerful CLI tool that automates the creation of feature modules following the project's architectural patterns. Named after Hephaestus, the Greek god of craftsmen and builders, Hepha forges well-structured, production-ready code scaffolding.
+
+### Quick Start
+
+```bash
+# Generate a complete module with all components
+yarn hepha product --all
+
+# Generate specific components using short aliases
+yarn hepha order -c=create-order -q=find-orders -d -m -r
+
+# Add a query to an existing module
+yarn hepha user -q=find-by-email
+```
+
+### What Hepha Generates
+
+- **Commands** (`-c`): State-changing operations (CREATE, UPDATE, DELETE)
+- **Queries** (`-q`): Data-retrieval operations (GET, LIST)
+- **DTOs** (`-d`): Request/response validation schemas
+- **Domain** (`-m`): Business logic, entities, and domain errors
+- **Repository** (`-r`): Database access layer with type-safe operations
+- **Mapper**: Transformations between layers (domain ↔ persistence ↔ response)
+
+### Features
+
+✅ Follows project's architectural patterns (DDD, Clean Architecture, CQRS)
+✅ Generates TypeScript with full type safety
+✅ Creates Fastify routes with schema validation
+✅ Integrates with command/query bus pattern
+✅ Supports incremental generation (add components to existing modules)
+✅ Smart file detection (never overwrites existing code)
+
+**[📖 Full Documentation](script/HEPHA.md)** - Complete guide with examples, options, and workflows
 
 ## Contributing
 
