@@ -7573,9 +7573,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dependency-cruiser@npm:17.3.3":
-  version: 17.3.3
-  resolution: "dependency-cruiser@npm:17.3.3"
+"dependency-cruiser@npm:17.3.4":
+  version: 17.3.4
+  resolution: "dependency-cruiser@npm:17.3.4"
   dependencies:
     acorn: "npm:8.15.0"
     acorn-jsx: "npm:5.3.2"
@@ -7603,7 +7603,7 @@ __metadata:
     depcruise-wrap-stream-in-html: bin/wrap-stream-in-html.mjs
     dependency-cruise: bin/dependency-cruise.mjs
     dependency-cruiser: bin/dependency-cruise.mjs
-  checksum: 10c0/f179f13af545f506017895b0c6daf12384ea81d00c7fbd13980ff3e98a2f562d8a8db7da82b04c2571d1b53bf251e36a250c3a11ec448f5c9b7e8900615d74e8
+  checksum: 10c0/f17757df19010731cde1fd111cac5e4061cf5a02fd5fd7e355a3fe3d34807eb5b54affd7e2fb4d0afc864fe8f56cb3fc3431b59256f65210a53451852ea86842
   languageName: node
   linkType: hard
 
@@ -8855,7 +8855,7 @@ __metadata:
     awilix: "npm:12.0.5"
     c8: "npm:10.1.3"
     dbmate: "npm:2.28.0"
-    dependency-cruiser: "npm:17.3.3"
+    dependency-cruiser: "npm:17.3.4"
     env-schema: "npm:7.0.0"
     eslint: "npm:9.39.2"
     eslint-config-prettier: "npm:10.1.8"
