@@ -6166,14 +6166,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"artillery-plugin-faker@npm:5.0.2":
-  version: 5.0.2
-  resolution: "artillery-plugin-faker@npm:5.0.2"
+"artillery-plugin-faker@npm:5.0.3":
+  version: 5.0.3
+  resolution: "artillery-plugin-faker@npm:5.0.3"
   dependencies:
     "@faker-js/faker": "npm:^7.5.0"
     debug: "npm:^4.3.4"
     lodash.get: "npm:^4.4.2"
-  checksum: 10c0/56a0885296ebf6af2812db70047f65f272f650195c6ebca801ebefdb4f21c066b8f1abd64133fc5e3106028f8c6d283d02cce2ed3fea7f726551eebbaa31fd11
+  checksum: 10c0/dba517c32ef2f9b18712b52333070431a96834888e57c5c350acdebe99a4abc30dbb91c209bef0721080f5724ee58f95c18be0bcd586a9d4e85590975f451229
   languageName: node
   linkType: hard
 
@@ -8851,7 +8851,7 @@ __metadata:
     "@types/ramda": "npm:0.31.1"
     ajv-formats: "npm:3.0.1"
     artillery: "npm:2.0.27"
-    artillery-plugin-faker: "npm:5.0.2"
+    artillery-plugin-faker: "npm:5.0.3"
     awilix: "npm:12.0.5"
     c8: "npm:10.1.3"
     dbmate: "npm:2.28.0"
