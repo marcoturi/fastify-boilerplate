@@ -8885,7 +8885,7 @@ __metadata:
     tsc-alias: "npm:1.8.16"
     tsconfig-paths: "npm:4.2.0"
     tsx: "npm:4.21.0"
-    typebox: "npm:1.0.64"
+    typebox: "npm:1.0.65"
     typescript: "npm:5.9.3"
     typescript-eslint: "npm:8.50.0"
   languageName: unknown
@@ -14715,10 +14715,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typebox@npm:1.0.64":
-  version: 1.0.64
-  resolution: "typebox@npm:1.0.64"
-  checksum: 10c0/eab183ff2bc4810b61a2010cc886bff4e85aabbd2e95b8c7d08ed205e15381cb9d67535c4f7cbfe99a9dcafdc90b62ef30a1ff45405965696b95e10282fa3a28
+"typebox@npm:1.0.65":
+  version: 1.0.65
+  resolution: "typebox@npm:1.0.65"
+  checksum: 10c0/1ffdcd78491bea6036b5807fff7833e8f352166c554c3bfdfc59737b56ed04e9e13661562689652e36cd3afc1d0221e263c012cc09f47f04c8ab1d2f0b14b1b1
   languageName: node
   linkType: hard
 
