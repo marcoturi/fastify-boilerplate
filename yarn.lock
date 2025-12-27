@@ -1941,19 +1941,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cucumber/cucumber@npm:12.4.0":
-  version: 12.4.0
-  resolution: "@cucumber/cucumber@npm:12.4.0"
+"@cucumber/cucumber@npm:12.5.0":
+  version: 12.5.0
+  resolution: "@cucumber/cucumber@npm:12.5.0"
   dependencies:
     "@cucumber/ci-environment": "npm:12.0.0"
     "@cucumber/cucumber-expressions": "npm:18.0.1"
-    "@cucumber/gherkin": "npm:37.0.0"
+    "@cucumber/gherkin": "npm:37.0.1"
     "@cucumber/gherkin-streams": "npm:6.0.0"
     "@cucumber/gherkin-utils": "npm:10.0.0"
-    "@cucumber/html-formatter": "npm:22.2.0"
+    "@cucumber/html-formatter": "npm:22.3.0"
     "@cucumber/junit-xml-formatter": "npm:0.9.0"
     "@cucumber/message-streams": "npm:4.0.1"
-    "@cucumber/messages": "npm:31.0.0"
+    "@cucumber/messages": "npm:31.1.0"
     "@cucumber/pretty-formatter": "npm:1.0.1"
     "@cucumber/tag-expressions": "npm:8.1.0"
     assertion-error-formatter: "npm:^3.0.0"
@@ -1987,7 +1987,7 @@ __metadata:
     yup: "npm:1.7.1"
   bin:
     cucumber-js: bin/cucumber.js
-  checksum: 10c0/a5425ec30c4879868728cf85a8ba0b8c2dbf2e3af007c2b56e869d73cbc0fc85d81e737029701c1800e3bbcffc0c12d719779be1ff045b17b7a3945349020c28
+  checksum: 10c0/8954e9cb6f267a0ccb5919ebb18e8db949ac7ed8a9701ce5a5e799e7e184c2343fb869cfc00af5882587dfc6ad97c623726cd8fe9263672eaa181d5c2d28b0cd
   languageName: node
   linkType: hard
 
@@ -2022,12 +2022,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cucumber/gherkin@npm:37.0.0":
-  version: 37.0.0
-  resolution: "@cucumber/gherkin@npm:37.0.0"
+"@cucumber/gherkin@npm:37.0.1":
+  version: 37.0.1
+  resolution: "@cucumber/gherkin@npm:37.0.1"
   dependencies:
     "@cucumber/messages": "npm:>=31.0.0 <32"
-  checksum: 10c0/83c55a11a383c3d7a1c0910b5494be7c5b1dce21e210006e85ce1fdb47d2ddca0d5c9e0c128fd08b5fe0951f9e0139334f5aa491c3aaefd62c599611495fddbc
+  checksum: 10c0/463766e983f4b0c75f29fae17cc79683f24c449fa3d96c5d597682aebfa65d0b9519e8899d324d1544fb207ca101cfc48c52a37a555fe389518ec56b0c3fda1d
   languageName: node
   linkType: hard
 
@@ -2037,15 +2037,6 @@ __metadata:
   dependencies:
     "@cucumber/messages": "npm:>=19.1.4 <29"
   checksum: 10c0/9ec5172e8d1f5bbbb11003f908a9795a290dfa3aea6b571c08503a64d09c9e27fa75061f4b952f9a5f846040c51976e1a18c151d607862f0c4e628986acbd8a7
-  languageName: node
-  linkType: hard
-
-"@cucumber/html-formatter@npm:22.2.0":
-  version: 22.2.0
-  resolution: "@cucumber/html-formatter@npm:22.2.0"
-  peerDependencies:
-    "@cucumber/messages": ">=18"
-  checksum: 10c0/c4ea6da6de70b6cfd74a3bdc5834f8da60a1c8641e5e5a5f591d126faea419e83134a6be72e7ce494ea000bc65a50116e25d459bdca73f2d6f392900d503d191
   languageName: node
   linkType: hard
 
@@ -2091,13 +2082,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cucumber/messages@npm:31.0.0, @cucumber/messages@npm:>=31.0.0 <32":
-  version: 31.0.0
-  resolution: "@cucumber/messages@npm:31.0.0"
+"@cucumber/messages@npm:31.1.0":
+  version: 31.1.0
+  resolution: "@cucumber/messages@npm:31.1.0"
   dependencies:
     class-transformer: "npm:0.5.1"
     reflect-metadata: "npm:0.2.2"
-  checksum: 10c0/9338e8bf75c121837fd9ff59a4bdd6e486cc90949cc40f10ec213e28ca424d00e38a693a62d8eb1fec23b33068ebaf4a9458eb7ebbfce4e8acba183c377a29d9
+  checksum: 10c0/1db25cc64b43aff27df35ed3047c0713958220e4e131ba90b623872ab4181de450b4d8a07b5c4a40d41ccd53caed588723fc448980ba6497e04a232437e56e5e
   languageName: node
   linkType: hard
 
@@ -2110,6 +2101,16 @@ __metadata:
     reflect-metadata: "npm:0.2.2"
     uuid: "npm:11.1.0"
   checksum: 10c0/e4d8bbd0a912ab62064ead79723480ffe0bbf6914afb3fa3439bcb350dd382e377163632c5b13060006e91f3661b60e34cea213d1c06c306ffdb7b6d7e8ec224
+  languageName: node
+  linkType: hard
+
+"@cucumber/messages@npm:>=31.0.0 <32":
+  version: 31.0.0
+  resolution: "@cucumber/messages@npm:31.0.0"
+  dependencies:
+    class-transformer: "npm:0.5.1"
+    reflect-metadata: "npm:0.2.2"
+  checksum: 10c0/9338e8bf75c121837fd9ff59a4bdd6e486cc90949cc40f10ec213e28ca424d00e38a693a62d8eb1fec23b33068ebaf4a9458eb7ebbfce4e8acba183c377a29d9
   languageName: node
   linkType: hard
 
@@ -8829,7 +8830,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": "npm:20.2.0"
     "@commitlint/config-conventional": "npm:20.2.0"
-    "@cucumber/cucumber": "npm:12.4.0"
+    "@cucumber/cucumber": "npm:12.5.0"
     "@cucumber/html-formatter": "npm:22.3.0"
     "@cucumber/messages": "npm:30.1.0"
     "@cucumber/pretty-formatter": "npm:2.4.1"
