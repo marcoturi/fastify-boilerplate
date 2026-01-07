@@ -1,3 +1,10 @@
+## [1.8.31](https://github.com/marcoturi/fastify-boilerplate/compare/v1.8.30...v1.8.31) (2026-01-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency typebox to v1.0.75 ([#809](https://github.com/marcoturi/fastify-boilerplate/issues/809)) ([7a69ae1](https://github.com/marcoturi/fastify-boilerplate/commit/7a69ae1503139f9148d8b176008e2397bacef648))
+
 ## [1.8.30](https://github.com/marcoturi/fastify-boilerplate/compare/v1.8.29...v1.8.30) (2026-01-07)
 
 
