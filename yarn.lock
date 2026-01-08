@@ -5341,9 +5341,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@trivago/prettier-plugin-sort-imports@npm:6.0.1":
-  version: 6.0.1
-  resolution: "@trivago/prettier-plugin-sort-imports@npm:6.0.1"
+"@trivago/prettier-plugin-sort-imports@npm:6.0.2":
+  version: 6.0.2
+  resolution: "@trivago/prettier-plugin-sort-imports@npm:6.0.2"
   dependencies:
     "@babel/generator": "npm:^7.28.0"
     "@babel/parser": "npm:^7.28.0"
@@ -5368,7 +5368,7 @@ __metadata:
       optional: true
     svelte:
       optional: true
-  checksum: 10c0/52e807e899a92e992b8e51ee08ec8da29512862d37840afff377a95e599398e6936992066a3f8c50897630301a4b75c6a58ef384b7d1da946b4a631a2ea7e211
+  checksum: 10c0/62ee7d74c9cb6318cf7b3a6faf8fb794853c30bae6dc9e27c9ae1b22ffd160d45286c0c143881064020329edd6ec8ae529d625dbe5e2867e092886d84b1a13fe
   languageName: node
   linkType: hard
 
@@ -8886,7 +8886,7 @@ __metadata:
     "@semantic-release/github": "npm:12.0.2"
     "@semantic-release/npm": "npm:13.1.3"
     "@semantic-release/release-notes-generator": "npm:14.1.0"
-    "@trivago/prettier-plugin-sort-imports": "npm:6.0.1"
+    "@trivago/prettier-plugin-sort-imports": "npm:6.0.2"
     "@tsconfig/node24": "npm:24.0.3"
     "@types/node": "npm:24.10.4"
     "@types/ramda": "npm:0.31.1"
