@@ -101,7 +101,7 @@
     "dependency-cruiser": "17.3.6",
     "eslint": "9.39.2",
     "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-n": "17.23.1",
+    "eslint-plugin-n": "17.23.2",
     "eslint-plugin-promise": "7.2.1",
     "eslint-plugin-security": "3.0.1",
     "eslint-plugin-sonarjs": "3.0.5",
