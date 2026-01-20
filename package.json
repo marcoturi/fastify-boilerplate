@@ -73,7 +73,7 @@
     "pino": "10.2.1",
     "postgres": "3.4.8",
     "ramda": "0.32.0",
-    "typebox": "1.0.78"
+    "typebox": "1.0.79"
   },
   "devDependencies": {
     "@commitlint/cli": "20.3.1",
