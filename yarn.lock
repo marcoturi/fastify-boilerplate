@@ -5,7 +5,7 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
-"@actions/core@npm:^1.10.0, @actions/core@npm:^1.11.1":
+"@actions/core@npm:^1.11.1":
   version: 1.11.1
   resolution: "@actions/core@npm:1.11.1"
   dependencies:
@@ -2675,20 +2675,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fastify/static@npm:^8.0.0":
-  version: 8.3.0
-  resolution: "@fastify/static@npm:8.3.0"
-  dependencies:
-    "@fastify/accept-negotiator": "npm:^2.0.0"
-    "@fastify/send": "npm:^4.0.0"
-    content-disposition: "npm:^0.5.4"
-    fastify-plugin: "npm:^5.0.0"
-    fastq: "npm:^1.17.1"
-    glob: "npm:^11.0.0"
-  checksum: 10c0/dcaecf26690e4faffb4ef05ad2f468b84ac255c6cde6817bf9c4132dad0759eae0e926e4df19814f2c01d65000e023148ad3e6a10cc44d53771a6b59c2e08b71
-  languageName: node
-  linkType: hard
-
 "@fastify/static@npm:^9.0.0":
   version: 9.0.0
   resolution: "@fastify/static@npm:9.0.0"
@@ -4390,16 +4376,6 @@ __metadata:
   version: 1.1.0
   resolution: "@protobufjs/utf8@npm:1.1.0"
   checksum: 10c0/a3fe31fe3fa29aa3349e2e04ee13dc170cc6af7c23d92ad49e3eeaf79b9766264544d3da824dba93b7855bd6a2982fb40032ef40693da98a136d835752beb487
-  languageName: node
-  linkType: hard
-
-"@reporters/github@npm:^1.5.4":
-  version: 1.11.0
-  resolution: "@reporters/github@npm:1.11.0"
-  dependencies:
-    "@actions/core": "npm:^1.10.0"
-    stack-utils: "npm:^2.0.6"
-  checksum: 10c0/9ea71a5d31d2291cf0de80992fd8e894a060eedf699799ea229e1b2d29298d3055e4076d425f71289622259e3686defc781f81e9a19239cad58726a23a984eaa
   languageName: node
   linkType: hard
 
@@ -6507,22 +6483,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"borp@npm:^0.20.2":
-  version: 0.20.2
-  resolution: "borp@npm:0.20.2"
-  dependencies:
-    "@reporters/github": "npm:^1.5.4"
-    c8: "npm:^10.0.0"
-    execa: "npm:^9.3.0"
-    find-up: "npm:^7.0.0"
-    glob: "npm:^10.3.10"
-    yaml: "npm:^2.5.1"
-  bin:
-    borp: borp.js
-  checksum: 10c0/eba52369d1edf14241141da380984d892e23698e09b5a42ac6de888613a2e1d42aadd063c1ef95ff92dbced01cbbc13561497806e9e73fb49bde92b6adf8f63f
-  languageName: node
-  linkType: hard
-
 "bottleneck@npm:^2.15.3":
   version: 2.19.5
   resolution: "bottleneck@npm:2.19.5"
@@ -6634,7 +6594,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"c8@npm:10.1.3, c8@npm:^10.0.0":
+"c8@npm:10.1.3":
   version: 10.1.3
   resolution: "c8@npm:10.1.3"
   dependencies:
@@ -7185,15 +7145,6 @@ __metadata:
     ini: "npm:^1.3.4"
     proto-list: "npm:~1.2.1"
   checksum: 10c0/39d1df18739d7088736cc75695e98d7087aea43646351b028dfabd5508d79cf6ef4c5bcd90471f52cd87ae470d1c5490c0a8c1a292fbe6ee9ff688061ea0963e
-  languageName: node
-  linkType: hard
-
-"content-disposition@npm:^0.5.4":
-  version: 0.5.4
-  resolution: "content-disposition@npm:0.5.4"
-  dependencies:
-    safe-buffer: "npm:5.2.1"
-  checksum: 10c0/bac0316ebfeacb8f381b38285dc691c9939bf0a78b0b7c2d5758acadad242d04783cee5337ba7d12a565a19075af1b3c11c728e1e4946de73c6ff7ce45f3f1bb
   languageName: node
   linkType: hard
 
@@ -8290,13 +8241,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"escape-string-regexp@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "escape-string-regexp@npm:2.0.0"
-  checksum: 10c0/2530479fe8db57eace5e8646c9c2a9c80fa279614986d16dcc6bcaceb63ae77f05a851ba6c43756d816c61d7f4534baf56e3c705e3e0d884818a46808811c507
-  languageName: node
-  linkType: hard
-
 "escodegen@npm:^2.1.0":
   version: 2.1.0
   resolution: "escodegen@npm:2.1.0"
@@ -8656,7 +8600,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"execa@npm:^9.0.0, execa@npm:^9.3.0":
+"execa@npm:^9.0.0":
   version: 9.6.0
   resolution: "execa@npm:9.6.0"
   dependencies:
@@ -8913,7 +8857,7 @@ __metadata:
     helmet: "npm:8.1.0"
     husky: "npm:9.1.7"
     lint-staged: "npm:16.2.7"
-    mercurius: "npm:16.6.0"
+    mercurius: "npm:16.7.0"
     pino: "npm:10.2.1"
     pino-pretty: "npm:13.1.3"
     pinst: "npm:3.0.0"
@@ -9480,7 +9424,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^10.2.2, glob@npm:^10.3.10, glob@npm:^10.4.1":
+"glob@npm:^10.2.2, glob@npm:^10.4.1":
   version: 10.4.5
   resolution: "glob@npm:10.4.5"
   dependencies:
@@ -9496,7 +9440,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^11.0.0, glob@npm:^11.0.3":
+"glob@npm:^11.0.3":
   version: 11.0.3
   resolution: "glob@npm:11.0.3"
   dependencies:
@@ -11407,14 +11351,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mercurius@npm:16.6.0":
-  version: 16.6.0
-  resolution: "mercurius@npm:16.6.0"
+"mercurius@npm:16.7.0":
+  version: 16.7.0
+  resolution: "mercurius@npm:16.7.0"
   dependencies:
     "@fastify/error": "npm:^4.0.0"
-    "@fastify/static": "npm:^8.0.0"
+    "@fastify/static": "npm:^9.0.0"
     "@fastify/websocket": "npm:^11.0.0"
-    borp: "npm:^0.20.2"
     fastify-plugin: "npm:^5.0.0"
     graphql-jit: "npm:0.8.7"
     mqemitter: "npm:^7.0.0"
@@ -11428,7 +11371,7 @@ __metadata:
     ws: "npm:^8.2.2"
   peerDependencies:
     graphql: ^16.0.0
-  checksum: 10c0/71650343505f377b05407c037de7b034b5f572c6dd039c861f815aee80b21c587226252e0c146e4b40ada879252a2361eed99d342ef47e9bab4635832f4e83cb
+  checksum: 10c0/401a525b9465d38dc2b4a91a9e6bf17a4a4a71cb516a3f8c51fd2ce05e744ec6dc992a1ce20e8850a980b95be2f65278657a8dc0673fb57d405fe1c829f7bf4c
   languageName: node
   linkType: hard
 
@@ -13581,7 +13524,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"safe-buffer@npm:5.2.1, safe-buffer@npm:^5.0.1, safe-buffer@npm:~5.2.0":
+"safe-buffer@npm:^5.0.1, safe-buffer@npm:~5.2.0":
   version: 5.2.1
   resolution: "safe-buffer@npm:5.2.1"
   checksum: 10c0/6501914237c0a86e9675d4e51d89ca3c21ffd6a31642efeba25ad65720bce6921c9e7e974e5be91a786b25aa058b5303285d3c15dbabf983a919f5f630d349f3
@@ -14037,15 +13980,6 @@ __metadata:
   dependencies:
     minipass: "npm:^7.0.3"
   checksum: 10c0/caddd5f544b2006e88fa6b0124d8d7b28208b83c72d7672d5ade44d794525d23b540f3396108c4eb9280dcb7c01f0bef50682f5b4b2c34291f7c5e211fd1417d
-  languageName: node
-  linkType: hard
-
-"stack-utils@npm:^2.0.6":
-  version: 2.0.6
-  resolution: "stack-utils@npm:2.0.6"
-  dependencies:
-    escape-string-regexp: "npm:^2.0.0"
-  checksum: 10c0/651c9f87667e077584bbe848acaecc6049bc71979f1e9a46c7b920cad4431c388df0f51b8ad7cfd6eed3db97a2878d0fc8b3122979439ea8bac29c61c95eec8a
   languageName: node
   linkType: hard
 
@@ -15331,7 +15265,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yaml@npm:^2.2.2, yaml@npm:^2.4.1, yaml@npm:^2.4.2, yaml@npm:^2.5.1, yaml@npm:^2.8.1":
+"yaml@npm:^2.2.2, yaml@npm:^2.4.1, yaml@npm:^2.4.2, yaml@npm:^2.8.1":
   version: 2.8.1
   resolution: "yaml@npm:2.8.1"
   bin:
