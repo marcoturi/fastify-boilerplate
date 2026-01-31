@@ -2766,18 +2766,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cucumber/pretty-formatter@npm:2.4.1":
-  version: 2.4.1
-  resolution: "@cucumber/pretty-formatter@npm:2.4.1"
+"@cucumber/pretty-formatter@npm:3.0.0":
+  version: 3.0.0
+  resolution: "@cucumber/pretty-formatter@npm:3.0.0"
   dependencies:
-    "@cucumber/query": "npm:^14.0.0"
+    "@cucumber/query": "npm:15.0.1"
+    luxon: "npm:^3.7.2"
   peerDependencies:
     "@cucumber/messages": "*"
-  checksum: 10c0/db8200ecd9ce01738e1586c2cd031423e320229574fbaad5a48fb86c11885bceab19c228e7073799f764cc7cc101b4bd1c16fdcd8f6f132faa43a6f953f7a3c9
+  checksum: 10c0/b48e637350427f8cff6ba9313e2f72c82818dd9b1c620adf8c0146f8f27a81d22749bc239a77643f2419ac4c90cefe2707c8a915b4cc7c6590c96bafec85eab8
   languageName: node
   linkType: hard
 
-"@cucumber/query@npm:^14.0.0, @cucumber/query@npm:^14.0.1":
+"@cucumber/query@npm:15.0.1":
+  version: 15.0.1
+  resolution: "@cucumber/query@npm:15.0.1"
+  dependencies:
+    "@teppeis/multimaps": "npm:3.0.0"
+    lodash.sortby: "npm:^4.7.0"
+  peerDependencies:
+    "@cucumber/messages": "*"
+  checksum: 10c0/93969c90dd52923135723e46a3cb5f3b903151b86ff95f3e9c552b75e9e67fc3e0acd2b24b25682aa9eaf2b27e4ac798d04cc514a6eb1980b31e2023d62248c1
+  languageName: node
+  linkType: hard
+
+"@cucumber/query@npm:^14.0.1":
   version: 14.6.0
   resolution: "@cucumber/query@npm:14.6.0"
   dependencies:
@@ -9788,7 +9801,7 @@ __metadata:
     "@cucumber/cucumber": "npm:12.6.0"
     "@cucumber/html-formatter": "npm:22.3.0"
     "@cucumber/messages": "npm:30.1.0"
-    "@cucumber/pretty-formatter": "npm:2.4.1"
+    "@cucumber/pretty-formatter": "npm:3.0.0"
     "@eslint/compat": "npm:1.4.1"
     "@eslint/js": "npm:9.39.2"
     "@fastify/autoload": "npm:6.3.1"
@@ -12183,7 +12196,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"luxon@npm:3.7.2, luxon@npm:^3.5.0":
+"luxon@npm:3.7.2, luxon@npm:^3.5.0, luxon@npm:^3.7.2":
   version: 3.7.2
   resolution: "luxon@npm:3.7.2"
   checksum: 10c0/ed8f0f637826c08c343a29dd478b00628be93bba6f068417b1d8896b61cb61c6deacbe1df1e057dbd9298334044afa150f9aaabbeb3181418ac8520acfdc2ae2
