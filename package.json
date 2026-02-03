@@ -76,8 +76,8 @@
     "typebox": "1.0.81"
   },
   "devDependencies": {
-    "@commitlint/cli": "20.4.0",
-    "@commitlint/config-conventional": "20.4.0",
+    "@commitlint/cli": "20.4.1",
+    "@commitlint/config-conventional": "20.4.1",
     "@cucumber/cucumber": "12.6.0",
     "@cucumber/html-formatter": "22.3.0",
     "@cucumber/messages": "30.1.0",
