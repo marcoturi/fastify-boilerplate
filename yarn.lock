@@ -9834,7 +9834,7 @@ __metadata:
     eslint-plugin-sonarjs: "npm:3.0.6"
     eslint-plugin-unicorn: "npm:62.0.0"
     eslint-plugin-unused-imports: "npm:4.3.0"
-    fastify: "npm:5.7.3"
+    fastify: "npm:5.7.4"
     fastify-plugin: "npm:5.1.0"
     globals: "npm:16.5.0"
     graphql: "npm:16.12.0"
@@ -9867,9 +9867,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fastify@npm:5.7.3":
-  version: 5.7.3
-  resolution: "fastify@npm:5.7.3"
+"fastify@npm:5.7.4":
+  version: 5.7.4
+  resolution: "fastify@npm:5.7.4"
   dependencies:
     "@fastify/ajv-compiler": "npm:^4.0.5"
     "@fastify/error": "npm:^4.0.0"
@@ -9886,7 +9886,7 @@ __metadata:
     secure-json-parse: "npm:^4.0.0"
     semver: "npm:^7.6.0"
     toad-cache: "npm:^3.7.0"
-  checksum: 10c0/0be6bd6641d6f55d6fbc2c0d678adca3c2761e1f56c0382aa077c96211cd55e6fd00ef1ce368b2a3cece367ce61f33e8712b0dc1741d7c765cb5bd1811b1dabf
+  checksum: 10c0/87425737ad4973eac1cb8a2cc00771fae26ccf87f7142d6a100e4b03d92613b050ec2abbb9b54432dfee0bebc5b75f5658c0016e77970cb4fb9d8382729cfc6a
   languageName: node
   linkType: hard
 
