@@ -6485,12 +6485,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:24.10.10":
-  version: 24.10.10
-  resolution: "@types/node@npm:24.10.10"
+"@types/node@npm:24.10.11":
+  version: 24.10.11
+  resolution: "@types/node@npm:24.10.11"
   dependencies:
     undici-types: "npm:~7.16.0"
-  checksum: 10c0/ae6871069373cf9ea2f9f9c6d42af6d0a66a213f8688c1b4ced6466cbcdd0f926e4603480a454b1df330feb1243d2ac50749895eddf5667e25e6873d3f8b9488
+  checksum: 10c0/2578baa9443d62b0f13444b7965790912eca6d25c205e594cfa96689fa9bc6a676d2d4d7024a95a92e42e4be52133e5608ece2ef86edb12ee110c8b52f603a35
   languageName: node
   linkType: hard
 
@@ -9816,7 +9816,7 @@ __metadata:
     "@semantic-release/release-notes-generator": "npm:14.1.0"
     "@trivago/prettier-plugin-sort-imports": "npm:6.0.2"
     "@tsconfig/node24": "npm:24.0.4"
-    "@types/node": "npm:24.10.10"
+    "@types/node": "npm:24.10.11"
     "@types/ramda": "npm:0.31.1"
     ajv-formats: "npm:3.0.1"
     artillery: "npm:2.0.29"
