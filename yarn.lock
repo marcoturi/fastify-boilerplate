@@ -3171,10 +3171,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@faker-js/faker@npm:^7.5.0":
-  version: 7.6.0
-  resolution: "@faker-js/faker@npm:7.6.0"
-  checksum: 10c0/8f0e0588b1327563aba3bf71d859eb52575c6e34f9d259f63dfa3c3ba7eea910588395399f2531753f1b7b730c06e0ef79336634361b2e69445ed69123e019eb
+"@faker-js/faker@npm:^10.1.0":
+  version: 10.3.0
+  resolution: "@faker-js/faker@npm:10.3.0"
+  checksum: 10c0/5a4688f8a040366bda83e6c7f144f9db9bef1d44f7c5b43fcee15c8def07463fcdcb572458b0d14072aca58c14321f1195e11d8664ce094266e29eb4d2a70ac4
   languageName: node
   linkType: hard
 
@@ -7190,14 +7190,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"artillery-plugin-faker@npm:5.0.3":
-  version: 5.0.3
-  resolution: "artillery-plugin-faker@npm:5.0.3"
+"artillery-plugin-faker@npm:6.0.0":
+  version: 6.0.0
+  resolution: "artillery-plugin-faker@npm:6.0.0"
   dependencies:
-    "@faker-js/faker": "npm:^7.5.0"
-    debug: "npm:^4.3.4"
-    lodash.get: "npm:^4.4.2"
-  checksum: 10c0/dba517c32ef2f9b18712b52333070431a96834888e57c5c350acdebe99a4abc30dbb91c209bef0721080f5724ee58f95c18be0bcd586a9d4e85590975f451229
+    "@faker-js/faker": "npm:^10.1.0"
+    debug: "npm:^4.4.3"
+    dlv: "npm:^1.1.3"
+  checksum: 10c0/ea48b1445b8e418b877689d5928c8cd839578b274eb8f24d4e48a2043bc481e0395d33bde5169f60f69a1c57bf8a06718aa29b0177af0e4ad52c6bb731025099
   languageName: node
   linkType: hard
 
@@ -8724,6 +8724,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dlv@npm:^1.1.3":
+  version: 1.1.3
+  resolution: "dlv@npm:1.1.3"
+  checksum: 10c0/03eb4e769f19a027fd5b43b59e8a05e3fd2100ac239ebb0bf9a745de35d449e2f25cfaf3aa3934664551d72856f4ae8b7822016ce5c42c2d27c18ae79429ec42
+  languageName: node
+  linkType: hard
+
 "dogapi@npm:^2.8.4":
   version: 2.8.4
   resolution: "dogapi@npm:2.8.4"
@@ -9809,7 +9816,7 @@ __metadata:
     "@types/ramda": "npm:0.31.1"
     ajv-formats: "npm:3.0.1"
     artillery: "npm:2.0.30"
-    artillery-plugin-faker: "npm:5.0.3"
+    artillery-plugin-faker: "npm:6.0.0"
     awilix: "npm:12.1.0"
     c8: "npm:10.1.3"
     dbmate: "npm:2.29.5"
@@ -12002,13 +12009,6 @@ __metadata:
   version: 4.1.2
   resolution: "lodash.escaperegexp@npm:4.1.2"
   checksum: 10c0/484ad4067fa9119bb0f7c19a36ab143d0173a081314993fe977bd00cf2a3c6a487ce417a10f6bac598d968364f992153315f0dbe25c9e38e3eb7581dd333e087
-  languageName: node
-  linkType: hard
-
-"lodash.get@npm:^4.4.2":
-  version: 4.4.2
-  resolution: "lodash.get@npm:4.4.2"
-  checksum: 10c0/48f40d471a1654397ed41685495acb31498d5ed696185ac8973daef424a749ca0c7871bf7b665d5c14f5cc479394479e0307e781f61d5573831769593411be6e
   languageName: node
   linkType: hard
 
