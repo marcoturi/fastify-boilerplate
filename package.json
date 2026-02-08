@@ -63,7 +63,7 @@
     "@graphql-tools/load-files": "7.0.1",
     "@graphql-tools/merge": "9.1.7",
     "ajv-formats": "3.0.1",
-    "awilix": "12.0.5",
+    "awilix": "12.1.0",
     "env-schema": "7.0.0",
     "fastify": "5.7.4",
     "fastify-plugin": "5.1.0",
