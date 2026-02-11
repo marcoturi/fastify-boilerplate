@@ -3789,6 +3789,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@isaacs/brace-expansion@npm:^5.0.1":
+  version: 5.0.1
+  resolution: "@isaacs/brace-expansion@npm:5.0.1"
+  dependencies:
+    "@isaacs/balanced-match": "npm:^4.0.1"
+  checksum: 10c0/e5d67c7bbf1f17b88132a35bc638af306d48acbb72810d48fa6e6edd8ab375854773108e8bf70f021f7ef6a8273455a6d1f0c3b5aa2aff06ce7894049ab77fb8
+  languageName: node
+  linkType: hard
+
 "@isaacs/cliui@npm:^8.0.2":
   version: 8.0.2
   resolution: "@isaacs/cliui@npm:8.0.2"
@@ -9324,9 +9333,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-sonarjs@npm:3.0.6":
-  version: 3.0.6
-  resolution: "eslint-plugin-sonarjs@npm:3.0.6"
+"eslint-plugin-sonarjs@npm:3.0.7":
+  version: 3.0.7
+  resolution: "eslint-plugin-sonarjs@npm:3.0.7"
   dependencies:
     "@eslint-community/regexpp": "npm:4.12.2"
     builtin-modules: "npm:3.3.0"
@@ -9334,13 +9343,13 @@ __metadata:
     functional-red-black-tree: "npm:1.0.1"
     jsx-ast-utils-x: "npm:0.1.0"
     lodash.merge: "npm:4.6.2"
-    minimatch: "npm:10.1.1"
+    minimatch: "npm:10.1.2"
     scslre: "npm:0.3.0"
-    semver: "npm:7.7.3"
+    semver: "npm:7.7.4"
     typescript: "npm:>=5"
   peerDependencies:
     eslint: ^8.0.0 || ^9.0.0
-  checksum: 10c0/5bc7099f4876200ded0e1b5ab3636f2c4c20da2da9792a8bc5d23adcc2fdde050ebad93544070b32981258fafeaa07eda878803d3387574f1e00120db9a92600
+  checksum: 10c0/bb6997f5388d7adaf7507ab2a77951c2d9107f6a5df77cd6758aae3e870209925137668a497d6e6f69ee649db4cdfd6901de477045ab894abedc1598d4911483
   languageName: node
   linkType: hard
 
@@ -9827,7 +9836,7 @@ __metadata:
     eslint-plugin-n: "npm:17.23.2"
     eslint-plugin-promise: "npm:7.2.1"
     eslint-plugin-security: "npm:3.0.1"
-    eslint-plugin-sonarjs: "npm:3.0.6"
+    eslint-plugin-sonarjs: "npm:3.0.7"
     eslint-plugin-unicorn: "npm:62.0.0"
     eslint-plugin-unused-imports: "npm:4.4.1"
     fastify: "npm:5.7.4"
@@ -12458,7 +12467,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:10.1.1, minimatch@npm:^10.0.3, minimatch@npm:^10.1.1":
+"minimatch@npm:10.1.2":
+  version: 10.1.2
+  resolution: "minimatch@npm:10.1.2"
+  dependencies:
+    "@isaacs/brace-expansion": "npm:^5.0.1"
+  checksum: 10c0/0cccef3622201703de6ecf9d772c0be1d5513dcc038ed9feb866c20cf798243e678ac35605dac3f1a054650c28037486713fe9e9a34b184b9097959114daf086
+  languageName: node
+  linkType: hard
+
+"minimatch@npm:^10.0.3, minimatch@npm:^10.1.1":
   version: 10.1.1
   resolution: "minimatch@npm:10.1.1"
   dependencies:

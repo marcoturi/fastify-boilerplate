@@ -104,7 +104,7 @@
     "eslint-plugin-n": "17.23.2",
     "eslint-plugin-promise": "7.2.1",
     "eslint-plugin-security": "3.0.1",
-    "eslint-plugin-sonarjs": "3.0.6",
+    "eslint-plugin-sonarjs": "3.0.7",
     "eslint-plugin-unicorn": "62.0.0",
     "eslint-plugin-unused-imports": "4.4.1",
     "globals": "16.5.0",
