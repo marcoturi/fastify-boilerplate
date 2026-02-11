@@ -1,10 +1,10 @@
 import {
   createUserCommand,
-  CreateUserCommandResult,
+  type CreateUserCommandResult,
 } from '@/modules/user/commands/create-user/create-user.handler';
 import { createUserRequestDtoSchema } from '@/modules/user/commands/create-user/create-user.schema';
 import { idDtoSchema } from '@/shared/api/id.response.dto';
-import { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
+import type { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 
 export default async function createUser(fastify: FastifyRouteInstance) {
   fastify.withTypeProvider<TypeBoxTypeProvider>().route({

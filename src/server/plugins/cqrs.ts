@@ -1,5 +1,5 @@
-import fastifyCqrs from '../../shared/cqrs';
-import { FastifyInstance } from 'fastify';
+import fastifyCqrs from '../../shared/cqrs/index.ts';
+import type { FastifyInstance } from 'fastify';
 import fp from 'fastify-plugin';
 
 async function cqrsPlugin(fastify: FastifyInstance) {

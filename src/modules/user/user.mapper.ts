@@ -1,8 +1,11 @@
-import { UserModel, userSchema } from '@/modules/user/database/user.repository';
-import { UserEntity } from '@/modules/user/domain/user.types';
-import { UserResponseDto } from '@/modules/user/dtos/user.response.dto';
-import { Mapper } from '@/shared/ddd/mapper.interface';
-import { ArgumentInvalidException } from '@/shared/exceptions';
+import {
+  type UserModel,
+  userSchema,
+} from '@/modules/user/database/user.repository';
+import type { UserEntity } from '@/modules/user/domain/user.types';
+import type { UserResponseDto } from '@/modules/user/dtos/user.response.dto';
+import type { Mapper } from '@/shared/ddd/mapper.interface';
+import { ArgumentInvalidException } from '@/shared/exceptions/index';
 import { ajv } from '@/shared/utils/validator.util';
 
 export default function userMapper(): Mapper<

@@ -1,9 +1,13 @@
-import { UserEntity } from '../../domain/user.types';
+import type { UserModel } from '@/modules/user/database/user.repository';
 import { userActionCreator } from '@/modules/user';
-import { UserModel } from '@/modules/user/database/user.repository';
 import { joinConditions } from '@/shared/db/postgres';
-import { Paginated, PaginatedQueryParams } from '@/shared/db/repository.port';
+import type {
+  Paginated,
+  PaginatedQueryParams,
+} from '@/shared/db/repository.port';
 import { paginatedQueryBase } from '@/shared/ddd/query.base';
+import { DatabaseErrorException } from '@/shared/exceptions';
+import type { UserEntity } from '../../domain/user.types.ts';
 
 export type FindUsersQueryResult = Promise<Paginated<UserEntity>>;
 export const findUsersQuery = userActionCreator<
@@ -29,19 +33,27 @@ export default function makeFindUsersQuery({
         query.street && `street = ${query.street}`,
         query.postalCode && `postalCode = ${query.postalCode}`,
       ];
-      const users: { rows: UserModel[]; count: number }[] = await db`
+      const joinedConditions = joinConditions(conditions);
+      try {
+        const users: { rows: UserModel[]; count: number }[] = await db`
           SELECT
-            (SELECT COUNT(*) FROM users ${joinConditions(conditions)}) as count,
+              (SELECT COUNT(*) FROM users ${joinConditions(conditions)}) as count,
             (SELECT json_agg(t.*) FROM
-              (SELECT * FROM users ${joinConditions(conditions)} LIMIT ${query.limit} OFFSET ${query.offset})
-            AS t) AS  rows
+              (SELECT * FROM users)
+            AS t) AS rows
           `;
-      return {
-        data: users[0].rows?.map((user) => userMapper.toDomain(user)) ?? [],
-        count: users[0].count,
-        limit: query.limit,
-        page: query.page,
-      };
+        return {
+          data: users[0].rows?.map((user) => userMapper.toDomain(user)) ?? [],
+          count: users[0].count,
+          limit: query.limit,
+          page: query.page,
+        };
+      } catch (error) {
+        throw new DatabaseErrorException(
+          `Failed to find users for ${JSON.stringify(joinedConditions)}: `,
+          error instanceof Error ? error : new Error(String(error)),
+        );
+      }
     },
     init() {
       queryBus.register(findUsersQuery.type, this.handler);

@@ -1,4 +1,4 @@
-import { Dependencies as InfrastructureDependencies } from '@/modules';
+import { Dependencies as InfrastructureDependencies } from '@/modules/index';
 import { JsonSchemaToTsProvider } from '@fastify/type-provider-json-schema-to-ts';
 import {
   FastifyBaseLogger,

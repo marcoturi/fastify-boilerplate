@@ -1,4 +1,4 @@
-import { ICustomWorld } from '../support/custom-world';
+import type { ICustomWorld } from '../support/custom-world.ts';
 import { Then } from '@cucumber/cucumber';
 import assert from 'node:assert';
 

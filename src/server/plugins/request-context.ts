@@ -2,7 +2,7 @@ import {
   fastifyRequestContext,
   requestContext,
 } from '@fastify/request-context';
-import { FastifyInstance } from 'fastify';
+import type { FastifyInstance } from 'fastify';
 import fp from 'fastify-plugin';
 
 async function requestContextPlugin(fastify: FastifyInstance) {

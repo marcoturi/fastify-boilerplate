@@ -1,6 +1,9 @@
 {
   "extends": "@tsconfig/node24/tsconfig.json",
   "compilerOptions": {
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "rewriteRelativeImportExtensions": true,
     "paths": {
       "@/*": ["./src/*"]
     },

@@ -1,5 +1,5 @@
-import userDomain from './user.domain';
-import { UserRoles } from './user.types';
+import userDomain from './user.domain.ts';
+import { UserRoles } from './user.types.ts';
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 

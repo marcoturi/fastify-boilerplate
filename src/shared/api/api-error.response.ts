@@ -1,4 +1,4 @@
-import { Static, Type } from 'typebox';
+import { type Static, Type } from 'typebox';
 
 export const apiErrorResponseSchema = Type.Object(
   {

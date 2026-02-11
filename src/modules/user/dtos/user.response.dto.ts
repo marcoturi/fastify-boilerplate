@@ -1,5 +1,5 @@
 import { baseResponseDtoSchema } from '@/shared/api/response.base';
-import { Static, Type } from 'typebox';
+import { type Static, Type } from 'typebox';
 
 export const userResponseDtoSchema = Type.Intersect([
   baseResponseDtoSchema,

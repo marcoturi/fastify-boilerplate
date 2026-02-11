@@ -1,6 +1,6 @@
 import Swagger from '@fastify/swagger';
 import SwaggerUI from '@fastify/swagger-ui';
-import { FastifyInstance } from 'fastify';
+import type { FastifyInstance } from 'fastify';
 import fp from 'fastify-plugin';
 
 async function swaggerGeneratorPlugin(fastify: FastifyInstance) {

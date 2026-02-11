@@ -1,13 +1,13 @@
-import { CommandBus, EventBus } from '@/shared/cqrs/bus.types';
+import type { CommandBus, EventBus } from '@/shared/cqrs/bus.types';
 import PostgresDB from '@/shared/db/postgres';
-import { RepositoryPort } from '@/shared/db/repository.port';
+import type { RepositoryPort } from '@/shared/db/repository.port';
 import {
   SqlRepositoryBase,
-  SqlRepositoryBaseProps,
+  type SqlRepositoryBaseProps,
 } from '@/shared/db/sql-repository.base';
 import { asValue } from 'awilix';
-import { FastifyBaseLogger } from 'fastify';
-import postgres from 'postgres';
+import type { FastifyBaseLogger } from 'fastify';
+import type postgres from 'postgres';
 
 declare global {
   export interface Dependencies {

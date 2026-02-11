@@ -2,7 +2,7 @@ import { requestContext } from '@fastify/request-context';
 
 // Get request ID
 function getRequestId(): string {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  // biome-ignore lint/style/noNonNullAssertion: needed
   return requestContext.get('requestId')!;
 }
 

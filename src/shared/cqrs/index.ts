@@ -1,4 +1,4 @@
-import { CommandBus, EventBus } from '@/shared/cqrs/bus.types';
+import type { CommandBus, EventBus } from '@/shared/cqrs/bus.types';
 import { commandBus } from '@/shared/cqrs/command-bus';
 import { eventBus } from '@/shared/cqrs/event-bus';
 import {

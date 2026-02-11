@@ -1,7 +1,10 @@
-import { findUsersQuery, FindUsersQueryResult } from './find-users.handler';
-import { findUsersRequestDtoSchema } from './find-users.schema';
+import {
+  findUsersQuery,
+  type FindUsersQueryResult,
+} from './find-users.handler.ts';
+import { findUsersRequestDtoSchema } from './find-users.schema.ts';
 import { userPaginatedResponseSchema } from '@/modules/user/dtos/user.paginated.response.dto';
-import { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
+import type { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 
 export default async function findUsers(fastify: FastifyRouteInstance) {
   fastify.withTypeProvider<TypeBoxTypeProvider>().route({

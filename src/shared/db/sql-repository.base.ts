@@ -1,11 +1,14 @@
 import { getRequestId } from '@/shared/app/app-request-context';
-import {
+import type {
   Paginated,
   PaginatedQueryParams,
   RepositoryPort,
 } from '@/shared/db/repository.port';
-import { Mapper } from '@/shared/ddd/mapper.interface';
-import { ConflictException, DatabaseErrorException } from '@/shared/exceptions';
+import type { Mapper } from '@/shared/ddd/mapper.interface';
+import {
+  ConflictException,
+  DatabaseErrorException,
+} from '@/shared/exceptions/index';
 
 export interface SqlRepositoryBaseProps<Entity, DbModel> {
   db: Dependencies['db'];

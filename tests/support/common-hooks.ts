@@ -1,10 +1,10 @@
-import { ICustomWorld } from './custom-world';
-import { buildApp } from './server';
-import { env } from '@/config';
+import type { ICustomWorld } from './custom-world.ts';
+import { buildApp } from './server.ts';
+import { env } from '@/config/index';
 import {
   After,
   Before,
-  ITestCaseHookParameter,
+  type ITestCaseHookParameter,
   setDefaultTimeout,
 } from '@cucumber/cucumber';
 import postgres from 'postgres';

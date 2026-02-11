@@ -1,8 +1,8 @@
-import { makeDependencies } from '@/modules';
+import { makeDependencies } from '@/modules/index';
 import { formatName } from '@/server/di/util';
 import { diContainer, fastifyAwilixPlugin } from '@fastify/awilix';
 import { asFunction, Lifetime } from 'awilix';
-import { FastifyInstance } from 'fastify';
+import type { FastifyInstance } from 'fastify';
 import path from 'node:path';
 
 export async function di(fastify: FastifyInstance) {
@@ -18,7 +18,7 @@ export async function di(fastify: FastifyInstance) {
     .loadModules(
       [
         path.join(
-          __dirname,
+          import.meta.dirname,
           '../../modules/**/*.{repository,mapper,service,domain}.{js,ts}',
         ),
       ],
@@ -33,7 +33,7 @@ export async function di(fastify: FastifyInstance) {
     .loadModules(
       [
         path.join(
-          __dirname,
+          import.meta.dirname,
           '../../modules/**/*.{handler,event-handler}.{js,ts}',
         ),
       ],

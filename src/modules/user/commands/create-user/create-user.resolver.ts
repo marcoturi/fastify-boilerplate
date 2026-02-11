@@ -1,9 +1,9 @@
+import { UserAlreadyExistsError } from '@/modules/user/domain/user.errors';
+import mercurius from 'mercurius';
 import {
   createUserCommand,
-  CreateUserCommandResult,
-} from './create-user.handler';
-import { UserAlreadyExistsError } from '@/modules/user/domain/user.errors';
-import { ErrorWithProps } from 'mercurius';
+  type CreateUserCommandResult,
+} from './create-user.handler.ts';
 
 export default async function createUserResolver(
   fastify: FastifyRouteInstance,
@@ -17,7 +17,7 @@ export default async function createUserResolver(
           );
         } catch (error) {
           if (error instanceof UserAlreadyExistsError) {
-            throw new ErrorWithProps(error.message, {
+            throw new mercurius.ErrorWithProps(error.message, {
               code: 'USER_ALREADY_EXISTS',
               timestamp: Math.round(Date.now() / 1000),
             });

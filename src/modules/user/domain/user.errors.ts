@@ -1,4 +1,4 @@
-import { ConflictException } from '@/shared/exceptions';
+import { ConflictException } from '@/shared/exceptions/index';
 
 export class UserAlreadyExistsError extends ConflictException {
   static readonly message = 'User already exists';

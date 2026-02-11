@@ -1,2 +1,2 @@
-export * from './exception-base';
-export * from './exceptions';
+export * from './exception-base.ts';
+export * from './exceptions.ts';

@@ -1,12 +1,12 @@
 import env from '@/config/env';
-import { di } from '@/server/di';
+import { di } from '@/server/di/index';
 import getGQL from '@/server/plugins/gql';
 import AutoLoad from '@fastify/autoload';
 import Cors from '@fastify/cors';
 import Helmet from '@fastify/helmet';
-import { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
+import type { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 import UnderPressure from '@fastify/under-pressure';
-import { FastifyInstance } from 'fastify';
+import type { FastifyInstance } from 'fastify';
 import mercurius from 'mercurius';
 import path from 'node:path';
 
@@ -34,7 +34,7 @@ export default async function createServer(fastify: FastifyInstance) {
 
   // Auto-load plugins
   await fastify.register(AutoLoad, {
-    dir: path.join(__dirname, 'plugins'),
+    dir: path.join(import.meta.dirname, 'plugins'),
     dirNameRoutePrefix: false,
   });
 
@@ -43,7 +43,7 @@ export default async function createServer(fastify: FastifyInstance) {
 
   // Auto-load routes
   await fastify.register(AutoLoad, {
-    dir: path.join(__dirname, '../modules'),
+    dir: path.join(import.meta.dirname, '../modules'),
     dirNameRoutePrefix: false,
     options: {
       autoPrefix: 'api',
