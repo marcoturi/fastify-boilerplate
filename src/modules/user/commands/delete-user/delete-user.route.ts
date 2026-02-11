@@ -24,7 +24,7 @@ export default async function deleteUser(fastify: FastifyRouteInstance) {
       await fastify.commandBus.execute<DeleteUserCommandResult>(
         deleteUserCommand({ id: req.params.id }),
       );
-      return res.status(204);
+      return res.status(204).send(null);
     },
   });
 }
