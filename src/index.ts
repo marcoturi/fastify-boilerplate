@@ -1,5 +1,5 @@
-import { env } from '@/config/index';
-import server from '@/server/index';
+import { env } from '@/config';
+import server from '@/server';
 import { closeDbConnection } from '@/shared/db/postgres';
 import GracefulServer from '@gquittet/graceful-server';
 import Fastify from 'fastify';

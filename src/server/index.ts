@@ -1,5 +1,5 @@
 import env from '@/config/env';
-import { di } from '@/server/di/index';
+import { di } from '@/server/di';
 import getGQL from '@/server/plugins/gql';
 import AutoLoad from '@fastify/autoload';
 import Cors from '@fastify/cors';

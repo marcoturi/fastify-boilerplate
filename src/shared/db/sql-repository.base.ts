@@ -5,10 +5,7 @@ import type {
   RepositoryPort,
 } from '@/shared/db/repository.port';
 import type { Mapper } from '@/shared/ddd/mapper.interface';
-import {
-  ConflictException,
-  DatabaseErrorException,
-} from '@/shared/exceptions/index';
+import { ConflictException, DatabaseErrorException } from '@/shared/exceptions';
 
 export interface SqlRepositoryBaseProps<Entity, DbModel> {
   db: Dependencies['db'];
