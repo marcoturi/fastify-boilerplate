@@ -28,29 +28,27 @@ This meticulously crafted boilerplate serves as a solid foundation for building 
 npx degit marcoturi/fastify-boilerplate my-app
 cd my-app
 
-# To enable yarn 4 follow the instruction here: https://yarnpkg.com/getting-started/install
-yarn #Install dependencies.
+pnpm install
 ```
 
 ### Common Commands
 
-- `yarn start` - start a development server.
-- `yarn start:prod` - start prod server.
-- `yarn test` - run unit and integration tests.
-- `yarn test:coverage` - run unit and integration tests with coverage.
-- `yarn test:unit` - run only unit tests.
-- `yarn test:coverage` - run only integration tests.
-- `yarn test:e2e` - run E2E tests
-- `yarn type-check` - check for typescript errors.
-- `yarn deps:validate` - check for dependencies problems (i.e. use route code inside a repository).
-- `yarn outdated` - update dependencies interactively.
-- `yarn format` - format all files with Biome.
-- `yarn lint` - runs Biome linter.
-- `yarn create:env` - creates and .env file by copying .env.example.
-- `yarn db:create-migration` - creates a new db migration.
-- `yarn db:migrate` - start db migrations.
-- `yarn db:create-seed` - creates a new db seed.
-- `yarn db:seed` - start db seeds.
+- `pnpm start` - start a development server.
+- `pnpm start:prod` - start prod server.
+- `pnpm test` - run unit and integration tests.
+- `pnpm test:coverage` - run unit and integration tests with coverage.
+- `pnpm test:unit` - run only unit tests.
+- `pnpm test:e2e` - run E2E tests.
+- `pnpm type:check` - check for typescript errors.
+- `pnpm deps:validate` - check for dependencies problems (i.e. use route code inside a repository).
+- `pnpm outdated` - update dependencies interactively.
+- `pnpm format` - format all files with Biome.
+- `pnpm lint` - runs Biome linter.
+- `pnpm create:env` - creates and .env file by copying .env.example.
+- `pnpm db:create-migration` - creates a new db migration.
+- `pnpm db:migrate` - start db migrations.
+- `pnpm db:create-seed` - creates a new db seed.
+- `pnpm db:seed` - start db seeds.
 
 ## <a name="principles"></a>🧱 Principles
 

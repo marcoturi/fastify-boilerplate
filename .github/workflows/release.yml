@@ -37,29 +37,25 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
           node-version-file: ".nvmrc"
-      - name: Enable Corepack before setting up Node
-        run: corepack enable
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version-file: ".nvmrc"
-          cache: "yarn"
+          cache: "pnpm"
       - name: Install dependencies
-        run: yarn install --immutable
+        run: pnpm install --frozen-lockfile
       - name: Check lint, types, and formatting
-        run: yarn check
+        run: pnpm check
       - name: Run tests
-        run: yarn test
+        run: pnpm test
       - name: Seed DB
-        run: yarn db:migrate
+        run: pnpm db:migrate
         env:
           DBMATE_DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable
       - name: Run e2e tests
-        run: yarn test:e2e
+        run: pnpm test:e2e
         env:
           POSTGRES_URL: localhost:5432
           POSTGRES_PASSWORD: postgres
@@ -78,4 +74,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: "unused"
           HUSKY: 0
-        run: yarn semantic-release
+        run: pnpm semantic-release

@@ -1,4 +1,4 @@
-yarn lint-staged --allow-empty
-yarn type:check
-yarn deps:validate
-yarn test
+pnpm lint-staged --allow-empty
+pnpm type:check
+pnpm deps:validate
+pnpm test
