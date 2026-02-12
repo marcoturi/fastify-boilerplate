@@ -1,11 +1,11 @@
-import { getRequestId } from '@/shared/app/app-request-context';
+import { getRequestId } from '#src/shared/app/app-request-context.ts';
 import type {
   Paginated,
   PaginatedQueryParams,
   RepositoryPort,
-} from '@/shared/db/repository.port';
-import type { Mapper } from '@/shared/ddd/mapper.interface';
-import { ConflictException, DatabaseErrorException } from '@/shared/exceptions';
+} from '#src/shared/db/repository.port.ts';
+import type { Mapper } from '#src/shared/ddd/mapper.interface.ts';
+import { ConflictException, DatabaseErrorException } from '#src/shared/exceptions/index.ts';
 
 export interface SqlRepositoryBaseProps<Entity, DbModel> {
   db: Dependencies['db'];
@@ -25,17 +25,14 @@ export function SqlRepositoryBase<
 }: SqlRepositoryBaseProps<Entity, DbModel>): RepositoryPort<Entity> {
   return {
     async findOneById(id: string): Promise<Entity | undefined> {
-      const [result] =
-        await db`SELECT * FROM ${db(tableName)} WHERE id = ${id}`;
+      const [result] = await db`SELECT * FROM ${db(tableName)} WHERE id = ${id}`;
       return result ? mapper.toDomain(result) : undefined;
     },
     async findAll(): Promise<Entity[]> {
       const records = await db`SELECT * FROM ${tableName}`;
       return records.map(mapper.toDomain);
     },
-    async findAllPaginated(
-      params: PaginatedQueryParams,
-    ): Promise<Paginated<Entity>> {
+    async findAllPaginated(params: PaginatedQueryParams): Promise<Paginated<Entity>> {
       const result =
         await db`SELECT * FROM ${tableName} LIMIT ${params.limit} OFFSET ${params.offset}`;
       const entities = result.map(mapper.toDomain);
@@ -60,11 +57,8 @@ export function SqlRepositoryBase<
       }
     },
     async delete(entityId: string): Promise<boolean> {
-      logger.debug(
-        `[${getRequestId()}] deleting entities ${entityId} from ${tableName}`,
-      );
-      const result =
-        await db`DELETE FROM ${db(tableName)} WHERE id = ${entityId}`;
+      logger.debug(`[${getRequestId()}] deleting entities ${entityId} from ${tableName}`);
+      const result = await db`DELETE FROM ${db(tableName)} WHERE id = ${entityId}`;
       return result.count > 0;
     },
   };

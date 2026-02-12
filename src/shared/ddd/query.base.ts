@@ -23,11 +23,7 @@ type PaginatedQueryBaseI<TProps> = TProps & {
 export function paginatedQueryBase<TProps extends PaginatedQueryParams>(
   props: TProps,
 ): PaginatedQueryBaseI<TProps> {
-  const {
-    limit = 20,
-    page = 0,
-    orderBy = { field: true, param: 'desc' },
-  } = props;
+  const { limit = 20, page = 0, orderBy = { field: true, param: 'desc' } } = props;
   const offset = page ? page * limit : 0;
 
   return {

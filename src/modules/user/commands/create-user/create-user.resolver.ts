@@ -1,13 +1,8 @@
-import { UserAlreadyExistsError } from '@/modules/user/domain/user.errors';
+import { UserAlreadyExistsError } from '#src/modules/user/domain/user.errors.ts';
 import mercurius from 'mercurius';
-import {
-  createUserCommand,
-  type CreateUserCommandResult,
-} from './create-user.handler.ts';
+import { createUserCommand, type CreateUserCommandResult } from './create-user.handler.ts';
 
-export default async function createUserResolver(
-  fastify: FastifyRouteInstance,
-) {
+export default async function createUserResolver(fastify: FastifyRouteInstance) {
   fastify.graphql.defineResolvers({
     Mutation: {
       putUser: async (_, args) => {

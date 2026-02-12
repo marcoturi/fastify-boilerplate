@@ -1,10 +1,10 @@
-import type { UserModel } from '@/modules/user/database/user.repository';
-import type { UserRepository } from '@/modules/user/database/user.repository.port';
-import type userDomain from '@/modules/user/domain/user.domain';
-import type { UserEntity } from '@/modules/user/domain/user.types';
-import type { UserResponseDto } from '@/modules/user/dtos/user.response.dto';
-import { actionCreatorFactory } from '@/shared/cqrs/action-creator';
-import type { Mapper } from '@/shared/ddd/mapper.interface';
+import type { UserModel } from '#src/modules/user/database/user.repository.ts';
+import type { UserRepository } from '#src/modules/user/database/user.repository.port.ts';
+import type userDomain from '#src/modules/user/domain/user.domain.ts';
+import type { UserEntity } from '#src/modules/user/domain/user.types.ts';
+import type { UserResponseDto } from '#src/modules/user/dtos/user.response.dto.ts';
+import { actionCreatorFactory } from '#src/shared/cqrs/action-creator.ts';
+import type { Mapper } from '#src/shared/ddd/mapper.interface.ts';
 
 declare global {
   export interface Dependencies {

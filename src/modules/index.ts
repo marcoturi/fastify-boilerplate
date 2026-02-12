@@ -1,10 +1,10 @@
-import type { CommandBus, EventBus } from '@/shared/cqrs/bus.types';
-import PostgresDB from '@/shared/db/postgres';
-import type { RepositoryPort } from '@/shared/db/repository.port';
+import type { CommandBus, EventBus } from '#src/shared/cqrs/bus.types.ts';
+import PostgresDB from '#src/shared/db/postgres.ts';
+import type { RepositoryPort } from '#src/shared/db/repository.port.ts';
 import {
   SqlRepositoryBase,
   type SqlRepositoryBaseProps,
-} from '@/shared/db/sql-repository.base';
+} from '#src/shared/db/sql-repository.base.ts';
 import { asValue } from 'awilix';
 import type { FastifyBaseLogger } from 'fastify';
 import type postgres from 'postgres';

@@ -1,18 +1,19 @@
 import envSchema from 'env-schema';
 import { type Static, Type } from 'typebox';
 
-enum NodeEnv {
-  development = 'development',
-  production = 'production',
-  test = 'test',
-}
+const NodeEnv = {
+  development: 'development',
+  production: 'production',
+  test: 'test',
+} as const;
 
-export enum LogLevel {
-  debug = 'debug',
-  info = 'info',
-  warn = 'warn',
-  error = 'error',
-}
+export const LogLevel = {
+  debug: 'debug',
+  info: 'info',
+  warn: 'warn',
+  error: 'error',
+} as const;
+export type LogLevel = (typeof LogLevel)[keyof typeof LogLevel];
 
 const schema = Type.Object({
   POSTGRES_URL: Type.String(),

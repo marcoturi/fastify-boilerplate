@@ -4,12 +4,9 @@ import { print } from 'graphql';
 import path from 'node:path';
 
 const getGQL = async () => {
-  const typesArraySchema = await loadFiles(
-    path.join(import.meta.dirname, '../../'),
-    {
-      extensions: ['.graphql-schema.ts', '.graphql-schema.js'], // js needed for the production build
-    },
-  );
+  const typesArraySchema = await loadFiles(path.join(import.meta.dirname, '../../'), {
+    extensions: ['.graphql-schema.ts', '.graphql-schema.js'], // js needed for the production build
+  });
 
   const typeDefsSchema = mergeTypeDefs(typesArraySchema, {
     throwOnConflict: true,

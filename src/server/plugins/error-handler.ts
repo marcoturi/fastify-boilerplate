@@ -1,9 +1,9 @@
 import {
   type ApiErrorResponse,
   apiErrorResponseSchema,
-} from '@/shared/api/api-error.response';
-import { getRequestId } from '@/shared/app/app-request-context';
-import { ExceptionBase } from '@/shared/exceptions/index';
+} from '#src/shared/api/api-error.response.ts';
+import { getRequestId } from '#src/shared/app/app-request-context.ts';
+import { ExceptionBase } from '#src/shared/exceptions/index.ts';
 import type { FastifyError, FastifyErrorCodes, FastifyInstance } from 'fastify';
 import fp from 'fastify-plugin';
 
@@ -28,9 +28,7 @@ async function errorHandlerPlugin(fastify: FastifyInstance) {
   fastify.setErrorHandler((error: FastifyError | Error, _, res) => {
     // Handle fastify errors
     const fastifyError =
-      'code' in error
-        ? fastifyErrorCodesMap[error.code as keyof FastifyErrorCodes]
-        : undefined;
+      'code' in error ? fastifyErrorCodesMap[error.code as keyof FastifyErrorCodes] : undefined;
 
     if (fastifyError) {
       const response = fastifyError(error);

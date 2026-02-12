@@ -1,14 +1,9 @@
-import { LogLevel } from '@/config/env';
-import { env } from '@/config/index';
+import { LogLevel } from '#src/config/env.ts';
+import { env } from '#src/config/index.ts';
 import postgres from 'postgres';
 
 const sql = postgres(env.db.url, {
-  debug: (
-    conn: number,
-    query: string,
-    params: unknown[],
-    paramTypes: unknown[],
-  ) => {
+  debug: (conn: number, query: string, params: unknown[], paramTypes: unknown[]) => {
     if (env.log.level === LogLevel.debug) {
       // biome-ignore lint/suspicious/noConsole: needed for debugging
       console.debug(`
@@ -35,10 +30,7 @@ export const joinConditions = (xs: any[], joiner = sql`AND`) => {
   }
 
   // Prepend "WHERE" to the beginning of the flattened array
-  return [
-    sql`WHERE`,
-    ...filtered.flatMap((x, i) => (i ? [joiner, sql`${x}`] : sql`${x}`)),
-  ];
+  return [sql`WHERE`, ...filtered.flatMap((x, i) => (i ? [joiner, sql`${x}`] : sql`${x}`))];
 };
 
 export default sql;

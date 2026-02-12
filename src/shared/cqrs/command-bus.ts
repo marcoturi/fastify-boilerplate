@@ -1,19 +1,11 @@
-import type {
-  CommandBus,
-  Action,
-  CommandHandler,
-  Middleware,
-} from '@/shared/cqrs/bus.types';
-import { pipe } from 'ramda';
+import type { CommandBus, Action, CommandHandler, Middleware } from '#src/shared/cqrs/bus.types.ts';
+import { pipe } from '#src/shared/utils/pipe.ts';
 
 export function commandBus(): CommandBus {
   const handlers = new Map<string, CommandHandler>();
   const middlewares: Middleware[] = [];
 
-  function register<T extends string = string>(
-    type: T,
-    handler: CommandHandler,
-  ): void {
+  function register<T extends string = string>(type: T, handler: CommandHandler): void {
     if (typeof type !== 'string') {
       throw new TypeError('type must be a string');
     }
@@ -42,7 +34,7 @@ export function commandBus(): CommandBus {
       throw new Error(`Command type of ${command.type} is not registered`);
     }
     if (middlewares.length > 0) {
-      const list = (pipe as any)(...middlewares);
+      const list = pipe(...middlewares);
       return list(command, handler);
     } else {
       return handler(command);

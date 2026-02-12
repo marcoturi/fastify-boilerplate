@@ -1,4 +1,4 @@
-import { userBaseSchema } from '@/modules/user/dtos/user.graphql-schema';
+import { userBaseSchema } from '#src/modules/user/dtos/user.graphql-schema.ts';
 
 const userCreateSchema = `
   input PutUserPayload {

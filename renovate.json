@@ -8,9 +8,5 @@
     }
   ],
   "timezone": "Europe/Rome",
-  "schedule": [
-    "after 10pm every weekday",
-    "before 5am every weekday",
-    "every weekend"
-  ]
+  "schedule": ["after 10pm every weekday", "before 5am every weekday", "every weekend"]
 }

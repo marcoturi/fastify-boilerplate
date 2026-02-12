@@ -1,10 +1,5 @@
-import type {
-  Action,
-  EventBus,
-  EventHandler,
-  Middleware,
-} from '@/shared/cqrs/bus.types';
-import { pipe } from 'ramda';
+import type { Action, EventBus, EventHandler, Middleware } from '#src/shared/cqrs/bus.types.ts';
+import { pipe } from '#src/shared/utils/pipe.ts';
 
 export function eventBus(): EventBus {
   const handlers = new Map<string, EventHandler>();
@@ -33,7 +28,7 @@ export function eventBus(): EventBus {
     }
 
     if (middlewares.length > 0) {
-      const list = (pipe as any)(...middlewares);
+      const list = pipe(...middlewares);
       list(event, handler);
     } else {
       handler(event);

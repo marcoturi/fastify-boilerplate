@@ -1,4 +1,4 @@
-import { paginatedQueryRequestDtoSchema } from '@/shared/api/paginated-query.request.dto';
+import { paginatedQueryRequestDtoSchema } from '#src/shared/api/paginated-query.request.dto.ts';
 import { Type } from 'typebox';
 
 export const findUsersRequestDtoSchema = Type.Intersect([

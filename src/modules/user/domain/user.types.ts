@@ -6,11 +6,12 @@ export interface CreateUserProps {
   street: string;
 }
 
-export enum UserRoles {
-  admin = 'admin',
-  moderator = 'moderator',
-  guest = 'guest',
-}
+export const UserRoles = {
+  admin: 'admin',
+  moderator: 'moderator',
+  guest: 'guest',
+} as const;
+export type UserRoles = (typeof UserRoles)[keyof typeof UserRoles];
 
 export interface UserEntity {
   id: string;

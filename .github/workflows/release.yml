@@ -40,18 +40,18 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version-file: '.nvmrc'
+          node-version-file: ".nvmrc"
       - name: Enable Corepack before setting up Node
         run: corepack enable
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version-file: '.nvmrc'
-          cache: 'yarn'
+          node-version-file: ".nvmrc"
+          cache: "yarn"
       - name: Install dependencies
         run: yarn install --immutable
       - name: Check lint, types, and formatting
-        run: yarn lint:ci && yarn format:ci && yarn type:check
+        run: yarn check
       - name: Run tests
         run: yarn test
       - name: Seed DB
@@ -78,6 +78,6 @@ jobs:
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          NPM_TOKEN: 'unused'
+          NPM_TOKEN: "unused"
           HUSKY: 0
         run: yarn semantic-release

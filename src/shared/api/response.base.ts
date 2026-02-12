@@ -1,4 +1,4 @@
-import { idDtoSchema } from '@/shared/api/id.response.dto';
+import { idDtoSchema } from '#src/shared/api/id.response.dto.ts';
 import { Type } from 'typebox';
 
 export const baseResponseDtoSchema = Type.Intersect([

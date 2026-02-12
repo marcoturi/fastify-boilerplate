@@ -1,5 +1,5 @@
-import { Dependencies as InfrastructureDependencies } from '@/modules';
-import { JsonSchemaToTsProvider } from '@fastify/type-provider-json-schema-to-ts';
+import { Dependencies as InfrastructureDependencies } from '#src/modules/index.ts';
+import type { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 import {
   FastifyBaseLogger,
   FastifyInstance,
@@ -18,7 +18,7 @@ declare global {
     RawRequestDefaultExpression<RawServerDefault>,
     RawReplyDefaultExpression<RawServerDefault>,
     FastifyBaseLogger,
-    JsonSchemaToTsProvider
+    TypeBoxTypeProvider
   >;
 }
 
