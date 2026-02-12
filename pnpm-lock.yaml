@@ -41,6 +41,9 @@ importers:
       '@graphql-tools/merge':
         specifier: 9.1.7
         version: 9.1.7(graphql@16.12.0)
+      ajv:
+        specifier: 8.17.1
+        version: 8.17.1
       ajv-formats:
         specifier: 3.0.1
         version: 3.0.1(ajv@8.17.1)
