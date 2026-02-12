@@ -1,3 +1,36 @@
+# [2.0.0](https://github.com/marcoturi/fastify-boilerplate/compare/v1.8.36...v2.0.0) (2026-02-12)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/swagger to v9.7.0 ([#860](https://github.com/marcoturi/fastify-boilerplate/issues/860)) ([c080616](https://github.com/marcoturi/fastify-boilerplate/commit/c080616b72cb70376c95effc11cf2761aab0cde8))
+* **deps:** update dependency @fastify/swagger-ui to v5.2.5 ([#845](https://github.com/marcoturi/fastify-boilerplate/issues/845)) ([0321ca8](https://github.com/marcoturi/fastify-boilerplate/commit/0321ca898be614849e20d7d0c6183d7906d28d1e))
+* **deps:** update dependency @gquittet/graceful-server to v6.0.3 ([#835](https://github.com/marcoturi/fastify-boilerplate/issues/835)) ([60c8905](https://github.com/marcoturi/fastify-boilerplate/commit/60c89052565882374ee246c8d24df205af45fd01))
+* **deps:** update dependency awilix to v12.1.0 ([#862](https://github.com/marcoturi/fastify-boilerplate/issues/862)) ([1274376](https://github.com/marcoturi/fastify-boilerplate/commit/1274376af6f1da58f465b8d749d3164a678070e6))
+* **deps:** update dependency fastify to v5.7.0 ([#826](https://github.com/marcoturi/fastify-boilerplate/issues/826)) ([3eec50d](https://github.com/marcoturi/fastify-boilerplate/commit/3eec50d7b634805f9c3d3419f013934b1adc71a8))
+* **deps:** update dependency fastify to v5.7.1 ([#828](https://github.com/marcoturi/fastify-boilerplate/issues/828)) ([b4387f1](https://github.com/marcoturi/fastify-boilerplate/commit/b4387f1bd736f330bdb26e7656820fa923116f15))
+* **deps:** update dependency fastify to v5.7.2 ([#841](https://github.com/marcoturi/fastify-boilerplate/issues/841)) ([b7f9d1b](https://github.com/marcoturi/fastify-boilerplate/commit/b7f9d1b848e3c4d79d29ac4c7604c96634f4bb0a))
+* **deps:** update dependency fastify to v5.7.3 [security] ([#851](https://github.com/marcoturi/fastify-boilerplate/issues/851)) ([b00e105](https://github.com/marcoturi/fastify-boilerplate/commit/b00e1052a07e79e4885a7a0ea16dc086242d0bf3))
+* **deps:** update dependency fastify to v5.7.4 ([#855](https://github.com/marcoturi/fastify-boilerplate/issues/855)) ([a52fae5](https://github.com/marcoturi/fastify-boilerplate/commit/a52fae54b07f3e85643ac70b1b60334afe490224))
+* **deps:** update dependency mercurius to v16.7.0 ([#832](https://github.com/marcoturi/fastify-boilerplate/issues/832)) ([d4727cd](https://github.com/marcoturi/fastify-boilerplate/commit/d4727cd7850845191702267d551618104440c005))
+* **deps:** update dependency pino to v10.2.1 ([#830](https://github.com/marcoturi/fastify-boilerplate/issues/830)) ([9b690d0](https://github.com/marcoturi/fastify-boilerplate/commit/9b690d009202c455fa4e934ad1b4a1add956fa83))
+* **deps:** update dependency pino to v10.3.0 ([#839](https://github.com/marcoturi/fastify-boilerplate/issues/839)) ([93dcdc7](https://github.com/marcoturi/fastify-boilerplate/commit/93dcdc706033717d87b132fd33975aab125d594f))
+* **deps:** update dependency pino to v10.3.1 ([#864](https://github.com/marcoturi/fastify-boilerplate/issues/864)) ([231769f](https://github.com/marcoturi/fastify-boilerplate/commit/231769fbb6c815fe6a7f11a84d0454925f85eaa3))
+* **deps:** update dependency typebox to v1.0.79 ([#831](https://github.com/marcoturi/fastify-boilerplate/issues/831)) ([b541dec](https://github.com/marcoturi/fastify-boilerplate/commit/b541dec4b36a23dd93f147cb7a1bc018944b3e28))
+* **deps:** update dependency typebox to v1.0.80 ([#842](https://github.com/marcoturi/fastify-boilerplate/issues/842)) ([1a7cd32](https://github.com/marcoturi/fastify-boilerplate/commit/1a7cd32e3d0b48fd98ee145fe6fed96de9120e63))
+* **deps:** update dependency typebox to v1.0.81 ([#850](https://github.com/marcoturi/fastify-boilerplate/issues/850)) ([04b6d64](https://github.com/marcoturi/fastify-boilerplate/commit/04b6d64d76e997661f7c5413ac9797876b1e6a99))
+
+
+### Features
+
+* migrate from eslint/prettier to biome and switch to ESM ([#869](https://github.com/marcoturi/fastify-boilerplate/issues/869)) ([9382f9a](https://github.com/marcoturi/fastify-boilerplate/commit/9382f9a3ab1a21e9801ef749bef632bdc8032062))
+
+
+### BREAKING CHANGES
+
+* project now requires ESM (type: module in package.json).
+Node.js CJS consumers are no longer supported.
+
 ## [1.8.36](https://github.com/marcoturi/fastify-boilerplate/compare/v1.8.35...v1.8.36) (2026-01-15)
 
 
