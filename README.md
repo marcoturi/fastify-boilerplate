@@ -35,7 +35,7 @@ yarn #Install dependencies.
 ### Common Commands
 
 - `yarn start` - start a development server.
-- `yarn build` - build for production. The generated files will be on the `dist` folder.
+- `yarn start:prod` - start prod server.
 - `yarn test` - run unit and integration tests.
 - `yarn test:coverage` - run unit and integration tests with coverage.
 - `yarn test:unit` - run only unit tests.

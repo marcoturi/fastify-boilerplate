@@ -58,8 +58,6 @@ jobs:
         run: yarn db:migrate
         env:
           DBMATE_DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable
-      - name: Run build
-        run: yarn build
       - name: Run e2e tests
         run: yarn test:e2e
         env:
