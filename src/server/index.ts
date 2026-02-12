@@ -28,6 +28,8 @@ export default async function createServer(fastify: FastifyInstance) {
 
   // Enables the use of CORS in a Fastify application.
   // https://en.wikipedia.org/wiki/Cross-origin_resource_sharing
+  // `origin: false` disables CORS headers entirely (suitable for same-origin / server-to-server).
+  // Set to `true` or a specific origin string/array for cross-origin frontends.
   await fastify.register(Cors, {
     origin: false,
   });

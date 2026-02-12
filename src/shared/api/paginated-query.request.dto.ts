@@ -5,7 +5,7 @@ export const paginatedQueryRequestDtoSchema = Type.Object({
     Type.Number({
       example: 10,
       description: 'Specifies a limit of returned records',
-      minimum: 0,
+      minimum: 1,
       maximum: 99_999,
     }),
   ),

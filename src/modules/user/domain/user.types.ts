@@ -6,6 +6,11 @@ export interface CreateUserProps {
   street: string;
 }
 
+/**
+ * `UserRoles` is both a value object (for runtime enum-like access, e.g. `UserRoles.admin`)
+ * and a type (union of `'admin' | 'moderator' | 'guest'`).
+ * This "const object + derived type" pattern is the idiomatic TypeScript replacement for enums.
+ */
 export const UserRoles = {
   admin: 'admin',
   moderator: 'moderator',

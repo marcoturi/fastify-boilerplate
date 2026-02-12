@@ -10,7 +10,7 @@
     "#tests/*": "./tests/*"
   },
   "scripts": {
-    "create:env": "node -r fs -e \"fs.copyFileSync('.env.example', '.env', fs.constants.COPYFILE_EXCL)\"",
+    "create:env": "node -e \"require('fs').copyFileSync('.env.example', '.env', require('fs').constants.COPYFILE_EXCL)\"",
     "start": "node --env-file=.env --watch src/index.ts | pino-pretty -clSt",
     "start:prod": "node --env-file=.env ./src/index.ts",
     "test": "pnpm test:unit",
@@ -52,7 +52,6 @@
     "@fastify/swagger-ui": "5.2.5",
     "@fastify/type-provider-typebox": "6.1.0",
     "@fastify/under-pressure": "9.0.3",
-    "@gquittet/graceful-server": "6.0.3",
     "@graphql-tools/load-files": "7.0.1",
     "@graphql-tools/merge": "9.1.7",
     "ajv-formats": "3.0.1",

@@ -76,7 +76,7 @@ This project is based on some of the following principles/styles:
 - [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 - [Onion Architecture](https://herbertograca.com/2017/09/21/onion-architecture/)
 - [SOLID Principles](https://en.wikipedia.org/wiki/SOLID)
-- [Vertical slice architecture](https://www.jimmybogard.com/vertical-slice-architecture/))
+- [Vertical slice architecture](https://www.jimmybogard.com/vertical-slice-architecture/)
 - [The Common Closure Principle (CCP)](https://en.wikipedia.org/wiki/Common_closure_principle)
 
 ### Modules
@@ -98,6 +98,8 @@ Each layer should handle its own distinct functionality. Ideally, these componen
 **Route:**
 The process starts with a request (HTTP, GRPC, Graphql) sent to the route. You can find the routes in the `src/modules/feature/{commands|queries}` folder.
 Routes handle HTTP request/response, request validation, and response formatting based on the type of protocol implied. They should not contain any business logic.
+
+> **Note:** All REST routes are automatically prefixed with `/api` (e.g. `/api/v1/users`). This prefix is configured via `@fastify/autoload` in `src/server/index.ts`.
 
 Example file: [find-users.route.ts](src/modules/user/queries/find-users/find-users.route.ts)
 

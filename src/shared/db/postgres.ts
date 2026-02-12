@@ -61,6 +61,3 @@ export async function withTransaction<T>(
   const db = getDb();
   return db.begin((tx) => fn(tx)) as Promise<T>;
 }
-
-/** @deprecated Use getDb() instead for lazy initialization */
-export default getDb;
