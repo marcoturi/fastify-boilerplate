@@ -25,5 +25,6 @@
     "noImplicitAny": false,
     "noStrictGenericChecks": false
   },
-  "include": ["src", "tests"]
+  "include": ["src", "tests"],
+  "exclude": ["**/*.k6.ts"]
 }
