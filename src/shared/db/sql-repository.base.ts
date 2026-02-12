@@ -30,19 +30,30 @@ export function SqlRepositoryBase<
       return result ? mapper.toDomain(result as DbModel) : undefined;
     },
     async findAll(): Promise<Entity[]> {
-      const records = await db`SELECT * FROM ${tableName}`;
+      const records = await db`SELECT * FROM ${db(tableName)}`;
       return records.map((r) => mapper.toDomain(r as DbModel));
     },
     async findAllPaginated(params: PaginatedQueryParams): Promise<Paginated<Entity>> {
+      const [{ total }] = await db`SELECT COUNT(*) as total FROM ${db(tableName)}`;
       const result =
-        await db`SELECT * FROM ${tableName} LIMIT ${params.limit} OFFSET ${params.offset}`;
+        await db`SELECT * FROM ${db(tableName)} LIMIT ${params.limit} OFFSET ${params.offset}`;
       const entities = result.map((r) => mapper.toDomain(r as DbModel));
       return {
         data: entities,
-        count: entities.length || 0,
+        count: Number(total),
         limit: params.limit,
         page: params.page,
       };
+    },
+    async update(entity: Entity): Promise<Entity> {
+      const record = mapper.toPersistence(entity);
+      const { id, ...fields } = record as Record<string, unknown> & { id: string };
+      const [updated] =
+        await db`UPDATE ${db(tableName)} SET ${db(fields)} WHERE id = ${id} RETURNING *`;
+      if (!updated) {
+        throw new DatabaseErrorException(`Record with id ${id} not found for update`);
+      }
+      return mapper.toDomain(updated as DbModel);
     },
     async insert(entity: Entity | Entity[]): Promise<void> {
       const entities = Array.isArray(entity) ? entity : [entity];

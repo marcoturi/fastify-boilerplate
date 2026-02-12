@@ -1,9 +1,8 @@
 import { requestContext } from '@fastify/request-context';
 
-// Get request ID
+/** Returns the current request ID, or 'no-request-context' if called outside a request lifecycle. */
 function getRequestId(): string {
-  // biome-ignore lint/style/noNonNullAssertion: needed
-  return requestContext.get('requestId')!;
+  return requestContext.get('requestId') ?? 'no-request-context';
 }
 
 export { getRequestId };

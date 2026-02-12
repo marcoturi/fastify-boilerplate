@@ -13,12 +13,22 @@ export interface CommandCreator<Payload> {
 }
 
 export type CommandHandler = (command: Action<unknown>) => Promise<unknown>;
+export type QueryHandler = (query: Action<unknown>) => Promise<unknown>;
 export type EventHandler = (event: Action<unknown>) => void;
 
 export interface CommandBus {
   register<P>(type: string, handler: (command: Action<P>) => Promise<unknown>): void;
   unregister(type: string): void;
   execute<R>(command: Action<unknown>): Promise<R>;
+  addMiddleware(fn: Middleware): void;
+}
+
+/** QueryBus has the same shape as CommandBus but is semantically distinct:
+ *  queries must be idempotent and side-effect-free. */
+export interface QueryBus {
+  register<P>(type: string, handler: (query: Action<P>) => Promise<unknown>): void;
+  unregister(type: string): void;
+  execute<R>(query: Action<unknown>): Promise<R>;
   addMiddleware(fn: Middleware): void;
 }
 

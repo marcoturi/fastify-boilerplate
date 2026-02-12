@@ -1,8 +1,8 @@
 import type { Action, EventBus, EventHandler, Middleware } from '#src/shared/cqrs/bus.types.ts';
-import { pipe } from '#src/shared/utils/pipe.ts';
+import { composeMiddlewares } from '#src/shared/utils/pipe.ts';
 
 export function eventBus(): EventBus {
-  const handlers = new Map<string, EventHandler>();
+  const handlers = new Map<string, EventHandler[]>();
   const middlewares: Middleware[] = [];
 
   function on<P>(type: string, handler: (event: Action<P>) => void): void {
@@ -12,7 +12,9 @@ export function eventBus(): EventBus {
     if (typeof handler !== 'function') {
       throw new TypeError('handler must be a function');
     }
-    handlers.set(type, handler as EventHandler);
+    const existing = handlers.get(type) ?? [];
+    existing.push(handler as EventHandler);
+    handlers.set(type, existing);
   }
 
   function emit(event: Action<unknown>): void {
@@ -22,16 +24,18 @@ export function eventBus(): EventBus {
     if (typeof event.type !== 'string') {
       throw new TypeError('event.type must be a string');
     }
-    const handler = handlers.get(event.type);
-    if (!handler) {
-      throw new Error(`Event type of ${event.type} is not registered`);
+    const eventHandlers = handlers.get(event.type);
+    if (!eventHandlers || eventHandlers.length === 0) {
+      return; // Events with no subscribers are silently ignored
     }
 
-    if (middlewares.length > 0) {
-      const list = pipe(...middlewares);
-      list(event, handler);
-    } else {
-      handler(event);
+    for (const handler of eventHandlers) {
+      if (middlewares.length > 0) {
+        const composed = composeMiddlewares(middlewares);
+        void composed(event, handler);
+      } else {
+        handler(event);
+      }
     }
   }
 

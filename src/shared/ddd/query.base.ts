@@ -1,5 +1,5 @@
 interface OrderBy {
-  field: string | boolean;
+  field: string;
   param: 'asc' | 'desc';
 }
 
@@ -18,13 +18,13 @@ type PaginatedQueryBaseI<TProps> = TProps & {
 };
 
 /**
- * Base class for paginated queries
+ * Provides defaults for paginated query parameters
  */
 export function paginatedQueryBase<TProps extends PaginatedQueryParams>(
   props: TProps,
 ): PaginatedQueryBaseI<TProps> {
-  const { limit = 20, page = 0, orderBy = { field: true, param: 'desc' } } = props;
-  const offset = page ? page * limit : 0;
+  const { limit = 20, page = 0, orderBy = { field: 'createdAt', param: 'desc' } } = props;
+  const offset = page * limit;
 
   return {
     limit,

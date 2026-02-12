@@ -7,11 +7,11 @@ export const deleteUserCommand = userActionCreator<{ id: string }>('delete');
 export default function makeDeleteUser({ userRepository, commandBus }: Dependencies) {
   return {
     async handler({ payload }: ReturnType<typeof deleteUserCommand>): DeleteUserCommandResult {
-      const user = await userRepository.findOneById(payload.id);
-      if (!user) {
+      const deleted = await userRepository.delete(payload.id);
+      if (!deleted) {
         throw new NotFoundException();
       }
-      return await userRepository.delete(payload.id);
+      return deleted;
     },
     init() {
       commandBus.register(deleteUserCommand.type, this.handler);
