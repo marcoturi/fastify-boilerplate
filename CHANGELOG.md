@@ -1,3 +1,14 @@
+# [2.1.0](https://github.com/marcoturi/fastify-boilerplate/compare/v2.0.0...v2.1.0) (2026-02-12)
+
+
+### Features
+
+* **cqrs:** improve plugin ([85f73af](https://github.com/marcoturi/fastify-boilerplate/commit/85f73af5ccf927869db2d0720ba7ca88443bca01))
+* **cqrs:** refactor action creator ([b4efab7](https://github.com/marcoturi/fastify-boilerplate/commit/b4efab796c879ea3bdde389771ac823d4ea455c2))
+* replace artillery with k6 ([10da679](https://github.com/marcoturi/fastify-boilerplate/commit/10da67976dbd9e10c50e354a9c5906d131325693))
+* replace yarn with pnpm ([229e9d6](https://github.com/marcoturi/fastify-boilerplate/commit/229e9d608eed8445611e7e7302db9e8dcd55f2b6))
+* use native ts, clean up project ([13d6c6f](https://github.com/marcoturi/fastify-boilerplate/commit/13d6c6fd2bb307d8e7cd6663e5d12b5246c97834))
+
 # [2.0.0](https://github.com/marcoturi/fastify-boilerplate/compare/v1.8.36...v2.0.0) (2026-02-12)
 
 
