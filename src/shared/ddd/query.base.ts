@@ -1,7 +1,4 @@
-interface OrderBy {
-  field: string;
-  param: 'asc' | 'desc';
-}
+import type { OrderBy } from '#src/shared/db/repository.port.ts';
 
 interface PaginatedQueryParams {
   limit?: number;

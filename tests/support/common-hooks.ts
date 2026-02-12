@@ -1,8 +1,7 @@
 import type { ICustomWorld } from './custom-world.ts';
 import { buildApp } from './server.ts';
-import { env } from '#src/config/index.ts';
+import { getDb } from '#src/shared/db/postgres.ts';
 import { After, Before, type ITestCaseHookParameter, setDefaultTimeout } from '@cucumber/cucumber';
-import postgres from 'postgres';
 
 setDefaultTimeout(process.env.PWDEBUG ? -1 : 60 * 1000);
 
@@ -17,7 +16,7 @@ Before(async function (this: ICustomWorld, { pickle }: ITestCaseHookParameter) {
   this.testName = pickle.name.replaceAll(/\W/g, '-');
   this.feature = pickle;
   this.context = {};
-  this.db = postgres(env.db.url);
+  this.db = getDb();
   this.server = await buildApp();
 });
 
@@ -26,5 +25,4 @@ After(async function (this: ICustomWorld, { result }: ITestCaseHookParameter) {
     this.attach(`Status: ${result.status}. Duration:${result.duration.seconds}s`);
   }
   await this.server.close();
-  await this.db.end();
 });

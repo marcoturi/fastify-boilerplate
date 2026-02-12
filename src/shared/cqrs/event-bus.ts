@@ -1,9 +1,22 @@
-import type { Action, EventBus, EventHandler, Middleware } from '#src/shared/cqrs/bus.types.ts';
-import { composeMiddlewares } from '#src/shared/utils/pipe.ts';
+import type {
+  Action,
+  EventBus,
+  EventHandler,
+  EventMiddleware,
+} from '#src/shared/cqrs/bus.types.ts';
+import { composeMiddlewares } from '#src/shared/utils/compose-middlewares.ts';
 
 export function eventBus(): EventBus {
   const handlers = new Map<string, EventHandler[]>();
-  const middlewares: Middleware[] = [];
+  const middlewares: EventMiddleware[] = [];
+
+  function dispatch(event: Action<unknown>, handler: EventHandler): void {
+    if (middlewares.length > 0) {
+      composeMiddlewares(middlewares)(event, handler);
+    } else {
+      handler(event);
+    }
+  }
 
   function on<P>(type: string, handler: (event: Action<P>) => void): void {
     if (typeof type !== 'string') {
@@ -28,18 +41,12 @@ export function eventBus(): EventBus {
     if (!eventHandlers || eventHandlers.length === 0) {
       return; // Events with no subscribers are silently ignored
     }
-
     for (const handler of eventHandlers) {
-      if (middlewares.length > 0) {
-        const composed = composeMiddlewares(middlewares);
-        void composed(event, handler);
-      } else {
-        handler(event);
-      }
+      dispatch(event, handler);
     }
   }
 
-  function addMiddleware(fn: Middleware) {
+  function addMiddleware(fn: EventMiddleware) {
     middlewares.push(fn);
   }
 

@@ -1,9 +1,14 @@
-import type { CommandBus, Action, CommandHandler, Middleware } from '#src/shared/cqrs/bus.types.ts';
-import { composeMiddlewares } from '#src/shared/utils/pipe.ts';
+import type {
+  Action,
+  CommandBus,
+  CommandHandler,
+  CommandMiddleware,
+} from '#src/shared/cqrs/bus.types.ts';
+import { composeMiddlewares } from '#src/shared/utils/compose-middlewares.ts';
 
 export function commandBus(): CommandBus {
   const handlers = new Map<string, CommandHandler>();
-  const middlewares: Middleware[] = [];
+  const middlewares: CommandMiddleware[] = [];
 
   function register<P>(type: string, handler: (command: Action<P>) => Promise<unknown>): void {
     if (typeof type !== 'string') {
@@ -34,13 +39,12 @@ export function commandBus(): CommandBus {
       throw new Error(`Command type of ${command.type} is not registered`);
     }
     if (middlewares.length > 0) {
-      const composed = composeMiddlewares(middlewares);
-      return composed(command, handler) as Promise<R>;
+      return composeMiddlewares(middlewares)(command, handler) as Promise<R>;
     }
     return handler(command) as Promise<R>;
   }
 
-  function addMiddleware(fn: Middleware) {
+  function addMiddleware(fn: CommandMiddleware) {
     middlewares.push(fn);
   }
 

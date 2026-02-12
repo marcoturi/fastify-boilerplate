@@ -9,7 +9,7 @@ export default function makeDeleteUser({ userRepository, commandBus }: Dependenc
     async handler({ payload }: ReturnType<typeof deleteUserCommand>): DeleteUserCommandResult {
       const deleted = await userRepository.delete(payload.id);
       if (!deleted) {
-        throw new NotFoundException();
+        throw new NotFoundException(`User with id ${payload.id} not found`);
       }
       return deleted;
     },
