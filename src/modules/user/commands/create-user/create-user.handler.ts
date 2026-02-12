@@ -20,7 +20,7 @@ export default function makeCreateUser({
         await userRepository.insert(user);
         eventBus.emit(createUserEvent(user));
         return user.id;
-      } catch (error: any) {
+      } catch (error: unknown) {
         if (error instanceof ConflictException) {
           throw new UserAlreadyExistsError(error);
         }

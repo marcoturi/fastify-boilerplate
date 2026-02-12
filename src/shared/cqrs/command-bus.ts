@@ -5,17 +5,17 @@ export function commandBus(): CommandBus {
   const handlers = new Map<string, CommandHandler>();
   const middlewares: Middleware[] = [];
 
-  function register<T extends string = string>(type: T, handler: CommandHandler): void {
+  function register<P>(type: string, handler: (command: Action<P>) => Promise<unknown>): void {
     if (typeof type !== 'string') {
       throw new TypeError('type must be a string');
     }
     if (typeof handler !== 'function') {
       throw new TypeError('handler must be a function');
     }
-    handlers.set(type, handler);
+    handlers.set(type, handler as CommandHandler);
   }
 
-  function unregister<T extends string = string>(type: T): void {
+  function unregister(type: string): void {
     if (typeof type !== 'string') {
       throw new TypeError('type must be a string');
     }
@@ -35,9 +35,9 @@ export function commandBus(): CommandBus {
     }
     if (middlewares.length > 0) {
       const list = pipe(...middlewares);
-      return list(command, handler);
+      return list(command, handler) as Promise<R>;
     } else {
-      return handler(command);
+      return handler(command) as Promise<R>;
     }
   }
 

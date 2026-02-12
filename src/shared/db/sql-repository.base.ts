@@ -6,12 +6,13 @@ import type {
 } from '#src/shared/db/repository.port.ts';
 import type { Mapper } from '#src/shared/ddd/mapper.interface.ts';
 import { ConflictException, DatabaseErrorException } from '#src/shared/exceptions/index.ts';
+import type { FastifyBaseLogger } from 'fastify';
 
 export interface SqlRepositoryBaseProps<Entity, DbModel> {
   db: Dependencies['db'];
   tableName: string;
   mapper: Mapper<Entity, DbModel>;
-  logger: any;
+  logger: FastifyBaseLogger;
 }
 
 export function SqlRepositoryBase<
@@ -26,16 +27,16 @@ export function SqlRepositoryBase<
   return {
     async findOneById(id: string): Promise<Entity | undefined> {
       const [result] = await db`SELECT * FROM ${db(tableName)} WHERE id = ${id}`;
-      return result ? mapper.toDomain(result) : undefined;
+      return result ? mapper.toDomain(result as DbModel) : undefined;
     },
     async findAll(): Promise<Entity[]> {
       const records = await db`SELECT * FROM ${tableName}`;
-      return records.map(mapper.toDomain);
+      return records.map((r) => mapper.toDomain(r as DbModel));
     },
     async findAllPaginated(params: PaginatedQueryParams): Promise<Paginated<Entity>> {
       const result =
         await db`SELECT * FROM ${tableName} LIMIT ${params.limit} OFFSET ${params.offset}`;
-      const entities = result.map(mapper.toDomain);
+      const entities = result.map((r) => mapper.toDomain(r as DbModel));
       return {
         data: entities,
         count: entities.length || 0,
@@ -47,13 +48,16 @@ export function SqlRepositoryBase<
       const entities = Array.isArray(entity) ? entity : [entity];
       const records = entities.map(mapper.toPersistence);
       try {
-        await db`INSERT INTO ${db(tableName)} ${db(records as any[])}`;
-      } catch (error: any) {
-        if (error.code === '23505') {
+        await db`INSERT INTO ${db(tableName)} ${db(records as Record<string, unknown>[])}`;
+      } catch (error: unknown) {
+        if (error instanceof Error && 'code' in error && error.code === '23505') {
           // https://www.postgresql.org/docs/current/errcodes-appendix.html
           throw new ConflictException('Record already exists', error);
         }
-        throw new DatabaseErrorException('Unknown database error', error);
+        throw new DatabaseErrorException(
+          'Unknown database error',
+          error instanceof Error ? error : new Error(String(error)),
+        );
       }
     },
     async delete(entityId: string): Promise<boolean> {

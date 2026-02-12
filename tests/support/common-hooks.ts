@@ -6,7 +6,7 @@ import postgres from 'postgres';
 
 setDefaultTimeout(process.env.PWDEBUG ? -1 : 60 * 1000);
 
-Before({ tags: '@pending' }, () => 'skipped' as any);
+Before({ tags: '@pending' }, () => 'skipped' as unknown as undefined);
 
 Before({ tags: '@debug' }, function (this: ICustomWorld) {
   this.debug = true;

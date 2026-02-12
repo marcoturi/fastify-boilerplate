@@ -1,7 +1,13 @@
 import { type IWorldOptions, setWorldConstructor, World } from '@cucumber/cucumber';
 import type * as messages from '@cucumber/messages';
-import type { FastifyInstance } from 'fastify';
+import type { FastifyInstance, LightMyRequestResponse } from 'fastify';
 import type postgres from 'postgres';
+
+export interface TestContext {
+  createUserDto?: Record<string, string>;
+  latestResponse?: LightMyRequestResponse;
+  [key: string]: unknown;
+}
 
 export interface ICustomWorld extends World {
   debug: boolean;
@@ -10,7 +16,7 @@ export interface ICustomWorld extends World {
   startTime?: Date;
   db: ReturnType<typeof postgres>;
   server: FastifyInstance;
-  context?: any;
+  context: TestContext;
 }
 
 export class CustomWorld extends World implements ICustomWorld {
@@ -20,8 +26,9 @@ export class CustomWorld extends World implements ICustomWorld {
   }
 
   debug = false;
-  server = undefined as any;
-  db = undefined as any;
+  server = undefined as unknown as FastifyInstance;
+  db = undefined as unknown as ReturnType<typeof postgres>;
+  context: TestContext = {};
 }
 
 setWorldConstructor(CustomWorld);

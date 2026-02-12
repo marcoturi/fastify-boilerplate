@@ -9,18 +9,23 @@ import { asValue } from 'awilix';
 import type { FastifyBaseLogger } from 'fastify';
 import type postgres from 'postgres';
 
+type SqlBaseProps<E = { id: string }, D = Record<string, unknown>> = Omit<
+  SqlRepositoryBaseProps<E, D>,
+  'logger' | 'db'
+>;
+
 declare global {
   export interface Dependencies {
     logger: FastifyBaseLogger;
     db: ReturnType<typeof postgres>;
-    repositoryBase: (props: SqlBaseProps) => RepositoryPort<any>;
+    repositoryBase: <E extends { id: string }, D extends Record<string, unknown>>(
+      props: SqlBaseProps<E, D>,
+    ) => RepositoryPort<E>;
     queryBus: CommandBus;
     commandBus: CommandBus;
     eventBus: EventBus;
   }
 }
-
-type SqlBaseProps = Omit<SqlRepositoryBaseProps<any, any>, 'logger' | 'db'>;
 
 export function makeDependencies({
   logger,
@@ -33,8 +38,11 @@ export function makeDependencies({
   commandBus: CommandBus;
   eventBus: EventBus;
 }) {
-  const repositoryBaseFn = ({ tableName, mapper }: SqlBaseProps) =>
-    SqlRepositoryBase({
+  const repositoryBaseFn = <E extends { id: string }, D extends Record<string, unknown>>({
+    tableName,
+    mapper,
+  }: SqlBaseProps<E, D>) =>
+    SqlRepositoryBase<E, D>({
       logger,
       db: PostgresDB,
       tableName,
