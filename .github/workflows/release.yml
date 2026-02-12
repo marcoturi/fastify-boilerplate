@@ -79,4 +79,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: 'unused'
+          HUSKY: 0
         run: yarn semantic-release
