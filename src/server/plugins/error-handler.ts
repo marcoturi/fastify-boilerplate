@@ -1,10 +1,10 @@
 import {
-  ApiErrorResponse,
+  type ApiErrorResponse,
   apiErrorResponseSchema,
 } from '@/shared/api/api-error.response';
 import { getRequestId } from '@/shared/app/app-request-context';
-import { ExceptionBase } from '@/shared/exceptions';
-import { FastifyError, FastifyErrorCodes, FastifyInstance } from 'fastify';
+import { ExceptionBase } from '@/shared/exceptions/index';
+import type { FastifyError, FastifyErrorCodes, FastifyInstance } from 'fastify';
 import fp from 'fastify-plugin';
 
 const fastifyErrorCodesMap = {
@@ -25,7 +25,6 @@ const fastifyErrorCodesMap = {
 };
 
 async function errorHandlerPlugin(fastify: FastifyInstance) {
-  // eslint-disable-next-line promise/prefer-await-to-callbacks
   fastify.setErrorHandler((error: FastifyError | Error, _, res) => {
     // Handle fastify errors
     const fastifyError =

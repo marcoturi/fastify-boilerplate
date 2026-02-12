@@ -1,5 +1,5 @@
-import { env } from '@/config';
 import { LogLevel } from '@/config/env';
+import { env } from '@/config/index';
 import postgres from 'postgres';
 
 const sql = postgres(env.db.url, {
@@ -10,6 +10,7 @@ const sql = postgres(env.db.url, {
     paramTypes: unknown[],
   ) => {
     if (env.log.level === LogLevel.debug) {
+      // biome-ignore lint/suspicious/noConsole: needed for debugging
       console.debug(`
     SQL::
       Executing query: "${query.trim()}"

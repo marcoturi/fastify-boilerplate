@@ -1,5 +1,5 @@
-import { userActionCreator } from '@/modules/user';
-import { NotFoundException } from '@/shared/exceptions';
+import { userActionCreator } from '@/modules/user/index';
+import { NotFoundException } from '@/shared/exceptions/index';
 
 export type DeleteUserCommandResult = Promise<boolean>;
 export const deleteUserCommand = userActionCreator<{ id: string }>('delete');

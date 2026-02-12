@@ -1,1 +1,1 @@
-export * from './guard.util';
+export * from './guard.util.ts';

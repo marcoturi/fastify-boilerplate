@@ -1,6 +1,6 @@
 ![Fastify Boilerplate Logo](doc/images/fastify_logo.png)
 
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![MIT License](https://img.shields.io/github/license/marcoturi/react-redux-boilerplate)](https://github.com/alan2207/bulletproof-react/blob/master/LICENCE) ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/marcoturi/fastify-boilerplate/codeql-analysis.yml) ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/marcoturi/fastify-boilerplate/release.yml)
+[![Biome](https://img.shields.io/badge/Biome-60a5fa?logo=biome&logoColor=fff)](https://biomejs.dev/) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![MIT License](https://img.shields.io/github/license/marcoturi/react-redux-boilerplate)](https://github.com/alan2207/bulletproof-react/blob/master/LICENCE) ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/marcoturi/fastify-boilerplate/codeql-analysis.yml) ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/marcoturi/fastify-boilerplate/release.yml)
 
 This meticulously crafted boilerplate serves as a solid foundation for building production-ready Fastify applications. While designed specifically for Fastify, the underlying principles and best practices aim to be adaptable to different frameworks and languages. These principles include clean architecture, domain-driven design, CQRS, vertical slice architecture, and dependency injection.
 
@@ -10,7 +10,7 @@ This meticulously crafted boilerplate serves as a solid foundation for building 
 - Plugins: [@fastify/helmet](https://github.com/fastify/fastify-helmet) for security headers, [@fastify/swagger](https://github.com/fastify/fastify-swagger) for Swagger documentation, [@fastify/under-pressure](https://github.com/fastify/under-pressure) for automatic handling of "Service Unavailable", [@fastify/awilix](https://github.com/fastify/fastify-awilix) for dependency injection, [typebox](https://github.com/sinclairzx81/typebox) for JSON schema and TS generation and validation
 - DB: [Postgres](https://github.com/porsager/postgres) as client + [DBMate](https://github.com/amacneil/dbmate) for seeds and migrations
 - Graphql: [Mercurius](https://github.com/mercurius-js/mercurius)
-- Format and Style: [Eslint 9](https://eslint.org/) + [Prettier](https://prettier.io/)
+- Format and Style: [Biome](https://biomejs.dev/) for linting and formatting
 - Dependencies validation: [depcruise](https://github.com/sverweij/dependency-cruiser)
 - Release flow: [Husky](https://github.com/typicode/husky) + [Commitlint](https://commitlint.js.org/) + [Semantic-release](https://github.com/semantic-release/semantic-release)
 - Tests: E2E tests with [Cucumber](https://cucumber.io/docs/installation/javascript/), and unit and integration tests with node:test
@@ -44,8 +44,8 @@ yarn #Install dependencies.
 - `yarn type-check` - check for typescript errors.
 - `yarn deps:validate` - check for dependencies problems (i.e. use route code inside a repository).
 - `yarn outdated` - update dependencies interactively.
-- `yarn format` - format all files with Prettier.
-- `yarn lint` - runs ESLint.
+- `yarn format` - format all files with Biome.
+- `yarn lint` - runs Biome linter.
 - `yarn create:env` - creates and .env file by copying .env.example.
 - `yarn db:create-migration` - creates a new db migration.
 - `yarn db:migrate` - start db migrations.
@@ -190,6 +190,17 @@ While including a specific application instrumentation example is avoided in thi
 - Simplified Instrumentation: OpenTelemetry provides language-specific SDKs and automatic instrumentation features that significantly reduce the complexity of adding tracing, metrics, and logs to your codebase.
 - Unified Observability: By offering a consistent way to collect and export telemetry data, OpenTelemetry facilitates a more holistic view of your application's performance.
 - Reduced Development Time: OpenTelemetry allows you to write instrumentation code once and export it to any compatible backend system, streamlining development efforts.
+
+### Why Biome over ESLint + Prettier?
+
+This project uses [Biome](https://biomejs.dev/) as a single tool for both linting and formatting, replacing the traditional ESLint + Prettier combination. Here's why:
+
+- **Reduced dependency overhead:** The ESLint ecosystem relies on a large number of plugins and configurations (`@typescript-eslint/parser`, `@typescript-eslint/eslint-plugin`, `eslint-config-prettier`, `eslint-plugin-import`, etc.) that are often maintained by different authors with different release cadences. Keeping these packages up to date and compatible with each other is a constant maintenance burden, and breaking changes across the plugin ecosystem are not uncommon.
+- **Single unified tool:** Biome provides linting, formatting, and import sorting out of the box with zero plugins needed. One dependency, one configuration file, one tool to learn.
+- **Performance:** Biome is written in Rust, making it orders of magnitude faster than ESLint and Prettier combined. This matters in CI pipelines, pre-commit hooks, and large codebases.
+- **Maturity and stability:** Biome has matured significantly and now covers the vast majority of rules that ESLint + typescript-eslint provide, while offering a more cohesive and consistent experience. It is actively maintained with a clear roadmap and growing community adoption.
+
+In short, Biome simplifies the toolchain, removes the fragility of juggling multiple ESLint plugins that may lag behind on updates, and delivers a faster and more reliable developer experience.
 
 ### Load testing
 

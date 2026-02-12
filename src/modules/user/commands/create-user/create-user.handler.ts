@@ -1,7 +1,7 @@
-import { CreateUserRequestDto } from './create-user.schema';
-import { userActionCreator } from '@/modules/user';
+import type { CreateUserRequestDto } from './create-user.schema.ts';
+import { userActionCreator } from '@/modules/user/index';
 import { UserAlreadyExistsError } from '@/modules/user/domain/user.errors';
-import { ConflictException } from '@/shared/exceptions';
+import { ConflictException } from '@/shared/exceptions/index';
 
 export type CreateUserCommandResult = Promise<string>;
 export const createUserCommand =

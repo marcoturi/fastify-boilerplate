@@ -1,7 +1,11 @@
-import { IWorldOptions, setWorldConstructor, World } from '@cucumber/cucumber';
-import * as messages from '@cucumber/messages';
-import { FastifyInstance } from 'fastify';
-import postgres from 'postgres';
+import {
+  type IWorldOptions,
+  setWorldConstructor,
+  World,
+} from '@cucumber/cucumber';
+import type * as messages from '@cucumber/messages';
+import type { FastifyInstance } from 'fastify';
+import type postgres from 'postgres';
 
 export interface ICustomWorld extends World {
   debug: boolean;
@@ -14,7 +18,7 @@ export interface ICustomWorld extends World {
 }
 
 export class CustomWorld extends World implements ICustomWorld {
-  // eslint-disable-next-line @typescript-eslint/no-useless-constructor
+  // biome-ignore lint/complexity/noUselessConstructor: needed
   constructor(options: IWorldOptions) {
     super(options);
   }

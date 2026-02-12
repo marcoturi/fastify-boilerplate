@@ -1,4 +1,4 @@
-import server from '../../src/server';
+import server from '../../src/server/index.ts';
 import Fastify from 'fastify';
 
 export const buildApp = async () => {
@@ -7,7 +7,9 @@ export const buildApp = async () => {
       level: 'warn',
     },
     disableRequestLogging: true,
-    ignoreDuplicateSlashes: true,
+    routerOptions: {
+      ignoreDuplicateSlashes: true,
+    },
     ajv: {
       customOptions: {
         keywords: ['example'],

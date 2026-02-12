@@ -1,6 +1,6 @@
 import {
   createUserCommand,
-  createUserEvent,
+  type createUserEvent,
 } from '@/modules/user/commands/create-user/create-user.handler';
 
 export default function makeCreateSettings({ eventBus, logger }: Dependencies) {

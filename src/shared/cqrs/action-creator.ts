@@ -1,4 +1,4 @@
-import { CommandCreator, Meta, Action } from '@/shared/cqrs/bus.types';
+import type { CommandCreator, Meta, Action } from '@/shared/cqrs/bus.types';
 
 export function actionCreatorFactory(prefix?: string | null) {
   const base = prefix ? `${prefix}/` : '';

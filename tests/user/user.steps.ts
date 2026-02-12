@@ -1,6 +1,6 @@
-import { ICustomWorld } from '../support/custom-world';
-import { UserModel } from '@/modules/user/database/user.repository';
-import { Paginated } from '@/shared/db/repository.port';
+import type { ICustomWorld } from '../support/custom-world.ts';
+import type { UserModel } from '@/modules/user/database/user.repository';
+import type { Paginated } from '@/shared/db/repository.port';
 import { Before, Given, Then, When } from '@cucumber/cucumber';
 import assert from 'node:assert';
 

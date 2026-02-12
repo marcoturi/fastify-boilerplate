@@ -1,4 +1,4 @@
-import { ExceptionBase } from './exception-base';
+import { ExceptionBase } from './exception-base.ts';
 
 enum ExceptionError {
   BAD_REQUEST = 'Bad Request',

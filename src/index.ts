@@ -11,11 +11,13 @@ async function init() {
       level: env.log.level,
       redact: ['headers.authorization'],
     },
-    genReqId: function (req) {
+    genReqId: (req) => {
       // header best practice: don't use "x-" https://www.rfc-editor.org/info/rfc6648 and keep it lowercase
       return (req.headers['request-id'] as string) ?? randomUUID();
     },
-    ignoreDuplicateSlashes: true,
+    routerOptions: {
+      ignoreDuplicateSlashes: true,
+    },
     ajv: {
       customOptions: {
         keywords: ['example'],
@@ -46,9 +48,9 @@ async function init() {
     gracefulServer.setReady();
   } catch (error) {
     fastify.log.error(error);
-    // eslint-disable-next-line n/no-process-exit,unicorn/no-process-exit
     process.exit(1);
   }
 }
 
+// biome-ignore lint/nursery/noFloatingPromises: needed for init
 init();

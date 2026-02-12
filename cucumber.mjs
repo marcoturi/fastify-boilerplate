@@ -1,6 +1,6 @@
 // https://github.com/cucumber/cucumber-js/blob/main/docs/configuration.md
 const config = {
-  require: ['cucumber.setup.js', 'src/**/*.(!spec).ts', 'tests/**/*.ts'],
+  import: ['src/**/*.(!spec).ts', 'tests/**/*.ts'],
   paths: ['tests/**/*.feature'],
   format: [
     'json:reports/cucumber-report.json',

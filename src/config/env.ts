@@ -1,5 +1,5 @@
 import envSchema from 'env-schema';
-import { Static, Type } from 'typebox';
+import { type Static, Type } from 'typebox';
 
 enum NodeEnv {
   development = 'development',

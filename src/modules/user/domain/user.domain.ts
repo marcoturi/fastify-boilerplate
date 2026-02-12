@@ -1,6 +1,6 @@
 import {
-  CreateUserProps,
-  UserEntity,
+  type CreateUserProps,
+  type UserEntity,
   UserRoles,
 } from '@/modules/user/domain/user.types';
 import { randomUUID } from 'node:crypto';

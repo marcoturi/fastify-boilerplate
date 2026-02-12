@@ -1,4 +1,3 @@
-// eslint-disable-next-line n/no-extraneous-import
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 

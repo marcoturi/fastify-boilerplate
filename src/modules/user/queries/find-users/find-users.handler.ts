@@ -1,9 +1,12 @@
-import { UserEntity } from '../../domain/user.types';
+import type { UserModel } from '@/modules/user/database/user.repository';
 import { userActionCreator } from '@/modules/user';
-import { UserModel } from '@/modules/user/database/user.repository';
 import { joinConditions } from '@/shared/db/postgres';
-import { Paginated, PaginatedQueryParams } from '@/shared/db/repository.port';
+import type {
+  Paginated,
+  PaginatedQueryParams,
+} from '@/shared/db/repository.port';
 import { paginatedQueryBase } from '@/shared/ddd/query.base';
+import type { UserEntity } from '../../domain/user.types.ts';
 
 export type FindUsersQueryResult = Promise<Paginated<UserEntity>>;
 export const findUsersQuery = userActionCreator<
