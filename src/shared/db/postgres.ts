@@ -21,8 +21,8 @@ export async function closeDbConnection() {
   await sql.end({ timeout: 5 });
 }
 
-export const joinConditions = (xs: any[], joiner = sql`AND`) => {
-  const filtered = xs.filter(Boolean); // remove null/false values
+export const joinConditions = (xs: (string | false | undefined | null)[], joiner = sql`AND`) => {
+  const filtered = xs.filter(Boolean) as string[];
 
   // Check if the filtered array has any elements (length > 0)
   if (filtered.length === 0) {

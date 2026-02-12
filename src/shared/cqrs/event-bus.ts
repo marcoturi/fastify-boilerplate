@@ -5,14 +5,14 @@ export function eventBus(): EventBus {
   const handlers = new Map<string, EventHandler>();
   const middlewares: Middleware[] = [];
 
-  function on<T extends string = string>(type: T, handler: EventHandler): void {
+  function on<P>(type: string, handler: (event: Action<P>) => void): void {
     if (typeof type !== 'string') {
       throw new TypeError('type must be a string');
     }
     if (typeof handler !== 'function') {
       throw new TypeError('handler must be a function');
     }
-    handlers.set(type, handler);
+    handlers.set(type, handler as EventHandler);
   }
 
   function emit(event: Action<unknown>): void {

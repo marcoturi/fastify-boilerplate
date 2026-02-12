@@ -21,7 +21,7 @@ When('I send a request to create a user', async function (this: ICustomWorld) {
 });
 
 Then('I receive my user ID', function (this: ICustomWorld) {
-  assert.deepStrictEqual(typeof this.context.latestResponse.json().id, 'string');
+  assert.deepStrictEqual(typeof this.context.latestResponse!.json().id, 'string');
 });
 
 Then('I can see my user in a list of all users', async function (this: ICustomWorld) {
@@ -31,7 +31,7 @@ Then('I can see my user in a list of all users', async function (this: ICustomWo
   });
   const users = response.json<Paginated<UserModel>>();
   assert.strictEqual(
-    users.data.some((item) => item.id === this.context.latestResponse.json().id),
+    users.data.some((item) => item.id === this.context.latestResponse!.json().id),
     true,
   );
 });
@@ -39,7 +39,7 @@ Then('I can see my user in a list of all users', async function (this: ICustomWo
 Then('I send a request to delete my user', async function (this: ICustomWorld) {
   const response = await this.server.inject({
     method: 'DELETE',
-    url: `/v1/users/${this.context.latestResponse.json().id}`,
+    url: `/v1/users/${this.context.latestResponse!.json().id}`,
   });
   assert.strictEqual(response.statusCode, 204);
 });
@@ -51,7 +51,7 @@ Then('I cannot see my user in a list of all users', async function (this: ICusto
   });
   const users = response.json<Paginated<UserModel>>();
   assert.strictEqual(
-    users.data.some((item) => item.id === this.context.latestResponse.json().id),
+    users.data.some((item) => item.id === this.context.latestResponse!.json().id),
     false,
   );
 });

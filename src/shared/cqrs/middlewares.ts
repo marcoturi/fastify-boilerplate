@@ -5,13 +5,13 @@ import type { FastifyBaseLogger } from 'fastify';
 export function decorateWithMetadata(
   action: Action<unknown>,
   handler: CommandHandler | EventHandler,
-) {
+): Promise<unknown> {
   action.meta = {
     ...action.meta,
     correlationId: action.meta?.correlationId ?? getRequestId(),
     timestamp: action.meta?.timestamp ?? Date.now(),
   };
-  return handler(action) as Promise<CommandHandler | EventHandler>;
+  return Promise.resolve(handler(action));
 }
 
 export function makeTrackExecutionTime(logger: FastifyBaseLogger) {
