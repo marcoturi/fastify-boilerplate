@@ -1,4 +1,4 @@
-import type { CommandCreator, Meta, Action } from '#src/shared/cqrs/bus.types.ts';
+import type { Action, CommandCreator, Meta } from '#src/shared/cqrs/bus.types.ts';
 
 export function actionCreatorFactory(prefix?: string | null) {
   const base = prefix ? `${prefix}/` : '';
@@ -8,14 +8,11 @@ export function actionCreatorFactory(prefix?: string | null) {
 
     return Object.assign(
       (payload: Payload, meta?: Meta) => {
-        const action: Action<Payload> = {
+        const action = {
           type: fullType,
           payload,
-        };
-
-        if (commonMeta || meta) {
-          action.meta = Object.assign({}, commonMeta, meta);
-        }
+          ...(commonMeta || meta ? { meta: { ...commonMeta, ...meta } } : {}),
+        } as Action<Payload>;
 
         return action;
       },

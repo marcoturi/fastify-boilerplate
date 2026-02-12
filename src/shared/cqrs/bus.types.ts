@@ -1,9 +1,15 @@
+import type { FastifyBaseLogger } from 'fastify';
+
 export type Meta = null | Record<string, unknown>;
 
+/** Unique symbol used to brand Action objects, preventing plain-object misuse. */
+declare const ActionBrand: unique symbol;
+
 export interface Action<Payload> {
-  type: string;
-  payload: Payload;
-  meta?: Meta;
+  readonly [ActionBrand]: true;
+  readonly type: string;
+  readonly payload: Payload;
+  readonly meta?: Meta;
 }
 
 export interface CommandCreator<Payload> {
@@ -32,7 +38,7 @@ export interface CommandBus {
   addMiddleware(fn: CommandMiddleware): void;
 }
 
-/** QueryBus has the same shape as CommandBus but is semantically distinct:
+/** QueryBus is semantically distinct from CommandBus:
  *  queries must be idempotent and side-effect-free. */
 export interface QueryBus {
   register<P>(type: string, handler: (query: Action<P>) => Promise<unknown>): void;
@@ -45,4 +51,9 @@ export interface EventBus {
   on<P>(type: string, handler: (event: Action<P>) => void): void;
   emit(event: Action<unknown>): void;
   addMiddleware(fn: EventMiddleware): void;
+}
+
+/** Options for creating an event bus instance. */
+export interface EventBusOptions {
+  logger: FastifyBaseLogger;
 }
