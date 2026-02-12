@@ -1,12 +1,12 @@
 import { ExceptionBase } from './exception-base.ts';
 
-enum ExceptionError {
-  BAD_REQUEST = 'Bad Request',
-  CONFLICT = 'Conflict',
-  NOT_FOUND = 'Not Found',
-  INTERNAL_SERVER_ERROR = 'Internal Server Error',
-  DATABASE_ERROR = 'Database Error',
-}
+const ExceptionError = {
+  BAD_REQUEST: 'Bad Request',
+  CONFLICT: 'Conflict',
+  NOT_FOUND: 'Not Found',
+  INTERNAL_SERVER_ERROR: 'Internal Server Error',
+  DATABASE_ERROR: 'Database Error',
+} as const;
 
 /**
  * Used to indicate that an incorrect argument was provided to a method/function/class constructor
@@ -65,10 +65,7 @@ export class InternalServerErrorException extends ExceptionBase {
 export class DatabaseErrorException extends ExceptionBase {
   static readonly message = 'Database error';
   readonly error = ExceptionError.INTERNAL_SERVER_ERROR;
-  constructor(
-    message: string = InternalServerErrorException.message,
-    cause?: Error,
-  ) {
+  constructor(message: string = InternalServerErrorException.message, cause?: Error) {
     super(message, cause);
   }
 
@@ -78,10 +75,7 @@ export class DatabaseErrorException extends ExceptionBase {
 export class ProviderErrorException extends ExceptionBase {
   static readonly message = 'Provider error';
   readonly error = ExceptionError.INTERNAL_SERVER_ERROR;
-  constructor(
-    message: string = InternalServerErrorException.message,
-    cause?: Error,
-  ) {
+  constructor(message: string = InternalServerErrorException.message, cause?: Error) {
     super(message, cause);
   }
 

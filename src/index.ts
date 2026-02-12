@@ -1,6 +1,6 @@
-import { env } from '@/config';
-import server from '@/server';
-import { closeDbConnection } from '@/shared/db/postgres';
+import { env } from '#src/config/index.ts';
+import server from '#src/server/index.ts';
+import { closeDbConnection } from '#src/shared/db/postgres.ts';
 import GracefulServer from '@gquittet/graceful-server';
 import Fastify from 'fastify';
 import { randomUUID } from 'node:crypto';
@@ -52,5 +52,4 @@ async function init() {
   }
 }
 
-// biome-ignore lint/nursery/noFloatingPromises: needed for init
-init();
+await init();

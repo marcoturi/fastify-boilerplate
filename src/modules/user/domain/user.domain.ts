@@ -2,7 +2,7 @@ import {
   type CreateUserProps,
   type UserEntity,
   UserRoles,
-} from '@/modules/user/domain/user.types';
+} from '#src/modules/user/domain/user.types.ts';
 import { randomUUID } from 'node:crypto';
 
 export default function userDomain() {

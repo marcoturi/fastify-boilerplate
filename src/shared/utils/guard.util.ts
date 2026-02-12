@@ -28,16 +28,11 @@ function isEmpty(value: unknown): boolean {
 /**
  * Checks length range of a provided number/string/array
  */
-function lengthIsBetween(
-  value: number | string | unknown[],
-  min: number,
-  max: number,
-): boolean {
+function lengthIsBetween(value: number | string | unknown[], min: number, max: number): boolean {
   if (isEmpty(value)) {
     throw new Error('Cannot check length of a value. Provided value is empty');
   }
-  const valueLength =
-    typeof value === 'number' ? Number(value).toString().length : value.length;
+  const valueLength = typeof value === 'number' ? Number(value).toString().length : value.length;
   return valueLength >= min && valueLength <= max;
 }
 

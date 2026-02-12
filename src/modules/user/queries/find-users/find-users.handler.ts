@@ -1,11 +1,8 @@
-import type { UserModel } from '@/modules/user/database/user.repository';
-import { userActionCreator } from '@/modules/user';
-import { joinConditions } from '@/shared/db/postgres';
-import type {
-  Paginated,
-  PaginatedQueryParams,
-} from '@/shared/db/repository.port';
-import { paginatedQueryBase } from '@/shared/ddd/query.base';
+import type { UserModel } from '#src/modules/user/database/user.repository.ts';
+import { userActionCreator } from '#src/modules/user/index.ts';
+import { joinConditions } from '#src/shared/db/postgres.ts';
+import type { Paginated, PaginatedQueryParams } from '#src/shared/db/repository.port.ts';
+import { paginatedQueryBase } from '#src/shared/ddd/query.base.ts';
 import type { UserEntity } from '../../domain/user.types.ts';
 
 export type FindUsersQueryResult = Promise<Paginated<UserEntity>>;
@@ -17,15 +14,9 @@ export const findUsersQuery = userActionCreator<
   }
 >('find-all-paginated');
 
-export default function makeFindUsersQuery({
-  db,
-  queryBus,
-  userMapper,
-}: Dependencies) {
+export default function makeFindUsersQuery({ db, queryBus, userMapper }: Dependencies) {
   return {
-    async handler({
-      payload,
-    }: ReturnType<typeof findUsersQuery>): FindUsersQueryResult {
+    async handler({ payload }: ReturnType<typeof findUsersQuery>): FindUsersQueryResult {
       const query = paginatedQueryBase(payload);
       const conditions = [
         query.country && `country = ${query.country}`,

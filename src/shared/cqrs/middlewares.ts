@@ -1,9 +1,5 @@
-import { getRequestId } from '@/shared/app/app-request-context';
-import type {
-  Action,
-  CommandHandler,
-  EventHandler,
-} from '@/shared/cqrs/bus.types';
+import { getRequestId } from '#src/shared/app/app-request-context.ts';
+import type { Action, CommandHandler, EventHandler } from '#src/shared/cqrs/bus.types.ts';
 import type { FastifyBaseLogger } from 'fastify';
 
 export function decorateWithMetadata(

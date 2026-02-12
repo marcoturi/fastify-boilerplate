@@ -1,5 +1,5 @@
-import { userResponseDtoSchema } from '@/modules/user/dtos/user.response.dto';
-import { paginatedResponseBaseSchema } from '@/shared/api/paginated.response.base';
+import { userResponseDtoSchema } from '#src/modules/user/dtos/user.response.dto.ts';
+import { paginatedResponseBaseSchema } from '#src/shared/api/paginated.response.base.ts';
 import { Type } from 'typebox';
 
 export const userPaginatedResponseSchema = Type.Intersect([

@@ -1,7 +1,7 @@
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 
-export const ajv = addFormats(new Ajv({}), [
+export const ajv = addFormats.default(new Ajv.default({}), [
   'date-time',
   'time',
   'date',

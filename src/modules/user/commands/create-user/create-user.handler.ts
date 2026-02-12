@@ -1,13 +1,11 @@
 import type { CreateUserRequestDto } from './create-user.schema.ts';
-import { userActionCreator } from '@/modules/user/index';
-import { UserAlreadyExistsError } from '@/modules/user/domain/user.errors';
-import { ConflictException } from '@/shared/exceptions/index';
+import { userActionCreator } from '#src/modules/user/index.ts';
+import { UserAlreadyExistsError } from '#src/modules/user/domain/user.errors.ts';
+import { ConflictException } from '#src/shared/exceptions/index.ts';
 
 export type CreateUserCommandResult = Promise<string>;
-export const createUserCommand =
-  userActionCreator<CreateUserRequestDto>('create');
-export const createUserEvent =
-  userActionCreator<CreateUserRequestDto>('create');
+export const createUserCommand = userActionCreator<CreateUserRequestDto>('create');
+export const createUserEvent = userActionCreator<CreateUserRequestDto>('create');
 
 export default function makeCreateUser({
   userRepository,
@@ -16,9 +14,7 @@ export default function makeCreateUser({
   eventBus,
 }: Dependencies) {
   return {
-    async handler({
-      payload,
-    }: ReturnType<typeof createUserCommand>): CreateUserCommandResult {
+    async handler({ payload }: ReturnType<typeof createUserCommand>): CreateUserCommandResult {
       const user = userDomain.createUser(payload);
       try {
         await userRepository.insert(user);

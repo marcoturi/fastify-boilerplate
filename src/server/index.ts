@@ -1,6 +1,6 @@
-import env from '@/config/env';
-import { di } from '@/server/di';
-import getGQL from '@/server/plugins/gql';
+import env from '#src/config/env.ts';
+import { di } from '#src/server/di/index.ts';
+import getGQL from '#src/server/plugins/gql.ts';
 import AutoLoad from '@fastify/autoload';
 import Cors from '@fastify/cors';
 import Helmet from '@fastify/helmet';
@@ -48,12 +48,7 @@ export default async function createServer(fastify: FastifyInstance) {
     options: {
       autoPrefix: 'api',
     },
-    matchFilter: (path) => {
-      const regex = env.isProduction
-        ? /.(route|resolver).js$/
-        : /.(route|resolver).(ts|js)$/;
-      return regex.test(path);
-    },
+    matchFilter: (path) => /\.(route|resolver)\.ts$/.test(path),
   });
 
   await fastify.register(UnderPressure);

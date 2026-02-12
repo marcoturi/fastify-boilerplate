@@ -1,13 +1,23 @@
 {
-  "extends": "@tsconfig/node24/tsconfig.json",
+  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "module": "preserve",
-    "moduleResolution": "bundler",
-    "rewriteRelativeImportExtensions": true,
-    "paths": {
-      "@/*": ["./src/*"]
-    },
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+
+    "strict": true,
+    "noEmit": true,
+
+    "verbatimModuleSyntax": true,
+    "erasableSyntaxOnly": true,
+    "allowImportingTsExtensions": true,
+
+    "skipLibCheck": true,
     "resolveJsonModule": true,
+
+    "incremental": true,
+    "tsBuildInfoFile": "node_modules/.cache/tsc/tsconfig.tsbuildinfo",
+
     /* Linting */
     "noUnusedLocals": true,
     "noUnusedParameters": true,

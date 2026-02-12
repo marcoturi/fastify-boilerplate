@@ -1,4 +1,4 @@
-import { getRequestId } from '@/shared/app/app-request-context';
+import { getRequestId } from '#src/shared/app/app-request-context.ts';
 
 export interface SerializedException {
   message: string;
@@ -15,6 +15,8 @@ export abstract class ExceptionBase extends Error {
   abstract statusCode: number;
 
   public readonly correlationId: string;
+  override readonly cause?: Error;
+  readonly metadata?: unknown;
 
   /**
    * @param {string} message
@@ -25,13 +27,10 @@ export abstract class ExceptionBase extends Error {
    * in application's log files. Only include non-sensitive
    * info that may help with debugging.
    */
-  constructor(
-    readonly message: string,
-    readonly cause?: Error,
-    readonly metadata?: unknown,
-  ) {
+  constructor(message: string, cause?: Error, metadata?: unknown) {
     super(message);
-
+    this.cause = cause;
+    this.metadata = metadata;
     this.correlationId = getRequestId();
   }
 

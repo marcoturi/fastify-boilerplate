@@ -1,8 +1,4 @@
-import {
-  type IWorldOptions,
-  setWorldConstructor,
-  World,
-} from '@cucumber/cucumber';
+import { type IWorldOptions, setWorldConstructor, World } from '@cucumber/cucumber';
 import type * as messages from '@cucumber/messages';
 import type { FastifyInstance } from 'fastify';
 import type postgres from 'postgres';

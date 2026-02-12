@@ -1,5 +1,5 @@
-import type { UserRepository } from '@/modules/user/database/user.repository.port';
-import { type UserEntity, UserRoles } from '@/modules/user/domain/user.types';
+import type { UserRepository } from '#src/modules/user/database/user.repository.port.ts';
+import { type UserEntity, UserRoles } from '#src/modules/user/domain/user.types.ts';
 import { type Static, Type } from 'typebox';
 
 export const userSchema = Type.Object({

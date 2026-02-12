@@ -1,9 +1,9 @@
 import {
   createUserCommand,
   type CreateUserCommandResult,
-} from '@/modules/user/commands/create-user/create-user.handler';
-import { createUserRequestDtoSchema } from '@/modules/user/commands/create-user/create-user.schema';
-import { idDtoSchema } from '@/shared/api/id.response.dto';
+} from '#src/modules/user/commands/create-user/create-user.handler.ts';
+import { createUserRequestDtoSchema } from '#src/modules/user/commands/create-user/create-user.schema.ts';
+import { idDtoSchema } from '#src/shared/api/id.response.dto.ts';
 import type { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 
 export default async function createUser(fastify: FastifyRouteInstance) {

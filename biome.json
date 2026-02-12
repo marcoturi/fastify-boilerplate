@@ -11,27 +11,13 @@
     "indentStyle": "space",
     "indentWidth": 2,
     "lineEnding": "lf",
-    "lineWidth": 80,
+    "lineWidth": 100,
     "attributePosition": "auto",
     "bracketSameLine": false,
     "bracketSpacing": true,
     "expand": "auto",
     "useEditorconfig": true,
-    "includes": [
-      "**",
-      "!**/.vscode",
-      "!**/.idea",
-      "!**/.DS_Store",
-      "!**/package.json",
-      "!**/*.jpg",
-      "!**/*.ico",
-      "!**/*.svg",
-      "!**/*.mp3",
-      "!**/*.png",
-      "!**/*.snap",
-      "!**/public",
-      "!**/CHANGELOG.md"
-    ]
+    "includes": ["**", "!**/.vscode", "!**/.idea", "!**/.DS_Store", "!**/CHANGELOG.md"]
   },
   "linter": {
     "enabled": true,
@@ -79,7 +65,7 @@
         "noUnusedPrivateClassMembers": "error",
         "noUnusedVariables": "error",
         "useIsNan": "error",
-        "useImportExtensions": "off",
+        "useImportExtensions": "error",
         "useValidForDirection": "error",
         "useValidTypeof": "error",
         "useYield": "error"
@@ -87,6 +73,7 @@
       "style": {
         "noCommonJs": "error",
         "noInferrableTypes": "error",
+        "noEnum": "error",
         "noNamespace": "error",
         "noNegationElse": "off",
         "noNonNullAssertion": "error",
@@ -103,7 +90,6 @@
           "options": { "filenameCases": ["kebab-case"] }
         },
         "useForOf": "error",
-        "useLiteralEnumMembers": "error",
         "useNodejsImportProtocol": "error",
         "useNumberNamespace": "error",
         "useNumericSeparators": "error",
@@ -186,12 +172,7 @@
   },
   "overrides": [
     {
-      "includes": [
-        "**/*.test.ts",
-        "**/*.spec.ts",
-        "**/test/**/*.ts",
-        "**/tests/**/*.ts"
-      ],
+      "includes": ["**/*.test.ts", "**/*.spec.ts", "**/test/**/*.ts", "**/tests/**/*.ts"],
       "linter": {
         "rules": {
           "style": { "noNonNullAssertion": "off" },
