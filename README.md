@@ -14,6 +14,7 @@ This meticulously crafted boilerplate serves as a solid foundation for building 
 - Dependencies validation: [depcruise](https://github.com/sverweij/dependency-cruiser)
 - Release flow: [Husky](https://github.com/typicode/husky) + [Commitlint](https://commitlint.js.org/) + [Semantic-release](https://github.com/semantic-release/semantic-release)
 - Tests: E2E tests with [Cucumber](https://cucumber.io/docs/installation/javascript/), and unit and integration tests with node:test
+- AI-Ready: [AGENTS.md](AGENTS.md) provides architecture rules, coding conventions, and step-by-step guides for AI coding assistants (Cursor, Claude Code, GitHub Copilot, and others)
 
 ## 👉 Table of Contents
 
@@ -221,6 +222,12 @@ npx openapi-typescript http://127.0.0.1:3000/api-docs/json -o ./client.schema.d.
 
 With a little effort you can add this process in the pipeline and have a package published with each version of the backend.
 Same concept apply for graphql schemas using [graphql-code-generator](https://the-guild.dev/graphql/codegen).
+
+## AI-assisted development
+
+This project ships with an [`AGENTS.md`](AGENTS.md) file that serves as a comprehensive guide for AI coding assistants. It documents the project's architecture, CQRS patterns, coding conventions, and common pitfalls so that tools like [Cursor](https://cursor.com/), [Claude Code](https://docs.anthropic.com/en/docs/claude-code), and [GitHub Copilot](https://github.com/features/copilot) can understand the codebase and generate code that follows the established patterns.
+
+When using an AI assistant to work on this project, the tool will automatically pick up `AGENTS.md` and apply the project's conventions without requiring manual prompting.
 
 ## Contributing
 
