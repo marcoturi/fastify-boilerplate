@@ -1,12 +1,13 @@
 import type {
   Action,
   EventBus,
+  EventBusOptions,
   EventHandler,
   EventMiddleware,
 } from '#src/shared/cqrs/bus.types.ts';
 import { composeMiddlewares } from '#src/shared/utils/compose-middlewares.ts';
 
-export function eventBus(): EventBus {
+export function eventBus({ logger }: EventBusOptions): EventBus {
   const handlers = new Map<string, EventHandler[]>();
   const middlewares: EventMiddleware[] = [];
 
@@ -39,7 +40,8 @@ export function eventBus(): EventBus {
     }
     const eventHandlers = handlers.get(event.type);
     if (!eventHandlers || eventHandlers.length === 0) {
-      return; // Events with no subscribers are silently ignored
+      logger.debug(`No handlers registered for event "${event.type}"`);
+      return;
     }
     for (const handler of eventHandlers) {
       dispatch(event, handler);

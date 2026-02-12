@@ -1,7 +1,12 @@
 import type { CommandBus, EventBus, QueryBus } from '#src/shared/cqrs/bus.types.ts';
 import { commandBus } from '#src/shared/cqrs/command-bus.ts';
 import { eventBus } from '#src/shared/cqrs/event-bus.ts';
-import { decorateWithMetadata, makeTrackExecutionTime } from '#src/shared/cqrs/middlewares.ts';
+import {
+  decorateCommandWithMetadata,
+  decorateEventWithMetadata,
+  makeTrackExecutionTime,
+} from '#src/shared/cqrs/middlewares.ts';
+import { queryBus } from '#src/shared/cqrs/query-bus.ts';
 import fastifyPlugin from 'fastify-plugin';
 
 const CQRSPlugin = fastifyPlugin(
@@ -9,15 +14,16 @@ const CQRSPlugin = fastifyPlugin(
     if (fastify.queryBus || fastify.commandBus || fastify.eventBus) {
       throw new Error('This plugin is already registered');
     }
-    const eventBusInstance = eventBus();
-    eventBusInstance.addMiddleware(decorateWithMetadata);
 
-    // QueryBus uses the same underlying implementation as CommandBus
-    // but is semantically distinct (queries must be idempotent / side-effect-free)
-    const queryBusInstance = commandBus();
+    const eventBusInstance = eventBus({ logger: fastify.log });
+    eventBusInstance.addMiddleware(decorateEventWithMetadata);
+
+    const queryBusInstance = queryBus();
+    queryBusInstance.addMiddleware(decorateCommandWithMetadata);
     queryBusInstance.addMiddleware(makeTrackExecutionTime(fastify.log));
 
     const commandBusInstance = commandBus();
+    commandBusInstance.addMiddleware(decorateCommandWithMetadata);
     commandBusInstance.addMiddleware(makeTrackExecutionTime(fastify.log));
 
     fastify.decorate('queryBus', queryBusInstance);
