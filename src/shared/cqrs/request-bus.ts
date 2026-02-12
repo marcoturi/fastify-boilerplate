@@ -4,7 +4,7 @@ import { composeMiddlewares } from '#src/shared/utils/compose-middlewares.ts';
 export interface RequestBus {
   register<P>(type: string, handler: (action: Action<P>) => Promise<unknown>): void;
   unregister(type: string): void;
-  execute<R>(action: Action<unknown>): Promise<R>;
+  execute<R>(action: Action<unknown, R>): Promise<R>;
   addMiddleware(fn: CommandMiddleware): void;
 }
 
@@ -34,7 +34,7 @@ export function createRequestBus(label: string): RequestBus {
     handlers.delete(type);
   }
 
-  function execute<R>(action: Action<unknown>): Promise<R> {
+  function execute<R>(action: Action<unknown, R>): Promise<R> {
     if (!action || typeof action !== 'object') {
       throw new TypeError(`${label} must be an object`);
     }

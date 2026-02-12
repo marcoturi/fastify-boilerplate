@@ -5,17 +5,29 @@ export type Meta = null | Record<string, unknown>;
 /** Unique symbol used to brand Action objects, preventing plain-object misuse. */
 declare const ActionBrand: unique symbol;
 
-export interface Action<Payload> {
+/** Phantom symbol carrying the Result type — never set at runtime. */
+declare const ResultType: unique symbol;
+
+export interface Action<Payload, Result = unknown> {
   readonly [ActionBrand]: true;
+  /** Phantom property — exists only at the type level to carry the Result type. */
+  readonly [ResultType]?: Result;
   readonly type: string;
   readonly payload: Payload;
   readonly meta?: Meta;
 }
 
-export interface CommandCreator<Payload> {
+/** Extracts the Result type from an Action. */
+export type ActionResult<A> = A extends Action<unknown, infer R> ? R : unknown;
+
+/** Produces an `Action<Payload>` (Result = unknown) from a CommandCreator.
+ *  Use this for handler parameter types so they stay compatible with `register()`. */
+export type HandlerAction<C> = C extends CommandCreator<infer P, unknown> ? Action<P> : never;
+
+export interface CommandCreator<Payload, Result = unknown> {
   type: string;
 
-  (payload: Payload, meta?: Meta): Action<Payload>;
+  (payload: Payload, meta?: Meta): Action<Payload, Result>;
 }
 
 export type CommandHandler = (command: Action<unknown>) => Promise<unknown>;
@@ -34,7 +46,7 @@ export type EventMiddleware = (action: Action<unknown>, handler: EventHandler) =
 export interface CommandBus {
   register<P>(type: string, handler: (command: Action<P>) => Promise<unknown>): void;
   unregister(type: string): void;
-  execute<R>(command: Action<unknown>): Promise<R>;
+  execute<R>(command: Action<unknown, R>): Promise<R>;
   addMiddleware(fn: CommandMiddleware): void;
 }
 
@@ -43,7 +55,7 @@ export interface CommandBus {
 export interface QueryBus {
   register<P>(type: string, handler: (query: Action<P>) => Promise<unknown>): void;
   unregister(type: string): void;
-  execute<R>(query: Action<unknown>): Promise<R>;
+  execute<R>(query: Action<unknown, R>): Promise<R>;
   addMiddleware(fn: CommandMiddleware): void;
 }
 

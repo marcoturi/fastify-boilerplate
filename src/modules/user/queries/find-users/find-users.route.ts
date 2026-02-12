@@ -1,4 +1,4 @@
-import { findUsersQuery, type FindUsersQueryResult } from './find-users.handler.ts';
+import { findUsersQuery } from './find-users.handler.ts';
 import { findUsersRequestDtoSchema } from './find-users.schema.ts';
 import { userPaginatedResponseSchema } from '#src/modules/user/dtos/user.paginated.response.dto.ts';
 import type { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
@@ -16,9 +16,7 @@ export default async function findUsers(fastify: FastifyRouteInstance) {
       tags: ['users'],
     },
     handler: async (req, res) => {
-      const result = await fastify.queryBus.execute<FindUsersQueryResult>(
-        findUsersQuery(req.query),
-      );
+      const result = await fastify.queryBus.execute(findUsersQuery(req.query));
       const response = {
         ...result,
         data: result.data?.map(fastify.diContainer.cradle.userMapper.toResponse),

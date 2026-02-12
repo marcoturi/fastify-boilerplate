@@ -1,4 +1,4 @@
-import { deleteUserCommand, type DeleteUserCommandResult } from './delete-user.handler.ts';
+import { deleteUserCommand } from './delete-user.handler.ts';
 import { idDtoSchema } from '#src/shared/api/id.response.dto.ts';
 import type { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 
@@ -18,9 +18,7 @@ export default async function deleteUser(fastify: FastifyRouteInstance) {
       tags: ['users'],
     },
     handler: async (req, res) => {
-      await fastify.commandBus.execute<DeleteUserCommandResult>(
-        deleteUserCommand({ id: req.params.id }),
-      );
+      await fastify.commandBus.execute(deleteUserCommand({ id: req.params.id }));
       return res.status(204).send(null);
     },
   });
