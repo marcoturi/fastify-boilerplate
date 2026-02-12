@@ -9,7 +9,7 @@ export const findUsersRequestDtoSchema = Type.Intersect([
         example: 'France',
         description: 'Country of residence',
         maxLength: 50,
-        pattern: '/^[ A-Za-z]*$/',
+        pattern: '^[ A-Za-z]*$',
       }),
     ),
     postalCode: Type.Optional(
@@ -24,7 +24,7 @@ export const findUsersRequestDtoSchema = Type.Intersect([
         example: 'Grande Rue',
         description: 'Street',
         maxLength: 50,
-        pattern: '/^[ A-Za-z]*$/',
+        pattern: '^[ A-Za-z]*$',
       }),
     ),
   }),

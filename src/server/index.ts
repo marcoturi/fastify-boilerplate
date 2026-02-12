@@ -46,12 +46,19 @@ export default async function createServer(fastify: FastifyInstance) {
     dir: path.join(import.meta.dirname, '../modules'),
     dirNameRoutePrefix: false,
     options: {
-      autoPrefix: 'api',
+      prefix: '/api',
     },
     matchFilter: (path) => /\.(route|resolver)\.ts$/.test(path),
   });
 
-  await fastify.register(UnderPressure);
+  await fastify.register(UnderPressure, {
+    healthCheck: async () => true,
+    healthCheckInterval: 5000,
+    exposeStatusRoute: {
+      routeOpts: { logLevel: 'silent' },
+      url: '/health',
+    },
+  });
 
   return fastify.withTypeProvider<TypeBoxTypeProvider>();
 }

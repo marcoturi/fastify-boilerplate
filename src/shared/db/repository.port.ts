@@ -6,7 +6,7 @@ export interface Paginated<T> {
 }
 
 export interface OrderBy {
-  field: string | boolean;
+  field: string;
   param: 'asc' | 'desc';
 }
 
@@ -22,5 +22,6 @@ export interface RepositoryPort<Entity> {
   findOneById(id: string): Promise<Entity | undefined>;
   findAll(): Promise<Entity[]>;
   findAllPaginated(params: PaginatedQueryParams): Promise<Paginated<Entity>>;
+  update(entity: Entity): Promise<Entity>;
   delete(entityId: string): Promise<boolean>;
 }

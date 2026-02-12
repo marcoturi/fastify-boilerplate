@@ -73,7 +73,8 @@ export default function () {
     street: `${randomString(10)} Street`,
   });
 
-  const res = http.post('http://localhost:3000/v1/users', payload, {
+  const baseUrl = 'http://localhost:3000';
+  const res = http.post(`${baseUrl}/api/v1/users`, payload, {
     headers: { 'Content-Type': 'application/json' },
     tags: { name: 'CreateUser' },
   });

@@ -8,7 +8,7 @@ export default async function createUserResolver(fastify: FastifyRouteInstance) 
       putUser: async (_, args) => {
         try {
           return await fastify.commandBus.execute<CreateUserCommandResult>(
-            createUserCommand(args.user ?? {}),
+            createUserCommand(args.input ?? {}),
           );
         } catch (error) {
           if (error instanceof UserAlreadyExistsError) {

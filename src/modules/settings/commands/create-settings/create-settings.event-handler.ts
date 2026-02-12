@@ -1,7 +1,4 @@
-import {
-  createUserCommand,
-  type createUserEvent,
-} from '#src/modules/user/commands/create-user/create-user.handler.ts';
+import { createUserEvent } from '#src/modules/user/commands/create-user/create-user.handler.ts';
 
 export default function makeCreateSettings({ eventBus, logger }: Dependencies) {
   return {
@@ -10,7 +7,7 @@ export default function makeCreateSettings({ eventBus, logger }: Dependencies) {
       // todo: add some logic here to create default settings for the user
     },
     init() {
-      eventBus.on(createUserCommand.type, this.handler);
+      eventBus.on(createUserEvent.type, this.handler);
     },
   };
 }

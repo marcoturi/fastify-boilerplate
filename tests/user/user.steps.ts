@@ -15,7 +15,7 @@ Given(/^user profile data$/, function (this: ICustomWorld, table) {
 When('I send a request to create a user', async function (this: ICustomWorld) {
   this.context.latestResponse = await this.server.inject({
     method: 'POST',
-    url: '/v1/users',
+    url: '/api/v1/users',
     body: this.context.createUserDto,
   });
 });
@@ -27,7 +27,7 @@ Then('I receive my user ID', function (this: ICustomWorld) {
 Then('I can see my user in a list of all users', async function (this: ICustomWorld) {
   const response = await this.server.inject({
     method: 'GET',
-    url: '/v1/users',
+    url: '/api/v1/users',
   });
   const users = response.json<Paginated<UserModel>>();
   assert.strictEqual(
@@ -39,7 +39,7 @@ Then('I can see my user in a list of all users', async function (this: ICustomWo
 Then('I send a request to delete my user', async function (this: ICustomWorld) {
   const response = await this.server.inject({
     method: 'DELETE',
-    url: `/v1/users/${this.context.latestResponse!.json().id}`,
+    url: `/api/v1/users/${this.context.latestResponse!.json().id}`,
   });
   assert.strictEqual(response.statusCode, 204);
 });
@@ -47,7 +47,7 @@ Then('I send a request to delete my user', async function (this: ICustomWorld) {
 Then('I cannot see my user in a list of all users', async function (this: ICustomWorld) {
   const response = await this.server.inject({
     method: 'GET',
-    url: '/v1/users',
+    url: '/api/v1/users',
   });
   const users = response.json<Paginated<UserModel>>();
   assert.strictEqual(

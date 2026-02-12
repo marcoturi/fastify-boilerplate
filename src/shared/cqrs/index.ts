@@ -1,4 +1,4 @@
-import type { CommandBus, EventBus } from '#src/shared/cqrs/bus.types.ts';
+import type { CommandBus, EventBus, QueryBus } from '#src/shared/cqrs/bus.types.ts';
 import { commandBus } from '#src/shared/cqrs/command-bus.ts';
 import { eventBus } from '#src/shared/cqrs/event-bus.ts';
 import { decorateWithMetadata, makeTrackExecutionTime } from '#src/shared/cqrs/middlewares.ts';
@@ -12,6 +12,8 @@ const CQRSPlugin = fastifyPlugin(
     const eventBusInstance = eventBus();
     eventBusInstance.addMiddleware(decorateWithMetadata);
 
+    // QueryBus uses the same underlying implementation as CommandBus
+    // but is semantically distinct (queries must be idempotent / side-effect-free)
     const queryBusInstance = commandBus();
     queryBusInstance.addMiddleware(makeTrackExecutionTime(fastify.log));
 
@@ -31,7 +33,7 @@ const CQRSPlugin = fastifyPlugin(
 
 declare module 'fastify' {
   interface FastifyInstance {
-    queryBus: CommandBus;
+    queryBus: QueryBus;
     commandBus: CommandBus;
     eventBus: EventBus;
   }

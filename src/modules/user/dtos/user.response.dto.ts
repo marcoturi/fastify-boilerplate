@@ -21,6 +21,10 @@ export const userResponseDtoSchema = Type.Intersect([
       example: 'Park Avenue',
       description: 'Street where the user is registered',
     }),
+    role: Type.Union([Type.Literal('admin'), Type.Literal('moderator'), Type.Literal('guest')], {
+      example: 'guest',
+      description: "User's role",
+    }),
   }),
 ]);
 

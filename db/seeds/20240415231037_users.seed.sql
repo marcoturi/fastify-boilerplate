@@ -23,4 +23,4 @@ VALUES
   );
 
 -- migrate:down
-DELETE FROM users WHERE id='f59d0748-d455-4465-b0a8-8d8260b1c877' LIMIT 1
+DELETE FROM users WHERE id='f59d0748-d455-4465-b0a8-8d8260b1c877'

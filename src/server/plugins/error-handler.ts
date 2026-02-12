@@ -4,10 +4,20 @@ import {
 } from '#src/shared/api/api-error.response.ts';
 import { getRequestId } from '#src/shared/app/app-request-context.ts';
 import { ExceptionBase } from '#src/shared/exceptions/index.ts';
-import type { FastifyError, FastifyErrorCodes, FastifyInstance } from 'fastify';
+import type { FastifyError, FastifyInstance } from 'fastify';
 import fp from 'fastify-plugin';
 
-const fastifyErrorCodesMap = {
+const fastifyErrorCodesMap: Record<
+  string,
+  | ((error: FastifyError) => {
+      statusCode: number;
+      message: string;
+      error: string;
+      correlationId?: string;
+      subErrors?: { path: string; message: string }[];
+    })
+  | undefined
+> = {
   FST_ERR_VALIDATION: (error: FastifyError) => ({
     subErrors: (error.validation ?? []).map((validationError) => ({
       path: validationError.instancePath,
@@ -27,13 +37,13 @@ const fastifyErrorCodesMap = {
 async function errorHandlerPlugin(fastify: FastifyInstance) {
   fastify.setErrorHandler((error: FastifyError | Error, _, res) => {
     // Handle fastify errors
-    const fastifyError =
-      'code' in error ? fastifyErrorCodesMap[error.code as keyof FastifyErrorCodes] : undefined;
-
-    if (fastifyError) {
-      const response = fastifyError(error);
-      response.correlationId = getRequestId();
-      return res.status(response.statusCode).send(response);
+    if ('code' in error) {
+      const fastifyError = fastifyErrorCodesMap[error.code];
+      if (fastifyError) {
+        const response = fastifyError(error as FastifyError);
+        response.correlationId = getRequestId();
+        return res.status(response.statusCode).send(response);
+      }
     }
 
     // Catch all other errors
