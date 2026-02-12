@@ -207,8 +207,8 @@ In short, Biome simplifies the toolchain, removes the fragility of juggling mult
 Load testing is a powerful tool to mitigate performance risks by verifying an API's ability to manage anticipated traffic. By simulating real-world user interactions with an API under development, businesses can pinpoint potential bottlenecks before they impact production environments. These bottlenecks might otherwise go unnoticed during development due to the absence of production-level loads.
 Example tools:
 
-- [k6](https://github.com/grafana/k6)
-- [Artillery](https://www.npmjs.com/package/artillery) (example file [create-user.artillery.yaml](tests/user/create-user/create-user.artillery.yaml))
+- [k6](https://github.com/grafana/k6) (example file [create-user.k6.ts](tests/user/create-user/create-user.k6.ts))
+- [Artillery](https://www.npmjs.com/package/artillery)
 
 ## <a name="client-types"></a>Client types generation
 

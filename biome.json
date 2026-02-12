@@ -172,11 +172,18 @@
   },
   "overrides": [
     {
-      "includes": ["**/*.test.ts", "**/*.spec.ts", "**/test/**/*.ts", "**/tests/**/*.ts"],
+      "includes": [
+        "**/*.test.ts",
+        "**/*.spec.ts",
+        "**/test/**/*.ts",
+        "**/tests/**/*.ts",
+        "**/*.k6.ts"
+      ],
       "linter": {
         "rules": {
           "style": { "noNonNullAssertion": "off" },
-          "suspicious": { "noExplicitAny": "off" }
+          "suspicious": { "noExplicitAny": "off" },
+          "security": { "noSecrets": "off" }
         }
       }
     },
