@@ -2,253 +2,338 @@
 
 [![Biome](https://img.shields.io/badge/Biome-60a5fa?logo=biome&logoColor=fff)](https://biomejs.dev/) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![MIT License](https://img.shields.io/github/license/marcoturi/fastify-boilerplate)](https://github.com/marcoturi/fastify-boilerplate/blob/main/LICENSE) ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/marcoturi/fastify-boilerplate/codeql-analysis.yml) ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/marcoturi/fastify-boilerplate/release.yml)
 
-This meticulously crafted boilerplate serves as a solid foundation for building production-ready Fastify applications. While designed specifically for Fastify, the underlying principles and best practices aim to be adaptable to different frameworks and languages. These principles include clean architecture, domain-driven design, CQRS, vertical slice architecture, and dependency injection.
+A production-ready [Fastify 5](https://github.com/fastify/fastify) boilerplate built on Clean Architecture, CQRS, DDD, and functional programming. Designed as a starting point for real-world applications, the architecture is framework-agnostic at its core — the patterns and boundaries translate to any language or framework.
 
-## ⚡ Features
+## Table of Contents
 
-- Native TypeScript: Runs TypeScript directly via [Node.js >= 24](https://nodejs.org/en/blog/release/v24.0.0) native type stripping — no build step, no transpiler, no `tsc --build`
-- Framework: [Fastify 5](https://github.com/fastify/fastify) with [Awilix](https://github.com/jeffijoe/awilix) for the dependency injection and [Pino](https://github.com/pinojs/pino) for logging
-- Plugins: [@fastify/helmet](https://github.com/fastify/fastify-helmet) for security headers, [@fastify/swagger](https://github.com/fastify/fastify-swagger) for Swagger documentation, [@fastify/under-pressure](https://github.com/fastify/under-pressure) for automatic handling of "Service Unavailable", [@fastify/awilix](https://github.com/fastify/fastify-awilix) for dependency injection, [typebox](https://github.com/sinclairzx81/typebox) for JSON schema and TS generation and validation
-- DB: [Postgres](https://github.com/porsager/postgres) as client + [DBMate](https://github.com/amacneil/dbmate) for seeds and migrations
-- Graphql: [Mercurius](https://github.com/mercurius-js/mercurius)
-- Docker: Production-ready multi-stage [Dockerfile](Dockerfile) with Alpine, non-root user, health checks, and [Docker Compose](docker-compose.yml) for local development
-- Telemetry: Vendor-agnostic [OpenTelemetry](https://opentelemetry.io/) with auto-instrumentation, disabled by default, ready for any OTLP-compatible backend
-- Format and Style: [Biome](https://biomejs.dev/) for linting and formatting
-- Dependencies validation: [depcruise](https://github.com/sverweij/dependency-cruiser)
-- Release flow: [Husky](https://github.com/typicode/husky) + [Commitlint](https://commitlint.js.org/) + [Semantic-release](https://github.com/semantic-release/semantic-release)
-- Tests: E2E tests with [Cucumber](https://cucumber.io/docs/installation/javascript/), and unit and integration tests with node:test
-- AI-Ready: [AGENTS.md](AGENTS.md) provides architecture rules, coding conventions, and step-by-step guides for AI coding assistants (Cursor, Claude Code, GitHub Copilot, and others)
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Getting Started](#getting-started)
+- [Available Scripts](#available-scripts)
+- [Running with Docker](#running-with-docker)
+- [API Endpoints](#api-endpoints)
+- [Architecture](#architecture)
+  - [Principles](#principles)
+  - [Modules](#modules)
+  - [Module Components](#module-components)
+- [Folder Structure](#folder-structure)
+- [OpenTelemetry](#opentelemetry)
+- [Testing](#testing)
+- [Client Types Package](#client-types-package)
+- [CI/CD Pipeline](#cicd-pipeline)
+- [AI-Assisted Development](#ai-assisted-development)
+- [Why Biome over ESLint + Prettier?](#why-biome-over-eslint--prettier)
+- [Useful Resources](#useful-resources)
+- [Contributing](#contributing)
+- [License](#license)
 
-## 👉 Table of Contents
+## Features
 
-- [Getting Started](#start)
-- [Principles](#principles)
-- [Useful resources](#resources)
-- [Client types generation](#client-types)
+| Category | Details |
+|---|---|
+| **Runtime** | Native TypeScript via [Node.js >= 24](https://nodejs.org/en/blog/release/v24.0.0) type stripping — no build step, no transpiler |
+| **Framework** | [Fastify 5](https://github.com/fastify/fastify) with [Awilix](https://github.com/jeffijoe/awilix) DI and [Pino](https://github.com/pinojs/pino) logging |
+| **API** | REST ([TypeBox](https://github.com/sinclairzx81/typebox) schemas, Swagger UI) + GraphQL ([Mercurius](https://github.com/mercurius-js/mercurius), GraphiQL in dev) |
+| **Database** | [Postgres.js](https://github.com/porsager/postgres) client + [DBMate](https://github.com/amacneil/dbmate) migrations & seeds |
+| **Security** | [@fastify/helmet](https://github.com/fastify/fastify-helmet), [@fastify/under-pressure](https://github.com/fastify/under-pressure) for back-pressure |
+| **Telemetry** | Vendor-agnostic [OpenTelemetry](https://opentelemetry.io/) with auto-instrumentation (disabled by default) |
+| **Linting** | [Biome](https://biomejs.dev/) — single tool for linting, formatting, and import sorting |
+| **Architecture** | [dependency-cruiser](https://github.com/sverweij/dependency-cruiser) validates layer boundaries at CI time |
+| **Release** | [Husky](https://github.com/typicode/husky) + [Commitlint](https://commitlint.js.org/) + [Semantic Release](https://github.com/semantic-release/semantic-release) |
+| **Client types** | REST (OpenAPI) and GraphQL types [auto-generated and published to npm](#client-types-package) on every release |
+| **Testing** | E2E with [Cucumber](https://cucumber.io/docs/installation/javascript/) (Gherkin), unit/integration with `node:test`, load tests with [k6](https://github.com/grafana/k6) |
+| **Docker** | Production-ready multi-stage [Dockerfile](Dockerfile) (Alpine, non-root, health check) + [Docker Compose](docker-compose.yml) |
+| **AI-Ready** | [AGENTS.md](AGENTS.md) — architecture rules and coding conventions for AI assistants |
 
-## <a name="start"></a>✨ Getting Started
+## Prerequisites
+
+| Tool | Notes |
+|---|---|
+| **Node.js** | >= 24 — required for native TypeScript execution. A `.nvmrc` is included — run `fnm use` or `nvm use` |
+| **pnpm** | >= 10 — package manager (`corepack enable` to activate) |
+| **Docker** | Used to run PostgreSQL via Docker Compose. Alternatively, use a local Postgres install |
+
+## Getting Started
 
 ```bash
+# 1. Scaffold from the template
 npx degit marcoturi/fastify-boilerplate my-app
 cd my-app
 
+# 2. Install dependencies
 pnpm install
+
+# 3. Create your .env file
+pnpm create:env          # copies .env.example → .env
+
+# 4. Start PostgreSQL (pick one)
+docker compose up postgres -d   # via Docker Compose
+# — or use a local Postgres and adjust .env values —
+
+# 5. Run database migrations
+pnpm db:migrate
+
+# 6. Start the dev server (with watch mode and pretty logs)
+pnpm start
 ```
 
-### Common Commands
+The server starts at **http://localhost:3000** by default. See [API Endpoints](#api-endpoints) for what's available.
 
-- `pnpm start` - start a development server.
-- `pnpm start:prod` - start prod server.
-- `pnpm test` - run unit and integration tests.
-- `pnpm test:coverage` - run unit and integration tests with coverage.
-- `pnpm test:unit` - run only unit tests.
-- `pnpm test:e2e` - run E2E tests.
-- `pnpm type:check` - check for typescript errors.
-- `pnpm deps:validate` - check for dependencies problems (i.e. use route code inside a repository).
-- `pnpm outdated` - update dependencies interactively.
-- `pnpm format` - format all files with Biome.
-- `pnpm lint` - runs Biome linter.
-- `pnpm create:env` - creates and .env file by copying .env.example.
-- `pnpm db:create-migration` - creates a new db migration.
-- `pnpm db:migrate` - start db migrations.
-- `pnpm db:create-seed` - creates a new db seed.
-- `pnpm db:seed` - start db seeds.
+## Available Scripts
 
-### Docker
+### Development
 
-Run the full stack (app + Postgres) with Docker Compose:
+| Script | Description |
+|---|---|
+| `pnpm start` | Start dev server with watch mode and pretty-printed logs |
+| `pnpm start:prod` | Start production server (no watch, no pretty-print) |
+| `pnpm create:env` | Copy `.env.example` to `.env` (fails if `.env` already exists) |
+
+### Code Quality
+
+| Script | Description |
+|---|---|
+| `pnpm check` | Run lint + format check + type check (use this before committing) |
+| `pnpm check:fix` | Same as `check` but auto-fixes lint and format issues |
+| `pnpm format` | Auto-format all files with Biome |
+| `pnpm lint` | Run Biome linter with auto-fix |
+| `pnpm type:check` | TypeScript type checking (`tsc --noEmit`) |
+| `pnpm deps:validate` | Validate architecture layer boundaries with dependency-cruiser |
+| `pnpm deps:graph` | Generate a dependency graph SVG in `doc/` |
+
+### Testing
+
+| Script | Description |
+|---|---|
+| `pnpm test` | Run unit tests (alias for `test:unit`) |
+| `pnpm test:unit` | Run unit and integration tests with `node:test` |
+| `pnpm test:coverage` | Run unit tests with c8 coverage |
+| `pnpm test:e2e` | Run E2E tests with Cucumber (requires running Postgres) |
+
+### Database
+
+| Script | Description |
+|---|---|
+| `pnpm db:migrate` | Apply pending migrations |
+| `pnpm db:create-migration` | Create a new migration file |
+| `pnpm db:seed` | Run database seeds |
+| `pnpm db:create-seed` | Create a new seed file |
+
+### Other
+
+| Script | Description |
+|---|---|
+| `pnpm generate:types` | Generate REST and GraphQL client types (requires running server + DB) |
+
+## Running with Docker
+
+### Full stack (app + Postgres)
 
 ```bash
-pnpm create:env   # create .env from .env.example (if not done already)
-docker compose up  # builds the app image and starts all services
+pnpm create:env       # create .env from .env.example (if not done already)
+docker compose up     # builds the app image and starts all services
 ```
 
-Or build and run the image standalone:
+### Standalone image
 
 ```bash
 docker build -t fastify-boilerplate .
 docker run -p 3000:3000 --env-file .env -e HOST=0.0.0.0 fastify-boilerplate
 ```
 
-The Dockerfile follows production best practices:
+### Dockerfile highlights
 
-- **Multi-stage build** — dependencies are installed in an isolated stage for optimal layer caching
-- **Node 24 Alpine** — small image footprint (~280 MB), leveraging native TypeScript execution (no build step)
-- **Non-root user** — the app runs as an unprivileged `fastify` user (uid 1001)
+- **Multi-stage build** — dependencies installed in an isolated stage for optimal layer caching
+- **Node Alpine** — small footprint, native TypeScript execution (no build step)
+- **Non-root user** — runs as an unprivileged `fastify` user (UID 1001)
 - **dumb-init** — proper PID 1 signal forwarding for graceful shutdown
-- **HEALTHCHECK** — built-in Docker health check against the `/health` endpoint
+- **HEALTHCHECK** — built-in Docker health check against `/health` every 30 seconds
 
-## <a name="principles"></a>🧱 Principles
+## API Endpoints
 
-![Fastify Boilerplate](doc/images/fastify-boilerplate.png)
-<sup>Diagram adapted from [here](https://github.com/Sairyss/domain-driven-hexagon)</sup>
+| Endpoint | Description |
+|---|---|
+| `GET /health` | Health check ([@fastify/under-pressure](https://github.com/fastify/under-pressure)) |
+| `/api/...` | All REST routes are prefixed with `/api` (e.g. `/api/v1/users`) |
+| `GET /api-docs` | Swagger UI (interactive API documentation) |
+| `GET /api-docs/json` | OpenAPI 3.1.0 JSON spec |
+| `POST /graphql` | GraphQL endpoint ([Mercurius](https://github.com/mercurius-js/mercurius)) |
+| `GET /graphql` | GraphiQL IDE (development only) |
 
-### Project Principles
+## Architecture
 
-- Adaptable Complexity: The structure should be flexible (scalable through adding or removing layers) to handle varying application complexities.
-- Future-Proofing: Technology and design choices should ensure the project's long-term health. This includes: clear separation of framework and application code and utilizing well-established, widely used packages/tools with minimal dependencies.
-- Functional Programming Emphasis: Prioritize functional programming patterns and composition over object-oriented approaches (OOP) and inheritance for potentially improved maintainability.
-- Microservices-Ready Architecture: Leveraging techniques like vertical slice architecture, path aliases, and CQRS (Command Query Responsibility Segregation) for communication. This promotes modularity and separation of concerns, facilitating potential future extraction and creation of microservices.
+![Architecture Diagram](doc/images/fastify-boilerplate.png)
+<sup>Diagram adapted from [Domain-Driven Hexagon](https://github.com/Sairyss/domain-driven-hexagon)</sup>
 
-### Code Principles
+### Principles
 
-- Framework Agnostic: Using vanilla Node.js, express, fastify? Your core business logic does not care about that either. Therefore, we will minimize fastify dependencies inside modules folder.
-- Client Interface Agnostic: The core business logic does not care if you are using a CLI, a REST API, or even gRPC. Command/Query handlers will serve every protocol needs.
-- Database Agnostic: Your core business logic does not care if you are using Postgres, MongoDB, or CouchDB for that matter. Database code, problems and errors should be tackled only in repositories.
-- The dependencies between software components should always point inward towards the core of the application. In other words, the innermost layers of the system should not depend on the outer layers. The flow of the code will be Route → Handler → Domain (optional) → Repository.
+**Project-level:**
 
-This project is based on some of the following principles/styles:
+- **Adaptable complexity** — the structure scales up or down by adding or removing layers to match the application's actual needs.
+- **Future-proofing** — framework code and business logic are separated. Dependencies are well-established and minimal.
+- **Functional programming first** — composition and factory functions over classes and inheritance.
+- **Microservices-ready** — vertical slices, path aliases, and CQRS make it straightforward to extract a module into its own service later.
+
+**Code-level:**
+
+- **Framework-agnostic core** — business logic has no Fastify dependency. Fastify concerns stay in routes.
+- **Protocol-agnostic handlers** — command/query handlers serve REST, GraphQL, gRPC, or CLI equally.
+- **Database-agnostic domain** — SQL stays in repository files. Handlers interact with data through repository ports (interfaces).
+- **Inward dependency flow** — outer layers depend on inner layers, never the reverse: `Route → Handler → Domain → Repository`.
+
+Based on:
 
 - [Domain-Driven Design (DDD)](https://en.wikipedia.org/wiki/Domain-driven_design)
 - [Hexagonal (Ports and Adapters) Architecture](<https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)>)
 - [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 - [Onion Architecture](https://herbertograca.com/2017/09/21/onion-architecture/)
 - [SOLID Principles](https://en.wikipedia.org/wiki/SOLID)
-- [Vertical slice architecture](https://www.jimmybogard.com/vertical-slice-architecture/)
-- [The Common Closure Principle (CCP)](https://en.wikipedia.org/wiki/Common_closure_principle)
+- [Vertical Slice Architecture](https://www.jimmybogard.com/vertical-slice-architecture/)
+- [Common Closure Principle (CCP)](https://en.wikipedia.org/wiki/Common_closure_principle)
 
 ### Modules
 
-- Each module's name should reflect an important concept from the Domain and have its own folder (see [vertical slice architecture](https://www.jimmybogard.com/vertical-slice-architecture/)).
-- It's easier to work on things that change together if those things are gathered relatively close to each other (see [The Common Closure Principle (CCP)](https://en.wikipedia.org/wiki/Common_closure_principle)).
-- Every module is independent (i.e. no direct imports) and has interactions between modules minimal. You want to be able to easily extract a module into a separate microservice if needed.
+Each module maps to a domain concept and lives in its own folder under `src/modules/`. Modules follow the [vertical slice architecture](https://www.jimmybogard.com/vertical-slice-architecture/) — everything a feature needs is co-located.
 
-How do I keep modules clean and decoupled between each one?
+**Key rules:**
 
-- One module shouldn't call other module directly (for example by importing an entity from module A to module B). You should create public interfaces to do so (for example, create a query that returns some data from feature A to anyone who calls it, so module B can query it).
-- In case of fire and forget logic (like sending an email after some operation), you can use events to communicate between modules.
-- If two modules are too "chatty", maybe they should be merged into a single module
+- **No direct imports** between modules. Cross-module communication uses the CQRS buses (commands/queries for request-response, events for fire-and-forget).
+- **Extractable** — any module can be pulled into a separate microservice. The CQRS handler boundary becomes the network boundary.
+- **If two modules are too "chatty"**, they probably belong together — merge them.
 
 ### Module Components
 
-Each layer should handle its own distinct functionality. Ideally, these components should adhere to the [Single Responsibility Principle](https://en.wikipedia.org/wiki/Single-responsibility_principle), meaning they have a single, well-defined purpose:
+Each layer has a single responsibility:
 
-**Route:**
-The process starts with a request (HTTP, GRPC, Graphql) sent to the route. You can find the routes in the `src/modules/feature/{commands|queries}` folder.
-Routes handle HTTP request/response, request validation, and response formatting based on the type of protocol implied. They should not contain any business logic.
+**Route** — handles the HTTP/GraphQL/gRPC request. Validates input, formats the response. No business logic.
 
-> **Note:** All REST routes are automatically prefixed with `/api` (e.g. `/api/v1/users`). This prefix is configured via `@fastify/autoload` in `src/server/index.ts`.
+> All REST routes are prefixed with `/api` (configured in `src/server/index.ts`).
 
-Example file: [find-users.route.ts](src/modules/user/queries/find-users/find-users.route.ts)
+Example: [find-users.route.ts](src/modules/user/queries/find-users/find-users.route.ts)
 
-**Command/Query Handler:**
-The Command or Query Handler, or an application Service handles the received request. It executes the necessary business logic by leveraging Domain Services. It also interacts with the infrastructure layer through well-defined interfaces (ports). Commands are state-changing operations and Queries are data-retrieval operations. They do not contain domain-specific business logic. One handler per use case it's generally a good practice (e.g., CreateUser, UpdateUser, etc.).
+**Command/Query Handler** — orchestrates the use case. Receives a command or query, calls domain services and repositories through ports, returns a result. One handler per use case (e.g. `CreateUser`, `FindUsers`).
 
-Note: instead of using handler you can also use an application service to handle commands/queries/events.
+Benefits of the CQRS bus pattern:
+- **Middlewares** — cross-cutting concerns (auth, caching, tracing, rate limiting) plug in between route and handler. Middleware targeting is pattern-based (e.g. `users/*` for all user commands, `users/create` for a specific one). See [middlewares.ts](src/shared/cqrs/middlewares.ts).
+- **Decoupling** — modules communicate through the bus instead of direct imports, making future extraction to microservices trivial.
 
-Using this pattern has several advantages:
+Example: [find-users.handler.ts](src/modules/user/queries/find-users/find-users.handler.ts)
 
-- You can implement middlewares in between the route and the handler. This way you can achieve things like authorization, rate limiting, caching, profiling, etc. It's easy to granular apply these middlewares to specific commands/queries by using simple regex i.e. by looking at `users/*` if you want to hit every command in the user module or `users/create` for specific ones. Example file: [middlewares.ts](src/shared/cqrs/middlewares.ts)
-- Reduce coupling between modules. Instead of explicitly defining dependencies between modules you can use commands/queries. At the moment you want to extract a module into a separate microservice you can just implement the GRPC request logic in the handler, and you are good to go.
+**Domain Service** — pure business logic. Computes properties, enforces invariants, composes entities. No infrastructure dependencies.
 
-Example file: [find-users.handler.ts](src/modules/user/queries/find-users/find-users.handler.ts)
+Example: [user.domain.ts](src/modules/user/domain/user.domain.ts)
 
-**Domain Service:**
-Contains the core business logic. For example, how to compose a new entity, calculate its own properties and how to change them. In this specific project there are no entities/aggregates classes (see [Domain-Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design)) and data is generally composed by objects/arrays/primitives therefore domain services are the responsible for handling the surrounding business. The domain should represent (in code) what the business is or does (in real life).
+**Repository** — data access. Converts between domain models and database rows. All SQL lives here. Implements a port (interface) defined alongside it.
 
-Example file: [user.domain.ts](src/modules/user/domain/user.domain.ts)
+Example: [user.repository.ts](src/modules/user/database/user.repository.ts)
 
-**Repository:**
-Adapts data to its internal format, retrieves or persists data from/to a database as needed. Repositories decouple the infrastructure or technology used to access databases from the other layers (i.e. for example handler/domains should not know if the data is stored in a SQL or NoSQL database). They should not contain business logic.
+> **Guideline:** use as many or as few layers as needed. Not every feature requires a domain service — simpler CRUD operations can go straight from handler to repository.
 
-Example file: [user.repository.ts](src/modules/user/database/user.repository.ts)
-
-General recommendation: The optimal project structure balances complexity with maintainability. Carefully consider the project's anticipated size and intricacy. Utilize as many layers and building blocks as necessary to ensure efficient development, while avoiding unnecessary complexity.
-
-## <a name="folder"></a>🗄️ Folder Structure and Code Organization
-
-The vertical slice architecture is the recommended structure. Each feature encapsulates commands, queries, repositories, etc.
+## Folder Structure
 
 ```
 .
 ├── db/
-│   ├── migrations
-│   └── seeds
-├── tests
+│   ├── migrations/                → SQL migration files (DBMate)
+│   └── seeds/                     → SQL seed files (DBMate)
+├── tests/
+│   ├── <feature>/
+│   │   ├── <scenario>.feature     → Gherkin E2E scenarios
+│   │   └── <scenario>.k6.ts      → k6 load test scripts
+│   ├── shared/                    → Shared step definitions
+│   └── support/                   → Test server, hooks, custom world
+├── client/                        → Generated REST + GraphQL client types (npm package)
+├── scripts/                       → Type generation scripts
 └── src/
-    ├── config
+    ├── instrumentation.ts         → OpenTelemetry setup (loaded via --import)
+    ├── config/                    → Environment validation (env-schema + TypeBox)
     ├── modules/
-    │   └── feature/
-    │       ├── commands/
-    │       │   └── command-example/
-    │       │       ├── command.handler.ts        → Route command handler/service
-    │       │       ├── command.route.ts          → Fastify http route
-    │       │       ├── command.graphql-schema.ts → Graphql schema
-    │       │       ├── command.resolver.ts       → Graphql resolver
-    │       │       └── command.schema.ts         → Schemas for request and response validation
-    │       ├── database/
-    │       │   ├── feature.repository.port.ts    → Fastify repository port
-    │       │   └── feature.repository.ts         → Feature repository
-    │       ├── domain/
-    │       │   ├── feature.domain.ts             → Domain services
-    │       │   ├── feature.errors.ts             → Domain-specific errors
-    │       │   └── feature.types.ts              → Domain-specific types
-    │       ├── dtos/
-    │       │   ├── feature.graphql-schema.ts     → Common Graphql schema
-    │       │   └── feature.response.dto.ts       → Common DTO definition used across feature commands/queries
-    │       ├── queries/
-    │       │   └── query-example/
-    │       │       ├── query.handler.ts          → Route command handler/service
-    │       │       ├── query.graphql-schema.ts   → Graphql schema
-    │       │       ├── query.resolver.ts         → Graphql resolver
-    │       │       ├── query.route.ts            → Fastify http route
-    │       │       └── query.schema.ts           → Schemas for request and response validation
-    │       ├── index.ts                          → Module entrypoint, dependencies definitions, command/query base definition
-    │       └── feature.mapper.ts                 → Mapper util to map entities between layers (controller, domain, repositories)
+    │   └── <feature>/
+    │   │   ├── commands/
+    │   │   │   └── <command>/
+    │   │   │       ├── command.handler.ts         → Command handler
+    │   │   │       ├── command.route.ts           → REST route
+    │   │   │       ├── command.resolver.ts        → GraphQL resolver
+    │   │   │       ├── command.graphql-schema.ts  → GraphQL type definitions
+    │   │   │       └── command.schema.ts          → TypeBox request/response schemas
+    │   │   ├── queries/
+    │   │   │   └── <query>/
+    │   │   │       ├── query.handler.ts           → Query handler
+    │   │   │       ├── query.route.ts             → REST route
+    │   │   │       ├── query.resolver.ts          → GraphQL resolver
+    │   │   │       ├── query.graphql-schema.ts    → GraphQL type definitions
+    │   │   │       └── query.schema.ts            → TypeBox request/response schemas
+    │   │   ├── database/
+    │   │   │   ├── feature.repository.port.ts     → Repository interface (port)
+    │   │   │   └── feature.repository.ts          → Repository implementation (adapter)
+    │   │   ├── domain/
+    │   │   │   ├── feature.domain.ts              → Domain service
+    │   │   │   ├── feature.errors.ts              → Domain-specific errors
+    │   │   │   └── feature.types.ts               → Domain types
+    │   │   ├── dtos/
+    │   │   │   ├── feature.graphql-schema.ts      → Shared GraphQL schema
+    │   │   │   └── feature.response.dto.ts        → Shared response DTO
+    │   │   ├── index.ts                           → Action creators, DI declarations
+    │   │   └── feature.mapper.ts                  → Entity ↔ DB model ↔ DTO mapper
     ├── server/
-    │   └── plugins                               → Fastify plugins
+    │   ├── index.ts               → Fastify instance setup
+    │   └── plugins/               → Fastify plugins (swagger, CORS, error handler, CQRS, etc.)
     └── shared/
-        ├── utils                                 → Generic functions that don't belong to any specific feature
-        └── db                                    → DB configuration and helpers
+        ├── cqrs/                  → Command/Query/Event bus, middlewares
+        ├── db/                    → Postgres connection, transaction helpers, repository base
+        ├── exceptions/            → Base exception classes
+        └── utils/                 → Cross-cutting utilities
 ```
 
-## <a name="resources"></a>Useful resources
+## OpenTelemetry
 
-This boilerplate draws inspiration from [Domain-Driven Hexagon](https://github.com/Sairyss/domain-driven-hexagon), but prioritizes functional programming paradigms over traditional Java-style backend practices. Also, while acknowledging the value of Domain-Driven Design (DDD), this project aims for a more approachable structure with a lower knowledge barrier for onboarding new team members. Despite these adjustments, the core principles of Domain-Driven Hexagon remain a valuable resource. I highly recommend exploring it for further knowledge acquisition.
-
-### Frontend
-
-[react-redux boilerplate](https://github.com/marcoturi/react-redux-boilerplate): A meticulously crafted, extensible, and robust architecture for constructing production-grade React applications.
-
-### Telemetry (OpenTelemetry)
-
-This project ships with a vendor-agnostic [OpenTelemetry](https://opentelemetry.io/) setup in [`src/instrumentation.ts`](src/instrumentation.ts). It is loaded before the application via the `--import` flag and uses the standard [OTLP](https://opentelemetry.io/docs/specs/otlp/) protocol, so it works with any backend — Grafana, Datadog, Honeycomb, Jaeger, and others — without code changes.
+The project ships with a vendor-agnostic [OpenTelemetry](https://opentelemetry.io/) setup in [`src/instrumentation.ts`](src/instrumentation.ts). It uses the standard [OTLP](https://opentelemetry.io/docs/specs/otlp/) protocol, so it works with any backend (Grafana, Datadog, Honeycomb, Jaeger, etc.) without code changes.
 
 **How it works:**
 
-- **HTTP + Fastify** — [`src/instrumentation.ts`](src/instrumentation.ts) registers the [ESM loader hook](https://github.com/open-telemetry/opentelemetry-js/blob/main/doc/esm-support.md) and initialises the `NodeSDK` with `instrumentation-http` and [`@fastify/otel`](https://github.com/fastify/otel) (Fastify's official OTel plugin). Every inbound request gets a trace span with route, method, status code, and full lifecycle hook instrumentation (`onRequest`, `preHandler`, `onSend`, etc.).
-- **CQRS** — A tracing middleware in [`src/shared/cqrs/otel-middleware.ts`](src/shared/cqrs/otel-middleware.ts) wraps every command, query, and event execution in an OTel span. Spans include the action type, bus kind, and correlation ID.
-- **Disabled by default** (`OTEL_SDK_DISABLED=true` in `.env.example`). When disabled, the SDK is not loaded and `@opentelemetry/api` returns noop implementations — zero overhead.
-- To enable, set the standard OTel environment variables:
+- **HTTP + Fastify** — the SDK registers the [ESM loader hook](https://github.com/open-telemetry/opentelemetry-js/blob/main/doc/esm-support.md) and initialises with `instrumentation-http` and [`@fastify/otel`](https://github.com/fastify/otel). Every request gets a trace span with route, method, status code, and lifecycle hooks.
+- **CQRS** — a tracing middleware in [`src/shared/cqrs/otel-middleware.ts`](src/shared/cqrs/otel-middleware.ts) wraps every command, query, and event in a span. Spans include the action type, bus kind, and correlation ID.
+- **Disabled by default** (`OTEL_SDK_DISABLED=true`). When disabled, `@opentelemetry/api` returns noop implementations — zero overhead.
+
+To enable, set the standard OTel environment variables in your `.env`:
 
 ```bash
 OTEL_SDK_DISABLED=false
 OTEL_SERVICE_NAME=fastify-boilerplate
-OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318   # your collector
+OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318   # your OTLP collector
 ```
 
-All configuration is done through [standard OTel environment variables](https://opentelemetry.io/docs/languages/sdk-configuration/general/) — no vendor-specific code required.
+All configuration uses [standard OTel environment variables](https://opentelemetry.io/docs/languages/sdk-configuration/general/) — no vendor lock-in.
 
-### Why Biome over ESLint + Prettier?
+## Testing
 
-This project uses [Biome](https://biomejs.dev/) as a single tool for both linting and formatting, replacing the traditional ESLint + Prettier combination. Here's why:
+### Unit and integration tests
 
-- **Reduced dependency overhead:** The ESLint ecosystem relies on a large number of plugins and configurations (`@typescript-eslint/parser`, `@typescript-eslint/eslint-plugin`, `eslint-config-prettier`, `eslint-plugin-import`, etc.) that are often maintained by different authors with different release cadences. Keeping these packages up to date and compatible with each other is a constant maintenance burden, and breaking changes across the plugin ecosystem are not uncommon.
-- **Single unified tool:** Biome provides linting, formatting, and import sorting out of the box with zero plugins needed. One dependency, one configuration file, one tool to learn.
-- **Performance:** Biome is written in Rust, making it orders of magnitude faster than ESLint and Prettier combined. This matters in CI pipelines, pre-commit hooks, and large codebases.
-- **Maturity and stability:** Biome has matured significantly and now covers the vast majority of rules that ESLint + typescript-eslint provide, while offering a more cohesive and consistent experience. It is actively maintained with a clear roadmap and growing community adoption.
+Run with `node:test`. Test files live next to their source files as `*.spec.ts`.
 
-In short, Biome simplifies the toolchain, removes the fragility of juggling multiple ESLint plugins that may lag behind on updates, and delivers a faster and more reliable developer experience.
+```bash
+pnpm test:unit           # run tests
+pnpm test:coverage       # run with c8 coverage
+```
 
-### Load testing
+### E2E tests
 
-Load testing is a powerful tool to mitigate performance risks by verifying an API's ability to manage anticipated traffic. By simulating real-world user interactions with an API under development, businesses can pinpoint potential bottlenecks before they impact production environments. These bottlenecks might otherwise go unnoticed during development due to the absence of production-level loads.
-Example tools:
+Written in [Gherkin](https://cucumber.io/docs/gherkin/) and executed with [Cucumber.js](https://cucumber.io/docs/installation/javascript/). Scenarios live in `tests/<feature>/<scenario>.feature`, step definitions in `tests/<feature>/<feature>.steps.ts`.
 
-- [k6](https://github.com/grafana/k6) (example file [create-user.k6.ts](tests/user/create-user/create-user.k6.ts))
-- [Artillery](https://www.npmjs.com/package/artillery)
+```bash
+# Requires a running Postgres with migrations applied
+pnpm test:e2e
+```
 
-## <a name="client-types"></a>Client types package
+The E2E test server is created via `buildApp()` (in `tests/support/server.ts`) — it boots a full Fastify instance without binding to a port, so tests run fast and don't conflict with a running dev server.
+
+### Load tests
+
+[k6](https://github.com/grafana/k6) scripts live alongside their feature's E2E tests.
+
+Example: [create-user.k6.ts](tests/user/create-user/create-user.k6.ts)
+
+## Client Types Package
 
 The release pipeline automatically generates **REST** (OpenAPI) and **GraphQL** client types and publishes them as the [`@marcoturi/fastify-boilerplate`](https://www.npmjs.com/package/@marcoturi/fastify-boilerplate) npm package. The version is kept in sync with the backend via semantic-release.
 
@@ -270,7 +355,7 @@ import type { User, Query, Mutation } from '@marcoturi/fastify-boilerplate/graph
 
 ### Generate locally
 
-To regenerate the types against a local server (requires a running database):
+To regenerate the types against a local server (requires running Postgres with migrations applied):
 
 ```bash
 pnpm generate:types
@@ -278,21 +363,54 @@ pnpm generate:types
 
 This starts the server, fetches the OpenAPI and GraphQL schemas, writes the type files to `client/`, and stops the server.
 
-## AI-assisted development
+## CI/CD Pipeline
 
-This project ships with an [`AGENTS.md`](AGENTS.md) file that serves as a comprehensive guide for AI coding assistants. It documents the project's architecture, CQRS patterns, coding conventions, and common pitfalls so that tools like [Cursor](https://cursor.com/), [Claude Code](https://docs.anthropic.com/en/docs/claude-code), and [GitHub Copilot](https://github.com/features/copilot) can understand the codebase and generate code that follows the established patterns.
+The project uses GitHub Actions with two workflows:
 
-When using an AI assistant to work on this project, the tool will automatically pick up `AGENTS.md` and apply the project's conventions without requiring manual prompting.
+**[release.yml](.github/workflows/release.yml)** — runs on every push to `main`:
+
+1. Install dependencies (`pnpm install --frozen-lockfile`)
+2. Code quality checks (`pnpm check`)
+3. Unit tests (`pnpm test`)
+4. E2E tests (`pnpm test:e2e`) against a Postgres service container
+5. Generate client types (`pnpm generate:types`)
+6. Publish release via semantic-release (changelog, GitHub release, npm client package)
+
+**[codeql-analysis.yml](.github/workflows/codeql-analysis.yml)** — runs on pushes and PRs to `main`:
+
+- GitHub CodeQL security analysis for JavaScript/TypeScript
+
+## AI-Assisted Development
+
+This project ships with an [`AGENTS.md`](AGENTS.md) file — a comprehensive guide for AI coding assistants. It documents the architecture, CQRS patterns, coding conventions, and common pitfalls so that tools like [Cursor](https://cursor.com/), [Claude Code](https://docs.anthropic.com/en/docs/claude-code), and [GitHub Copilot](https://github.com/features/copilot) can generate code that follows the project's established patterns.
+
+AI assistants automatically pick up `AGENTS.md` and apply the conventions without manual prompting.
+
+## Why Biome over ESLint + Prettier?
+
+This project uses [Biome](https://biomejs.dev/) as a single tool for linting, formatting, and import sorting:
+
+- **One tool, zero plugins** — no `@typescript-eslint/parser`, `eslint-config-prettier`, `eslint-plugin-import`, or other ecosystem packages to keep in sync.
+- **Fast** — written in Rust, orders of magnitude faster than ESLint + Prettier. Noticeable in CI and pre-commit hooks.
+- **Stable** — no more breakage from mismatched plugin versions or peer dependency conflicts across the ESLint ecosystem.
+- **Mature** — covers the vast majority of rules that ESLint + typescript-eslint provide, with a growing community and clear roadmap.
+
+## Useful Resources
+
+- [Domain-Driven Hexagon](https://github.com/Sairyss/domain-driven-hexagon) — the primary inspiration for this project's architecture (adapted toward functional programming)
+- [react-redux boilerplate](https://github.com/marcoturi/react-redux-boilerplate) — companion frontend boilerplate by the same author
 
 ## Contributing
 
-Contributions are always welcome! If you have any ideas, suggestions, fixes, feel free to contribute. You can do that by going through the following steps:
+Contributions are welcome! This project uses [Conventional Commits](https://www.conventionalcommits.org/) enforced by Commitlint and Husky.
 
-1. Clone this repo
+1. Fork and clone the repo
 2. Create a branch: `git checkout -b your-feature`
-3. Make some changes
-4. Test your changes
-5. Push your branch and open a Pull Request
+3. Make your changes
+4. Run `pnpm check` to validate lint, format, and types
+5. Run `pnpm test` (and `pnpm test:e2e` if your change touches API behavior)
+6. Commit using [Conventional Commits](https://www.conventionalcommits.org/) format (e.g. `feat: add user roles`)
+7. Open a Pull Request
 
 ## License
 

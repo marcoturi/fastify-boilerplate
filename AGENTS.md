@@ -121,33 +121,37 @@ There are separate types for command/query vs event middlewares:
 
 ### Bus differences
 
-| Bus | Purpose | Handler return | execute/emit return |
-|---|---|---|---|
-| `CommandBus` | State-changing mutations | `Promise<unknown>` | `Promise<R>` (inferred) |
-| `QueryBus` | Idempotent reads | `Promise<unknown>` | `Promise<R>` (inferred) |
-| `EventBus` | Fire-and-forget notifications | `void` | `void` |
+| Bus | Purpose | Register method | Dispatch method | Handler return |
+|---|---|---|---|---|
+| `CommandBus` | State-changing mutations | `register(type, handler)` | `execute(action)` → `Promise<R>` (inferred) | `Promise<unknown>` |
+| `QueryBus` | Idempotent reads | `register(type, handler)` | `execute(action)` → `Promise<R>` (inferred) | `Promise<unknown>` |
+| `EventBus` | Fire-and-forget notifications | `on(type, handler)` | `emit(action)` → `void` | `void` |
 
 Commands and queries share a `createRequestBus` factory in `src/shared/cqrs/request-bus.ts`.
-The event bus is a separate implementation with a `logger` dependency for debug-level warnings
-when events have no subscribers.
+The event bus is a separate implementation in `src/shared/cqrs/event-bus.ts` with a `logger` dependency
+for debug-level warnings when events have no subscribers. Note the different API: `on`/`emit` for events
+vs `register`/`execute` for commands and queries.
 
 ## Dependency injection
 
 DI uses [Awilix](https://github.com/jeffijoe/awilix) with `@fastify/awilix`.
 
-- Global dependencies (`db`, `logger`, `buses`, `repositoryBase`) are registered in `src/modules/index.ts`
+- Global dependencies (`db`, `logger`, `commandBus`, `queryBus`, `eventBus`, `repositoryBase`) are registered in `src/modules/index.ts`
 - Module-specific dependencies are declared via `declare global { export interface Dependencies { ... } }` in the module's `index.ts`
 - Repositories, mappers, domain services are auto-loaded as singletons from `src/modules/**/*.{repository,mapper,service,domain}.ts`
 - Handlers and event-handlers are auto-loaded with `asyncInit: 'init'` from `src/modules/**/*.{handler,event-handler}.ts`
 - All handlers receive dependencies as a single destructured object: `function makeX({ dep1, dep2 }: Dependencies)`
+- DI naming convention: kebab-case filenames are converted to camelCase identifiers (e.g. `create-user.handler.ts` → `createUserHandler` in the container)
 
 ## Database
 
 - Client: `postgres` (postgres.js) — uses tagged template literals for parameterized queries
-- Connection: lazy singleton via `getDb()` in `src/shared/db/postgres.ts`
+- Connection: lazy singleton via `getDb()` in `src/shared/db/postgres.ts`; close with `closeDbConnection()`
 - Migrations/seeds: DBMate (SQL files in `db/migrations/` and `db/seeds/`)
 - Transaction support: `withTransaction(async (tx) => { ... })`
-- Repository base: `SqlRepositoryBase` provides generic CRUD (insert, findOneById, findAll, findAllPaginated, update, delete)
+- Repository base: `SqlRepositoryBase` (in `src/shared/db/sql-repository.base.ts`) provides generic CRUD (insert, findOneById, findAll, findAllPaginated, update, delete)
+- Repository ports extend `RepositoryPort<Entity>` (in `src/shared/db/repository.port.ts`)
+- Mapper interface: `Mapper<DomainEntity, DbRecord, Response>` with `toPersistence`, `toDomain`, `toResponse` (in `src/shared/ddd/mapper.interface.ts`)
 
 SQL parameterization rules:
 - Always use tagged templates: `` db`SELECT * FROM ${db(tableName)} WHERE id = ${id}` ``
@@ -168,7 +172,7 @@ SQL parameterization rules:
 
 ### TypeScript
 - `strict: true` with `noImplicitAny: true`
-- Path aliases: `#src/*` maps to `./src/*`, `#tests/*` maps to `./tests/*`
+- Path aliases: `#src/*` maps to `./src/*`, `#tests/*` maps to `./tests/*` (defined as Node [subpath imports](https://nodejs.org/api/packages.html#subpath-imports) in `package.json`, not in `tsconfig.json`)
 - Always include `.ts` extension in imports (ESM requirement)
 - Prefer `type` imports: `import type { Foo } from './bar.ts'`
 
@@ -186,7 +190,7 @@ SQL parameterization rules:
 
 ### Exceptions
 - Domain errors extend `ExceptionBase` (in `src/shared/exceptions/`)
-- Built-in exceptions: `NotFoundException`, `ConflictException`, `DatabaseErrorException`, `BadRequestException`
+- Built-in exceptions: `NotFoundException`, `ConflictException`, `DatabaseErrorException`, `ArgumentInvalidException`, `InternalServerErrorException`, `ProviderErrorException`
 - Always include a descriptive message: `throw new NotFoundException('User with id X not found')`
 
 ## Adding a new module
