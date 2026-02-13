@@ -1,3 +1,15 @@
+# [2.4.0](https://github.com/marcoturi/fastify-boilerplate/compare/v2.3.0...v2.4.0) (2026-02-13)
+
+
+### Bug Fixes
+
+* linting ([077159a](https://github.com/marcoturi/fastify-boilerplate/commit/077159ae0db9fd6cc001c2243b5b37532a0894d0))
+
+
+### Features
+
+* remove lint-staged in favor of biome ([51352ff](https://github.com/marcoturi/fastify-boilerplate/commit/51352ffd51060ab07bddaea12879140c977990d1))
+
 # [2.3.0](https://github.com/marcoturi/fastify-boilerplate/compare/v2.2.0...v2.3.0) (2026-02-13)
 
 
