@@ -1,5 +1,5 @@
-import server from '../../src/server/index.ts';
 import Fastify from 'fastify';
+import server from '../../src/server/index.ts';
 
 export const buildApp = async () => {
   const app = Fastify({

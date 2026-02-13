@@ -1,3 +1,6 @@
+import { asValue } from 'awilix';
+import type { FastifyBaseLogger } from 'fastify';
+import type postgres from 'postgres';
 import type { CommandBus, EventBus, QueryBus } from '#src/shared/cqrs/bus.types.ts';
 import { getDb } from '#src/shared/db/postgres.ts';
 import type { RepositoryPort } from '#src/shared/db/repository.port.ts';
@@ -5,9 +8,6 @@ import {
   SqlRepositoryBase,
   type SqlRepositoryBaseProps,
 } from '#src/shared/db/sql-repository.base.ts';
-import { asValue } from 'awilix';
-import type { FastifyBaseLogger } from 'fastify';
-import type postgres from 'postgres';
 
 type SqlBaseProps<E = { id: string }, D = Record<string, unknown>> = Omit<
   SqlRepositoryBaseProps<E, D>,

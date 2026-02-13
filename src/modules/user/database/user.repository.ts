@@ -1,11 +1,11 @@
+import { type Static, Type } from 'typebox';
 import type {
   UserFilters,
   UserRepository,
 } from '#src/modules/user/database/user.repository.port.ts';
 import { type UserEntity, UserRoles } from '#src/modules/user/domain/user.types.ts';
-import type { Paginated, PaginatedQueryParams } from '#src/shared/db/repository.port.ts';
 import { joinConditions } from '#src/shared/db/postgres.ts';
-import { type Static, Type } from 'typebox';
+import type { Paginated, PaginatedQueryParams } from '#src/shared/db/repository.port.ts';
 
 export const userSchema = Type.Object({
   id: Type.String({ format: 'uuid' }),

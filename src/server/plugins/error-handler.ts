@@ -1,11 +1,11 @@
+import type { FastifyError, FastifyInstance } from 'fastify';
+import fp from 'fastify-plugin';
 import {
   type ApiErrorResponse,
   apiErrorResponseSchema,
 } from '#src/shared/api/api-error.response.ts';
 import { getRequestId } from '#src/shared/app/app-request-context.ts';
 import { ExceptionBase } from '#src/shared/exceptions/index.ts';
-import type { FastifyError, FastifyInstance } from 'fastify';
-import fp from 'fastify-plugin';
 
 const fastifyErrorCodesMap: Record<
   string,

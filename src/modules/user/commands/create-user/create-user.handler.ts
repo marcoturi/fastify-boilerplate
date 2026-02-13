@@ -1,9 +1,9 @@
-import type { CreateUserRequestDto } from './create-user.schema.ts';
-import { userActionCreator } from '#src/modules/user/index.ts';
-import type { UserEntity } from '#src/modules/user/domain/user.types.ts';
 import { UserAlreadyExistsError } from '#src/modules/user/domain/user.errors.ts';
+import type { UserEntity } from '#src/modules/user/domain/user.types.ts';
+import { userActionCreator } from '#src/modules/user/index.ts';
 import type { HandlerAction } from '#src/shared/cqrs/bus.types.ts';
 import { ConflictException } from '#src/shared/exceptions/index.ts';
+import type { CreateUserRequestDto } from './create-user.schema.ts';
 
 export type CreateUserResult = string;
 export const createUserCommand = userActionCreator<CreateUserRequestDto, CreateUserResult>(

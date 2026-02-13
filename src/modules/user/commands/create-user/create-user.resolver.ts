@@ -1,5 +1,5 @@
-import { UserAlreadyExistsError } from '#src/modules/user/domain/user.errors.ts';
 import mercurius from 'mercurius';
+import { UserAlreadyExistsError } from '#src/modules/user/domain/user.errors.ts';
 import { createUserCommand } from './create-user.handler.ts';
 
 export default async function createUserResolver(fastify: FastifyRouteInstance) {

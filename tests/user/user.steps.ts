@@ -1,8 +1,8 @@
-import type { ICustomWorld } from '../support/custom-world.ts';
+import assert from 'node:assert';
+import { Before, Given, Then, When } from '@cucumber/cucumber';
 import type { UserModel } from '#src/modules/user/database/user.repository.ts';
 import type { Paginated } from '#src/shared/db/repository.port.ts';
-import { Before, Given, Then, When } from '@cucumber/cucumber';
-import assert from 'node:assert';
+import type { ICustomWorld } from '../support/custom-world.ts';
 
 Before({ tags: '@user' }, async function (this: ICustomWorld) {
   await this.db`TRUNCATE "users"`;

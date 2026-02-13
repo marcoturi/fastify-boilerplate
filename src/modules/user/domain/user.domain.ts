@@ -1,9 +1,9 @@
+import { randomUUID } from 'node:crypto';
 import {
   type CreateUserProps,
   type UserEntity,
   UserRoles,
 } from '#src/modules/user/domain/user.types.ts';
-import { randomUUID } from 'node:crypto';
 
 export default function userDomain() {
   return {

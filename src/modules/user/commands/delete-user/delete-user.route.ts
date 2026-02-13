@@ -1,6 +1,6 @@
-import { deleteUserCommand } from './delete-user.handler.ts';
-import { idDtoSchema } from '#src/shared/api/id.response.dto.ts';
 import type { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
+import { idDtoSchema } from '#src/shared/api/id.response.dto.ts';
+import { deleteUserCommand } from './delete-user.handler.ts';
 
 export default async function deleteUser(fastify: FastifyRouteInstance) {
   fastify.withTypeProvider<TypeBoxTypeProvider>().route({

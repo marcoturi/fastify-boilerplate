@@ -1,3 +1,4 @@
+import type { FastifyBaseLogger } from 'fastify';
 import { getRequestId } from '#src/shared/app/app-request-context.ts';
 import type {
   Paginated,
@@ -6,7 +7,6 @@ import type {
 } from '#src/shared/db/repository.port.ts';
 import type { Mapper } from '#src/shared/ddd/mapper.interface.ts';
 import { ConflictException, DatabaseErrorException } from '#src/shared/exceptions/index.ts';
-import type { FastifyBaseLogger } from 'fastify';
 
 export interface SqlRepositoryBaseProps<Entity, DbModel> {
   db: Dependencies['db'];

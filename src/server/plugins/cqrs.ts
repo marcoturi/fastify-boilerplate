@@ -1,6 +1,6 @@
-import fastifyCqrs from '../../shared/cqrs/index.ts';
 import type { FastifyInstance } from 'fastify';
 import fp from 'fastify-plugin';
+import fastifyCqrs from '../../shared/cqrs/index.ts';
 
 async function cqrsPlugin(fastify: FastifyInstance) {
   await fastify.register(fastifyCqrs);

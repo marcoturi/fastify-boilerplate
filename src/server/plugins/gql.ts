@@ -1,7 +1,7 @@
+import path from 'node:path';
 import { loadFiles } from '@graphql-tools/load-files';
 import { mergeTypeDefs } from '@graphql-tools/merge';
 import { print } from 'graphql';
-import path from 'node:path';
 
 const getGQL = async () => {
   const typesArraySchema = await loadFiles(path.join(import.meta.dirname, '../../'), {

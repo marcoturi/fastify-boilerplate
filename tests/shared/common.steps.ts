@@ -1,6 +1,6 @@
-import type { ICustomWorld } from '../support/custom-world.ts';
-import { Then } from '@cucumber/cucumber';
 import assert from 'node:assert';
+import { Then } from '@cucumber/cucumber';
+import type { ICustomWorld } from '../support/custom-world.ts';
 
 Then(
   /^I receive an error "(.*)" with status code (\d+)$/,

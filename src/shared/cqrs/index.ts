@@ -1,3 +1,4 @@
+import fastifyPlugin from 'fastify-plugin';
 import type { CommandBus, EventBus, QueryBus } from '#src/shared/cqrs/bus.types.ts';
 import { commandBus } from '#src/shared/cqrs/command-bus.ts';
 import { eventBus } from '#src/shared/cqrs/event-bus.ts';
@@ -8,7 +9,6 @@ import {
 } from '#src/shared/cqrs/middlewares.ts';
 import { makeTracingMiddleware, traceEventMiddleware } from '#src/shared/cqrs/otel-middleware.ts';
 import { queryBus } from '#src/shared/cqrs/query-bus.ts';
-import fastifyPlugin from 'fastify-plugin';
 
 const CQRSPlugin = fastifyPlugin(
   (fastify, _opts, done) => {

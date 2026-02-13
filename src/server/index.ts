@@ -1,6 +1,4 @@
-import env from '#src/config/env.ts';
-import { di } from '#src/server/di/index.ts';
-import getGQL from '#src/server/plugins/gql.ts';
+import path from 'node:path';
 import AutoLoad from '@fastify/autoload';
 import Cors from '@fastify/cors';
 import Helmet from '@fastify/helmet';
@@ -8,7 +6,9 @@ import type { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 import UnderPressure from '@fastify/under-pressure';
 import type { FastifyInstance } from 'fastify';
 import mercurius from 'mercurius';
-import path from 'node:path';
+import env from '#src/config/env.ts';
+import { di } from '#src/server/di/index.ts';
+import getGQL from '#src/server/plugins/gql.ts';
 
 export default async function createServer(fastify: FastifyInstance) {
   // Graphql

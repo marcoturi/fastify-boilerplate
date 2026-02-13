@@ -1,7 +1,7 @@
+import type { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 import { createUserCommand } from '#src/modules/user/commands/create-user/create-user.handler.ts';
 import { createUserRequestDtoSchema } from '#src/modules/user/commands/create-user/create-user.schema.ts';
 import { idDtoSchema } from '#src/shared/api/id.response.dto.ts';
-import type { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 
 export default async function createUser(fastify: FastifyRouteInstance) {
   fastify.withTypeProvider<TypeBoxTypeProvider>().route({
