@@ -1,3 +1,16 @@
+# [2.2.0](https://github.com/marcoturi/fastify-boilerplate/compare/v2.1.0...v2.2.0) (2026-02-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency awilix to v12.1.1 ([#875](https://github.com/marcoturi/fastify-boilerplate/issues/875)) ([cae3f38](https://github.com/marcoturi/fastify-boilerplate/commit/cae3f38937d9a8cbd31e234aa8881df4ae48944c))
+
+
+### Features
+
+* add AGENTS.md ([2afe59f](https://github.com/marcoturi/fastify-boilerplate/commit/2afe59f2695271f9037c52301a2d51fb3a3ba659))
+* add Dockerfile ([6898a78](https://github.com/marcoturi/fastify-boilerplate/commit/6898a78ee39d24cd8b3e67d8ea127ed503971e9f))
+
 # [2.1.0](https://github.com/marcoturi/fastify-boilerplate/compare/v2.0.0...v2.1.0) (2026-02-12)
 
 

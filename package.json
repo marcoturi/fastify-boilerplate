@@ -1,6 +1,6 @@
 {
   "name": "fastify-boilerplate",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "A Fastify template that follows the Clean Architecture principles and encourages established practices.",
   "author": "Marco Turi <marco.turi@hotmail.it>",
   "license": "MIT",
@@ -40,8 +40,13 @@
   },
   "packageManager": "pnpm@10.29.3",
   "lint-staged": {
-    "*.ts": ["biome lint --write", "biome format --write"],
-    "*.json": ["biome format --write"]
+    "*.ts": [
+      "biome lint --write",
+      "biome format --write"
+    ],
+    "*.json": [
+      "biome format --write"
+    ]
   },
   "dependencies": {
     "@fastify/autoload": "6.3.1",
