@@ -1,0 +1,51 @@
+# Dependencies
+node_modules
+
+# Version control
+.git
+.gitignore
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Documentation
+*.md
+doc/
+
+# Tests
+tests/
+coverage/
+reports/
+screenshots/
+
+# IDE / Editor
+.vscode/
+.idea/
+.cursor/
+.DS_Store
+
+# Dev tooling
+.husky/
+.dependency-cruiser.cjs
+biome.json
+tsconfig.json
+commitlint.config.ts
+cucumber.json
+.specstory
+.history
+
+# Docker
+docker-compose.yml
+Dockerfile
+
+# DB migrations (run separately)
+db/
+
+# Misc
+*.log
+.cache
+traces
+.nvmrc
+client.schema.d.ts

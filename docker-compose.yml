@@ -6,3 +6,23 @@ services:
     env_file:
       - path: ./.env
         required: true
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  app:
+    build: .
+    ports:
+      - 3000:3000
+    env_file:
+      - path: ./.env
+        required: true
+    environment:
+      HOST: 0.0.0.0
+      NODE_ENV: production
+      POSTGRES_URL: postgres:5432
+    depends_on:
+      postgres:
+        condition: service_healthy

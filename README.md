@@ -6,10 +6,12 @@ This meticulously crafted boilerplate serves as a solid foundation for building 
 
 ## ⚡ Features
 
+- Native TypeScript: Runs TypeScript directly via [Node.js >= 24](https://nodejs.org/en/blog/release/v24.0.0) native type stripping — no build step, no transpiler, no `tsc --build`
 - Framework: [Fastify 5](https://github.com/fastify/fastify) with [Awilix](https://github.com/jeffijoe/awilix) for the dependency injection and [Pino](https://github.com/pinojs/pino) for logging
 - Plugins: [@fastify/helmet](https://github.com/fastify/fastify-helmet) for security headers, [@fastify/swagger](https://github.com/fastify/fastify-swagger) for Swagger documentation, [@fastify/under-pressure](https://github.com/fastify/under-pressure) for automatic handling of "Service Unavailable", [@fastify/awilix](https://github.com/fastify/fastify-awilix) for dependency injection, [typebox](https://github.com/sinclairzx81/typebox) for JSON schema and TS generation and validation
 - DB: [Postgres](https://github.com/porsager/postgres) as client + [DBMate](https://github.com/amacneil/dbmate) for seeds and migrations
 - Graphql: [Mercurius](https://github.com/mercurius-js/mercurius)
+- Docker: Production-ready multi-stage [Dockerfile](Dockerfile) with Alpine, non-root user, health checks, and [Docker Compose](docker-compose.yml) for local development
 - Format and Style: [Biome](https://biomejs.dev/) for linting and formatting
 - Dependencies validation: [depcruise](https://github.com/sverweij/dependency-cruiser)
 - Release flow: [Husky](https://github.com/typicode/husky) + [Commitlint](https://commitlint.js.org/) + [Semantic-release](https://github.com/semantic-release/semantic-release)
@@ -50,6 +52,30 @@ pnpm install
 - `pnpm db:migrate` - start db migrations.
 - `pnpm db:create-seed` - creates a new db seed.
 - `pnpm db:seed` - start db seeds.
+
+### Docker
+
+Run the full stack (app + Postgres) with Docker Compose:
+
+```bash
+pnpm create:env   # create .env from .env.example (if not done already)
+docker compose up  # builds the app image and starts all services
+```
+
+Or build and run the image standalone:
+
+```bash
+docker build -t fastify-boilerplate .
+docker run -p 3000:3000 --env-file .env -e HOST=0.0.0.0 fastify-boilerplate
+```
+
+The Dockerfile follows production best practices:
+
+- **Multi-stage build** — dependencies are installed in an isolated stage for optimal layer caching
+- **Node 24 Alpine** — small image footprint (~280 MB), leveraging native TypeScript execution (no build step)
+- **Non-root user** — the app runs as an unprivileged `fastify` user (uid 1001)
+- **dumb-init** — proper PID 1 signal forwarding for graceful shutdown
+- **HEALTHCHECK** — built-in Docker health check against the `/health` endpoint
 
 ## <a name="principles"></a>🧱 Principles
 

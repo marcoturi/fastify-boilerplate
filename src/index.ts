@@ -42,7 +42,7 @@ async function init() {
   process.on('SIGINT', () => shutDown('SIGINT'));
 
   try {
-    await fastify.listen({ port: env.server.port });
+    await fastify.listen({ port: env.server.port, host: env.server.host });
     fastify.log.info('Server is ready');
   } catch (error) {
     fastify.log.error(error);

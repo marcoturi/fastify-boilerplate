@@ -40,13 +40,8 @@
   },
   "packageManager": "pnpm@10.29.3",
   "lint-staged": {
-    "*.ts": [
-      "biome lint --write",
-      "biome format --write"
-    ],
-    "*.json": [
-      "biome format --write"
-    ]
+    "*.ts": ["biome lint --write", "biome format --write"],
+    "*.json": ["biome format --write"]
   },
   "dependencies": {
     "@fastify/autoload": "6.3.1",
