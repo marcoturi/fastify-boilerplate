@@ -53,6 +53,10 @@
         "@semantic-release/changelog",
         "@semantic-release/npm",
         {
+          "path": "@semantic-release/exec",
+          "prepareCmd": "pnpm biome format --write package.json client/package.json"
+        },
+        {
           "path": "@semantic-release/git",
           "assets": [
             "package.json",

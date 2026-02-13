@@ -41,13 +41,8 @@
   },
   "packageManager": "pnpm@10.29.3",
   "lint-staged": {
-    "*.ts": [
-      "biome lint --write",
-      "biome format --write"
-    ],
-    "*.json": [
-      "biome format --write"
-    ]
+    "*.ts": ["biome lint --write", "biome format --write"],
+    "*.json": ["biome format --write"]
   },
   "dependencies": {
     "@fastify/autoload": "6.3.1",
@@ -89,6 +84,7 @@
     "@graphql-codegen/typescript": "5.0.7",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "13.0.1",
+    "@semantic-release/exec": "7.1.0",
     "@semantic-release/git": "10.0.1",
     "@semantic-release/github": "12.0.6",
     "@semantic-release/npm": "13.1.4",
