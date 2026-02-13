@@ -1,3 +1,16 @@
+# [2.3.0](https://github.com/marcoturi/fastify-boilerplate/compare/v2.2.0...v2.3.0) (2026-02-13)
+
+
+### Bug Fixes
+
+* add missing files ([8b55af0](https://github.com/marcoturi/fastify-boilerplate/commit/8b55af066b18a619fefebf83b5e7cd39d38beccf))
+
+
+### Features
+
+* add client types npm package ([7e94369](https://github.com/marcoturi/fastify-boilerplate/commit/7e94369bac1729c24163dade5d578529a610e049))
+* add OpenTelemtry implementation ([d3614a3](https://github.com/marcoturi/fastify-boilerplate/commit/d3614a3826dd13c33467805c83b92e689f8e964f))
+
 # [2.2.0](https://github.com/marcoturi/fastify-boilerplate/compare/v2.1.0...v2.2.0) (2026-02-13)
 
 
