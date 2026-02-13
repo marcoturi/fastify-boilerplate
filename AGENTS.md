@@ -30,6 +30,7 @@ The dependency flow is strictly **inward**: `Route → Handler → Domain → Re
 
 ```
 src/
+├── instrumentation.ts ← OpenTelemetry setup (loaded via --import before the app)
 ├── modules/         ← Feature code (vertical slices)
 │   └── <feature>/
 │       ├── commands/ ← State-changing operations

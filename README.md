@@ -12,6 +12,7 @@ This meticulously crafted boilerplate serves as a solid foundation for building 
 - DB: [Postgres](https://github.com/porsager/postgres) as client + [DBMate](https://github.com/amacneil/dbmate) for seeds and migrations
 - Graphql: [Mercurius](https://github.com/mercurius-js/mercurius)
 - Docker: Production-ready multi-stage [Dockerfile](Dockerfile) with Alpine, non-root user, health checks, and [Docker Compose](docker-compose.yml) for local development
+- Telemetry: Vendor-agnostic [OpenTelemetry](https://opentelemetry.io/) with auto-instrumentation, disabled by default, ready for any OTLP-compatible backend
 - Format and Style: [Biome](https://biomejs.dev/) for linting and formatting
 - Dependencies validation: [depcruise](https://github.com/sverweij/dependency-cruiser)
 - Release flow: [Husky](https://github.com/typicode/husky) + [Commitlint](https://commitlint.js.org/) + [Semantic-release](https://github.com/semantic-release/semantic-release)
@@ -209,14 +210,24 @@ This boilerplate draws inspiration from [Domain-Driven Hexagon](https://github.c
 
 [react-redux boilerplate](https://github.com/marcoturi/react-redux-boilerplate): A meticulously crafted, extensible, and robust architecture for constructing production-grade React applications.
 
-### Telemetry
+### Telemetry (OpenTelemetry)
 
-While including a specific application instrumentation example is avoided in this project due to configuration and provider variations, I strongly recommend considering [OpenTelemetry](https://opentelemetry.io/). It offers significant benefits:
+This project ships with a vendor-agnostic [OpenTelemetry](https://opentelemetry.io/) setup in [`src/instrumentation.ts`](src/instrumentation.ts). It is loaded before the application via the `--import` flag and uses the standard [OTLP](https://opentelemetry.io/docs/specs/otlp/) protocol, so it works with any backend — Grafana, Datadog, Honeycomb, Jaeger, and others — without code changes.
 
-- Vendor Independence: OpenTelemetry is an open standard, freeing you from vendor lock-in. This flexibility allows you to choose and swap backend tools as needed without rewriting instrumentation code.
-- Simplified Instrumentation: OpenTelemetry provides language-specific SDKs and automatic instrumentation features that significantly reduce the complexity of adding tracing, metrics, and logs to your codebase.
-- Unified Observability: By offering a consistent way to collect and export telemetry data, OpenTelemetry facilitates a more holistic view of your application's performance.
-- Reduced Development Time: OpenTelemetry allows you to write instrumentation code once and export it to any compatible backend system, streamlining development efforts.
+**How it works:**
+
+- **HTTP + Fastify** — [`src/instrumentation.ts`](src/instrumentation.ts) registers the [ESM loader hook](https://github.com/open-telemetry/opentelemetry-js/blob/main/doc/esm-support.md) and initialises the `NodeSDK` with `instrumentation-http` and [`@fastify/otel`](https://github.com/fastify/otel) (Fastify's official OTel plugin). Every inbound request gets a trace span with route, method, status code, and full lifecycle hook instrumentation (`onRequest`, `preHandler`, `onSend`, etc.).
+- **CQRS** — A tracing middleware in [`src/shared/cqrs/otel-middleware.ts`](src/shared/cqrs/otel-middleware.ts) wraps every command, query, and event execution in an OTel span. Spans include the action type, bus kind, and correlation ID.
+- **Disabled by default** (`OTEL_SDK_DISABLED=true` in `.env.example`). When disabled, the SDK is not loaded and `@opentelemetry/api` returns noop implementations — zero overhead.
+- To enable, set the standard OTel environment variables:
+
+```bash
+OTEL_SDK_DISABLED=false
+OTEL_SERVICE_NAME=fastify-boilerplate
+OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318   # your collector
+```
+
+All configuration is done through [standard OTel environment variables](https://opentelemetry.io/docs/languages/sdk-configuration/general/) — no vendor-specific code required.
 
 ### Why Biome over ESLint + Prettier?
 
