@@ -1,4 +1,4 @@
-pnpm lint-staged --allow-empty
+biome check --staged --write --no-errors-on-unmatched
 pnpm type:check
 pnpm deps:validate
 pnpm test

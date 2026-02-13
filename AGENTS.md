@@ -13,7 +13,7 @@ TypeScript strict mode, ESM-only, Node >= 24 (native TS execution, no build step
 |---|---|
 | Package manager | `pnpm` (never npm or yarn) |
 | Linter + formatter | Biome (never ESLint or Prettier) |
-| Validation after changes | `pnpm check` (runs `biome lint && biome format && tsc --noEmit`) |
+| Validation after changes | `pnpm check` (runs `biome check && tsc --noEmit`) |
 | Auto-fix formatting | `pnpm format` |
 | Unit tests | `pnpm test:unit` (node:test) |
 | E2E tests | `pnpm test:e2e` (Cucumber + Gherkin) |
