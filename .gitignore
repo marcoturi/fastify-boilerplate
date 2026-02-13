@@ -30,3 +30,7 @@ coverage
 .specstory
 .history
 .cursor
+
+# Generated client types (produced by generate:types script)
+client/rest.d.ts
+client/graphql.ts

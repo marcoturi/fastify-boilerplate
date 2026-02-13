@@ -69,9 +69,18 @@ jobs:
           name: reports
           path: reports/
           retention-days: 30
+      - name: Generate client types
+        run: pnpm generate:types
+        env:
+          POSTGRES_URL: localhost:5432
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: postgres
+          LOG_LEVEL: error
+          NODE_ENV: test
+          OTEL_SDK_DISABLED: "true"
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          NPM_TOKEN: "unused"
           HUSKY: 0
         run: pnpm semantic-release
