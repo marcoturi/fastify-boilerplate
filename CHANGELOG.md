@@ -1,3 +1,10 @@
+## [2.4.1](https://github.com/marcoturi/fastify-boilerplate/compare/v2.4.0...v2.4.1) (2026-02-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency ajv to v8.18.0 ([#876](https://github.com/marcoturi/fastify-boilerplate/issues/876)) ([c3813dd](https://github.com/marcoturi/fastify-boilerplate/commit/c3813dd209f9c2559277500281fa1128c3d11877))
+
 # [2.4.0](https://github.com/marcoturi/fastify-boilerplate/compare/v2.3.0...v2.4.0) (2026-02-13)
 
 
