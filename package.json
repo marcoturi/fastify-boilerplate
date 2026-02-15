@@ -58,7 +58,7 @@
     "@opentelemetry/sdk-node": "0.212.0",
     "ajv": "8.18.0",
     "ajv-formats": "3.0.1",
-    "awilix": "12.1.1",
+    "awilix": "13.0.0",
     "env-schema": "7.0.0",
     "fastify": "5.7.4",
     "fastify-plugin": "5.1.0",
