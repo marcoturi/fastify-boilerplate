@@ -105,9 +105,9 @@
         "noClassAssign": "error",
         "noCompareNegZero": "error",
         "noConfusingVoidType": "error",
+        "noConsole": "warn",
         "noConstantBinaryExpressions": "error",
         "noControlCharactersInRegex": "error",
-        "noConsole": "warn",
         "noDebugger": "error",
         "noDocumentCookie": "error",
         "noDuplicateCase": "error",
@@ -122,6 +122,7 @@
         "noFunctionAssign": "error",
         "noGlobalAssign": "error",
         "noImportAssign": "error",
+        "noImportCycles": "error",
         "noIrregularWhitespace": "error",
         "noMisleadingCharacterClass": "error",
         "noMisleadingInstantiator": "error",
@@ -146,7 +147,6 @@
         "noSecrets": "error"
       },
       "nursery": {
-        "noImportCycles": "error",
         "noFloatingPromises": "error"
       }
     }
