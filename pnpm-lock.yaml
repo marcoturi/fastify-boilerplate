@@ -112,8 +112,8 @@ importers:
         specifier: 6.1.1
         version: 6.1.1(@fastify/websocket@11.2.0)(@types/node@25.2.3)(graphql@16.12.0)(typescript@5.9.3)
       '@graphql-codegen/typescript':
-        specifier: 5.0.7
-        version: 5.0.7(graphql@16.12.0)
+        specifier: 5.0.8
+        version: 5.0.8(graphql@16.12.0)
       '@semantic-release/changelog':
         specifier: 6.0.3
         version: 6.0.3(semantic-release@25.0.3(typescript@5.9.3))
@@ -673,14 +673,20 @@ packages:
       graphql-sock:
         optional: true
 
-  '@graphql-codegen/typescript@5.0.7':
-    resolution: {integrity: sha512-kZwcu9Iat5RWXxLGPnDbG6qVbGTigF25/aGqCG/DCQ1Al8RufSjVXhIOkJBp7QWAqXn3AupHXL1WTMXP7xs4dQ==}
+  '@graphql-codegen/typescript@5.0.8':
+    resolution: {integrity: sha512-lUW6ari+rXP6tz5B0LXjmV9rEMOphoCZAkt+SJGObLQ6w6544ZsXSsRga/EJiSvZ1fRfm9yaFoErOZ56IVThyg==}
     engines: {node: '>=16'}
     peerDependencies:
       graphql: ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
 
   '@graphql-codegen/visitor-plugin-common@6.2.2':
     resolution: {integrity: sha512-wEJ4zJj58PKlXISItZfr0xIHyM1lAuRfoflPegsb1L17Mx5+YzNOy0WAlLele3yzyV89WvCiprFKMcVQ7KfDXg==}
+    engines: {node: '>=16'}
+    peerDependencies:
+      graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+
+  '@graphql-codegen/visitor-plugin-common@6.2.3':
+    resolution: {integrity: sha512-Rewl/QRFfIOXHFK3i/ts4VodsaB4N22kckH1zweTzq7SFodkfrqGrLa/MrGLJ/q6aUuqGiqao7f4Za2IjjkCxw==}
     engines: {node: '>=16'}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
@@ -4658,7 +4664,7 @@ snapshots:
       '@graphql-codegen/gql-tag-operations': 5.1.2(graphql@16.12.0)
       '@graphql-codegen/plugin-helpers': 6.1.0(graphql@16.12.0)
       '@graphql-codegen/typed-document-node': 6.1.5(graphql@16.12.0)
-      '@graphql-codegen/typescript': 5.0.7(graphql@16.12.0)
+      '@graphql-codegen/typescript': 5.0.8(graphql@16.12.0)
       '@graphql-codegen/typescript-operations': 5.0.7(graphql@16.12.0)
       '@graphql-codegen/visitor-plugin-common': 6.2.2(graphql@16.12.0)
       '@graphql-tools/documents': 1.0.1(graphql@16.12.0)
@@ -4719,7 +4725,7 @@ snapshots:
   '@graphql-codegen/typescript-operations@5.0.7(graphql@16.12.0)':
     dependencies:
       '@graphql-codegen/plugin-helpers': 6.1.0(graphql@16.12.0)
-      '@graphql-codegen/typescript': 5.0.7(graphql@16.12.0)
+      '@graphql-codegen/typescript': 5.0.8(graphql@16.12.0)
       '@graphql-codegen/visitor-plugin-common': 6.2.2(graphql@16.12.0)
       auto-bind: 4.0.0
       graphql: 16.12.0
@@ -4727,11 +4733,11 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@graphql-codegen/typescript@5.0.7(graphql@16.12.0)':
+  '@graphql-codegen/typescript@5.0.8(graphql@16.12.0)':
     dependencies:
       '@graphql-codegen/plugin-helpers': 6.1.0(graphql@16.12.0)
       '@graphql-codegen/schema-ast': 5.0.0(graphql@16.12.0)
-      '@graphql-codegen/visitor-plugin-common': 6.2.2(graphql@16.12.0)
+      '@graphql-codegen/visitor-plugin-common': 6.2.3(graphql@16.12.0)
       auto-bind: 4.0.0
       graphql: 16.12.0
       tslib: 2.6.3
@@ -4739,6 +4745,22 @@ snapshots:
       - encoding
 
   '@graphql-codegen/visitor-plugin-common@6.2.2(graphql@16.12.0)':
+    dependencies:
+      '@graphql-codegen/plugin-helpers': 6.1.0(graphql@16.12.0)
+      '@graphql-tools/optimize': 2.0.0(graphql@16.12.0)
+      '@graphql-tools/relay-operation-optimizer': 7.0.27(graphql@16.12.0)
+      '@graphql-tools/utils': 10.11.0(graphql@16.12.0)
+      auto-bind: 4.0.0
+      change-case-all: 1.0.15
+      dependency-graph: 1.0.0
+      graphql: 16.12.0
+      graphql-tag: 2.12.6(graphql@16.12.0)
+      parse-filepath: 1.0.2
+      tslib: 2.6.3
+    transitivePeerDependencies:
+      - encoding
+
+  '@graphql-codegen/visitor-plugin-common@6.2.3(graphql@16.12.0)':
     dependencies:
       '@graphql-codegen/plugin-helpers': 6.1.0(graphql@16.12.0)
       '@graphql-tools/optimize': 2.0.0(graphql@16.12.0)
@@ -5018,14 +5040,14 @@ snapshots:
   '@graphql-tools/optimize@2.0.0(graphql@16.12.0)':
     dependencies:
       graphql: 16.12.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   '@graphql-tools/relay-operation-optimizer@7.0.27(graphql@16.12.0)':
     dependencies:
       '@ardatan/relay-compiler': 12.0.3(graphql@16.12.0)
       '@graphql-tools/utils': 11.0.0(graphql@16.12.0)
       graphql: 16.12.0
-      tslib: 2.6.3
+      tslib: 2.8.1
     transitivePeerDependencies:
       - encoding
 
@@ -6715,7 +6737,7 @@ snapshots:
   graphql-tag@2.12.6(graphql@16.12.0):
     dependencies:
       graphql: 16.12.0
-      tslib: 2.6.3
+      tslib: 2.8.1
 
   graphql-ws@6.0.7(@fastify/websocket@11.2.0)(graphql@16.12.0)(ws@8.19.0):
     dependencies:
