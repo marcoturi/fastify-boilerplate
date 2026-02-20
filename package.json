@@ -68,7 +68,7 @@
     "typebox": "1.0.81"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.2",
+    "@biomejs/biome": "2.4.3",
     "@commitlint/cli": "20.4.2",
     "@commitlint/config-conventional": "20.4.2",
     "@cucumber/cucumber": "12.6.0",
