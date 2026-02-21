@@ -1,6 +1,6 @@
 {
   "name": "fastify-boilerplate",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "description": "A Fastify template that follows the Clean Architecture principles and encourages established practices.",
   "author": "Marco Turi <marco.turi@hotmail.it>",
   "license": "MIT",
