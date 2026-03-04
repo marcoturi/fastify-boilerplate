@@ -1,3 +1,10 @@
+## [2.4.11](https://github.com/marcoturi/fastify-boilerplate/compare/v2.4.10...v2.4.11) (2026-03-04)
+
+
+### Bug Fixes
+
+* **deps:** update opentelemetry-js monorepo to v0.213.0 ([#912](https://github.com/marcoturi/fastify-boilerplate/issues/912)) ([f35efe8](https://github.com/marcoturi/fastify-boilerplate/commit/f35efe8a198209b94a36c0ed27fdee9283749521))
+
 ## [2.4.10](https://github.com/marcoturi/fastify-boilerplate/compare/v2.4.9...v2.4.10) (2026-03-04)
 
 
