@@ -1,3 +1,10 @@
+## [2.4.12](https://github.com/marcoturi/fastify-boilerplate/compare/v2.4.11...v2.4.12) (2026-03-05)
+
+
+### Bug Fixes
+
+* **deps:** update dependency graphql to v16.13.1 ([#913](https://github.com/marcoturi/fastify-boilerplate/issues/913)) ([3a2f973](https://github.com/marcoturi/fastify-boilerplate/commit/3a2f973a364571d16bb222e35cfe23ff52b342e7))
+
 ## [2.4.11](https://github.com/marcoturi/fastify-boilerplate/compare/v2.4.10...v2.4.11) (2026-03-04)
 
 
