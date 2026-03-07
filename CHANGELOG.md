@@ -1,3 +1,10 @@
+## [2.4.15](https://github.com/marcoturi/fastify-boilerplate/compare/v2.4.14...v2.4.15) (2026-03-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency mercurius to v16.8.0 [security] ([#918](https://github.com/marcoturi/fastify-boilerplate/issues/918)) ([eb533a5](https://github.com/marcoturi/fastify-boilerplate/commit/eb533a5700817928d97e1c2e9bd795c427832ba9))
+
 ## [2.4.14](https://github.com/marcoturi/fastify-boilerplate/compare/v2.4.13...v2.4.14) (2026-03-06)
 
 
