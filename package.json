@@ -69,8 +69,8 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.6",
-    "@commitlint/cli": "20.4.3",
-    "@commitlint/config-conventional": "20.4.3",
+    "@commitlint/cli": "20.4.4",
+    "@commitlint/config-conventional": "20.4.4",
     "@cucumber/cucumber": "12.7.0",
     "@cucumber/html-formatter": "23.0.0",
     "@cucumber/messages": "32.2.0",
