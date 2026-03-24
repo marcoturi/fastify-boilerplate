@@ -1,3 +1,10 @@
+## [2.4.17](https://github.com/marcoturi/fastify-boilerplate/compare/v2.4.16...v2.4.17) (2026-03-24)
+
+
+### Bug Fixes
+
+* **deps:** update dependency fastify to v5.8.4 ([#933](https://github.com/marcoturi/fastify-boilerplate/issues/933)) ([8b3b542](https://github.com/marcoturi/fastify-boilerplate/commit/8b3b54258a06ca76ff5523c5cd7da85b6402ee2c))
+
 ## [2.4.16](https://github.com/marcoturi/fastify-boilerplate/compare/v2.4.15...v2.4.16) (2026-03-07)
 
 
