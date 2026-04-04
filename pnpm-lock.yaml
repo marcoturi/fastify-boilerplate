@@ -78,8 +78,8 @@ importers:
         specifier: 16.13.2
         version: 16.13.2
       mercurius:
-        specifier: 16.8.0
-        version: 16.8.0(graphql@16.13.2)
+        specifier: 16.9.0
+        version: 16.9.0(graphql@16.13.2)
       postgres:
         specifier: 3.4.8
         version: 3.4.8
@@ -2726,8 +2726,8 @@ packages:
     resolution: {integrity: sha512-pxQJQzB6djGPXh08dacEloMFopsOqGVRKFPYvPOt9XDZ1HasbgDZA74CJGreSU4G3Ak7EFJGoiH2auq+yXISgA==}
     engines: {node: '>=18'}
 
-  mercurius@16.8.0:
-    resolution: {integrity: sha512-b0ZxtmqgqH8GBvXxs5wITLNZdTOVd7FzkuvUkUgg0waEM1UD8buDcl0RVrqH745WOpGRqID2ltWRVfNeLIXh5w==}
+  mercurius@16.9.0:
+    resolution: {integrity: sha512-3td+e+SZyA7Gp/Tb51ncYdOGD5OsXh6zK4FjUJx+2pSHbJJEWE11EjKAAqhf3Xrp2JjMlg6dBrmRWsdM9E5G1Q==}
     engines: {node: ^20.9.0 || >=22.0.0}
     peerDependencies:
       graphql: ^16.0.0
@@ -6922,7 +6922,7 @@ snapshots:
 
   meow@13.2.0: {}
 
-  mercurius@16.8.0(graphql@16.13.2):
+  mercurius@16.9.0(graphql@16.13.2):
     dependencies:
       '@fastify/error': 4.2.0
       '@fastify/static': 9.0.0
