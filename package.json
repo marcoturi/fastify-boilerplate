@@ -64,7 +64,7 @@
     "fastify-plugin": "5.1.0",
     "graphql": "16.13.2",
     "mercurius": "16.9.0",
-    "postgres": "3.4.8",
+    "postgres": "3.4.9",
     "typebox": "1.1.15"
   },
   "devDependencies": {

@@ -81,8 +81,8 @@ importers:
         specifier: 16.9.0
         version: 16.9.0(graphql@16.13.2)
       postgres:
-        specifier: 3.4.8
-        version: 3.4.8
+        specifier: 3.4.9
+        version: 3.4.9
       typebox:
         specifier: 1.1.15
         version: 1.1.15
@@ -3157,8 +3157,8 @@ packages:
     resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
     engines: {node: '>=4'}
 
-  postgres@3.4.8:
-    resolution: {integrity: sha512-d+JFcLM17njZaOLkv6SCev7uoLaBtfK86vMUXhW1Z4glPWh4jozno9APvW/XKFJ3CCxVoC7OL38BqRydtu5nGg==}
+  postgres@3.4.9:
+    resolution: {integrity: sha512-GD3qdB0x1z9xgFI6cdRD6xu2Sp2WCOEoe3mtnyB5Ee0XrrL5Pe+e4CCnJrRMnL1zYtRDZmQQVbvOttLnKDLnaw==}
     engines: {node: '>=12'}
 
   pretty-ms@9.3.0:
@@ -7274,7 +7274,7 @@ snapshots:
 
   pluralize@8.0.0: {}
 
-  postgres@3.4.8: {}
+  postgres@3.4.9: {}
 
   pretty-ms@9.3.0:
     dependencies:
