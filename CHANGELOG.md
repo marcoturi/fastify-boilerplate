@@ -1,3 +1,10 @@
+## [2.4.30](https://github.com/marcoturi/fastify-boilerplate/compare/v2.4.29...v2.4.30) (2026-04-05)
+
+
+### Bug Fixes
+
+* **deps:** update dependency postgres to v3.4.9 ([#954](https://github.com/marcoturi/fastify-boilerplate/issues/954)) ([72c0711](https://github.com/marcoturi/fastify-boilerplate/commit/72c071190ca4f66db0157fb1a8e2fb238068a626))
+
 ## [2.4.29](https://github.com/marcoturi/fastify-boilerplate/compare/v2.4.28...v2.4.29) (2026-04-05)
 
 
