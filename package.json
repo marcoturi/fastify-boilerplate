@@ -73,7 +73,7 @@
     "@commitlint/config-conventional": "20.5.0",
     "@cucumber/cucumber": "12.8.0",
     "@cucumber/html-formatter": "23.1.0",
-    "@cucumber/messages": "32.2.0",
+    "@cucumber/messages": "32.3.1",
     "@cucumber/pretty-formatter": "3.2.0",
     "@graphql-codegen/cli": "6.2.1",
     "@graphql-codegen/typescript": "5.0.9",
