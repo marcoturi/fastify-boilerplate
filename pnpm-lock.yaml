@@ -57,11 +57,11 @@ importers:
         specifier: 0.215.0
         version: 0.215.0(@opentelemetry/api@1.9.1)
       ajv:
-        specifier: 8.18.0
-        version: 8.18.0
+        specifier: 8.20.0
+        version: 8.20.0
       ajv-formats:
         specifier: 3.0.1
-        version: 3.0.1(ajv@8.18.0)
+        version: 3.0.1(ajv@8.20.0)
       awilix:
         specifier: 13.0.3
         version: 13.0.3
@@ -1497,8 +1497,8 @@ packages:
       ajv:
         optional: true
 
-  ajv@8.18.0:
-    resolution: {integrity: sha512-PlXPeEWMXMZ7sPYOHqmDyCJzcfNrUr3fGNKtezX14ykXOEIvyK81d+qydx89KY5O71FKMPaQ2vBfBFI5NHR63A==}
+  ajv@8.20.0:
+    resolution: {integrity: sha512-Thbli+OlOj+iMPYFBVBfJ3OmCAnaSyNn4M1vz9T6Gka5Jt9ba/HIR56joy65tY6kx/FCF5VXNB819Y7/GUrBGA==}
 
   ansi-colors@4.1.3:
     resolution: {integrity: sha512-/6w/C21Pm1A7aZitlI5Ni/2J6FFQN8i1Cvz3kHABAAbw93v/NlvKdVOqz7CCWz/3iv/JplRSEEZ83XION15ovw==}
@@ -4094,7 +4094,7 @@ snapshots:
   '@commitlint/config-validator@20.5.0':
     dependencies:
       '@commitlint/types': 20.5.0
-      ajv: 8.18.0
+      ajv: 8.20.0
 
   '@commitlint/ensure@20.5.0':
     dependencies:
@@ -4364,8 +4364,8 @@ snapshots:
 
   '@fastify/ajv-compiler@4.0.5':
     dependencies:
-      ajv: 8.18.0
-      ajv-formats: 3.0.1(ajv@8.18.0)
+      ajv: 8.20.0
+      ajv-formats: 3.0.1(ajv@8.20.0)
       fast-uri: 3.1.0
 
   '@fastify/autoload@6.3.1': {}
@@ -5664,11 +5664,11 @@ snapshots:
       clean-stack: 5.3.0
       indent-string: 5.0.0
 
-  ajv-formats@3.0.1(ajv@8.18.0):
+  ajv-formats@3.0.1(ajv@8.20.0):
     optionalDependencies:
-      ajv: 8.18.0
+      ajv: 8.20.0
 
-  ajv@8.18.0:
+  ajv@8.20.0:
     dependencies:
       fast-deep-equal: 3.1.3
       fast-uri: 3.1.0
@@ -6152,7 +6152,7 @@ snapshots:
 
   env-schema@7.0.0:
     dependencies:
-      ajv: 8.18.0
+      ajv: 8.20.0
 
   environment@1.1.0: {}
 
@@ -6236,8 +6236,8 @@ snapshots:
   fast-json-stringify@5.16.1:
     dependencies:
       '@fastify/merge-json-schemas': 0.1.1
-      ajv: 8.18.0
-      ajv-formats: 3.0.1(ajv@8.18.0)
+      ajv: 8.20.0
+      ajv-formats: 3.0.1(ajv@8.20.0)
       fast-deep-equal: 3.1.3
       fast-uri: 2.4.0
       json-schema-ref-resolver: 1.0.1
@@ -6246,8 +6246,8 @@ snapshots:
   fast-json-stringify@6.3.0:
     dependencies:
       '@fastify/merge-json-schemas': 0.2.1
-      ajv: 8.18.0
-      ajv-formats: 3.0.1(ajv@8.18.0)
+      ajv: 8.20.0
+      ajv-formats: 3.0.1(ajv@8.20.0)
       fast-uri: 3.1.0
       json-schema-ref-resolver: 3.0.0
       rfdc: 1.4.1
