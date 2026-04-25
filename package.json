@@ -56,7 +56,7 @@
     "@opentelemetry/instrumentation": "0.215.0",
     "@opentelemetry/instrumentation-http": "0.215.0",
     "@opentelemetry/sdk-node": "0.215.0",
-    "ajv": "8.18.0",
+    "ajv": "8.20.0",
     "ajv-formats": "3.0.1",
     "awilix": "13.0.3",
     "env-schema": "7.0.0",
