@@ -106,8 +106,8 @@ importers:
         specifier: 32.3.1
         version: 32.3.1
       '@cucumber/pretty-formatter':
-        specifier: 3.2.0
-        version: 3.2.0(@cucumber/messages@32.3.1)
+        specifier: 3.3.0
+        version: 3.3.0(@cucumber/messages@32.3.1)
       '@graphql-codegen/cli':
         specifier: 6.3.1
         version: 6.3.1(@fastify/websocket@11.2.0)(@types/node@25.6.0)(graphql@16.13.2)(typescript@5.9.3)
@@ -462,8 +462,8 @@ packages:
       '@cucumber/cucumber': '>=7.0.0'
       '@cucumber/messages': '*'
 
-  '@cucumber/pretty-formatter@3.2.0':
-    resolution: {integrity: sha512-QN+UwKHMGs/PwDCu/CU6Q9F89SvMgS2Gh9GU05CFNDE/asJjhCYdh0IksfFZfwPcbJ/3WxcqXLuNzUws0npPgw==}
+  '@cucumber/pretty-formatter@3.3.0':
+    resolution: {integrity: sha512-3wA2O8RXtHnvzSGKA46z4MI4PuSYYWNtXYiBHYjP9bIO+Ee87ZKsOk8XKdIv4ECwXSsbCmYW0XIN4nXI0yA4Fw==}
     peerDependencies:
       '@cucumber/messages': '*'
 
@@ -4280,7 +4280,7 @@ snapshots:
       figures: 3.2.0
       ts-dedent: 2.2.0
 
-  '@cucumber/pretty-formatter@3.2.0(@cucumber/messages@32.3.1)':
+  '@cucumber/pretty-formatter@3.3.0(@cucumber/messages@32.3.1)':
     dependencies:
       '@cucumber/messages': 32.3.1
       '@cucumber/query': 15.0.1(@cucumber/messages@32.3.1)
