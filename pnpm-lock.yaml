@@ -92,7 +92,7 @@ importers:
         version: 2.4.15
       '@commitlint/cli':
         specifier: 20.5.3
-        version: 20.5.3(@types/node@25.8.0)(conventional-commits-filter@5.0.0)(conventional-commits-parser@6.3.0)(typescript@5.9.3)
+        version: 20.5.3(@types/node@25.8.0)(conventional-commits-filter@5.0.0)(conventional-commits-parser@6.3.0)(typescript@6.0.3)
       '@commitlint/config-conventional':
         specifier: 20.5.3
         version: 20.5.3
@@ -110,31 +110,31 @@ importers:
         version: 3.3.1(@cucumber/messages@32.3.1)
       '@graphql-codegen/cli':
         specifier: 6.3.1
-        version: 6.3.1(@fastify/websocket@11.2.0)(@types/node@25.8.0)(graphql@16.14.0)(typescript@5.9.3)
+        version: 6.3.1(@fastify/websocket@11.2.0)(@types/node@25.8.0)(graphql@16.14.0)(typescript@6.0.3)
       '@graphql-codegen/typescript':
         specifier: 5.0.10
         version: 5.0.10(graphql@16.14.0)
       '@semantic-release/changelog':
         specifier: 6.0.3
-        version: 6.0.3(semantic-release@25.0.3(typescript@5.9.3))
+        version: 6.0.3(semantic-release@25.0.3(typescript@6.0.3))
       '@semantic-release/commit-analyzer':
         specifier: 13.0.1
-        version: 13.0.1(semantic-release@25.0.3(typescript@5.9.3))
+        version: 13.0.1(semantic-release@25.0.3(typescript@6.0.3))
       '@semantic-release/exec':
         specifier: 7.1.0
-        version: 7.1.0(semantic-release@25.0.3(typescript@5.9.3))
+        version: 7.1.0(semantic-release@25.0.3(typescript@6.0.3))
       '@semantic-release/git':
         specifier: 10.0.1
-        version: 10.0.1(semantic-release@25.0.3(typescript@5.9.3))
+        version: 10.0.1(semantic-release@25.0.3(typescript@6.0.3))
       '@semantic-release/github':
         specifier: 12.0.8
-        version: 12.0.8(semantic-release@25.0.3(typescript@5.9.3))
+        version: 12.0.8(semantic-release@25.0.3(typescript@6.0.3))
       '@semantic-release/npm':
         specifier: 13.1.5
-        version: 13.1.5(semantic-release@25.0.3(typescript@5.9.3))
+        version: 13.1.5(semantic-release@25.0.3(typescript@6.0.3))
       '@semantic-release/release-notes-generator':
         specifier: 14.1.1
-        version: 14.1.1(semantic-release@25.0.3(typescript@5.9.3))
+        version: 14.1.1(semantic-release@25.0.3(typescript@6.0.3))
       '@types/k6':
         specifier: 1.7.0
         version: 1.7.0
@@ -155,16 +155,16 @@ importers:
         version: 9.1.7
       openapi-typescript:
         specifier: 7.13.0
-        version: 7.13.0(typescript@5.9.3)
+        version: 7.13.0(typescript@6.0.3)
       pino-pretty:
         specifier: 13.1.3
         version: 13.1.3
       semantic-release:
         specifier: 25.0.3
-        version: 25.0.3(typescript@5.9.3)
+        version: 25.0.3(typescript@6.0.3)
       typescript:
-        specifier: 5.9.3
-        version: 5.9.3
+        specifier: 6.0.3
+        version: 6.0.3
 
 packages:
 
@@ -3672,8 +3672,8 @@ packages:
   typebox@1.1.38:
     resolution: {integrity: sha512-pZ0aQPmMmXoUvSbeuWf/Hzsc+avNw/Zd6VeE8CFgkVGWyuHPJvqeJJDeJqLve+K70LvjYIoleGcoJHPT17cWoA==}
 
-  typescript@5.9.3:
-    resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
+  typescript@6.0.3:
+    resolution: {integrity: sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -4051,11 +4051,11 @@ snapshots:
   '@colors/colors@1.5.0':
     optional: true
 
-  '@commitlint/cli@20.5.3(@types/node@25.8.0)(conventional-commits-filter@5.0.0)(conventional-commits-parser@6.3.0)(typescript@5.9.3)':
+  '@commitlint/cli@20.5.3(@types/node@25.8.0)(conventional-commits-filter@5.0.0)(conventional-commits-parser@6.3.0)(typescript@6.0.3)':
     dependencies:
       '@commitlint/format': 20.5.0
       '@commitlint/lint': 20.5.3
-      '@commitlint/load': 20.5.3(@types/node@25.8.0)(typescript@5.9.3)
+      '@commitlint/load': 20.5.3(@types/node@25.8.0)(typescript@6.0.3)
       '@commitlint/read': 20.5.0(conventional-commits-filter@5.0.0)(conventional-commits-parser@6.3.0)
       '@commitlint/types': 20.5.0
       tinyexec: 1.0.2
@@ -4100,14 +4100,14 @@ snapshots:
       '@commitlint/rules': 20.5.3
       '@commitlint/types': 20.5.0
 
-  '@commitlint/load@20.5.3(@types/node@25.8.0)(typescript@5.9.3)':
+  '@commitlint/load@20.5.3(@types/node@25.8.0)(typescript@6.0.3)':
     dependencies:
       '@commitlint/config-validator': 20.5.0
       '@commitlint/execute-rule': 20.0.0
       '@commitlint/resolve-extends': 20.5.3
       '@commitlint/types': 20.5.0
-      cosmiconfig: 9.0.1(typescript@5.9.3)
-      cosmiconfig-typescript-loader: 6.2.0(@types/node@25.8.0)(cosmiconfig@9.0.1(typescript@5.9.3))(typescript@5.9.3)
+      cosmiconfig: 9.0.1(typescript@6.0.3)
+      cosmiconfig-typescript-loader: 6.2.0(@types/node@25.8.0)(cosmiconfig@9.0.1(typescript@6.0.3))(typescript@6.0.3)
       es-toolkit: 1.46.1
       is-plain-obj: 4.1.0
       picocolors: 1.1.1
@@ -4453,7 +4453,7 @@ snapshots:
       graphql: 16.14.0
       tslib: 2.8.1
 
-  '@graphql-codegen/cli@6.3.1(@fastify/websocket@11.2.0)(@types/node@25.8.0)(graphql@16.14.0)(typescript@5.9.3)':
+  '@graphql-codegen/cli@6.3.1(@fastify/websocket@11.2.0)(@types/node@25.8.0)(graphql@16.14.0)(typescript@6.0.3)':
     dependencies:
       '@babel/generator': 7.29.1
       '@babel/template': 7.28.6
@@ -4474,11 +4474,11 @@ snapshots:
       '@inquirer/prompts': 7.10.1(@types/node@25.8.0)
       '@whatwg-node/fetch': 0.10.13
       chalk: 4.1.2
-      cosmiconfig: 9.0.1(typescript@5.9.3)
+      cosmiconfig: 9.0.1(typescript@6.0.3)
       debounce: 2.2.0
       detect-indent: 6.1.0
       graphql: 16.14.0
-      graphql-config: 5.1.6(@fastify/websocket@11.2.0)(@types/node@25.8.0)(graphql@16.14.0)(typescript@5.9.3)
+      graphql-config: 5.1.6(@fastify/websocket@11.2.0)(@types/node@25.8.0)(graphql@16.14.0)(typescript@6.0.3)
       is-glob: 4.0.3
       jiti: 2.6.1
       json-to-pretty-yaml: 1.2.2
@@ -5429,15 +5429,15 @@ snapshots:
 
   '@sec-ant/readable-stream@0.4.1': {}
 
-  '@semantic-release/changelog@6.0.3(semantic-release@25.0.3(typescript@5.9.3))':
+  '@semantic-release/changelog@6.0.3(semantic-release@25.0.3(typescript@6.0.3))':
     dependencies:
       '@semantic-release/error': 3.0.0
       aggregate-error: 3.1.0
       fs-extra: 11.3.3
       lodash: 4.17.23
-      semantic-release: 25.0.3(typescript@5.9.3)
+      semantic-release: 25.0.3(typescript@6.0.3)
 
-  '@semantic-release/commit-analyzer@13.0.1(semantic-release@25.0.3(typescript@5.9.3))':
+  '@semantic-release/commit-analyzer@13.0.1(semantic-release@25.0.3(typescript@6.0.3))':
     dependencies:
       conventional-changelog-angular: 8.1.0
       conventional-changelog-writer: 8.2.0
@@ -5447,7 +5447,7 @@ snapshots:
       import-from-esm: 2.0.0
       lodash-es: 4.17.23
       micromatch: 4.0.8
-      semantic-release: 25.0.3(typescript@5.9.3)
+      semantic-release: 25.0.3(typescript@6.0.3)
     transitivePeerDependencies:
       - supports-color
 
@@ -5455,7 +5455,7 @@ snapshots:
 
   '@semantic-release/error@4.0.0': {}
 
-  '@semantic-release/exec@7.1.0(semantic-release@25.0.3(typescript@5.9.3))':
+  '@semantic-release/exec@7.1.0(semantic-release@25.0.3(typescript@6.0.3))':
     dependencies:
       '@semantic-release/error': 4.0.0
       aggregate-error: 3.1.0
@@ -5463,11 +5463,11 @@ snapshots:
       execa: 9.6.1
       lodash-es: 4.17.23
       parse-json: 8.3.0
-      semantic-release: 25.0.3(typescript@5.9.3)
+      semantic-release: 25.0.3(typescript@6.0.3)
     transitivePeerDependencies:
       - supports-color
 
-  '@semantic-release/git@10.0.1(semantic-release@25.0.3(typescript@5.9.3))':
+  '@semantic-release/git@10.0.1(semantic-release@25.0.3(typescript@6.0.3))':
     dependencies:
       '@semantic-release/error': 3.0.0
       aggregate-error: 3.1.0
@@ -5477,11 +5477,11 @@ snapshots:
       lodash: 4.17.23
       micromatch: 4.0.8
       p-reduce: 2.1.0
-      semantic-release: 25.0.3(typescript@5.9.3)
+      semantic-release: 25.0.3(typescript@6.0.3)
     transitivePeerDependencies:
       - supports-color
 
-  '@semantic-release/github@12.0.8(semantic-release@25.0.3(typescript@5.9.3))':
+  '@semantic-release/github@12.0.8(semantic-release@25.0.3(typescript@6.0.3))':
     dependencies:
       '@octokit/core': 7.0.6
       '@octokit/plugin-paginate-rest': 14.0.0(@octokit/core@7.0.6)
@@ -5497,14 +5497,14 @@ snapshots:
       lodash-es: 4.17.23
       mime: 4.1.0
       p-filter: 4.1.0
-      semantic-release: 25.0.3(typescript@5.9.3)
+      semantic-release: 25.0.3(typescript@6.0.3)
       tinyglobby: 0.2.15
       undici: 7.22.0
       url-join: 5.0.0
     transitivePeerDependencies:
       - supports-color
 
-  '@semantic-release/npm@13.1.5(semantic-release@25.0.3(typescript@5.9.3))':
+  '@semantic-release/npm@13.1.5(semantic-release@25.0.3(typescript@6.0.3))':
     dependencies:
       '@actions/core': 3.0.0
       '@semantic-release/error': 4.0.0
@@ -5519,11 +5519,11 @@ snapshots:
       rc: 1.2.8
       read-pkg: 10.1.0
       registry-auth-token: 5.1.1
-      semantic-release: 25.0.3(typescript@5.9.3)
+      semantic-release: 25.0.3(typescript@6.0.3)
       semver: 7.7.4
       tempy: 3.2.0
 
-  '@semantic-release/release-notes-generator@14.1.1(semantic-release@25.0.3(typescript@5.9.3))':
+  '@semantic-release/release-notes-generator@14.1.1(semantic-release@25.0.3(typescript@6.0.3))':
     dependencies:
       conventional-changelog-angular: 8.2.0
       conventional-changelog-writer: 8.2.0
@@ -5533,7 +5533,7 @@ snapshots:
       import-from-esm: 2.0.0
       lodash-es: 4.17.23
       read-package-up: 11.0.0
-      semantic-release: 25.0.3(typescript@5.9.3)
+      semantic-release: 25.0.3(typescript@6.0.3)
     transitivePeerDependencies:
       - supports-color
 
@@ -5943,39 +5943,39 @@ snapshots:
 
   core-util-is@1.0.3: {}
 
-  cosmiconfig-typescript-loader@6.2.0(@types/node@25.8.0)(cosmiconfig@9.0.1(typescript@5.9.3))(typescript@5.9.3):
+  cosmiconfig-typescript-loader@6.2.0(@types/node@25.8.0)(cosmiconfig@9.0.1(typescript@6.0.3))(typescript@6.0.3):
     dependencies:
       '@types/node': 25.8.0
-      cosmiconfig: 9.0.1(typescript@5.9.3)
+      cosmiconfig: 9.0.1(typescript@6.0.3)
       jiti: 2.6.1
-      typescript: 5.9.3
+      typescript: 6.0.3
 
-  cosmiconfig@8.3.6(typescript@5.9.3):
+  cosmiconfig@8.3.6(typescript@6.0.3):
     dependencies:
       import-fresh: 3.3.1
       js-yaml: 4.1.1
       parse-json: 5.2.0
       path-type: 4.0.0
     optionalDependencies:
-      typescript: 5.9.3
+      typescript: 6.0.3
 
-  cosmiconfig@9.0.0(typescript@5.9.3):
+  cosmiconfig@9.0.0(typescript@6.0.3):
     dependencies:
       env-paths: 2.2.1
       import-fresh: 3.3.1
       js-yaml: 4.1.1
       parse-json: 5.2.0
     optionalDependencies:
-      typescript: 5.9.3
+      typescript: 6.0.3
 
-  cosmiconfig@9.0.1(typescript@5.9.3):
+  cosmiconfig@9.0.1(typescript@6.0.3):
     dependencies:
       env-paths: 2.2.1
       import-fresh: 3.3.1
       js-yaml: 4.1.1
       parse-json: 5.2.0
     optionalDependencies:
-      typescript: 5.9.3
+      typescript: 6.0.3
 
   cross-inspect@1.0.1:
     dependencies:
@@ -6401,7 +6401,7 @@ snapshots:
 
   graceful-fs@4.2.11: {}
 
-  graphql-config@5.1.6(@fastify/websocket@11.2.0)(@types/node@25.8.0)(graphql@16.14.0)(typescript@5.9.3):
+  graphql-config@5.1.6(@fastify/websocket@11.2.0)(@types/node@25.8.0)(graphql@16.14.0)(typescript@6.0.3):
     dependencies:
       '@graphql-tools/graphql-file-loader': 8.1.12(graphql@16.14.0)
       '@graphql-tools/json-file-loader': 8.0.26(graphql@16.14.0)
@@ -6409,7 +6409,7 @@ snapshots:
       '@graphql-tools/merge': 9.1.9(graphql@16.14.0)
       '@graphql-tools/url-loader': 9.0.6(@fastify/websocket@11.2.0)(@types/node@25.8.0)(graphql@16.14.0)
       '@graphql-tools/utils': 11.0.1(graphql@16.14.0)
-      cosmiconfig: 8.3.6(typescript@5.9.3)
+      cosmiconfig: 8.3.6(typescript@6.0.3)
       graphql: 16.14.0
       jiti: 2.6.1
       minimatch: 10.2.4
@@ -7041,14 +7041,14 @@ snapshots:
 
   openapi-types@12.1.3: {}
 
-  openapi-typescript@7.13.0(typescript@5.9.3):
+  openapi-typescript@7.13.0(typescript@6.0.3):
     dependencies:
       '@redocly/openapi-core': 1.34.6(supports-color@10.2.2)
       ansi-colors: 4.1.3
       change-case: 5.4.4
       parse-json: 8.3.0
       supports-color: 10.2.2
-      typescript: 5.9.3
+      typescript: 6.0.3
       yargs-parser: 21.1.1
 
   p-each-series@3.0.0: {}
@@ -7423,15 +7423,15 @@ snapshots:
 
   seed-random@2.2.0: {}
 
-  semantic-release@25.0.3(typescript@5.9.3):
+  semantic-release@25.0.3(typescript@6.0.3):
     dependencies:
-      '@semantic-release/commit-analyzer': 13.0.1(semantic-release@25.0.3(typescript@5.9.3))
+      '@semantic-release/commit-analyzer': 13.0.1(semantic-release@25.0.3(typescript@6.0.3))
       '@semantic-release/error': 4.0.0
-      '@semantic-release/github': 12.0.8(semantic-release@25.0.3(typescript@5.9.3))
-      '@semantic-release/npm': 13.1.5(semantic-release@25.0.3(typescript@5.9.3))
-      '@semantic-release/release-notes-generator': 14.1.1(semantic-release@25.0.3(typescript@5.9.3))
+      '@semantic-release/github': 12.0.8(semantic-release@25.0.3(typescript@6.0.3))
+      '@semantic-release/npm': 13.1.5(semantic-release@25.0.3(typescript@6.0.3))
+      '@semantic-release/release-notes-generator': 14.1.1(semantic-release@25.0.3(typescript@6.0.3))
       aggregate-error: 5.0.0
-      cosmiconfig: 9.0.0(typescript@5.9.3)
+      cosmiconfig: 9.0.0(typescript@6.0.3)
       debug: 4.4.3
       env-ci: 11.2.0
       execa: 9.6.1
@@ -7757,7 +7757,7 @@ snapshots:
 
   typebox@1.1.38: {}
 
-  typescript@5.9.3: {}
+  typescript@6.0.3: {}
 
   uglify-js@3.19.3:
     optional: true
