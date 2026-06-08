@@ -65,7 +65,7 @@
     "graphql": "16.14.1",
     "mercurius": "16.9.0",
     "postgres": "3.4.9",
-    "typebox": "1.2.2"
+    "typebox": "1.2.3"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.16",
