@@ -36,8 +36,8 @@ importers:
         specifier: 6.1.0
         version: 6.1.0(typebox@1.2.9)
       '@fastify/under-pressure':
-        specifier: 9.0.3
-        version: 9.0.3
+        specifier: 9.1.0
+        version: 9.1.0
       '@graphql-tools/load-files':
         specifier: 7.0.1
         version: 7.0.1(graphql@16.14.2)
@@ -592,8 +592,8 @@ packages:
     peerDependencies:
       typebox: ^1.0.13
 
-  '@fastify/under-pressure@9.0.3':
-    resolution: {integrity: sha512-uWzyFn9ThgGgynxyoX/kqgLtPtNBXXvQgN3U8fSRPNBS1y5mEZC/uCBRx03hXm9PDsQwTGN7qt83ItsHVQ0L4A==}
+  '@fastify/under-pressure@9.1.0':
+    resolution: {integrity: sha512-RTVuCM78MZiTWUJA+0CkN5AHUnLjmY2PKFEm5mVjjmwE8ev/Mk30GvjHyfBYCu65geAJvXnz5DauGm0Tpyl0LA==}
 
   '@fastify/websocket@11.2.0':
     resolution: {integrity: sha512-3HrDPbAG1CzUCqnslgJxppvzaAZffieOVbLp1DAy1huCSynUWPifSvfdEDUR8HlJLp3sp1A36uOM2tJogADS8w==}
@@ -4413,10 +4413,10 @@ snapshots:
     dependencies:
       typebox: 1.2.9
 
-  '@fastify/under-pressure@9.0.3':
+  '@fastify/under-pressure@9.1.0':
     dependencies:
       '@fastify/error': 4.2.0
-      fastify-plugin: 5.1.0
+      fastify-plugin: 6.0.0
 
   '@fastify/websocket@11.2.0':
     dependencies:
