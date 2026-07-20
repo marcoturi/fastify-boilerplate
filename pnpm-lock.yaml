@@ -136,8 +136,8 @@ importers:
         specifier: 14.1.1
         version: 14.1.1(semantic-release@25.0.8(typescript@5.9.3))
       '@types/k6':
-        specifier: 1.7.0
-        version: 1.7.0
+        specifier: 2.0.1
+        version: 2.0.1
       '@types/node':
         specifier: 25.9.5
         version: 25.9.5
@@ -1420,8 +1420,8 @@ packages:
   '@types/istanbul-lib-coverage@2.0.6':
     resolution: {integrity: sha512-2QF/t/auWm0lsy8XtKVPG19v3sSOQlJe/YHZgfjb/KBBHOGSV+J2q/S671rcq9uTBrLAXmZpqJiaQbMT+zNU1w==}
 
-  '@types/k6@1.7.0':
-    resolution: {integrity: sha512-oL4mckVcOPIA2HUrCVj3aQXCJgCqsQe35Uc4fRTffmrQuR24v92GJImnagqUaRnC1TQVJFx85o3aHQPP+0bxpg==}
+  '@types/k6@2.0.1':
+    resolution: {integrity: sha512-3lAXtNx1qMwnn+fbE65yP1h9ADJyG6xQaIfGrhasZI2uck8S+gLuCbQl38YkbR5lGeE/NyCiF0FznmElpUgBsA==}
 
   '@types/node@25.9.5':
     resolution: {integrity: sha512-OScDchr2fwuUmWdf4kZ9h7PcJiYDVInhJizG/biAq3cAvqwYktuy/TYGGdZNMtNTFUP7rnb0NU4TUdm82kt4Rg==}
@@ -5587,7 +5587,7 @@ snapshots:
 
   '@types/istanbul-lib-coverage@2.0.6': {}
 
-  '@types/k6@1.7.0': {}
+  '@types/k6@2.0.1': {}
 
   '@types/node@25.9.5':
     dependencies:
