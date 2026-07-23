@@ -38,7 +38,7 @@
     "node": ">=24.0.0",
     "pnpm": ">=10.0.0"
   },
-  "packageManager": "pnpm@10.34.5",
+  "packageManager": "pnpm@11.17.0",
   "dependencies": {
     "@fastify/autoload": "6.4.0",
     "@fastify/awilix": "8.2.0",
