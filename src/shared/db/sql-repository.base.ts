@@ -34,13 +34,13 @@ export function SqlRepositoryBase<
       return records.map((r) => mapper.toDomain(r as DbModel));
     },
     async findAllPaginated(params: PaginatedQueryParams): Promise<Paginated<Entity>> {
-      const [{ total }] = await db`SELECT COUNT(*) as total FROM ${db(tableName)}`;
+      const [countRow] = await db`SELECT COUNT(*) as total FROM ${db(tableName)}`;
       const result =
         await db`SELECT * FROM ${db(tableName)} LIMIT ${params.limit} OFFSET ${params.offset}`;
       const entities = result.map((r) => mapper.toDomain(r as DbModel));
       return {
         data: entities,
-        count: Number(total),
+        count: Number(countRow?.total ?? 0),
         limit: params.limit,
         page: params.page,
       };

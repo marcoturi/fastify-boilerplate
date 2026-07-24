@@ -23,8 +23,10 @@ describe('userDomain()', () => {
       street: 'Via Roma',
     });
     assert.equal(events.length, 1);
-    assert.equal(events[0].type, createUserEvent.type);
-    assert.equal(events[0].type, 'user/created');
-    assert.equal(events[0].payload, entity);
+    const [event] = events;
+    assert.ok(event);
+    assert.equal(event.type, createUserEvent.type);
+    assert.equal(event.type, 'user/created');
+    assert.equal(event.payload, entity);
   });
 });

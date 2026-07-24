@@ -48,7 +48,9 @@ describe('eventBus()', () => {
     bus.emit(makeEvent('nobody/listening', {}));
 
     assert.equal(debugCalls.length, 1);
-    assert.match(debugCalls[0], /nobody\/listening/);
+    const [firstDebug] = debugCalls;
+    assert.ok(firstDebug);
+    assert.match(firstDebug, /nobody\/listening/);
   });
 
   it('validates its arguments', () => {
@@ -88,7 +90,9 @@ describe('eventBus()', () => {
 
     await flushUntil(() => errorCalls.length > 0);
     assert.equal(errorCalls.length, 1);
-    assert.match(errorCalls[0].msg, /failed/);
+    const [firstError] = errorCalls;
+    assert.ok(firstError);
+    assert.match(firstError.msg, /failed/);
   });
 
   it('processes same-key events sequentially, in emit order', async () => {
