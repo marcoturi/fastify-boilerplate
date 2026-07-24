@@ -1,3 +1,10 @@
+# [2.8.0](https://github.com/marcoturi/fastify-boilerplate/compare/v2.7.0...v2.8.0) (2026-07-24)
+
+
+### Features
+
+* **cqrs:** add EventPublisher port and DomainResult/withEvents helper ([bb52f86](https://github.com/marcoturi/fastify-boilerplate/commit/bb52f86b16098536f7d0622db669b6db462b2e8f))
+
 # [2.7.0](https://github.com/marcoturi/fastify-boilerplate/compare/v2.6.0...v2.7.0) (2026-07-24)
 
 
