@@ -11,14 +11,8 @@ import { di } from '#src/server/di/index.ts';
 import getGQL from '#src/server/plugins/gql.ts';
 
 export default async function createServer(fastify: FastifyInstance) {
-  // Graphql
-  await fastify.register(mercurius, {
-    schema: await getGQL(),
-    graphiql: env.isDevelopment,
-    defineMutation: true,
-  });
-
-  // Set sensible default security headers
+  // Set sensible default security headers.
+  // Registered before any route (including GraphQL) so its onRequest hook applies globally.
   await fastify.register(Helmet, {
     global: true,
     // The following settings are needed for graphiql, see https://github.com/graphql/graphql-playground/issues/1283
@@ -32,6 +26,13 @@ export default async function createServer(fastify: FastifyInstance) {
   // Set to `true` or a specific origin string/array for cross-origin frontends.
   await fastify.register(Cors, {
     origin: false,
+  });
+
+  // Graphql — registered after Helmet/CORS so the /graphql endpoint inherits their hooks.
+  await fastify.register(mercurius, {
+    schema: await getGQL(),
+    graphiql: env.isDevelopment,
+    defineMutation: true,
   });
 
   // Auto-load plugins
