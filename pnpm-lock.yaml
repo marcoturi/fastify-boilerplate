@@ -105,9 +105,6 @@ importers:
       '@cucumber/messages':
         specifier: 34.2.0
         version: 34.2.0
-      '@cucumber/pretty-formatter':
-        specifier: 4.0.0
-        version: 4.0.0(@cucumber/messages@34.2.0)
       '@graphql-codegen/cli':
         specifier: 7.2.0
         version: 7.2.0(@fastify/websocket@11.3.0)(@types/node@26.1.1)(graphql@16.14.2)(supports-color@10.2.2)(typescript@6.0.3)
@@ -4110,21 +4107,9 @@ snapshots:
       '@cucumber/query': 16.0.0(@cucumber/messages@34.0.1)
       luxon: 3.7.2
 
-  '@cucumber/pretty-formatter@4.0.0(@cucumber/messages@34.2.0)':
-    dependencies:
-      '@cucumber/messages': 34.2.0
-      '@cucumber/query': 16.0.0(@cucumber/messages@34.2.0)
-      luxon: 3.7.2
-
   '@cucumber/query@16.0.0(@cucumber/messages@34.0.1)':
     dependencies:
       '@cucumber/messages': 34.0.1
-      '@teppeis/multimaps': 3.0.0
-      lodash.sortby: 4.7.0
-
-  '@cucumber/query@16.0.0(@cucumber/messages@34.2.0)':
-    dependencies:
-      '@cucumber/messages': 34.2.0
       '@teppeis/multimaps': 3.0.0
       lodash.sortby: 4.7.0
 

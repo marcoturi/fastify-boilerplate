@@ -7,7 +7,7 @@ const config = {
     'html:reports/index.html',
     'summary',
     'progress-bar',
-    '@cucumber/pretty-formatter',
+    'pretty',
   ],
   formatOptions: { snippetInterface: 'async-await' },
 };

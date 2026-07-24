@@ -74,7 +74,6 @@
     "@cucumber/cucumber": "13.2.0",
     "@cucumber/html-formatter": "24.1.0",
     "@cucumber/messages": "34.2.0",
-    "@cucumber/pretty-formatter": "4.0.0",
     "@graphql-codegen/cli": "7.2.0",
     "@graphql-codegen/typescript": "6.1.0",
     "@semantic-release/changelog": "7.0.0",
