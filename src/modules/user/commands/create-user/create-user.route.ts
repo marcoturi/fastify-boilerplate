@@ -1,6 +1,7 @@
 import type { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 import { createUserCommand } from '#src/modules/user/commands/create-user/create-user.handler.ts';
 import { createUserRequestDtoSchema } from '#src/modules/user/commands/create-user/create-user.schema.ts';
+import { apiErrorResponseRef } from '#src/shared/api/api-error.response.ts';
 import { idDtoSchema } from '#src/shared/api/id.response.dto.ts';
 
 export default async function createUser(fastify: FastifyRouteInstance) {
@@ -12,6 +13,9 @@ export default async function createUser(fastify: FastifyRouteInstance) {
       body: createUserRequestDtoSchema,
       response: {
         201: idDtoSchema,
+        // 400/500 come from the shared 4XX/5XX error responses (see swagger plugin).
+        // 409 is declared explicitly because clients special-case "already exists".
+        409: apiErrorResponseRef,
       },
       tags: ['users'],
     },
