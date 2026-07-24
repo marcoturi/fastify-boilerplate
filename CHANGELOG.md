@@ -1,3 +1,13 @@
+## [2.9.1](https://github.com/marcoturi/fastify-boilerplate/compare/v2.9.0...v2.9.1) (2026-07-24)
+
+
+### Bug Fixes
+
+* **docker:** run DBMate migrations via a one-shot compose service ([06857e0](https://github.com/marcoturi/fastify-boilerplate/commit/06857e023868fbdb656483d55c468c5d9b1dd85f))
+* **logging:** log 4xx domain errors at warn instead of error ([c11974a](https://github.com/marcoturi/fastify-boilerplate/commit/c11974a04fbe407ff329d483fc46d92c89e1a1f1))
+* **renovate:** use matchUpdateTypes so automerge stays minor/patch ([9f0d0e0](https://github.com/marcoturi/fastify-boilerplate/commit/9f0d0e0fb9f38df4bdc2c8d5dcf75a533a9c11c4))
+* **test:** keep a single cucumber stdout formatter ([052241a](https://github.com/marcoturi/fastify-boilerplate/commit/052241a163e3a9b815c6148433f5646547149744))
+
 # [2.9.0](https://github.com/marcoturi/fastify-boilerplate/compare/v2.8.0...v2.9.0) (2026-07-24)
 
 
