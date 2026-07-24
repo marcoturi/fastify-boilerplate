@@ -36,7 +36,7 @@ instance (`fastify.commandBus`, `fastify.queryBus`, `fastify.eventBus`).
 
 ## Building blocks
 
-```
+```text
 Route / Resolver ──execute()──▶ CommandBus / QueryBus ──▶ Handler ──▶ Domain / Repository
                                                              │
                                                              └──emit()──▶ EventBus ──▶ Event handler(s)
@@ -295,7 +295,7 @@ eventBus.emit(walletTransactionEvent({ walletId: 'w2', amount: 3 }));
 ## The three buses at a glance
 
 | Bus | Purpose | Subscribe | Dispatch | Handler return |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | `CommandBus` | state-changing mutations | `register(type, handler)` | `execute(action)` → `Promise<R>` (inferred) | `Promise<unknown>` |
 | `QueryBus` | idempotent reads | `register(type, handler)` | `execute(action)` → `Promise<R>` (inferred) | `Promise<unknown>` |
 | `EventBus` | fire-and-forget notifications | `on(type, handler, options?)` | `emit(action)` → `void` | `void \| Promise<void>` |
@@ -303,7 +303,7 @@ eventBus.emit(walletTransactionEvent({ walletId: 'w2', amount: 3 }));
 `CommandBus` and `QueryBus` share the `createRequestBus` factory
 (`src/shared/cqrs/request-bus.ts`); the `EventBus` is a separate implementation
 (`src/shared/cqrs/event-bus.ts`) with the multi-subscriber, error-isolation and per-key
-ordering behaviour described above.
+ordering behavior described above.
 
 ---
 
@@ -328,7 +328,7 @@ Two signatures exist (`src/shared/cqrs/bus.types.ts`):
 
 Registered in `src/shared/cqrs/index.ts`, outermost first:
 
-```
+```text
 command / query :  metadata → OTel tracing → trackExecutionTime → handler
 event           :  metadata → OTel tracing → handler
 ```
