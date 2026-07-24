@@ -92,7 +92,6 @@ export type CreateUserResult = string;
 export const createUserCommand = userActionCreator<CreateUserRequestDto, CreateUserResult>(
   'create',
 );
-export const createUserEvent = userActionCreator<UserEntity>('created');
 
 export default function makeCreateUser({
   userRepository,
@@ -102,10 +101,12 @@ export default function makeCreateUser({
 }: Dependencies) {
   return {
     async handler({ payload }: HandlerAction<typeof createUserCommand>): Promise<CreateUserResult> {
-      const user = userDomain.createUser(payload);
+      // The domain returns the entity + the events it produced (see "Domain events" below).
+      const created = userDomain.createUser(payload);
+      const user = created.entity;
       try {
         await userRepository.insert(user);
-        eventBus.emit(createUserEvent(user)); // fire-and-forget notification
+        await created.commit(eventBus); // publish recorded domain events after the write succeeds
         return user.id;
       } catch (error: unknown) {
         if (error instanceof ConflictException) {
@@ -188,10 +189,40 @@ for subscribers. Events are declared with an action creator **without** a `Resul
 (they return nothing), and subscribers register with `eventBus.on()`.
 
 ```typescript
-// producer (in the command handler)
+// the event is owned by the domain — src/modules/user/domain/user.events.ts
 export const createUserEvent = userActionCreator<UserEntity>('created'); // type: 'user/created'
-eventBus.emit(createUserEvent(user));
+
+// a subscriber (any module) reacts to it
+eventBus.on(createUserEvent.type, provisionDefaultSettings);
 ```
+
+### Domain events
+
+Following the DDD **AggregateRoot** idea (functional variant — no classes), a domain
+operation returns the entity **and the events it produced**, and the command handler
+**publishes them after persistence** with a single `commit(eventBus)` call. This keeps "what
+happened" in the domain and ensures events fire only once the write succeeds. The
+`DomainResult<T>` helper (`entity`, `events`, `commit()`) lives in
+`src/shared/ddd/aggregate.ts`.
+
+```typescript
+// domain — src/modules/user/domain/user.domain.ts
+createUser: (create: CreateUserProps): DomainResult<UserEntity> => {
+  const user: UserEntity = { id: randomUUID(), /* ... */, role: UserRoles.guest };
+  return withEvents(user, [createUserEvent(user)]); // record the event
+};
+
+// handler — publishes after the repository write, one call (à la NestJS aggregate.commit())
+const created = userDomain.createUser(payload);
+await userRepository.insert(created.entity);
+await created.commit(eventBus);
+```
+
+`commit(publisher)` depends on the minimal `EventPublisher` port (`{ emit }`), not the full
+bus, and is async. This is the seam for durability: `commit()` is the single place that
+publishes, so making events at-least-once (a transactional-outbox writer that implements
+`EventPublisher` and writes in the same DB transaction) is a change to `withEvents`/`commit`
+alone — every domain and handler stays the same (they already `await`).
 
 ```typescript
 // subscriber — src/modules/settings/commands/create-settings/create-settings.event-handler.ts
