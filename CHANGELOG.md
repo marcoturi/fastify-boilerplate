@@ -1,3 +1,15 @@
+# [2.5.0](https://github.com/marcoturi/fastify-boilerplate/compare/v2.4.45...v2.5.0) (2026-07-24)
+
+
+### Bug Fixes
+
+* **user:** use identifier interpolation for findOneByEmail table name ([ee75390](https://github.com/marcoturi/fastify-boilerplate/commit/ee75390ae333d0957314fab8452e140bf5ee0044))
+
+
+### Features
+
+* **api:** document shared error responses in the OpenAPI spec ([2fdf1a3](https://github.com/marcoturi/fastify-boilerplate/commit/2fdf1a33ab4bcb634383b8ad75b03c070cbad00d))
+
 ## [2.4.45](https://github.com/marcoturi/fastify-boilerplate/compare/v2.4.44...v2.4.45) (2026-07-24)
 
 
