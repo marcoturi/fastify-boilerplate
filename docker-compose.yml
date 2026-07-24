@@ -12,6 +12,19 @@ services:
       timeout: 3s
       retries: 5
 
+  # One-shot migrations: runs DBMate against the DB, then exits. `app` waits for it to
+  # complete successfully (the app image intentionally does not ship db/ or dbmate).
+  migrate:
+    image: ghcr.io/amacneil/dbmate:2
+    command: ["--wait", "up"]
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?sslmode=disable
+    volumes:
+      - ./db:/db
+    depends_on:
+      postgres:
+        condition: service_healthy
+
   app:
     build: .
     ports:
@@ -26,3 +39,5 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
