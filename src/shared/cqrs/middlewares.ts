@@ -41,7 +41,7 @@ export function makeTrackExecutionTime(logger: FastifyBaseLogger) {
     const startTime = performance.now();
     const result = await handler(action);
     const endTime = performance.now();
-    logger.info(
+    logger.debug(
       `Action ${action.type} took ${(endTime - startTime).toFixed(2)}ms of execution time.`,
     );
     return result;
