@@ -30,7 +30,7 @@ export default function userRepository({
 
     async findOneByEmail(email: string): Promise<UserEntity | undefined> {
       const [user]: [UserModel?] =
-        await db`SELECT * FROM ${tableName} WHERE email = ${email} LIMIT 1`;
+        await db`SELECT * FROM ${db(tableName)} WHERE email = ${email} LIMIT 1`;
       return user ? userMapper.toDomain(user) : undefined;
     },
 
