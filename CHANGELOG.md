@@ -1,3 +1,15 @@
+# [2.9.0](https://github.com/marcoturi/fastify-boilerplate/compare/v2.8.0...v2.9.0) (2026-07-24)
+
+
+### Bug Fixes
+
+* **logging:** avoid logging PII and lower action timing to debug ([01662c2](https://github.com/marcoturi/fastify-boilerplate/commit/01662c23e0d9dae0f47b88bc87496d80778900d1))
+
+
+### Features
+
+* **observability:** add correlationId to all logs and flush OTel on shutdown ([843335c](https://github.com/marcoturi/fastify-boilerplate/commit/843335cf6f9e572dd759d6f37fc72c313097ca09))
+
 # [2.8.0](https://github.com/marcoturi/fastify-boilerplate/compare/v2.7.0...v2.8.0) (2026-07-24)
 
 
