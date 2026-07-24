@@ -1,3 +1,10 @@
+# [2.7.0](https://github.com/marcoturi/fastify-boilerplate/compare/v2.6.0...v2.7.0) (2026-07-24)
+
+
+### Features
+
+* **cqrs:** add ordered per-key processing and async error isolation to the event bus ([4695f2c](https://github.com/marcoturi/fastify-boilerplate/commit/4695f2c282d6985be6c22dac5c065d5938416119))
+
 # [2.6.0](https://github.com/marcoturi/fastify-boilerplate/compare/v2.5.0...v2.6.0) (2026-07-24)
 
 
