@@ -8,6 +8,10 @@ let sql: ReturnType<typeof postgres> | null = null;
 export function getDb(): ReturnType<typeof postgres> {
   if (!sql) {
     sql = postgres(env.db.url, {
+      ssl: env.db.ssl ? 'require' : false,
+      max: env.db.poolMax,
+      idle_timeout: env.db.idleTimeout,
+      connect_timeout: env.db.connectTimeout,
       debug: (conn: number, query: string, params: unknown[], paramTypes: unknown[]) => {
         if (env.log.level === LogLevel.debug) {
           // biome-ignore lint/suspicious/noConsole: needed for debugging

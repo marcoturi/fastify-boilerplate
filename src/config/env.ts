@@ -20,6 +20,13 @@ const schema = Type.Object({
   POSTGRES_PASSWORD: Type.String(),
   POSTGRES_USER: Type.String(),
   POSTGRES_DB: Type.String(),
+  // Enable TLS for the DB connection. Keep `false` for local/CI Postgres; set `true`
+  // in production (most managed Postgres providers require TLS).
+  POSTGRES_SSL: Type.Boolean({ default: false }),
+  // Connection pool tuning (see https://github.com/porsager/postgres#connection).
+  POSTGRES_POOL_MAX: Type.Number({ default: 10 }),
+  POSTGRES_IDLE_TIMEOUT: Type.Number({ default: 20 }),
+  POSTGRES_CONNECT_TIMEOUT: Type.Number({ default: 30 }),
   LOG_LEVEL: Type.Enum(LogLevel),
   NODE_ENV: Type.Enum(NodeEnv),
   HOST: Type.String({ default: 'localhost' }),
@@ -44,6 +51,10 @@ export default {
     port: env.PORT,
   },
   db: {
-    url: `postgres://${env.POSTGRES_USER}:${env.POSTGRES_PASSWORD}@${env.POSTGRES_URL}/${env.POSTGRES_DB}?sslmode=disable`,
+    url: `postgres://${env.POSTGRES_USER}:${env.POSTGRES_PASSWORD}@${env.POSTGRES_URL}/${env.POSTGRES_DB}`,
+    ssl: env.POSTGRES_SSL,
+    poolMax: env.POSTGRES_POOL_MAX,
+    idleTimeout: env.POSTGRES_IDLE_TIMEOUT,
+    connectTimeout: env.POSTGRES_CONNECT_TIMEOUT,
   },
 };
