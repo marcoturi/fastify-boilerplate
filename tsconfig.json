@@ -22,8 +22,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
-    "noStrictGenericChecks": false
+    "noImplicitAny": true
   },
   "include": ["src", "tests"],
   "exclude": ["**/*.k6.ts"]

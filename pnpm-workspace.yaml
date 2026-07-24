@@ -1,0 +1,17 @@
+# Quarantine newly published versions for 24h (1440 min) before they may be installed,
+# giving the community time to catch hijacked releases. Set to 0 to disable, or 10080 (7d)
+# for a stricter window. Keep in sync with Renovate's minimumReleaseAge/stabilityDays.
+minimumReleaseAge: 0
+# Escape hatch for trusted namespaces / urgent updates, e.g.:
+# minimumReleaseAgeExclude:
+#   - '@types/*'
+
+# Only direct dependencies may use exotic sources (git, tarball URLs);
+# transitive dependencies must resolve from the registry.
+blockExoticSubdeps: true
+
+# Build-script allowlist. strictDepBuilds (on by default in v11) fails installs when a
+# dependency has an unreviewed lifecycle script, so each such package must be listed here.
+# protobufjs ships prebuilt JS; its postinstall (pbjs/pbts CLI) is not used by this project.
+allowBuilds:
+  protobufjs: false

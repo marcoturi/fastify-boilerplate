@@ -1,4 +1,3 @@
-import { Dependencies as InfrastructureDependencies } from '#src/modules/index.ts';
 import type { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 import {
   FastifyBaseLogger,
@@ -7,6 +6,7 @@ import {
   RawRequestDefaultExpression,
   RawServerDefault,
 } from 'fastify';
+import { Dependencies as InfrastructureDependencies } from '#src/modules/index.ts';
 
 declare global {
   // Declare global DI container type
