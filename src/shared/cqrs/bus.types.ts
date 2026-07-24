@@ -32,7 +32,8 @@ export interface CommandCreator<Payload, Result = unknown> {
 
 export type CommandHandler = (command: Action<unknown>) => Promise<unknown>;
 export type QueryHandler = (query: Action<unknown>) => Promise<unknown>;
-export type EventHandler = (event: Action<unknown>) => void;
+/** Event handlers may be sync or async; the bus isolates and logs their failures. */
+export type EventHandler = (event: Action<unknown>) => void | Promise<void>;
 
 /** Middleware for command/query buses — wraps a handler that returns a Promise. */
 export type CommandMiddleware = (
@@ -40,8 +41,19 @@ export type CommandMiddleware = (
   handler: CommandHandler,
 ) => Promise<unknown>;
 
-/** Middleware for the event bus — wraps a handler that returns void. */
-export type EventMiddleware = (action: Action<unknown>, handler: EventHandler) => void;
+/** Middleware for the event bus. Returns the (possibly async) handler result so the
+ *  bus can await it for sequential processing and catch failures. */
+export type EventMiddleware = (
+  action: Action<unknown>,
+  handler: EventHandler,
+) => void | Promise<void>;
+
+/** Opt-in ordering for an event subscription: events whose `keyExtractor` returns the
+ *  same key are processed one at a time, in emit order (e.g. per aggregate/entity id),
+ *  while different keys run concurrently. */
+export interface SequentialProcessingOptions {
+  keyExtractor: (event: Action<unknown>) => string;
+}
 
 export interface CommandBus {
   register<P>(type: string, handler: (command: Action<P>) => Promise<unknown>): void;
@@ -60,7 +72,11 @@ export interface QueryBus {
 }
 
 export interface EventBus {
-  on<P>(type: string, handler: (event: Action<P>) => void): void;
+  on<P>(
+    type: string,
+    handler: (event: Action<P>) => void | Promise<void>,
+    options?: SequentialProcessingOptions,
+  ): void;
   emit(event: Action<unknown>): void;
   addMiddleware(fn: EventMiddleware): void;
 }

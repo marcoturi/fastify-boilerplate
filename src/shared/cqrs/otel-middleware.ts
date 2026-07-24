@@ -44,10 +44,15 @@ export function makeTracingMiddleware(busType: 'command' | 'query') {
 
 /**
  * Event bus tracing middleware.
- * Events are fire-and-forget so the span is recorded synchronously.
+ * The span covers the (possibly async) handler and is returned so the event bus can
+ * await it for sequential processing; failures are recorded on the span and rethrown
+ * for the bus to isolate/log.
  */
-export function traceEventMiddleware(action: Action<unknown>, handler: EventHandler): void {
-  tracer.startActiveSpan(
+export function traceEventMiddleware(
+  action: Action<unknown>,
+  handler: EventHandler,
+): void | Promise<void> {
+  return tracer.startActiveSpan(
     action.type,
     {
       kind: SpanKind.INTERNAL,
@@ -56,12 +61,12 @@ export function traceEventMiddleware(action: Action<unknown>, handler: EventHand
         'cqrs.action': action.type,
       },
     },
-    (span) => {
+    async (span) => {
       if (action.meta?.correlationId) {
         span.setAttribute('cqrs.correlation_id', String(action.meta.correlationId));
       }
       try {
-        handler(action);
+        await handler(action);
         span.setStatus({ code: SpanStatusCode.OK });
       } catch (error) {
         span.setStatus({ code: SpanStatusCode.ERROR });

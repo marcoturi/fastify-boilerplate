@@ -9,10 +9,19 @@ const makeEvent = <P>(type: string, payload: P): Action<P> =>
 
 const fakeLogger = () => {
   const debugCalls: string[] = [];
+  const errorCalls: { obj: unknown; msg: string }[] = [];
   const logger = {
     debug: (msg: string) => debugCalls.push(String(msg)),
+    error: (obj: unknown, msg?: string) => errorCalls.push({ obj, msg: String(msg ?? obj) }),
   } as unknown as FastifyBaseLogger;
-  return { logger, debugCalls };
+  return { logger, debugCalls, errorCalls };
+};
+
+/** Yields to the event loop until `predicate` holds or the tick budget is exhausted. */
+const flushUntil = async (predicate: () => boolean, ticks = 50): Promise<void> => {
+  for (let i = 0; i < ticks && !predicate(); i++) {
+    await new Promise((resolve) => setImmediate(resolve));
+  }
 };
 
 describe('eventBus()', () => {
@@ -20,8 +29,12 @@ describe('eventBus()', () => {
     const { logger } = fakeLogger();
     const bus = eventBus({ logger });
     const received: number[] = [];
-    bus.on<{ n: number }>('user/created', (event) => received.push(event.payload.n));
-    bus.on<{ n: number }>('user/created', (event) => received.push(event.payload.n + 1));
+    bus.on<{ n: number }>('user/created', (event) => {
+      received.push(event.payload.n);
+    });
+    bus.on<{ n: number }>('user/created', (event) => {
+      received.push(event.payload.n + 1);
+    });
 
     bus.emit(makeEvent('user/created', { n: 10 }));
 
@@ -55,10 +68,47 @@ describe('eventBus()', () => {
       order.push('middleware');
       next(event);
     });
-    bus.on('t', () => order.push('handler'));
+    bus.on('t', () => {
+      order.push('handler');
+    });
 
     bus.emit(makeEvent('t', {}));
 
     assert.deepEqual(order, ['middleware', 'handler']);
+  });
+
+  it('isolates and logs a failing async handler instead of rejecting', async () => {
+    const { logger, errorCalls } = fakeLogger();
+    const bus = eventBus({ logger });
+    bus.on('t', async () => {
+      throw new Error('boom');
+    });
+
+    assert.doesNotThrow(() => bus.emit(makeEvent('t', {})));
+
+    await flushUntil(() => errorCalls.length > 0);
+    assert.equal(errorCalls.length, 1);
+    assert.match(errorCalls[0].msg, /failed/);
+  });
+
+  it('processes same-key events sequentially, in emit order', async () => {
+    const { logger } = fakeLogger();
+    const bus = eventBus({ logger });
+    const done: string[] = [];
+    bus.on<{ id: string; label: string }>(
+      'job',
+      async (event) => {
+        await new Promise((resolve) => setImmediate(resolve));
+        done.push(event.payload.label);
+      },
+      { keyExtractor: (event) => (event.payload as { id: string }).id },
+    );
+
+    bus.emit(makeEvent('job', { id: 'a', label: 'a1' }));
+    bus.emit(makeEvent('job', { id: 'a', label: 'a2' }));
+    bus.emit(makeEvent('job', { id: 'a', label: 'a3' }));
+
+    await flushUntil(() => done.length === 3);
+    assert.deepEqual(done, ['a1', 'a2', 'a3']);
   });
 });

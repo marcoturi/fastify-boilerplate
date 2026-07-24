@@ -15,9 +15,14 @@ function withMetadata(action: Action<unknown>): Action<unknown> {
   } as Action<unknown>;
 }
 
-/** Metadata middleware for the event bus — creates a new action, does not mutate. */
-export function decorateEventWithMetadata(action: Action<unknown>, handler: EventHandler): void {
-  handler(withMetadata(action));
+/** Metadata middleware for the event bus — creates a new action, does not mutate.
+ *  Returns the handler result so the bus can await it (sequential processing) and
+ *  isolate failures. */
+export function decorateEventWithMetadata(
+  action: Action<unknown>,
+  handler: EventHandler,
+): void | Promise<void> {
+  return handler(withMetadata(action));
 }
 
 /** Metadata middleware for the command/query bus — creates a new action, does not mutate. */
