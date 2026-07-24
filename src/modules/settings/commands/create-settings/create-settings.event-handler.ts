@@ -1,4 +1,4 @@
-import { createUserEvent } from '#src/modules/user/commands/create-user/create-user.handler.ts';
+import { createUserEvent } from '#src/modules/user/domain/user.events.ts';
 
 export default function makeCreateSettings({ eventBus, logger }: Dependencies) {
   return {
