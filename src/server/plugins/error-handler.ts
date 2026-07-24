@@ -46,9 +46,14 @@ async function errorHandlerPlugin(fastify: FastifyInstance) {
       }
     }
 
-    // Catch all other errors
-    fastify.log.error(error);
+    // Known domain errors: 4xx are expected outcomes (log at warn to avoid alert noise),
+    // 5xx are genuine failures (log at error).
     if (error instanceof ExceptionBase) {
+      if (error.statusCode >= 500) {
+        fastify.log.error(error);
+      } else {
+        fastify.log.warn(error);
+      }
       return res.status(error.statusCode).send({
         statusCode: error.statusCode,
         message: error.message,
@@ -57,6 +62,8 @@ async function errorHandlerPlugin(fastify: FastifyInstance) {
       } satisfies ApiErrorResponse);
     }
 
+    // Unexpected/unknown error
+    fastify.log.error(error);
     return res.status(500).send({
       statusCode: 500,
       message: 'Internal Server Error', // https://datatracker.ietf.org/doc/html/rfc7231#section-6.6.1
