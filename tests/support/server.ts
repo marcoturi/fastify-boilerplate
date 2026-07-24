@@ -1,4 +1,4 @@
-import Fastify from 'fastify';
+import Fastify, { LogController } from 'fastify';
 import server from '../../src/server/index.ts';
 
 export const buildApp = async () => {
@@ -6,7 +6,7 @@ export const buildApp = async () => {
     logger: {
       level: 'warn',
     },
-    disableRequestLogging: true,
+    logController: new LogController({ disableRequestLogging: true }),
     routerOptions: {
       ignoreDuplicateSlashes: true,
     },
