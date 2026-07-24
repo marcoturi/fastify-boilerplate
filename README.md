@@ -201,6 +201,8 @@ Each module maps to a domain concept and lives in its own folder under `src/modu
 - **Extractable** — any module can be pulled into a separate microservice. The CQRS handler boundary becomes the network boundary.
 - **If two modules are too "chatty"**, they probably belong together — merge them.
 
+> **CQRS:** see [doc/CQRS.md](doc/CQRS.md) for how the command, query, and event buses work — actions, handlers, middlewares, ordered per-key events, and worked examples.
+
 ### Module Components
 
 Each layer has a single responsibility:

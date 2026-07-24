@@ -57,6 +57,9 @@ uses the CQRS buses:
 
 This project uses three buses: `CommandBus`, `QueryBus`, and `EventBus`.
 
+> Full guide with examples: [doc/CQRS.md](doc/CQRS.md) (event error isolation and ordered
+> per-key processing are documented there).
+
 ### Action creators
 
 Actions are created via `actionCreatorFactory` with a module prefix.
