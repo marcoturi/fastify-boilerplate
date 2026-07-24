@@ -24,5 +24,8 @@ After(async function (this: ICustomWorld, { result }: ITestCaseHookParameter) {
   if (result) {
     this.attach(`Status: ${result.status}. Duration:${result.duration.seconds}s`);
   }
+  // Reset persisted state so scenarios stay independent and re-runnable
+  // (otherwise leftover rows cause unique-email clashes on repeat runs).
+  await this.db`TRUNCATE TABLE users CASCADE`;
   await this.server.close();
 });
