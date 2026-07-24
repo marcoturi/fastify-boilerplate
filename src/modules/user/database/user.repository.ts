@@ -43,7 +43,7 @@ export default function userRepository({
         filters.street && db`street = ${filters.street}`,
         filters.postalCode && db`"postalCode" = ${filters.postalCode}`,
       ];
-      const users: { rows: UserModel[]; count: number }[] = await db`
+      const [result]: { rows: UserModel[] | null; count: number }[] = await db`
         SELECT
           (SELECT COUNT(*) FROM users ${joinConditions(conditions)}) as count,
           (SELECT json_agg(t.*) FROM
@@ -51,8 +51,8 @@ export default function userRepository({
           AS t) AS rows
       `;
       return {
-        data: users[0].rows?.map((user) => userMapper.toDomain(user)) ?? [],
-        count: Number(users[0].count),
+        data: result?.rows?.map((user) => userMapper.toDomain(user)) ?? [],
+        count: Number(result?.count ?? 0),
         limit: params.limit,
         page: params.page,
       };
