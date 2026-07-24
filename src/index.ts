@@ -1,7 +1,9 @@
 import { randomUUID } from 'node:crypto';
 import Fastify from 'fastify';
 import { env } from '#src/config/index.ts';
+import { shutdownTelemetry } from '#src/instrumentation.ts';
 import server from '#src/server/index.ts';
+import { getRequestId } from '#src/shared/app/app-request-context.ts';
 import { closeDbConnection } from '#src/shared/db/postgres.ts';
 
 async function init() {
@@ -9,6 +11,11 @@ async function init() {
     logger: {
       level: env.log.level,
       redact: ['headers.authorization'],
+      // Attach the request correlation id (from the request-context ALS) to every log line,
+      // including those from handlers/repositories. Falls back to a sentinel outside a request.
+      mixin() {
+        return { correlationId: getRequestId() };
+      },
     },
     genReqId: (req) => {
       // header best practice: don't use "x-" https://www.rfc-editor.org/info/rfc6648 and keep it lowercase
@@ -36,6 +43,7 @@ async function init() {
   const shutDown = async (signal: string) => {
     fastify.log.info(`Received ${signal}, shutting down gracefully…`);
     await fastify.close();
+    await shutdownTelemetry(); // flush buffered spans/metrics before exit
     process.exit(0);
   };
   process.on('SIGTERM', () => shutDown('SIGTERM'));

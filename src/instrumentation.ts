@@ -20,6 +20,10 @@
  *   https://opentelemetry.io/docs/languages/sdk-configuration/general/
  */
 
+import type { NodeSDK } from '@opentelemetry/sdk-node';
+
+let sdk: NodeSDK | undefined;
+
 if (process.env.OTEL_SDK_DISABLED !== 'true') {
   // Register the ESM loader hook so OpenTelemetry can patch imported modules
   // (http, etc.). Must be called before any application imports.
@@ -30,7 +34,7 @@ if (process.env.OTEL_SDK_DISABLED !== 'true') {
   const { HttpInstrumentation } = await import('@opentelemetry/instrumentation-http');
   const { FastifyOtelInstrumentation } = await import('@fastify/otel');
 
-  const sdk = new NodeSDK({
+  sdk = new NodeSDK({
     instrumentations: [
       new HttpInstrumentation(),
       // registerOnInitialization auto-registers the Fastify plugin on server creation
@@ -39,4 +43,10 @@ if (process.env.OTEL_SDK_DISABLED !== 'true') {
   });
 
   sdk.start();
+}
+
+/** Flushes and shuts down the OpenTelemetry SDK so buffered spans/metrics are exported
+ *  before the process exits. No-op when telemetry is disabled. Call from graceful shutdown. */
+export async function shutdownTelemetry(): Promise<void> {
+  await sdk?.shutdown();
 }
