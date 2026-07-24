@@ -71,7 +71,14 @@ export interface QueryBus {
   addMiddleware(fn: CommandMiddleware): void;
 }
 
-export interface EventBus {
+/** Minimal publishing port. Anything that can publish an event satisfies this — the event
+ *  bus today, a transactional-outbox writer tomorrow. Consumers (e.g. `DomainResult.commit`)
+ *  should depend on this, not on the full `EventBus`. */
+export interface EventPublisher {
+  emit(event: Action<unknown>): void | Promise<void>;
+}
+
+export interface EventBus extends EventPublisher {
   on<P>(
     type: string,
     handler: (event: Action<P>) => void | Promise<void>,
