@@ -1,3 +1,15 @@
+# [2.6.0](https://github.com/marcoturi/fastify-boilerplate/compare/v2.5.0...v2.6.0) (2026-07-24)
+
+
+### Features
+
+* **db:** make DB TLS and connection pool configurable via env ([011f772](https://github.com/marcoturi/fastify-boilerplate/commit/011f77249b9e99ae81df910bfd98a6728e9a2999))
+
+
+### Performance Improvements
+
+* **user:** index columns filtered by findAllPaginatedFiltered ([47fe1e9](https://github.com/marcoturi/fastify-boilerplate/commit/47fe1e9c84f14c2cf3c232c003f64a2e3978d5e0))
+
 # [2.5.0](https://github.com/marcoturi/fastify-boilerplate/compare/v2.4.45...v2.5.0) (2026-07-24)
 
 
