@@ -21,6 +21,9 @@
   },
   "linter": {
     "enabled": true,
+    "domains": {
+      "project": "recommended"
+    },
     "rules": {
       "preset": "recommended",
       "complexity": {

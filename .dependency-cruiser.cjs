@@ -14,6 +14,7 @@ const infrastructureLayerPaths = [
   'infra',
   'database',
   'repository',
+  'shared/db',
 ];
 
 const domainLayerPaths = ['domain'];
@@ -69,11 +70,36 @@ module.exports = {
         path: apiLayerPaths,
       },
     },
+    {
+      name: 'no-handler-to-infra-deps',
+      comment:
+        'Handlers/event-handlers must not import infrastructure/DB directly — go through a repository port (interface).',
+      severity: 'error',
+      from: {
+        path: ['handler\\.ts$', 'event-handler\\.ts$'],
+      },
+      to: {
+        path: infrastructureLayerPaths,
+        pathNot: ['port\\.ts$'],
+      },
+    },
+    {
+      name: 'no-cross-module-deps',
+      comment:
+        "Modules must not import each other directly, except another module's domain events " +
+        '(*.events.ts), which are the cross-module contract. Use the CQRS buses for the rest.',
+      severity: 'error',
+      from: { path: '^src/modules/([^/]+)/' },
+      to: {
+        path: '^src/modules/[^/]+/',
+        pathNot: ['^src/modules/$1/', '[.]events[.]ts$'],
+      },
+    },
 
     /* rules from the 'recommended' preset: */
     {
       name: 'no-circular',
-      severity: 'warn',
+      severity: 'error',
       comment:
         'This dependency is part of a circular relationship. You might want to revise ' +
         'your solution (i.e. use dependency inversion, make sure the modules have a single responsibility) ',
