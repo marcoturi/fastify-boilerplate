@@ -47,7 +47,7 @@
     "@fastify/otel": "0.20.1",
     "@fastify/request-context": "7.0.0",
     "@fastify/swagger": "9.8.1",
-    "@fastify/swagger-ui": "6.1.0",
+    "@fastify/swagger-ui": "6.1.1",
     "@fastify/type-provider-typebox": "6.1.0",
     "@fastify/under-pressure": "9.1.0",
     "@graphql-tools/load-files": "7.0.1",
