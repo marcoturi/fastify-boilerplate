@@ -97,8 +97,8 @@ importers:
         specifier: 21.2.0
         version: 21.2.0
       '@cucumber/cucumber':
-        specifier: 13.2.0
-        version: 13.2.0
+        specifier: 13.2.1
+        version: 13.2.1
       '@cucumber/html-formatter':
         specifier: 24.1.0
         version: 24.1.0(@cucumber/messages@34.2.0)
@@ -418,8 +418,8 @@ packages:
   '@cucumber/cucumber-expressions@20.0.0':
     resolution: {integrity: sha512-t2FBLKuU0U1nP5FM8pHiVonYcXVm07fvXr/H9osdvrjcLXSWc5OCbOOqV/k5S56w/YndPv1Sv2/m/x1KBYvIlA==}
 
-  '@cucumber/cucumber@13.2.0':
-    resolution: {integrity: sha512-QjhTG6FWVdG66qkj1BGONecAIqEIDx4g+ZnTdaQVmhECDfGPYyfEcBX3k71p/h1YKvWEUWmhol77Y7FZ36pARA==}
+  '@cucumber/cucumber@13.2.1':
+    resolution: {integrity: sha512-Km3mLbZKOE/TlR9ExGWcG7PwOG1ArMt/R6BexrMhGA8pLGaLCWYISTHStpftLuuhVKvVd3RO5M/pfARKyvcyWg==}
     engines: {node: 22 || 24 || >=26}
     hasBin: true
 
@@ -438,10 +438,8 @@ packages:
   '@cucumber/gherkin@41.0.0':
     resolution: {integrity: sha512-pKGx1EzNjtWbpw74kEevKDMj71dF3ZSaFJpLYuWVvRZKe+Cwoq5iEkuMaELIg1jxIu8jH/A2HPMpMR8UBvdG0w==}
 
-  '@cucumber/html-formatter@24.0.0':
-    resolution: {integrity: sha512-F+3Y2yXZBjj8kYhUg++8LjHhfne0ddm8KS9bYf29nF5f9D3g3elZjWnxa9eMKfkIQGlW5EcmzMYyu6iEF+dV5g==}
-    peerDependencies:
-      '@cucumber/messages': '>=18'
+  '@cucumber/gherkin@42.0.0':
+    resolution: {integrity: sha512-kBcv+NV4FGQYX6NIsSCjsjaX8MsRdEH559BQ9xEFPgkLQX/Z//JZrY94fpjxW6quo4V5kxlzFiiVC5xouF9Akg==}
 
   '@cucumber/html-formatter@24.1.0':
     resolution: {integrity: sha512-5TBLnBT+tIvtamw/jtblBVgzQ2/ckd+md8I0rwkEk29vFMCF68jNwhyONGq6leUYMq4kVF+KdFhE8xGrSc3kJw==}
@@ -461,9 +459,6 @@ packages:
   '@cucumber/messages@33.0.4':
     resolution: {integrity: sha512-i6P1a0bnmhecOHfvIW0rhMxv/gMKfBKwDMxmD9/Uo1HSqpQ17ocHms1JwWW6uTMLAopqqWlcz7l6Pax+qUOTzg==}
 
-  '@cucumber/messages@34.0.1':
-    resolution: {integrity: sha512-Mvh8CkZD4TGykvXqM9qpnYVGy9cqMxYkImtghl2cF1hEuBtuDGU716zQk7KviLh0ssidM/phh9kdbJL/73dHpg==}
-
   '@cucumber/messages@34.2.0':
     resolution: {integrity: sha512-6X6T1TApmbQNqxC0Oh3GcnLU+gfE5fp+cEXE/ml6+Ldx76Q6BDmkgM5vagSSDXP+vetPV2Fb0kWVeP7QIR6+Aw==}
 
@@ -482,8 +477,8 @@ packages:
     peerDependencies:
       '@cucumber/messages': '*'
 
-  '@cucumber/tag-expressions@10.0.0':
-    resolution: {integrity: sha512-uap3XSQFxj5HYAHQIShGeS2zotMEnUmnEVjyuhp39j7tDUvaU64ArHzRkLPSWRavEI8ycdeNdwef1pcM/n6pSQ==}
+  '@cucumber/tag-expressions@11.0.0':
+    resolution: {integrity: sha512-7Uo6dYST8xZbHwwemXCt7Kv80Yh/SE85DyOed1/FTwxRXs3NYVOCm6e/h8DxlhTGIpD6rYXfpY3nHnIXAFMBlw==}
 
   '@dbmate/darwin-arm64@2.34.1':
     resolution: {integrity: sha512-Ez6UWKuws/E/yMGgVyUZ5ngbe/hMYFOV31pZIwTp7dcT8yGL4JV5ayOYbHHnvwiX9Ram28p7JwXntDh1jI2TFw==}
@@ -3383,6 +3378,10 @@ packages:
     resolution: {integrity: sha512-SS+jx45GF1QjgEXQx4NJZV9ImqmO2NPz5FNsIHrsDjh2YsHnawpan7SNQ1o8NuhrbHZy9AZhIoCUiCeaW/C80g==}
     engines: {node: '>=18'}
 
+  supports-color@11.0.0:
+    resolution: {integrity: sha512-/zyImLdxhdygBIaVX0xTlQhKaCDLCrm665aqHk8xqK/Pa6k61fL6gwQGQq1k31yNyz6x55PppQgF2DMyPQa5xw==}
+    engines: {node: '>=22'}
+
   supports-color@5.5.0:
     resolution: {integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==}
     engines: {node: '>=4'}
@@ -4021,23 +4020,23 @@ snapshots:
     dependencies:
       regexp-match-indices: 1.0.2
 
-  '@cucumber/cucumber@13.2.0':
+  '@cucumber/cucumber@13.2.1':
     dependencies:
       '@cucumber/ci-environment': 14.0.0
       '@cucumber/cucumber-expressions': 20.0.0
-      '@cucumber/gherkin': 41.0.0
-      '@cucumber/gherkin-streams': 7.0.1(@cucumber/gherkin@41.0.0)(@cucumber/message-streams@5.0.1(@cucumber/messages@34.0.1))(@cucumber/messages@34.0.1)
+      '@cucumber/gherkin': 42.0.0
+      '@cucumber/gherkin-streams': 7.0.1(@cucumber/gherkin@42.0.0)(@cucumber/message-streams@5.0.1(@cucumber/messages@34.2.0))(@cucumber/messages@34.2.0)
       '@cucumber/gherkin-utils': 12.0.1
-      '@cucumber/html-formatter': 24.0.0(@cucumber/messages@34.0.1)
-      '@cucumber/junit-xml-formatter': 0.14.0(@cucumber/messages@34.0.1)
-      '@cucumber/message-streams': 5.0.1(@cucumber/messages@34.0.1)
-      '@cucumber/messages': 34.0.1
-      '@cucumber/pretty-formatter': 4.0.0(@cucumber/messages@34.0.1)
-      '@cucumber/tag-expressions': 10.0.0
+      '@cucumber/html-formatter': 24.1.0(@cucumber/messages@34.2.0)
+      '@cucumber/junit-xml-formatter': 0.14.0(@cucumber/messages@34.2.0)
+      '@cucumber/message-streams': 5.0.1(@cucumber/messages@34.2.0)
+      '@cucumber/messages': 34.2.0
+      '@cucumber/pretty-formatter': 4.0.0(@cucumber/messages@34.2.0)
+      '@cucumber/tag-expressions': 11.0.0
       assertion-error-formatter: 3.0.0
       cli-table3: 0.6.5
       commander: 15.0.0
-      debug: 4.4.3(supports-color@10.2.2)
+      debug: 4.4.3(supports-color@11.0.0)
       error-stack-parser: 2.1.4
       figures: 6.1.0
       has-ansi: 6.0.2
@@ -4050,17 +4049,17 @@ snapshots:
       read-package-up: 12.0.0
       semver: 7.8.5
       string-argv: 0.3.2
-      supports-color: 10.2.2
+      supports-color: 11.0.0
       type-fest: 5.8.0
       util-arity: 1.1.0
       yaml: 2.9.0
       yup: 1.7.1
 
-  '@cucumber/gherkin-streams@7.0.1(@cucumber/gherkin@41.0.0)(@cucumber/message-streams@5.0.1(@cucumber/messages@34.0.1))(@cucumber/messages@34.0.1)':
+  '@cucumber/gherkin-streams@7.0.1(@cucumber/gherkin@42.0.0)(@cucumber/message-streams@5.0.1(@cucumber/messages@34.2.0))(@cucumber/messages@34.2.0)':
     dependencies:
-      '@cucumber/gherkin': 41.0.0
-      '@cucumber/message-streams': 5.0.1(@cucumber/messages@34.0.1)
-      '@cucumber/messages': 34.0.1
+      '@cucumber/gherkin': 42.0.0
+      '@cucumber/message-streams': 5.0.1(@cucumber/messages@34.2.0)
+      '@cucumber/messages': 34.2.0
       commander: 15.0.0
       source-map-support: 0.5.21
 
@@ -4076,52 +4075,50 @@ snapshots:
     dependencies:
       '@cucumber/messages': 33.0.4
 
-  '@cucumber/html-formatter@24.0.0(@cucumber/messages@34.0.1)':
+  '@cucumber/gherkin@42.0.0':
     dependencies:
-      '@cucumber/messages': 34.0.1
+      '@cucumber/messages': 34.2.0
 
   '@cucumber/html-formatter@24.1.0(@cucumber/messages@34.2.0)':
     dependencies:
       '@cucumber/messages': 34.2.0
 
-  '@cucumber/junit-xml-formatter@0.14.0(@cucumber/messages@34.0.1)':
+  '@cucumber/junit-xml-formatter@0.14.0(@cucumber/messages@34.2.0)':
     dependencies:
-      '@cucumber/messages': 34.0.1
-      '@cucumber/query': 16.0.1(@cucumber/messages@34.0.1)
+      '@cucumber/messages': 34.2.0
+      '@cucumber/query': 16.0.1(@cucumber/messages@34.2.0)
       '@teppeis/multimaps': 3.0.0
       luxon: 3.7.2
       xmlbuilder: 15.1.1
 
-  '@cucumber/message-streams@5.0.1(@cucumber/messages@34.0.1)':
+  '@cucumber/message-streams@5.0.1(@cucumber/messages@34.2.0)':
     dependencies:
-      '@cucumber/messages': 34.0.1
+      '@cucumber/messages': 34.2.0
       mime: 4.1.0
 
   '@cucumber/messages@33.0.4': {}
 
-  '@cucumber/messages@34.0.1': {}
-
   '@cucumber/messages@34.2.0': {}
 
-  '@cucumber/pretty-formatter@4.0.0(@cucumber/messages@34.0.1)':
+  '@cucumber/pretty-formatter@4.0.0(@cucumber/messages@34.2.0)':
     dependencies:
-      '@cucumber/messages': 34.0.1
-      '@cucumber/query': 16.0.0(@cucumber/messages@34.0.1)
+      '@cucumber/messages': 34.2.0
+      '@cucumber/query': 16.0.0(@cucumber/messages@34.2.0)
       luxon: 3.7.2
 
-  '@cucumber/query@16.0.0(@cucumber/messages@34.0.1)':
+  '@cucumber/query@16.0.0(@cucumber/messages@34.2.0)':
     dependencies:
-      '@cucumber/messages': 34.0.1
+      '@cucumber/messages': 34.2.0
       '@teppeis/multimaps': 3.0.0
       lodash.sortby: 4.7.0
 
-  '@cucumber/query@16.0.1(@cucumber/messages@34.0.1)':
+  '@cucumber/query@16.0.1(@cucumber/messages@34.2.0)':
     dependencies:
-      '@cucumber/messages': 34.0.1
+      '@cucumber/messages': 34.2.0
       '@teppeis/multimaps': 3.0.0
       lodash.sortby: 4.7.0
 
-  '@cucumber/tag-expressions@10.0.0': {}
+  '@cucumber/tag-expressions@11.0.0': {}
 
   '@dbmate/darwin-arm64@2.34.1':
     optional: true
@@ -5744,6 +5741,12 @@ snapshots:
     optionalDependencies:
       supports-color: 10.2.2
 
+  debug@4.4.3(supports-color@11.0.0):
+    dependencies:
+      ms: 2.1.3
+    optionalDependencies:
+      supports-color: 11.0.0
+
   deep-extend@0.6.0: {}
 
   depd@2.0.0: {}
@@ -7233,6 +7236,8 @@ snapshots:
       time-span: 5.1.0
 
   supports-color@10.2.2: {}
+
+  supports-color@11.0.0: {}
 
   supports-color@5.5.0:
     dependencies:
