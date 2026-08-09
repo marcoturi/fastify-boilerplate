@@ -101,10 +101,10 @@ importers:
         version: 13.2.1
       '@cucumber/html-formatter':
         specifier: 24.1.1
-        version: 24.1.1(@cucumber/messages@34.2.0)
+        version: 24.1.1(@cucumber/messages@34.2.1)
       '@cucumber/messages':
-        specifier: 34.2.0
-        version: 34.2.0
+        specifier: 34.2.1
+        version: 34.2.1
       '@graphql-codegen/cli':
         specifier: 7.2.0
         version: 7.2.0(@fastify/websocket@11.3.0)(@types/node@26.1.2)(graphql@16.14.2)(supports-color@10.2.2)(typescript@6.0.3)
@@ -466,6 +466,9 @@ packages:
 
   '@cucumber/messages@34.2.0':
     resolution: {integrity: sha512-6X6T1TApmbQNqxC0Oh3GcnLU+gfE5fp+cEXE/ml6+Ldx76Q6BDmkgM5vagSSDXP+vetPV2Fb0kWVeP7QIR6+Aw==}
+
+  '@cucumber/messages@34.2.1':
+    resolution: {integrity: sha512-aj2iCAG9ZOpMVcMxcgShifv5fbR96b7SMgdWcPXXh2QbFp7OEcAnQ5MC5YfWUDSDasmw7FU5NJEsOrXdTQOU1A==}
 
   '@cucumber/pretty-formatter@4.0.0':
     resolution: {integrity: sha512-vWKHUfjMphtbeHHlQBZ1gQzPL3/HE/O2dNnpBqEOIDwvhp7tKvqSe8kscp2H7pArbxN6euEpR5JbstJdzo3iyg==}
@@ -4082,15 +4085,15 @@ snapshots:
 
   '@cucumber/gherkin@42.0.0':
     dependencies:
-      '@cucumber/messages': 34.2.0
+      '@cucumber/messages': 34.2.1
 
   '@cucumber/html-formatter@24.1.0(@cucumber/messages@34.2.0)':
     dependencies:
       '@cucumber/messages': 34.2.0
 
-  '@cucumber/html-formatter@24.1.1(@cucumber/messages@34.2.0)':
+  '@cucumber/html-formatter@24.1.1(@cucumber/messages@34.2.1)':
     dependencies:
-      '@cucumber/messages': 34.2.0
+      '@cucumber/messages': 34.2.1
 
   '@cucumber/junit-xml-formatter@0.14.0(@cucumber/messages@34.2.0)':
     dependencies:
@@ -4108,6 +4111,8 @@ snapshots:
   '@cucumber/messages@33.0.4': {}
 
   '@cucumber/messages@34.2.0': {}
+
+  '@cucumber/messages@34.2.1': {}
 
   '@cucumber/pretty-formatter@4.0.0(@cucumber/messages@34.2.0)':
     dependencies:
