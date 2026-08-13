@@ -1,3 +1,10 @@
+## [2.9.11](https://github.com/marcoturi/fastify-boilerplate/compare/v2.9.10...v2.9.11) (2026-08-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/awilix to v8.2.1 ([#1092](https://github.com/marcoturi/fastify-boilerplate/issues/1092)) ([816cd6a](https://github.com/marcoturi/fastify-boilerplate/commit/816cd6a1e79824ed10440149cfee0075f398b766))
+
 ## [2.9.10](https://github.com/marcoturi/fastify-boilerplate/compare/v2.9.9...v2.9.10) (2026-08-12)
 
 
