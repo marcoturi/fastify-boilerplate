@@ -1,3 +1,10 @@
+## [2.9.19](https://github.com/marcoturi/fastify-boilerplate/compare/v2.9.18...v2.9.19) (2026-08-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/helmet to v13.1.1 ([#1107](https://github.com/marcoturi/fastify-boilerplate/issues/1107)) ([090ae22](https://github.com/marcoturi/fastify-boilerplate/commit/090ae22b38fe709ad2f9e65781716e3868d53aea))
+
 ## [2.9.18](https://github.com/marcoturi/fastify-boilerplate/compare/v2.9.17...v2.9.18) (2026-08-22)
 
 
