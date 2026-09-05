@@ -84,7 +84,7 @@
     "@semantic-release/npm": "13.1.5",
     "@semantic-release/release-notes-generator": "14.1.1",
     "@types/k6": "2.2.0",
-    "@types/node": "26.4.0",
+    "@types/node": "26.4.1",
     "c8": "12.0.0",
     "dbmate": "2.35.1",
     "dependency-cruiser": "18.2.0",
