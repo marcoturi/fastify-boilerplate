@@ -13,7 +13,7 @@ importers:
         version: 6.5.0
       '@fastify/awilix':
         specifier: 8.2.1
-        version: 8.2.1(awilix@13.0.5)(fastify@5.12.1)
+        version: 8.2.1(awilix@13.0.5)(fastify@5.12.3)
       '@fastify/cors':
         specifier: 11.3.0
         version: 11.3.0
@@ -69,8 +69,8 @@ importers:
         specifier: 7.0.0
         version: 7.0.0
       fastify:
-        specifier: 5.12.1
-        version: 5.12.1
+        specifier: 5.12.3
+        version: 5.12.3
       fastify-plugin:
         specifier: 6.0.0
         version: 6.0.0
@@ -2041,8 +2041,8 @@ packages:
   fastify-plugin@6.0.0:
     resolution: {integrity: sha512-fZOty7z3O7vOliF6d8bHE3wiEh1KcNnKEQensSgTk9C1DvN6nRLS++XVd86v33Hw/8u9Un8A1zDrQ8ujcQDHEg==}
 
-  fastify@5.12.1:
-    resolution: {integrity: sha512-FWi+tQvwxR/PeRX7Z2mhfEF5ozJ3jn9asiiclzKXNSzJRHAYcU924aIOKAdHFJ+YIKieh3cqr1IwCOvTr41B3Q==}
+  fastify@5.12.3:
+    resolution: {integrity: sha512-reZ8wce5VNCcufIt9AVtzZa3L4u1j8esikn7OEgHWLVpRpL5R7Y2+Xzj70OUkv5zDfzUAxXZT6cu4Rt0zr3EKA==}
 
   fastparallel@2.4.1:
     resolution: {integrity: sha512-qUmhxPgNHmvRjZKBFUNI0oZuuH9OlSIOXmJ98lhKPxMZZ7zS/Fi0wRHOihDSz0R1YiIOjxzOY4bq65YTcdBi2Q==}
@@ -4203,11 +4203,11 @@ snapshots:
 
   '@fastify/autoload@6.5.0': {}
 
-  '@fastify/awilix@8.2.1(awilix@13.0.5)(fastify@5.12.1)':
+  '@fastify/awilix@8.2.1(awilix@13.0.5)(fastify@5.12.3)':
     dependencies:
       awilix: 13.0.5
       awilix-manager: 7.0.0(awilix@13.0.5)
-      fastify: 5.12.1
+      fastify: 5.12.3
       fastify-plugin: 6.0.0
 
   '@fastify/busboy@3.2.0': {}
@@ -6037,7 +6037,7 @@ snapshots:
 
   fastify-plugin@6.0.0: {}
 
-  fastify@5.12.1:
+  fastify@5.12.3:
     dependencies:
       '@fastify/ajv-compiler': 4.0.5
       '@fastify/error': 4.2.0
