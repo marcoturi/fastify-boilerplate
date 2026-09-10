@@ -44,7 +44,7 @@
     "@fastify/awilix": "8.2.1",
     "@fastify/cors": "11.3.0",
     "@fastify/helmet": "13.1.1",
-    "@fastify/otel": "0.20.1",
+    "@fastify/otel": "0.21.0",
     "@fastify/request-context": "7.0.0",
     "@fastify/swagger": "9.8.1",
     "@fastify/swagger-ui": "6.1.1",
