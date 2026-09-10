@@ -1,3 +1,10 @@
+## [2.9.32](https://github.com/marcoturi/fastify-boilerplate/compare/v2.9.31...v2.9.32) (2026-09-10)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/otel to v0.21.0 ([#1134](https://github.com/marcoturi/fastify-boilerplate/issues/1134)) ([7ae7ccd](https://github.com/marcoturi/fastify-boilerplate/commit/7ae7ccd9c6ab5d67e109a71ca94b753dd6354aa5))
+
 ## [2.9.31](https://github.com/marcoturi/fastify-boilerplate/compare/v2.9.30...v2.9.31) (2026-09-10)
 
 
