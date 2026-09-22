@@ -49,7 +49,7 @@
     "@fastify/swagger": "9.8.1",
     "@fastify/swagger-ui": "6.1.1",
     "@fastify/type-provider-typebox": "6.1.0",
-    "@fastify/under-pressure": "9.1.0",
+    "@fastify/under-pressure": "9.2.0",
     "@graphql-tools/load-files": "7.0.1",
     "@graphql-tools/merge": "9.2.4",
     "@opentelemetry/api": "1.9.1",
