@@ -86,7 +86,7 @@
     "@types/k6": "2.2.1",
     "@types/node": "26.6.2",
     "c8": "12.0.0",
-    "dbmate": "2.35.1",
+    "dbmate": "2.36.0",
     "dependency-cruiser": "18.3.1",
     "husky": "9.1.7",
     "openapi-typescript": "7.13.0",
