@@ -100,8 +100,8 @@ importers:
         specifier: 13.2.1
         version: 13.2.1
       '@cucumber/html-formatter':
-        specifier: 24.1.1
-        version: 24.1.1(@cucumber/messages@34.2.1)
+        specifier: 24.2.0
+        version: 24.2.0(@cucumber/messages@34.2.1)
       '@cucumber/messages':
         specifier: 34.2.1
         version: 34.2.1
@@ -446,8 +446,8 @@ packages:
     peerDependencies:
       '@cucumber/messages': '>=18'
 
-  '@cucumber/html-formatter@24.1.1':
-    resolution: {integrity: sha512-N7Y0P74qrIYM9pazsMKQ1KRnNg0u7LSHbX32Fs3dW9Afmjm2NNBXIEolT+rrDIZKxTAKHJOitJeE6YroB0uW0Q==}
+  '@cucumber/html-formatter@24.2.0':
+    resolution: {integrity: sha512-6Y5ijKyFeNiaMdcYna/fo1Bluzebm8L+vSAyuymIt7Dxu5Fq1sDYMGqR1rYeuNdJmXyu/YRtGLOsrZdCJCQGIg==}
     peerDependencies:
       '@cucumber/messages': '>=18'
 
@@ -4100,7 +4100,7 @@ snapshots:
     dependencies:
       '@cucumber/messages': 34.2.0
 
-  '@cucumber/html-formatter@24.1.1(@cucumber/messages@34.2.1)':
+  '@cucumber/html-formatter@24.2.0(@cucumber/messages@34.2.1)':
     dependencies:
       '@cucumber/messages': 34.2.1
 
