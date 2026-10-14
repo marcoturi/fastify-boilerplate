@@ -24,8 +24,8 @@ importers:
         specifier: 0.21.2
         version: 0.21.2(@opentelemetry/api@1.9.1)(supports-color@10.2.2)
       '@fastify/request-context':
-        specifier: 7.0.0
-        version: 7.0.0
+        specifier: 7.0.2
+        version: 7.0.2
       '@fastify/swagger':
         specifier: 9.9.1
         version: 9.9.1(supports-color@10.2.2)
@@ -562,8 +562,8 @@ packages:
   '@fastify/proxy-addr@5.1.0':
     resolution: {integrity: sha512-INS+6gh91cLUjB+PVHfu1UqcB76Sqtpyp7bnL+FYojhjygvOPA9ctiD/JDKsyD9Xgu4hUhCSJBPig/w7duNajw==}
 
-  '@fastify/request-context@7.0.0':
-    resolution: {integrity: sha512-SMnQ4VWa1p20qOSONvi+yG32vqyHoZE6LPD4xrIl3RVE11dLrBwiQ7VmK4aTCS7/jB5Tx6fI9JotTNErClPS5A==}
+  '@fastify/request-context@7.0.2':
+    resolution: {integrity: sha512-XpXmh09g3841GkygpWydPd41hCk7kNcyV6Th5pBXcpol0N283k25IhG4Zf8DJUsQiGhHL0kB1LsuOs7pMt3d6Q==}
 
   '@fastify/send@4.1.0':
     resolution: {integrity: sha512-TMYeQLCBSy2TOFmV95hQWkiTYgC/SEx7vMdV+wnZVX4tt8VBLKzmH8vV9OzJehV0+XBfg+WxPMt5wp+JBUKsVw==}
@@ -2034,9 +2034,6 @@ packages:
 
   fast-wrap-ansi@0.2.2:
     resolution: {integrity: sha512-7F2Fl+TjRSenLqlU3UjSH0iyqopqoZIu7eZVpEirP2g1GtWa2G/ecEmBdgz31+Mxr+ELclgg6sokpSFIQiZ02Q==}
-
-  fastify-plugin@5.1.0:
-    resolution: {integrity: sha512-FAIDA8eovSt5qcDgcBvDuX/v0Cjz0ohGhENZ/wpc3y+oZCY2afZ9Baqql3g/lC+OHRnciQol4ww7tuthOb9idw==}
 
   fastify-plugin@6.0.0:
     resolution: {integrity: sha512-fZOty7z3O7vOliF6d8bHE3wiEh1KcNnKEQensSgTk9C1DvN6nRLS++XVd86v33Hw/8u9Un8A1zDrQ8ujcQDHEg==}
@@ -4248,9 +4245,9 @@ snapshots:
       '@fastify/forwarded': 3.0.1
       ipaddr.js: 2.4.0
 
-  '@fastify/request-context@7.0.0':
+  '@fastify/request-context@7.0.2':
     dependencies:
-      fastify-plugin: 5.1.0
+      fastify-plugin: 6.0.0
 
   '@fastify/send@4.1.0':
     dependencies:
@@ -6046,8 +6043,6 @@ snapshots:
   fast-wrap-ansi@0.2.2:
     dependencies:
       fast-string-width: 3.0.2
-
-  fastify-plugin@5.1.0: {}
 
   fastify-plugin@6.0.0: {}
 
