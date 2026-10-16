@@ -78,8 +78,8 @@ importers:
         specifier: 16.14.2
         version: 16.14.2
       mercurius:
-        specifier: 16.10.1
-        version: 16.10.1(graphql@16.14.2)
+        specifier: 16.11.0
+        version: 16.11.0(graphql@16.14.2)
       postgres:
         specifier: 3.4.9
         version: 3.4.9
@@ -2666,11 +2666,11 @@ packages:
     resolution: {integrity: sha512-pxQJQzB6djGPXh08dacEloMFopsOqGVRKFPYvPOt9XDZ1HasbgDZA74CJGreSU4G3Ak7EFJGoiH2auq+yXISgA==}
     engines: {node: '>=18'}
 
-  mercurius@16.10.1:
-    resolution: {integrity: sha512-8P7KwNjA+R8OeZ2+6f43fQsCLjvekdeYKIvgWZbRnOMq8J2VdR2fDb/PLL5QPQF3ndjCuPXZJ7GxHfkKOnNlXw==}
+  mercurius@16.11.0:
+    resolution: {integrity: sha512-Cp4HVQkz1EY3ncjrlteVHd3r7D0tXK5SKX1birkBDo9ED0QTS/fcxACfNqxWmJC2SDjHSBxB5zC0DJulm/feoQ==}
     engines: {node: ^20.9.0 || >=22.0.0}
     peerDependencies:
-      graphql: ^16.0.0
+      graphql: ^16.8.0 || ^17.0.0
 
   merge-stream@2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
@@ -3491,9 +3491,9 @@ packages:
   tiny-case@1.0.3:
     resolution: {integrity: sha512-Eet/eeMhkO6TX8mnUteS9zgPbUMQa4I6Kkp5ORiBD5476/m+PIRiumP5tmh5ioJpH7k51Kehawy2UDfsnxxY8Q==}
 
-  tiny-lru@11.4.7:
-    resolution: {integrity: sha512-w/Te7uMUVeH0CR8vZIjr+XiN41V+30lkDdK+NRIDCUYKKuL9VcmaUEmaPISuwGhLlrTGh5yu18lENtR9axSxYw==}
-    engines: {node: '>=12'}
+  tiny-lru@13.1.0:
+    resolution: {integrity: sha512-sImTU4L5bvqNJxr95Jk6I/IZeHwTU6fWLfA6PuALDKnugw78YlGVkyDpPLzdzX02WU1zgrLIGSRJ8sLrtAJx5g==}
+    engines: {node: '>=14'}
 
   tinyexec@1.2.4:
     resolution: {integrity: sha512-SHf/r48b7vOrjve9PxJo3MN5v5yuyjHvdUcrQffT3WXMUfnGmHDVbC4k3sHJaJTgZCwpUplIaAo5ANtMyp3YHg==}
@@ -6662,7 +6662,7 @@ snapshots:
 
   meow@13.2.0: {}
 
-  mercurius@16.10.1(graphql@16.14.2):
+  mercurius@16.11.0(graphql@16.14.2):
     dependencies:
       '@fastify/error': 4.2.0
       '@fastify/static': 10.1.2
@@ -6674,11 +6674,12 @@ snapshots:
       p-map: 4.0.0
       quick-lru: 7.3.0
       readable-stream: 4.7.0
+      rfdc: 1.4.1
       safe-stable-stringify: 2.5.0
       secure-json-parse: 4.1.0
       single-user-cache: 2.1.0
-      tiny-lru: 11.4.7
-      ws: 8.21.1
+      tiny-lru: 13.1.0
+      ws: 8.22.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -7416,7 +7417,7 @@ snapshots:
 
   tiny-case@1.0.3: {}
 
-  tiny-lru@11.4.7: {}
+  tiny-lru@13.1.0: {}
 
   tinyexec@1.2.4: {}
 
