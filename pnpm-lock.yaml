@@ -78,8 +78,8 @@ importers:
         specifier: 16.14.2
         version: 16.14.2
       mercurius:
-        specifier: 16.11.0
-        version: 16.11.0(graphql@16.14.2)
+        specifier: 16.12.0
+        version: 16.12.0(graphql@16.14.2)
       postgres:
         specifier: 3.4.9
         version: 3.4.9
@@ -2666,11 +2666,11 @@ packages:
     resolution: {integrity: sha512-pxQJQzB6djGPXh08dacEloMFopsOqGVRKFPYvPOt9XDZ1HasbgDZA74CJGreSU4G3Ak7EFJGoiH2auq+yXISgA==}
     engines: {node: '>=18'}
 
-  mercurius@16.11.0:
-    resolution: {integrity: sha512-Cp4HVQkz1EY3ncjrlteVHd3r7D0tXK5SKX1birkBDo9ED0QTS/fcxACfNqxWmJC2SDjHSBxB5zC0DJulm/feoQ==}
+  mercurius@16.12.0:
+    resolution: {integrity: sha512-00AZMStfln/Gml1SO5y1SdwUl3YV4zckkaUUStmdfs0/VxjlXHSAk9hNt9Cli9PJC+Uev6zAgxBL499WjWWYIg==}
     engines: {node: ^20.9.0 || >=22.0.0}
     peerDependencies:
-      graphql: ^16.8.0 || ^17.0.0
+      graphql: ^16.0.0 || ^17.0.0
 
   merge-stream@2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
@@ -6662,7 +6662,7 @@ snapshots:
 
   meow@13.2.0: {}
 
-  mercurius@16.11.0(graphql@16.14.2):
+  mercurius@16.12.0(graphql@16.14.2):
     dependencies:
       '@fastify/error': 4.2.0
       '@fastify/static': 10.1.2
@@ -6674,7 +6674,6 @@ snapshots:
       p-map: 4.0.0
       quick-lru: 7.3.0
       readable-stream: 4.7.0
-      rfdc: 1.4.1
       safe-stable-stringify: 2.5.0
       secure-json-parse: 4.1.0
       single-user-cache: 2.1.0
