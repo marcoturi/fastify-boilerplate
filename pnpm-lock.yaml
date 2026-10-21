@@ -34,7 +34,7 @@ importers:
         version: 6.1.2
       '@fastify/type-provider-typebox':
         specifier: 6.3.0
-        version: 6.3.0(ajv-formats@3.0.1(ajv@8.20.0))(typebox@1.3.37)
+        version: 6.3.0(ajv-formats@3.0.1(ajv@8.20.0))(typebox@1.4.2)
       '@fastify/under-pressure':
         specifier: 9.2.1
         version: 9.2.1
@@ -84,8 +84,8 @@ importers:
         specifier: 3.4.9
         version: 3.4.9
       typebox:
-        specifier: 1.3.37
-        version: 1.3.37
+        specifier: 1.4.2
+        version: 1.4.2
     devDependencies:
       '@biomejs/biome':
         specifier: 2.5.15
@@ -1240,6 +1240,7 @@ packages:
   '@opentelemetry/propagator-jaeger@2.12.0':
     resolution: {integrity: sha512-Kz2Vz+NILW7S1WtN4rV1wr76fMtT/RRWvAMFBc91uTIi2dDMXxrfBKNe2KH7yaCfFp1X0xfAuabzuFczvoPB6A==}
     engines: {node: ^18.19.0 || >=20.6.0}
+    deprecated: Package no longer supported. See https://github.com/open-telemetry/opentelemetry-js/pull/7077
     peerDependencies:
       '@opentelemetry/api': '>=1.0.0 <1.10.0'
 
@@ -1270,12 +1271,14 @@ packages:
   '@opentelemetry/sdk-trace-base@2.12.0':
     resolution: {integrity: sha512-JOERgZCxRM06FEJ5kEWxlSRChah6MmXDx3KwCruqEv/iEyLkTokCSemf2y1w8oIHtfrr8EVTpzebq/31vn2Cpg==}
     engines: {node: ^18.19.0 || >=20.6.0}
+    deprecated: Use @opentelemetry/sdk-trace package
     peerDependencies:
       '@opentelemetry/api': '>=1.3.0 <1.10.0'
 
   '@opentelemetry/sdk-trace-node@2.12.0':
     resolution: {integrity: sha512-9DufH1IlmQMoKAfot5y/FhTP1RnmhLb5K6eKmJO/bvzPjYwPAazoiAUbTZFdPbqxOXN0FEbhZx/e6SB1Og4jmg==}
     engines: {node: ^18.19.0 || >=20.6.0}
+    deprecated: Use @opentelemetry/sdk-trace package
     peerDependencies:
       '@opentelemetry/api': '>=1.0.0 <1.10.0'
 
@@ -3560,8 +3563,8 @@ packages:
     resolution: {integrity: sha512-YGYEVz3Fm5iy/AybuA0oyNFq7H4CgQNfRp/qfe8nurE1kuCeNm3/vfm9X4Mtl+qLyaKJUh5xrFZwogr41SMjYA==}
     engines: {node: '>=20'}
 
-  typebox@1.3.37:
-    resolution: {integrity: sha512-k+Qogwk7lztlItGvFf5v4GZPPStFAFehAyOKYeuqIHzi3dfTFqPOTx38JG09hmpcK6TQgctrTD06U/0CTTpM1g==}
+  typebox@1.4.2:
+    resolution: {integrity: sha512-eSoZzgSIyOKDtTH9MI7XMAxMaiXq7UiSFWarysN1ka66baTLDxAVdQ6WkWn6qDqsJFVrcjzvuP+CqHo9yrlQpg==}
 
   typescript@6.0.3:
     resolution: {integrity: sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==}
@@ -4300,10 +4303,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@fastify/type-provider-typebox@6.3.0(ajv-formats@3.0.1(ajv@8.20.0))(typebox@1.3.37)':
+  '@fastify/type-provider-typebox@6.3.0(ajv-formats@3.0.1(ajv@8.20.0))(typebox@1.4.2)':
     dependencies:
       ajv-formats: 3.0.1(ajv@8.20.0)
-      typebox: 1.3.37
+      typebox: 1.4.2
 
   '@fastify/under-pressure@9.2.1':
     dependencies:
@@ -7470,7 +7473,7 @@ snapshots:
     dependencies:
       tagged-tag: 1.0.0
 
-  typebox@1.3.37: {}
+  typebox@1.4.2: {}
 
   typescript@6.0.3: {}
 
