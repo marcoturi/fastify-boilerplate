@@ -45,7 +45,7 @@
     "@fastify/cors": "11.3.1",
     "@fastify/helmet": "13.2.0",
     "@fastify/otel": "0.21.3",
-    "@fastify/request-context": "7.0.2",
+    "@fastify/request-context": "7.0.4",
     "@fastify/swagger": "9.9.2",
     "@fastify/swagger-ui": "6.1.2",
     "@fastify/type-provider-typebox": "6.3.0",

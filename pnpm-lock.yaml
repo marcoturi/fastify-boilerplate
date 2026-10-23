@@ -24,8 +24,8 @@ importers:
         specifier: 0.21.3
         version: 0.21.3(@opentelemetry/api@1.9.1)(supports-color@10.2.2)
       '@fastify/request-context':
-        specifier: 7.0.2
-        version: 7.0.2
+        specifier: 7.0.4
+        version: 7.0.4
       '@fastify/swagger':
         specifier: 9.9.2
         version: 9.9.2(supports-color@10.2.2)
@@ -562,8 +562,8 @@ packages:
   '@fastify/proxy-addr@5.1.0':
     resolution: {integrity: sha512-INS+6gh91cLUjB+PVHfu1UqcB76Sqtpyp7bnL+FYojhjygvOPA9ctiD/JDKsyD9Xgu4hUhCSJBPig/w7duNajw==}
 
-  '@fastify/request-context@7.0.2':
-    resolution: {integrity: sha512-XpXmh09g3841GkygpWydPd41hCk7kNcyV6Th5pBXcpol0N283k25IhG4Zf8DJUsQiGhHL0kB1LsuOs7pMt3d6Q==}
+  '@fastify/request-context@7.0.4':
+    resolution: {integrity: sha512-AleCtdpwbZLVRO9GBpp/VUcg3qrIOaDcgC9C6qo1vt+k6z9BPGjJVJ356NtYlbZ5vbXlM2YbQSFTaaCEd2botA==}
 
   '@fastify/send@4.1.0':
     resolution: {integrity: sha512-TMYeQLCBSy2TOFmV95hQWkiTYgC/SEx7vMdV+wnZVX4tt8VBLKzmH8vV9OzJehV0+XBfg+WxPMt5wp+JBUKsVw==}
@@ -4239,7 +4239,7 @@ snapshots:
       '@fastify/forwarded': 3.0.1
       ipaddr.js: 2.4.0
 
-  '@fastify/request-context@7.0.2':
+  '@fastify/request-context@7.0.4':
     dependencies:
       fastify-plugin: 6.0.1
 
