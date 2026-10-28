@@ -41,7 +41,7 @@
   "packageManager": "pnpm@11.28.8",
   "dependencies": {
     "@fastify/autoload": "6.5.1",
-    "@fastify/awilix": "8.3.1",
+    "@fastify/awilix": "8.3.2",
     "@fastify/cors": "11.3.1",
     "@fastify/helmet": "13.2.0",
     "@fastify/otel": "0.21.3",
