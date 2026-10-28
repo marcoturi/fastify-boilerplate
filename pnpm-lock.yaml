@@ -78,8 +78,8 @@ importers:
         specifier: 16.14.2
         version: 16.14.2
       mercurius:
-        specifier: 16.12.0
-        version: 16.12.0(graphql@16.14.2)
+        specifier: 16.12.1
+        version: 16.12.1(graphql@16.14.2)
       postgres:
         specifier: 3.4.9
         version: 3.4.9
@@ -2183,8 +2183,8 @@ packages:
       cosmiconfig-toml-loader:
         optional: true
 
-  graphql-jit@0.8.9:
-    resolution: {integrity: sha512-h3CUhDa9c0OfFU2UkTNZLHBNtGTMVbsgLSesNgsEB+Dr5eglRuqDVxrMONj5q7RO8jOctoSFcgNU01W0BInEpw==}
+  graphql-jit@0.8.10:
+    resolution: {integrity: sha512-vvjth/yqAW+zhPYXhNVntJGTR2j9O0Z+/f+j6Jyr5AxlzOMh7jglW5SLfUGxkstewrUSniwUDvod8jcm3zz8gA==}
     peerDependencies:
       graphql: '>=15'
 
@@ -2650,8 +2650,8 @@ packages:
     resolution: {integrity: sha512-pxQJQzB6djGPXh08dacEloMFopsOqGVRKFPYvPOt9XDZ1HasbgDZA74CJGreSU4G3Ak7EFJGoiH2auq+yXISgA==}
     engines: {node: '>=18'}
 
-  mercurius@16.12.0:
-    resolution: {integrity: sha512-00AZMStfln/Gml1SO5y1SdwUl3YV4zckkaUUStmdfs0/VxjlXHSAk9hNt9Cli9PJC+Uev6zAgxBL499WjWWYIg==}
+  mercurius@16.12.1:
+    resolution: {integrity: sha512-hYiL89ShIhUAhgZyza2C2g6ObawjB4zIsK9Fbw031nTPh9Hw0yETY3TiplWpjX8Qx4rsYIkkVosSb8pvtF5rMQ==}
     engines: {node: ^20.9.0 || >=22.0.0}
     peerDependencies:
       graphql: ^16.0.0 || ^17.0.0
@@ -2898,10 +2898,6 @@ packages:
 
   p-locate@5.0.0:
     resolution: {integrity: sha512-LaNjtRWUBY++zB5nE/NwcaoMylSPk+S+ZHNB1TzdbMJMny6dynpAGt7X/tl/QYq3TIeE6nxHppbo2LGymrG5Pw==}
-    engines: {node: '>=10'}
-
-  p-map@4.0.0:
-    resolution: {integrity: sha512-/bjOqmgETBYB5BoEeGVea8dmvHb2m9GLy1E9W43yeyfP6QQCZGFNa+XRceJEuDB6zqr+gKpIAmlLebMpykw/MQ==}
     engines: {node: '>=10'}
 
   p-map@7.0.6:
@@ -3215,6 +3211,10 @@ packages:
   safe-stable-stringify@2.5.0:
     resolution: {integrity: sha512-b3rppTKm9T+PsVCBEOUR46GWI7fdOs00VKZ1+9c1EWDaDMvjQc6tUwuFyIprgGgTcWoVHSKrU8H31ZHA2e0RHA==}
     engines: {node: '>=10'}
+
+  safe-stable-stringify@3.0.0:
+    resolution: {integrity: sha512-1z5+QfsSGAtBGJrCw2DP9cwfdvSEMRN4BKKaZxFIKwcwRbshkrtKzzueVFAJ2d1QJm+J3AmpYvI88jFnlEZmyg==}
+    engines: {node: '>=18'}
 
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
@@ -6201,7 +6201,7 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  graphql-jit@0.8.9(graphql@16.14.2):
+  graphql-jit@0.8.10(graphql@16.14.2):
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.14.2)
       fast-json-stringify: 7.0.1
@@ -6615,19 +6615,18 @@ snapshots:
 
   meow@13.2.0: {}
 
-  mercurius@16.12.0(graphql@16.14.2):
+  mercurius@16.12.1(graphql@16.14.2):
     dependencies:
       '@fastify/error': 4.2.0
       '@fastify/static': 10.1.2
       '@fastify/websocket': 11.3.0
       fastify-plugin: 6.0.1
       graphql: 16.14.2
-      graphql-jit: 0.8.9(graphql@16.14.2)
+      graphql-jit: 0.8.10(graphql@16.14.2)
       mqemitter: 7.1.0
-      p-map: 4.0.0
       quick-lru: 7.3.0
       readable-stream: 4.7.0
-      safe-stable-stringify: 2.5.0
+      safe-stable-stringify: 3.0.0
       secure-json-parse: 4.1.0
       single-user-cache: 2.1.0
       tiny-lru: 13.1.0
@@ -6789,10 +6788,6 @@ snapshots:
   p-locate@5.0.0:
     dependencies:
       p-limit: 3.1.0
-
-  p-map@4.0.0:
-    dependencies:
-      aggregate-error: 3.1.0
 
   p-map@7.0.6: {}
 
@@ -7105,6 +7100,8 @@ snapshots:
       regexp-tree: 0.1.27
 
   safe-stable-stringify@2.5.0: {}
+
+  safe-stable-stringify@3.0.0: {}
 
   safer-buffer@2.1.2: {}
 
