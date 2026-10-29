@@ -2,7 +2,7 @@
 
 # ---- Base ----
 # Node 24 Alpine for small image size; native TS execution (no build step needed)
-FROM node:24-alpine AS base
+FROM node:26-alpine AS base
 
 RUN corepack enable
 WORKDIR /app
