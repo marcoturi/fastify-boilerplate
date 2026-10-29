@@ -39,11 +39,11 @@ importers:
         specifier: 9.2.1
         version: 9.2.1
       '@graphql-tools/load-files':
-        specifier: 7.0.1
-        version: 7.0.1(graphql@16.14.2)
+        specifier: 8.0.7
+        version: 8.0.7(graphql@16.14.2)
       '@graphql-tools/merge':
-        specifier: 9.2.8
-        version: 9.2.8(graphql@16.14.2)
+        specifier: 10.0.7
+        version: 10.0.7(graphql@16.14.2)
       '@opentelemetry/api':
         specifier: 1.10.0
         version: 1.10.0
@@ -798,17 +798,23 @@ packages:
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
 
-  '@graphql-tools/load-files@7.0.1':
-    resolution: {integrity: sha512-oTNIENc9To9u8Gc3kY82C74caW6kXa8ya2GyxWRXp8gP4zK/7PmvlWJK0/GFCUH0cU3t9jM7k59zXz1+ZfP3Mw==}
-    engines: {node: '>=16.0.0'}
+  '@graphql-tools/load-files@8.0.7':
+    resolution: {integrity: sha512-+9Qz6tj644B1Xf37ckqlgliPf+m1ZEZpW2woORzwXjkvCIP05y8mvaArLZTVVRXcLZCVs2CXsLT7z9V30N+VZQ==}
+    engines: {node: '>=22.18.0'}
     peerDependencies:
-      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+      graphql: ^16.0.0 || ^17.0.0
 
   '@graphql-tools/load@8.1.19':
     resolution: {integrity: sha512-kXgYD7PVBLGiOI7Uf/i91ncv14ckC8pWoiSbZhzCuSE1QemFguofzexSv8B4kIXrr6kqoNLCKSdD2fqAYg+w2g==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+
+  '@graphql-tools/merge@10.0.7':
+    resolution: {integrity: sha512-Xnf0rvHPI1EPFs4cVTlcfZzQ1kgo8XtaHIlF3mfRPTaeLBo1/9HQeofkOIqFYDFogUXk08fTKZCe+/hdX6J+GA==}
+    engines: {node: '>=22.18.0'}
+    peerDependencies:
+      graphql: ^16.0.0 || ^17.0.0
 
   '@graphql-tools/merge@9.2.8':
     resolution: {integrity: sha512-OsCEmJ9RIMT4LB/1jBbyKHe7pMIlfGhLAQ0FVNaZqteydDUC+rTI9wZ+yaKqxQpPOFFycD+UtMhovg19lPq92Q==}
@@ -863,6 +869,12 @@ packages:
     engines: {node: '>=16.0.0'}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+
+  '@graphql-tools/utils@13.2.0':
+    resolution: {integrity: sha512-s3+6E/Zve4Okj7+60HpMBoVDmMBzuskX1u9C1/kNi86V3Aez1Eh1LP0crh929kzhb1YcyZYyVWGuKyfztuF5qA==}
+    engines: {node: '>=22.18.0'}
+    peerDependencies:
+      graphql: ^16.0.0 || ^17.0.0
 
   '@graphql-tools/wrap@11.1.20':
     resolution: {integrity: sha512-nustNS7MhcyomrhSVJvb5HFjyPtWE+XAH7qBoy1n6zokC6UwFnagyHJFuHKllTz4ONcKw91BdDogHuW9KC3cUA==}
@@ -4653,9 +4665,9 @@ snapshots:
       tslib: 2.8.1
       unixify: 1.0.0
 
-  '@graphql-tools/load-files@7.0.1(graphql@16.14.2)':
+  '@graphql-tools/load-files@8.0.7(graphql@16.14.2)':
     dependencies:
-      globby: 11.1.0
+      '@graphql-tools/utils': 13.2.0(graphql@16.14.2)
       graphql: 16.14.2
       tslib: 2.8.1
       unixify: 1.0.0
@@ -4666,6 +4678,12 @@ snapshots:
       '@graphql-tools/utils': 12.0.3(graphql@16.14.2)
       graphql: 16.14.2
       p-limit: 3.1.0
+      tslib: 2.8.1
+
+  '@graphql-tools/merge@10.0.7(graphql@16.14.2)':
+    dependencies:
+      '@graphql-tools/utils': 13.2.0(graphql@16.14.2)
+      graphql: 16.14.2
       tslib: 2.8.1
 
   '@graphql-tools/merge@9.2.8(graphql@16.14.2)':
@@ -4743,6 +4761,13 @@ snapshots:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.14.2)
       '@whatwg-node/promise-helpers': 2.0.0
       cross-inspect: 1.0.1
+      graphql: 16.14.2
+      tslib: 2.8.1
+
+  '@graphql-tools/utils@13.2.0(graphql@16.14.2)':
+    dependencies:
+      '@graphql-typed-document-node/core': 3.2.0(graphql@16.14.2)
+      '@whatwg-node/promise-helpers': 2.0.0
       graphql: 16.14.2
       tslib: 2.8.1
 
