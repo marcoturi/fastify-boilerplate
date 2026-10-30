@@ -1,4 +1,6 @@
-biome check --staged --write --no-errors-on-unmatched
+# Fails on lint/format issues in staged files instead of fixing them: fixes written to disk
+# would not be part of the commit. Run `pnpm check:fix`, then stage the result.
+biome check --staged --no-errors-on-unmatched
 pnpm type:check
 pnpm deps:validate
 pnpm test
