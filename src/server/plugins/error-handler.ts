@@ -1,3 +1,4 @@
+import { STATUS_CODES } from 'node:http';
 import type { FastifyError, FastifyInstance } from 'fastify';
 import fp from 'fastify-plugin';
 import {
@@ -27,12 +28,18 @@ const fastifyErrorCodesMap: Record<
     message: 'Validation error',
     error: 'Bad Request', // https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.1
   }),
-  FST_ERR_NOT_FOUND: () => ({
-    message: 'Not Found',
-    error: 'Not Found',
-    statusCode: 404, //  'https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.4',
-  }),
 };
+
+function isClientError(
+  error: FastifyError | Error,
+): error is FastifyError & { statusCode: number } {
+  return (
+    'statusCode' in error &&
+    typeof error.statusCode === 'number' &&
+    error.statusCode >= 400 &&
+    error.statusCode < 500
+  );
+}
 
 async function errorHandlerPlugin(fastify: FastifyInstance) {
   fastify.setErrorHandler((error: FastifyError | Error, _, res) => {
@@ -62,6 +69,17 @@ async function errorHandlerPlugin(fastify: FastifyInstance) {
       } satisfies ApiErrorResponse);
     }
 
+    // Other client errors raised by Fastify or its plugins (malformed JSON, unsupported
+    // media type, body too large, ...) carry their own 4xx status: keep it instead of a 500.
+    if (isClientError(error)) {
+      return res.status(error.statusCode).send({
+        statusCode: error.statusCode,
+        message: error.message,
+        error: STATUS_CODES[error.statusCode] ?? 'Bad Request',
+        correlationId: getRequestId(),
+      } satisfies ApiErrorResponse);
+    }
+
     // Unexpected/unknown error
     fastify.log.error(error);
     return res.status(500).send({
@@ -71,6 +89,16 @@ async function errorHandlerPlugin(fastify: FastifyInstance) {
       correlationId: getRequestId(),
     } satisfies ApiErrorResponse);
   });
+
+  // Unknown routes never reach the error handler: answer with the same error envelope
+  fastify.setNotFoundHandler((req, res) =>
+    res.status(404).send({
+      statusCode: 404,
+      message: `Route ${req.method}:${req.url} not found`,
+      error: 'Not Found', // https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.4
+      correlationId: getRequestId(),
+    } satisfies ApiErrorResponse),
+  );
 
   // Add the ExceptionResponse schema to the fastify instance
   fastify.addSchema(apiErrorResponseSchema);
