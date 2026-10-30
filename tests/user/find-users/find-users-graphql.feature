@@ -26,3 +26,17 @@ Feature: Find users via GraphQL
       | limit   | 1     |
       | page    | 0     |
     Then I receive 1 of 2 users
+
+  @user
+  Scenario Outline: I try to list users with invalid arguments
+    When I send a GraphQL query for users with
+      | <Argument> | <Value> |
+    Then I receive a GraphQL error with code "BAD_USER_INPUT"
+
+    Examples:
+      | Argument | Value  |
+      | limit    | 0      |
+      | limit    | null   |
+      | limit    | 100000 |
+      | page     | -1     |
+      | country  | Italy1 |

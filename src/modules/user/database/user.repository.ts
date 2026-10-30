@@ -4,7 +4,7 @@ import type {
   UserRepository,
 } from '#src/modules/user/database/user.repository.port.ts';
 import { type UserEntity, UserRoles } from '#src/modules/user/domain/user.types.ts';
-import { joinConditions } from '#src/shared/db/postgres.ts';
+import { joinConditions, orderByClause } from '#src/shared/db/postgres.ts';
 import type { Paginated, PaginatedQueryParams } from '#src/shared/db/repository.port.ts';
 
 export const userSchema = Type.Object({
@@ -46,8 +46,9 @@ export default function userRepository({
       const [result]: { rows: UserModel[] | null; count: number }[] = await db`
         SELECT
           (SELECT COUNT(*) FROM users ${joinConditions(conditions)}) as count,
-          (SELECT json_agg(t.*) FROM
-            (SELECT * FROM users ${joinConditions(conditions)} LIMIT ${params.limit} OFFSET ${params.offset})
+          (SELECT json_agg(t.* ${orderByClause(params.orderBy)}) FROM
+            (SELECT * FROM users ${joinConditions(conditions)} ${orderByClause(params.orderBy)}
+              LIMIT ${params.limit} OFFSET ${params.offset})
           AS t) AS rows
       `;
       return {

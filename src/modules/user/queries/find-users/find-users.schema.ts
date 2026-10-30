@@ -1,4 +1,4 @@
-import { Type } from 'typebox';
+import { type Static, Type } from 'typebox';
 import { paginatedQueryRequestDtoSchema } from '#src/shared/api/paginated-query.request.dto.ts';
 
 export const findUsersRequestDtoSchema = Type.Intersect([
@@ -29,3 +29,4 @@ export const findUsersRequestDtoSchema = Type.Intersect([
     ),
   }),
 ]);
+export type FindUsersRequestDto = Static<typeof findUsersRequestDtoSchema>;

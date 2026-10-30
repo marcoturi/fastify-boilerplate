@@ -44,6 +44,16 @@ async function findUsers(world: ICustomWorld, variables: Record<string, unknown>
   return body.data!.findUsers;
 }
 
+// Table values are strings: pagination arguments become numbers, and "null" an explicit null
+function toFindUsersVariables(table: DataTable) {
+  return Object.fromEntries(
+    Object.entries(table.rowsHash()).map(([key, value]) => {
+      if (value === 'null') return [key, null];
+      return [key, key === 'limit' || key === 'page' ? Number(value) : value];
+    }),
+  );
+}
+
 Given('these users exist', async function (this: ICustomWorld, table: DataTable) {
   for (const input of table.hashes()) {
     const response = await sendGraphQL(this, putUserMutation, { input });
@@ -62,14 +72,19 @@ When('I query the users via GraphQL', async function (this: ICustomWorld) {
 });
 
 When('I query the users via GraphQL with', async function (this: ICustomWorld, table: DataTable) {
-  const variables = Object.fromEntries(
-    Object.entries(table.rowsHash()).map(([key, value]) => [
-      key,
-      key === 'limit' || key === 'page' ? Number(value) : value,
-    ]),
-  );
-  this.context.users = await findUsers(this, variables);
+  this.context.users = await findUsers(this, toFindUsersVariables(table));
 });
+
+When(
+  'I send a GraphQL query for users with',
+  async function (this: ICustomWorld, table: DataTable) {
+    this.context.latestResponse = await sendGraphQL(
+      this,
+      findUsersQuery,
+      toFindUsersVariables(table),
+    );
+  },
+);
 
 Then('I receive my user ID from GraphQL', function (this: ICustomWorld) {
   const body = this.context.latestResponse!.json<GraphQLResponse<{ putUser: string }>>();

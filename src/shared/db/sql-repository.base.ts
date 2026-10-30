@@ -1,5 +1,6 @@
 import type { FastifyBaseLogger } from 'fastify';
 import { getRequestId } from '#src/shared/app/app-request-context.ts';
+import { orderByClause } from '#src/shared/db/postgres.ts';
 import type {
   Paginated,
   PaginatedQueryParams,
@@ -36,7 +37,7 @@ export function SqlRepositoryBase<
     async findAllPaginated(params: PaginatedQueryParams): Promise<Paginated<Entity>> {
       const [countRow] = await db`SELECT COUNT(*) as total FROM ${db(tableName)}`;
       const result =
-        await db`SELECT * FROM ${db(tableName)} LIMIT ${params.limit} OFFSET ${params.offset}`;
+        await db`SELECT * FROM ${db(tableName)} ${orderByClause(params.orderBy)} LIMIT ${params.limit} OFFSET ${params.offset}`;
       const entities = result.map((r) => mapper.toDomain(r as DbModel));
       return {
         data: entities,

@@ -20,14 +20,11 @@ type PaginatedQueryBaseI<TProps> = TProps & {
 export function paginatedQueryBase<TProps extends PaginatedQueryParams>(
   props: TProps,
 ): PaginatedQueryBaseI<TProps> {
-  const { limit = 20, page = 0, orderBy = { field: 'createdAt', param: 'desc' } } = props;
-  const offset = page * limit;
+  // `??` rather than destructuring defaults, so explicit nulls also get the default
+  const limit = props.limit ?? 20;
+  const page = props.page ?? 0;
+  const orderBy = props.orderBy ?? { field: 'createdAt', param: 'desc' };
 
-  return {
-    limit,
-    offset,
-    orderBy,
-    page,
-    ...props,
-  };
+  // Computed values come last so caller input (e.g. a stray `offset`) cannot override them
+  return { ...props, limit, offset: page * limit, orderBy, page };
 }

@@ -2,7 +2,7 @@ import { Type } from 'typebox';
 
 export const paginatedQueryRequestDtoSchema = Type.Object({
   limit: Type.Optional(
-    Type.Number({
+    Type.Integer({
       example: 10,
       description: 'Specifies a limit of returned records',
       minimum: 1,
@@ -10,7 +10,7 @@ export const paginatedQueryRequestDtoSchema = Type.Object({
     }),
   ),
   page: Type.Optional(
-    Type.Number({
+    Type.Integer({
       example: 0,
       description: 'Page number',
       minimum: 0,

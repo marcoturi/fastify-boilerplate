@@ -1,6 +1,7 @@
 import postgres from 'postgres';
 import { LogLevel } from '#src/config/env.ts';
 import { env } from '#src/config/index.ts';
+import type { OrderBy } from '#src/shared/db/repository.port.ts';
 
 let sql: ReturnType<typeof postgres> | null = null;
 
@@ -52,6 +53,17 @@ export const joinConditions = (
     (acc, fragment, i) => (i === 0 ? db`WHERE ${fragment}` : db`${acc} ${join} ${fragment}`),
     db``,
   );
+};
+
+/**
+ * Builds a deterministic ORDER BY: the requested column, then `id` as a tiebreaker, so rows
+ * with equal values (e.g. the same createdAt) keep a stable order across pages.
+ * The column goes through identifier escaping and the direction is whitelisted.
+ */
+export const orderByClause = ({ field, param }: OrderBy) => {
+  const db = getDb();
+  const direction = param === 'asc' ? db`ASC` : db`DESC`;
+  return db`ORDER BY ${db(field)} ${direction}, id ${direction}`;
 };
 
 /**
