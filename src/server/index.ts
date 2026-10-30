@@ -63,6 +63,9 @@ export default async function createServer(fastify: FastifyInstance) {
       prefix: '/api',
     },
     matchFilter: (path) => /\.(route|resolver)\.ts$/.test(path),
+    // By default an index.ts makes autoload skip every other file in its folder, so an index
+    // next to routes would silently drop them: match no file as index, matchFilter decides alone
+    indexPattern: /^$/,
   });
 
   await fastify.register(UnderPressure, {
