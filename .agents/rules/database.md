@@ -14,7 +14,9 @@ SQL belongs in repository files only. Handlers use the repository **port** (inte
 
 - Client: `postgres` (postgres.js) — uses tagged template literals for parameterized queries
 - Connection: lazy singleton via `getDb()` in `src/shared/db/postgres.ts`; close with `closeDbConnection()`
-- Transaction support: `withTransaction(async (tx) => { ... })` in `src/shared/db/postgres.ts`
+- Transactions: `withTransaction(async () => { ... })` in `src/shared/db/postgres.ts`. The DI `db` is
+  transaction-aware, so repositories called inside it join the transaction without receiving `tx`;
+  a nested call joins the outer transaction. Publish domain events after it resolves
 - Repository base: `SqlRepositoryBase` (in `src/shared/db/sql-repository.base.ts`) provides generic CRUD (insert, findOneById, findAll, findAllPaginated, update, delete)
 - Repository ports extend `RepositoryPort<Entity>` (in `src/shared/db/repository.port.ts`)
 - Mapper interface: `Mapper<DomainEntity, DbRecord, Response>` with `toPersistence`, `toDomain`, `toResponse` (in `src/shared/ddd/mapper.interface.ts`); `toPersistence` validates the record with the shared Ajv instance
@@ -33,4 +35,6 @@ DBMate runs plain SQL files from `db/migrations/` (seeds in `db/seeds/`).
 - Always use tagged templates: `` db`SELECT * FROM ${db(tableName)} WHERE id = ${id}` ``
 - Table names use `db(tableName)` (identifier interpolation)
 - Values use `${value}` (parameterized automatically)
-- Condition composition uses `joinConditions()` from `src/shared/db/postgres.ts`
+- Custom queries compose conditions and ordering with the `where()` and `orderBy()` helpers of the
+  repository base, bound to its client. Destructure them before spreading the base, so they do
+  not become repository methods: `const { where, orderBy, ...base } = repositoryBase({ tableName, mapper })`

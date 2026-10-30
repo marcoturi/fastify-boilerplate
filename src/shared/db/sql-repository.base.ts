@@ -1,11 +1,12 @@
 import type { FastifyBaseLogger } from 'fastify';
 import { getRequestId } from '#src/shared/app/app-request-context.ts';
-import { orderByClause } from '#src/shared/db/order-by.ts';
 import type {
+  OrderBy,
   Paginated,
   PaginatedQueryParams,
   RepositoryPort,
 } from '#src/shared/db/repository.port.ts';
+import { type Condition, orderByClause, whereClause } from '#src/shared/db/sql-fragments.ts';
 import type { Mapper } from '#src/shared/ddd/mapper.interface.ts';
 import {
   AlreadyExistsException,
@@ -19,6 +20,18 @@ export interface SqlRepositoryBaseProps<Entity, DbModel> {
   mapper: Mapper<Entity, DbModel>;
   logger: FastifyBaseLogger;
 }
+
+/**
+ * The generic CRUD of a repository, plus SQL helpers bound to its client for custom queries.
+ * Destructure the helpers out before spreading the base into a repository, so they do not
+ * become repository methods: `const { where, orderBy, ...base } = repositoryBase(...)`.
+ */
+export type RepositoryBase<Entity> = RepositoryPort<Entity> & {
+  /** WHERE clause joining the set conditions with AND: empty when none is set */
+  where(conditions: Condition[]): ReturnType<typeof whereClause>;
+  /** Deterministic ORDER BY on the field, with `id` as a tiebreaker */
+  orderBy(order: OrderBy): ReturnType<typeof orderByClause>;
+};
 
 /** Maps a driver error: a unique violation becomes AlreadyExists, anything else a database error. */
 function toDatabaseException(error: unknown) {
@@ -40,8 +53,13 @@ export function SqlRepositoryBase<
   tableName,
   mapper,
   logger,
-}: SqlRepositoryBaseProps<Entity, DbModel>): RepositoryPort<Entity> {
+}: SqlRepositoryBaseProps<Entity, DbModel>): RepositoryBase<Entity> {
+  const where = (conditions: Condition[]) => whereClause(db, conditions);
+  const orderBy = (order: OrderBy) => orderByClause(db, order);
+
   return {
+    where,
+    orderBy,
     async findOneById(id: string): Promise<Entity | undefined> {
       const [result] = await db`SELECT * FROM ${db(tableName)} WHERE id = ${id}`;
       return result ? mapper.toDomain(result as DbModel) : undefined;
@@ -53,7 +71,7 @@ export function SqlRepositoryBase<
     async findAllPaginated(params: PaginatedQueryParams): Promise<Paginated<Entity>> {
       const [countRow] = await db`SELECT COUNT(*) as total FROM ${db(tableName)}`;
       const result =
-        await db`SELECT * FROM ${db(tableName)} ${orderByClause(db, params.orderBy)} LIMIT ${params.limit} OFFSET ${params.offset}`;
+        await db`SELECT * FROM ${db(tableName)} ${orderBy(params.orderBy)} LIMIT ${params.limit} OFFSET ${params.offset}`;
       const entities = result.map((r) => mapper.toDomain(r as DbModel));
       return {
         data: entities,

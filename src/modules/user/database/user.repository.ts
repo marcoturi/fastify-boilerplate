@@ -4,8 +4,6 @@ import type {
   UserRepository,
 } from '#src/modules/user/database/user.repository.port.ts';
 import { type UserEntity, UserRoles } from '#src/modules/user/domain/user.types.ts';
-import { orderByClause } from '#src/shared/db/order-by.ts';
-import { joinConditions } from '#src/shared/db/postgres.ts';
 import type { Paginated, PaginatedQueryParams } from '#src/shared/db/repository.port.ts';
 
 export const userSchema = Type.Object({
@@ -26,8 +24,10 @@ export default function userRepository({
   repositoryBase,
 }: Dependencies): UserRepository {
   const tableName = 'users';
+  // where/orderBy are query helpers, not repository methods: keep them out of the spread
+  const { where, orderBy, ...base } = repositoryBase({ tableName, mapper: userMapper });
   return {
-    ...repositoryBase({ tableName, mapper: userMapper }),
+    ...base,
 
     async findOneByEmail(email: string): Promise<UserEntity | undefined> {
       const [user]: [UserModel?] =
@@ -46,9 +46,9 @@ export default function userRepository({
       ];
       const [result]: { rows: UserModel[] | null; count: number }[] = await db`
         SELECT
-          (SELECT COUNT(*) FROM users ${joinConditions(conditions)}) as count,
-          (SELECT json_agg(t.* ${orderByClause(db, params.orderBy)}) FROM
-            (SELECT * FROM users ${joinConditions(conditions)} ${orderByClause(db, params.orderBy)}
+          (SELECT COUNT(*) FROM users ${where(conditions)}) as count,
+          (SELECT json_agg(t.* ${orderBy(params.orderBy)}) FROM
+            (SELECT * FROM users ${where(conditions)} ${orderBy(params.orderBy)}
               LIMIT ${params.limit} OFFSET ${params.offset})
           AS t) AS rows
       `;

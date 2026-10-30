@@ -1,11 +1,15 @@
 import postgres from 'postgres';
 import { LogLevel } from '#src/config/env.ts';
 import { env } from '#src/config/index.ts';
+import { transactionContext } from '#src/shared/db/transaction-context.ts';
 
-let sql: ReturnType<typeof postgres> | null = null;
+type Sql = ReturnType<typeof postgres>;
+
+let sql: Sql | null = null;
+const transactions = transactionContext<postgres.TransactionSql>();
 
 /** Returns the singleton DB connection, creating it lazily on first call. */
-export function getDb(): ReturnType<typeof postgres> {
+export function getDb(): Sql {
   if (!sql) {
     sql = postgres({
       host: env.db.host,
@@ -41,32 +45,35 @@ export async function closeDbConnection() {
   }
 }
 
-export const joinConditions = (
-  xs: (postgres.PendingQuery<postgres.Row[]> | false | undefined | null | '')[],
-  joiner?: postgres.PendingQuery<postgres.Row[]>,
-) => {
-  const db = getDb();
-  const join = joiner ?? db`AND`;
-  const filtered = xs.filter(Boolean) as postgres.PendingQuery<postgres.Row[]>[];
-
-  if (filtered.length === 0) {
-    return db``;
-  }
-
-  return filtered.reduce(
-    (acc, fragment, i) => (i === 0 ? db`WHERE ${fragment}` : db`${acc} ${join} ${fragment}`),
-    db``,
-  );
-};
+/** The client for the current query: the open transaction inside withTransaction(), else the pool. */
+function currentDb(): Sql {
+  // A TransactionSql runs queries and helpers like Sql: it only lacks the pool-level methods
+  return (transactions.current() as unknown as Sql | undefined) ?? getDb();
+}
 
 /**
- * Executes a callback within a database transaction.
- * All queries using the `tx` sql instance share the same transaction.
- * The transaction is committed if the callback resolves, rolled back if it throws.
+ * A client that runs each query on the current transaction (inside withTransaction()) or,
+ * outside one, on the pool. Registered in DI as `db`, so repositories join transactions
+ * without passing `tx` around.
+ */
+export function transactionAwareDb(): Sql {
+  return new Proxy(getDb(), {
+    apply: (_target, _thisArg, args) => Reflect.apply(currentDb(), undefined, args),
+    get: (_target, property) => Reflect.get(currentDb(), property),
+  });
+}
+
+/**
+ * Runs `fn` in a database transaction: committed if it resolves, rolled back if it throws.
+ * Repositories called inside it use the transaction automatically, and a nested call joins
+ * the outer transaction. Publish domain events after it resolves, so handlers see the data.
  */
 export async function withTransaction<T>(
   fn: (tx: postgres.TransactionSql) => Promise<T>,
 ): Promise<T> {
-  const db = getDb();
-  return db.begin((tx) => fn(tx)) as Promise<T>;
+  const open = transactions.current();
+  if (open) {
+    return fn(open);
+  }
+  return getDb().begin((tx) => transactions.run(tx, () => fn(tx))) as Promise<T>;
 }

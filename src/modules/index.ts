@@ -2,9 +2,9 @@ import { asValue } from 'awilix';
 import type { FastifyBaseLogger } from 'fastify';
 import type postgres from 'postgres';
 import type { CommandBus, EventBus, QueryBus } from '#src/shared/cqrs/bus.types.ts';
-import { getDb } from '#src/shared/db/postgres.ts';
-import type { RepositoryPort } from '#src/shared/db/repository.port.ts';
+import { transactionAwareDb } from '#src/shared/db/postgres.ts';
 import {
+  type RepositoryBase,
   SqlRepositoryBase,
   type SqlRepositoryBaseProps,
 } from '#src/shared/db/sql-repository.base.ts';
@@ -20,7 +20,7 @@ declare global {
     db: ReturnType<typeof postgres>;
     repositoryBase: <E extends { id: string }, D extends Record<string, unknown>>(
       props: SqlBaseProps<E, D>,
-    ) => RepositoryPort<E>;
+    ) => RepositoryBase<E>;
     queryBus: QueryBus;
     commandBus: CommandBus;
     eventBus: EventBus;
@@ -38,7 +38,7 @@ export function globalDependencies({
   commandBus: CommandBus;
   eventBus: EventBus;
 }) {
-  const db = getDb();
+  const db = transactionAwareDb();
   const repositoryBaseFn = <E extends { id: string }, D extends Record<string, unknown>>({
     tableName,
     mapper,
