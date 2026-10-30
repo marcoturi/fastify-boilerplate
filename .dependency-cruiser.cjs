@@ -15,6 +15,9 @@ const infrastructureLayerPaths = [
   'database',
   'repository',
   'shared/db',
+  // The postgres driver itself, in a flat or a pnpm (node_modules/.pnpm/) layout
+  '^node_modules/postgres/',
+  'node_modules/[.]pnpm/postgres@',
 ];
 
 const domainLayerPaths = ['domain'];
