@@ -5,7 +5,7 @@
 ## Project overview
 
 A production-ready Fastify 5 boilerplate using Clean Architecture, CQRS, DDD, and functional programming.
-TypeScript strict mode, ESM-only, Node >= 24 (native TS execution, no build step).
+TypeScript strict mode, ESM-only, Node >= 26 (native TS execution, no build step).
 
 ## Quick reference
 

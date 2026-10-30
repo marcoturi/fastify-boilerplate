@@ -20,6 +20,8 @@
  *   https://opentelemetry.io/docs/languages/sdk-configuration/general/
  */
 
+import { createRequire } from 'node:module';
+import { pathToFileURL } from 'node:url';
 import type { NodeSDK } from '@opentelemetry/sdk-node';
 
 let sdk: NodeSDK | undefined;
@@ -27,8 +29,17 @@ let sdk: NodeSDK | undefined;
 if (process.env.OTEL_SDK_DISABLED !== 'true') {
   // Register the ESM loader hook so OpenTelemetry can patch imported modules
   // (http, etc.). Must be called before any application imports.
-  const { register } = await import('node:module');
-  register('@opentelemetry/instrumentation/hook.mjs', import.meta.url);
+  // Uses synchronous in-thread hooks (module.registerHooks): module.register() with
+  // @opentelemetry/instrumentation/hook.mjs is runtime-deprecated since Node 26 (DEP0205).
+  // import-in-the-middle is resolved from @opentelemetry/instrumentation so the loader
+  // shares state with the copy that registers the instrumentation hooks.
+  const iitmHooksPath = createRequire(
+    import.meta.resolve('@opentelemetry/instrumentation'),
+  ).resolve('import-in-the-middle/register-hooks.mjs');
+  const { register } = (await import(pathToFileURL(iitmHooksPath).href)) as {
+    register: () => void;
+  };
+  register();
 
   const { NodeSDK } = await import('@opentelemetry/sdk-node');
   const { HttpInstrumentation } = await import('@opentelemetry/instrumentation-http');

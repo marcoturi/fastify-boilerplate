@@ -1,10 +1,11 @@
 # syntax=docker/dockerfile:1
 
 # ---- Base ----
-# Node 24 Alpine for small image size; native TS execution (no build step needed)
-FROM node:24-alpine AS base
+# Node 26 Alpine for small image size; native TS execution (no build step needed)
+FROM node:26-alpine AS base
 
-RUN corepack enable
+# Node >= 25 no longer bundles Corepack: install it to get the pnpm pinned in packageManager
+RUN npm install -g corepack@0.36.0 && corepack enable
 WORKDIR /app
 
 # ---- Dependencies ----

@@ -31,7 +31,7 @@ A production-ready [Fastify 5](https://github.com/fastify/fastify) boilerplate b
 
 | Category | Details |
 |---|---|
-| **Runtime** | Native TypeScript via [Node.js >= 24](https://nodejs.org/en/blog/release/v24.0.0) type stripping — no build step, no transpiler |
+| **Runtime** | Native TypeScript via [Node.js >= 26](https://nodejs.org/en/blog/release/v26.0.0) type stripping — no build step, no transpiler |
 | **Framework** | [Fastify 5](https://github.com/fastify/fastify) with [Awilix](https://github.com/jeffijoe/awilix) DI and [Pino](https://github.com/pinojs/pino) logging |
 | **API** | REST ([TypeBox](https://github.com/sinclairzx81/typebox) schemas, Swagger UI) + GraphQL ([Mercurius](https://github.com/mercurius-js/mercurius), GraphiQL in dev) |
 | **Database** | [Postgres.js](https://github.com/porsager/postgres) client + [DBMate](https://github.com/amacneil/dbmate) migrations & seeds |
@@ -49,8 +49,8 @@ A production-ready [Fastify 5](https://github.com/fastify/fastify) boilerplate b
 
 | Tool | Notes |
 |---|---|
-| **Node.js** | >= 24 — required for native TypeScript execution. A `.nvmrc` is included — run `fnm use` or `nvm use` |
-| **pnpm** | >= 10 — package manager (`corepack enable` to activate) |
+| **Node.js** | >= 26 — required for native TypeScript execution and synchronous module hooks (OpenTelemetry). A `.nvmrc` is included — run `fnm use` or `nvm use` |
+| **pnpm** | >= 12 — package manager. Node >= 25 no longer bundles Corepack: `npm install -g corepack && corepack enable` to activate the pinned version |
 | **Docker** | Used to run PostgreSQL via Docker Compose. Alternatively, use a local Postgres install |
 
 ## Getting Started
