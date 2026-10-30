@@ -12,9 +12,12 @@ WORKDIR /app
 # Install production dependencies in an isolated stage for layer caching
 FROM base AS deps
 
-COPY package.json pnpm-lock.yaml ./
+# pnpm-workspace.yaml holds pnpm settings (e.g. overrides) that a frozen install checks
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
+# Corepack downloads pnpm on first use: cache it with the store so rebuilds skip the download
 RUN --mount=type=cache,target=/root/.local/share/pnpm/store \
+    --mount=type=cache,target=/root/.cache/node/corepack \
     pnpm install --frozen-lockfile --prod --ignore-scripts
 
 # ---- Production ----

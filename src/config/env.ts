@@ -28,7 +28,7 @@ const schema = Type.Object({
   POSTGRES_POOL_MAX: Type.Number({ default: 10 }),
   POSTGRES_IDLE_TIMEOUT: Type.Number({ default: 20 }),
   POSTGRES_CONNECT_TIMEOUT: Type.Number({ default: 30 }),
-  LOG_LEVEL: Type.Enum(LogLevel),
+  LOG_LEVEL: Type.Enum(LogLevel, { default: LogLevel.info }),
   NODE_ENV: Type.Enum(NodeEnv),
   HOST: Type.String({ default: 'localhost' }),
   PORT: Type.Number({ default: 3000 }),
