@@ -384,9 +384,13 @@ The project uses GitHub Actions with two workflows:
 
 ## AI-Assisted Development
 
-This project ships with an [`AGENTS.md`](AGENTS.md) file — a comprehensive guide for AI coding assistants. It documents the architecture, CQRS patterns, coding conventions, and common pitfalls so that tools like [Cursor](https://cursor.com/), [Claude Code](https://docs.anthropic.com/en/docs/claude-code), and [GitHub Copilot](https://github.com/features/copilot) can generate code that follows the project's established patterns.
+This project ships with an [`AGENTS.md`](AGENTS.md) file — a guide for AI coding assistants. It documents the architecture, coding conventions, and common pitfalls so that tools like [Cursor](https://cursor.com/), [Claude Code](https://docs.anthropic.com/en/docs/claude-code), and [GitHub Copilot](https://github.com/features/copilot) can generate code that follows the project's established patterns.
 
 AI assistants automatically pick up `AGENTS.md` and apply the conventions without manual prompting.
+
+Area-specific rules (CQRS, database, API, modules, testing) live in [`.agents/rules/`](.agents/rules), each with a `paths` frontmatter listing the files it covers, so they enter the context only when relevant. `AGENTS.md` points every assistant to them; Claude Code loads them automatically through the `.claude/rules` symlink.
+
+> On Windows, clone with symlinks enabled (Developer Mode on, then `git clone -c core.symlinks=true …`), otherwise `.claude/rules` is checked out as a plain text file and Claude Code will not load the rules.
 
 ## Why Biome over ESLint + Prettier?
 

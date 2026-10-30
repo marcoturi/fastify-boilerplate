@@ -16,17 +16,33 @@ TypeScript strict mode, ESM-only, Node >= 26 (native TS execution, no build step
 | Validation after changes | `pnpm check` (runs `biome check && tsc --noEmit`) |
 | Auto-fix formatting | `pnpm format` |
 | Unit tests | `pnpm test:unit` (node:test) |
-| E2E tests | `pnpm test:e2e` (Cucumber + Gherkin) |
+| E2E tests | `pnpm test:e2e` (Cucumber + Gherkin, needs Postgres) |
 | Architecture validation | `pnpm deps:validate` (dependency-cruiser) |
 | DB migrations | `pnpm db:migrate` (DBMate) |
 
-Always run `pnpm check` after making changes. If formatting fails, run `pnpm format` first, then `pnpm check`.
+Always run `pnpm check` after making changes. If it fails on formatting, import order or other safe fixes, run `pnpm check:fix`, then `pnpm check` again.
+
+## Path-specific rules
+
+Detailed rules live in `.agents/rules/`, one file per area. The `paths` list in each file's
+frontmatter says which files it covers: read the matching rule before changing those files.
+Claude Code loads them automatically through the `.claude/rules` symlink.
+
+| Rule | Covers |
+|---|---|
+| [`clean-architecture.md`](.agents/rules/clean-architecture.md) | Layer responsibilities, services, when to split a file, factory functions |
+| [`cqrs.md`](.agents/rules/cqrs.md) | Buses, action creators, handlers, middlewares, calls from routes/resolvers |
+| [`database.md`](.agents/rules/database.md) | Repositories, mappers, SQL, migrations |
+| [`api.md`](.agents/rules/api.md) | REST routes, TypeBox schemas, GraphQL resolvers, server setup |
+| [`modules.md`](.agents/rules/modules.md) | Module structure, dependency injection, adding a module |
+| [`testing.md`](.agents/rules/testing.md) | Unit, E2E and load tests |
 
 ## Architecture
 
-### Layer boundaries (CRITICAL)
+### Layer boundaries
 
-The dependency flow is strictly **inward**: `Route → Handler → Domain → Repository`.
+The dependency flow is strictly **inward**: `Route/Resolver → Handler → (Service) → Domain + Repository`.
+The domain is pure and never calls repositories; see `clean-architecture.md` for what each layer does.
 
 ```
 src/
@@ -42,190 +58,47 @@ src/
 └── shared/          ← Cross-cutting: CQRS, DB, exceptions, utils
 ```
 
-**Never** import from `src/shared/db/` or `database/` inside handler files.
-Handlers interact with data exclusively through repository ports (interfaces).
-SQL belongs in repository files only.
+Handlers get repositories through DI and use them only through their port interfaces: from
+`src/shared/db/` or `database/` they import nothing but port files (`*.port.ts`), never an
+adapter or the DB client. `pnpm deps:validate` enforces this. SQL belongs in repository files only.
 
 ### Module independence
 
-Modules should avoid importing directly from other modules. Cross-module communication
-uses the CQRS buses:
+Modules do not import from each other, except another module's domain events
+(`domain/*.events.ts`), which are the cross-module contract; `pnpm deps:validate` enforces
+this. Everything else goes through the CQRS buses:
 - Commands/queries for request-response
 - Events for fire-and-forget notifications
 
-## CQRS pattern
-
-This project uses three buses: `CommandBus`, `QueryBus`, and `EventBus`.
-
-> Full guide with examples: [doc/CQRS.md](doc/CQRS.md) (event error isolation and ordered
-> per-key processing are documented there).
-
-### Action creators
-
-Actions are created via `actionCreatorFactory` with a module prefix.
-The `Result` type parameter is a phantom type — it exists only at the type level
-to enable type-safe `execute()` calls:
-
-```typescript
-// In the module's index.ts
-export const userActionCreator = actionCreatorFactory('user');
-
-// In the handler file — embed both Payload and Result types
-export type CreateUserResult = string;
-export const createUserCommand = userActionCreator<CreateUserRequestDto, CreateUserResult>('create');
-```
-
-### Handler pattern
-
-Every handler follows this structure:
-
-```typescript
-export default function makeHandler({ commandBus, repository, ...deps }: Dependencies) {
-  return {
-    async handler({ payload }: HandlerAction<typeof myCommand>): Promise<MyResult> {
-      // business logic here
-    },
-    init() {
-      commandBus.register(myCommand.type, this.handler);
-    },
-  };
-}
-```
-
-Key rules:
-- Handler parameters use `HandlerAction<typeof creator>` (strips the phantom Result type for register() compatibility)
-- The result type (e.g. `CreateUserResult`) is the **unwrapped** value, not `Promise<X>` — the `Promise` wrapper comes from `execute()`
-- Events use `userActionCreator<PayloadType>('event-name')` without a Result generic (events return void)
-- Handlers are auto-loaded and wired via Awilix DI — the `init()` method is called automatically
-
-### Calling from routes/resolvers
-
-```typescript
-// Return type is inferred from the action's phantom Result — no manual generic needed
-const id = await fastify.commandBus.execute(createUserCommand(req.body));
-```
-
-Do **not** pass a manual generic to `execute()`. The type is inferred from the action creator's `Result` parameter.
-
-### Middlewares
-
-Middlewares use an onion-model pipeline (composed via `reduceRight`). They must **never mutate** the action — always spread into a new object:
-
-```typescript
-function myMiddleware(action: Action<unknown>, handler: CommandHandler): Promise<unknown> {
-  const enrichedAction = { ...action, meta: { ...action.meta, foo: 'bar' } } as Action<unknown>;
-  return handler(enrichedAction);
-}
-```
-
-There are separate types for command/query vs event middlewares:
-- `CommandMiddleware` — returns `Promise<unknown>` (used by CommandBus and QueryBus)
-- `EventMiddleware` — returns `void` (used by EventBus)
-
-### Bus differences
-
-| Bus | Purpose | Register method | Dispatch method | Handler return |
-|---|---|---|---|---|
-| `CommandBus` | State-changing mutations | `register(type, handler)` | `execute(action)` → `Promise<R>` (inferred) | `Promise<unknown>` |
-| `QueryBus` | Idempotent reads | `register(type, handler)` | `execute(action)` → `Promise<R>` (inferred) | `Promise<unknown>` |
-| `EventBus` | Fire-and-forget notifications | `on(type, handler)` | `emit(action)` → `void` | `void` |
-
-Commands and queries share a `createRequestBus` factory in `src/shared/cqrs/request-bus.ts`.
-The event bus is a separate implementation in `src/shared/cqrs/event-bus.ts` with a `logger` dependency
-for debug-level warnings when events have no subscribers. Note the different API: `on`/`emit` for events
-vs `register`/`execute` for commands and queries.
-
-## Dependency injection
-
-DI uses [Awilix](https://github.com/jeffijoe/awilix) with `@fastify/awilix`.
-
-- Global dependencies (`db`, `logger`, `commandBus`, `queryBus`, `eventBus`, `repositoryBase`) are registered in `src/modules/index.ts`
-- Module-specific dependencies are declared via `declare global { export interface Dependencies { ... } }` in the module's `index.ts`
-- Repositories, mappers, domain services are auto-loaded as singletons from `src/modules/**/*.{repository,mapper,service,domain}.ts`
-- Handlers and event-handlers are auto-loaded with `asyncInit: 'init'` from `src/modules/**/*.{handler,event-handler}.ts`
-- All handlers receive dependencies as a single destructured object: `function makeX({ dep1, dep2 }: Dependencies)`
-- DI naming convention: kebab-case filenames are converted to camelCase identifiers (e.g. `create-user.handler.ts` → `createUserHandler` in the container)
-
-## Database
-
-- Client: `postgres` (postgres.js) — uses tagged template literals for parameterized queries
-- Connection: lazy singleton via `getDb()` in `src/shared/db/postgres.ts`; close with `closeDbConnection()`
-- Migrations/seeds: DBMate (SQL files in `db/migrations/` and `db/seeds/`)
-- Transaction support: `withTransaction(async (tx) => { ... })`
-- Repository base: `SqlRepositoryBase` (in `src/shared/db/sql-repository.base.ts`) provides generic CRUD (insert, findOneById, findAll, findAllPaginated, update, delete)
-- Repository ports extend `RepositoryPort<Entity>` (in `src/shared/db/repository.port.ts`)
-- Mapper interface: `Mapper<DomainEntity, DbRecord, Response>` with `toPersistence`, `toDomain`, `toResponse` (in `src/shared/ddd/mapper.interface.ts`)
-
-SQL parameterization rules:
-- Always use tagged templates: `` db`SELECT * FROM ${db(tableName)} WHERE id = ${id}` ``
-- Table names use `db(tableName)` (identifier interpolation)
-- Values use `${value}` (parameterized automatically)
-- Condition composition uses `joinConditions()` from `src/shared/db/postgres.ts`
-
 ## Coding conventions
 
-### Style
-- Biome enforces: single quotes, 2-space indent, trailing commas, semicolons, LF line endings
-- Max line width: 100 characters
-- File naming: `kebab-case` only (enforced by Biome)
+- Biome enforces formatting and most style rules (quotes, indentation, kebab-case file names,
+  no `enum`, no `any` outside tests, no `console`): rely on `pnpm check` instead of restating them
 - No enums — use `const` objects with derived types (e.g. `UserRoles`)
-- No classes for business logic — prefer factory functions and composition
-- No `any` — Biome's `noExplicitAny` is an error (relaxed only in test files)
-- No `console` — use the injected `logger` (Pino)
-
-### TypeScript
-- `strict: true` with `noImplicitAny: true`
-- Path aliases: `#src/*` maps to `./src/*`, `#tests/*` maps to `./tests/*` (defined as Node [subpath imports](https://nodejs.org/api/packages.html#subpath-imports) in `package.json`, not in `tsconfig.json`)
-- Always include `.ts` extension in imports (ESM requirement)
-- Prefer `type` imports: `import type { Foo } from './bar.ts'`
-
-### API
-- All REST routes are prefixed with `/api` (configured in `src/server/index.ts`)
-- Schemas use TypeBox (`Type.Object`, `Type.String`, etc.)
-- Routes handle HTTP concerns only — no business logic in routes
-- GraphQL resolvers co-locate with their REST route counterparts
-
-### Testing
-- Unit/integration tests: `*.spec.ts` files next to source, using `node:test` with `describe`/`it`/`assert`
-- E2E tests: Cucumber features in `tests/`, step definitions in `tests/<feature>/`
-- Load tests: k6 scripts in `tests/<feature>/`
-- Test server: use `buildApp()` from `tests/support/server.ts` — creates a Fastify instance without listening
+- No classes except errors: everything else is a factory function (naming, parameters and
+  return types are in `clean-architecture.md`). The Cucumber World in `tests/support/` is a class
+  because Cucumber requires it
+- Code, comments, identifiers, log and error messages are in English
+- Read `process.env` only in `src/config/env.ts`, which validates it; everything else imports
+  `env` from `#src/config/index.ts`. The one exception is `src/instrumentation.ts`, which runs
+  via `--import` before the config is loaded
+- Use the injected `logger` (Pino), never `console`
+- TypeScript: `strict: true`; always include the `.ts` extension in imports (ESM); prefer
+  `import type { Foo } from './bar.ts'`
+- Path aliases: `#src/*` maps to `./src/*`, `#tests/*` maps to `./tests/*` (Node
+  [subpath imports](https://nodejs.org/api/packages.html#subpath-imports) in `package.json`, not `tsconfig.json`)
 
 ### Exceptions
+
 - Domain errors extend `ExceptionBase` (in `src/shared/exceptions/`)
 - Built-in exceptions: `NotFoundException`, `ConflictException`, `DatabaseErrorException`, `ArgumentInvalidException`, `InternalServerErrorException`, `ProviderErrorException`
 - Always include a descriptive message: `throw new NotFoundException('User with id X not found')`
 
-## Adding a new module
-
-1. Create `src/modules/<name>/` with the vertical slice structure
-2. Create `src/modules/<name>/index.ts` with `actionCreatorFactory('<name>')` and `declare global` Dependencies
-3. Create domain types in `domain/<name>.types.ts`
-4. Create repository port in `database/<name>.repository.port.ts` (interface extending `RepositoryPort<Entity>`)
-5. Create repository adapter in `database/<name>.repository.ts` (implements the port)
-6. Create mapper in `<name>.mapper.ts` (implements `Mapper<Entity, DbModel, ResponseDto>`)
-7. Create command/query handlers with action creators embedding `<Payload, Result>` types
-8. Create routes and/or resolvers — call `bus.execute(action)` without manual generics
-9. Create a DB migration: `pnpm db:create-migration <name>`
-10. Run `pnpm check` to validate
-
-## Adding a new CQRS middleware
-
-1. Define the middleware function in `src/shared/cqrs/middlewares.ts` (or a new file)
-2. Match the correct signature: `CommandMiddleware` for command/query buses, `EventMiddleware` for event bus
-3. Never mutate the action — spread into a new object
-4. Register in `src/shared/cqrs/index.ts` via `busInstance.addMiddleware(myMiddleware)`
-5. Middleware order matters: first added = outermost wrapper
-
 ## Common mistakes to avoid
 
-- Importing DB/infrastructure code in handlers (violates architecture boundaries)
 - Using `execute<ManualType>(action)` instead of letting the type be inferred from the action creator
 - Mutating `action.meta` in middleware instead of spreading
 - Using `ReturnType<typeof creator>` for handler params (incompatible with register — use `HandlerAction<typeof creator>`)
-- Forgetting `.ts` extensions in imports
-- Using `npm` or `yarn` instead of `pnpm`
-- Using `console.log` instead of the injected Pino `logger`
-- Adding `enum` types (use const objects + derived types)
 - Putting business logic in route files
-- Directly importing from one module into another
+- Importing anything from another module other than its domain events
+- Accepting GraphQL input without validating it against the route's TypeBox schema
