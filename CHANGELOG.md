@@ -1,3 +1,5 @@
+## [3.0.1](https://github.com/marcoturi/fastify-boilerplate/compare/v3.0.0...v3.0.1) (2026-10-30)
+
 # [3.0.0](https://github.com/marcoturi/fastify-boilerplate/compare/v2.9.35...v3.0.0) (2026-10-30)
 
 
