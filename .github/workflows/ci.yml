@@ -1,0 +1,71 @@
+name: CI
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read # for checkout
+
+# A new push to the same pull request cancels the run still in progress
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Check and test
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_DB: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+        ports:
+          - 5432:5432
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Check lint, types, and formatting
+        run: pnpm check
+      - name: Run tests
+        run: pnpm test
+      - name: Validate architecture boundaries
+        run: pnpm deps:validate
+      - name: Seed DB
+        run: pnpm db:migrate
+        env:
+          DBMATE_DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable
+      - name: Run e2e tests
+        run: pnpm test:e2e
+        env:
+          POSTGRES_URL: localhost:5432
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: postgres
+          LOG_LEVEL: error
+          NODE_ENV: test
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: reports
+          path: reports/
+          retention-days: 30
