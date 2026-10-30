@@ -1,3 +1,10 @@
+## [4.0.2](https://github.com/marcoturi/fastify-boilerplate/compare/v4.0.1...v4.0.2) (2026-10-30)
+
+
+### Bug Fixes
+
+* **cqrs:** run queued sequential events in the context they were emitted in ([ff52633](https://github.com/marcoturi/fastify-boilerplate/commit/ff5263337d344b3fe788e5c9bfa1aa744524a985))
+
 ## [4.0.1](https://github.com/marcoturi/fastify-boilerplate/compare/v4.0.0...v4.0.1) (2026-10-30)
 
 
