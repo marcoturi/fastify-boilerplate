@@ -155,7 +155,8 @@ module.exports = {
           '^node-inspect/lib/_inspect$',
           '^node-inspect/lib/internal/inspect_client$',
           '^node-inspect/lib/internal/inspect_repl$',
-          '^async_hooks$',
+          // async_hooks is not listed: only createHook and its siblings are discouraged, while its
+          // AsyncLocalStorage is stable (the event bus uses it to keep each event's request context)
           '^punycode$',
           '^domain$',
           '^constants$',

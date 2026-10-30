@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { AsyncLocalStorage } from 'node:async_hooks';
 import { describe, it } from 'node:test';
 import type { FastifyBaseLogger } from 'fastify';
 import type { Action } from './bus.types.ts';
@@ -114,5 +115,33 @@ describe('eventBus()', () => {
 
     await flushUntil(() => done.length === 3);
     assert.deepEqual(done, ['a1', 'a2', 'a3']);
+  });
+
+  it('runs each queued event in the async context it was emitted in', async () => {
+    const { logger } = fakeLogger();
+    const bus = eventBus({ logger });
+    // Stands in for the per-request stores (request context, OTel) built on AsyncLocalStorage
+    const requestStore = new AsyncLocalStorage<string>();
+    const seen: string[] = [];
+    let releaseFirst: () => void = () => undefined;
+    const firstHeld = new Promise<void>((resolve) => {
+      releaseFirst = resolve;
+    });
+    bus.on<{ id: string; label: string }>(
+      'job',
+      async (event) => {
+        // Holds the drain loop started by request A, so B's event is queued behind it
+        if (event.payload.label === 'a') await firstHeld;
+        seen.push(`${event.payload.label}@${requestStore.getStore()}`);
+      },
+      { keyExtractor: (event) => (event.payload as { id: string }).id },
+    );
+
+    requestStore.run('request-A', () => bus.emit(makeEvent('job', { id: 'k', label: 'a' })));
+    requestStore.run('request-B', () => bus.emit(makeEvent('job', { id: 'k', label: 'b' })));
+    releaseFirst();
+
+    await flushUntil(() => seen.length === 2);
+    assert.deepEqual(seen, ['a@request-A', 'b@request-B']);
   });
 });
