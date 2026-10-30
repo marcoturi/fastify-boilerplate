@@ -8,7 +8,12 @@ let sql: ReturnType<typeof postgres> | null = null;
 /** Returns the singleton DB connection, creating it lazily on first call. */
 export function getDb(): ReturnType<typeof postgres> {
   if (!sql) {
-    sql = postgres(env.db.url, {
+    sql = postgres({
+      host: env.db.host,
+      port: env.db.port,
+      username: env.db.user,
+      password: env.db.password,
+      database: env.db.database,
       ssl: env.db.ssl ? 'require' : false,
       max: env.db.poolMax,
       idle_timeout: env.db.idleTimeout,

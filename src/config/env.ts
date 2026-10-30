@@ -38,6 +38,9 @@ const env = envSchema<Static<typeof schema>>({
   schema,
 });
 
+// POSTGRES_URL holds `host:port` (the port is optional), not a connection URL
+const [dbHost = 'localhost', dbPort = '5432'] = env.POSTGRES_URL.split(':');
+
 export default {
   nodeEnv: env.NODE_ENV,
   isDevelopment: env.NODE_ENV === NodeEnv.development,
@@ -51,7 +54,12 @@ export default {
     port: env.PORT,
   },
   db: {
-    url: `postgres://${env.POSTGRES_USER}:${env.POSTGRES_PASSWORD}@${env.POSTGRES_URL}/${env.POSTGRES_DB}`,
+    // Separate fields rather than a connection URL, so credentials need no escaping
+    host: dbHost,
+    port: Number(dbPort),
+    user: env.POSTGRES_USER,
+    password: env.POSTGRES_PASSWORD,
+    database: env.POSTGRES_DB,
     ssl: env.POSTGRES_SSL,
     poolMax: env.POSTGRES_POOL_MAX,
     idleTimeout: env.POSTGRES_IDLE_TIMEOUT,
