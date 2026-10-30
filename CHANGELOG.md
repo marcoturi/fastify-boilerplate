@@ -1,3 +1,64 @@
+# [3.0.0](https://github.com/marcoturi/fastify-boilerplate/compare/v2.9.35...v3.0.0) (2026-10-30)
+
+
+* feat!: require Node.js 26 and pnpm 12 ([92cf6e2](https://github.com/marcoturi/fastify-boilerplate/commit/92cf6e250dae6abbc35ff10c29ad401482d98815))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/autoload to v6.5.1 ([#1188](https://github.com/marcoturi/fastify-boilerplate/issues/1188)) ([9b033e2](https://github.com/marcoturi/fastify-boilerplate/commit/9b033e2ad018849c2cac3060809da3481e36b9e2))
+* **deps:** update dependency @fastify/awilix to v8.3.0 ([#1164](https://github.com/marcoturi/fastify-boilerplate/issues/1164)) ([7a2c355](https://github.com/marcoturi/fastify-boilerplate/commit/7a2c355476abe6b9bfdb5a05f2429fbff585bf43))
+* **deps:** update dependency @fastify/awilix to v8.3.1 ([#1189](https://github.com/marcoturi/fastify-boilerplate/issues/1189)) ([cf02c12](https://github.com/marcoturi/fastify-boilerplate/commit/cf02c12310c32cb6b5cac780ef4620ad9bc2c3c8))
+* **deps:** update dependency @fastify/awilix to v8.3.2 ([#1224](https://github.com/marcoturi/fastify-boilerplate/issues/1224)) ([f371687](https://github.com/marcoturi/fastify-boilerplate/commit/f37168744785c0a51e4884277b76914817270f5a))
+* **deps:** update dependency @fastify/cors to v11.3.1 ([#1187](https://github.com/marcoturi/fastify-boilerplate/issues/1187)) ([e7f9139](https://github.com/marcoturi/fastify-boilerplate/commit/e7f9139713db28d1c8ffb6bc79592b882bed0158))
+* **deps:** update dependency @fastify/helmet to v13.1.2 ([#1190](https://github.com/marcoturi/fastify-boilerplate/issues/1190)) ([a0842bf](https://github.com/marcoturi/fastify-boilerplate/commit/a0842bf27809c29bad36dc651d3b7a9a6f969f7b))
+* **deps:** update dependency @fastify/helmet to v13.2.0 ([#1205](https://github.com/marcoturi/fastify-boilerplate/issues/1205)) ([a16a65b](https://github.com/marcoturi/fastify-boilerplate/commit/a16a65b81702fefd8c211eca2b3bc553ec74f276))
+* **deps:** update dependency @fastify/otel to v0.21.1 ([#1178](https://github.com/marcoturi/fastify-boilerplate/issues/1178)) ([3a46feb](https://github.com/marcoturi/fastify-boilerplate/commit/3a46feb8b3de6c86d2b0474e9c24ea6405d218a0))
+* **deps:** update dependency @fastify/otel to v0.21.2 ([#1191](https://github.com/marcoturi/fastify-boilerplate/issues/1191)) ([38e67f3](https://github.com/marcoturi/fastify-boilerplate/commit/38e67f383e22b30749c6ff4408307c922cf437a7))
+* **deps:** update dependency @fastify/otel to v0.21.3 ([#1212](https://github.com/marcoturi/fastify-boilerplate/issues/1212)) ([f0645bf](https://github.com/marcoturi/fastify-boilerplate/commit/f0645bf73bb3f307d320fe4104efbddfe5828436))
+* **deps:** update dependency @fastify/otel to v0.21.4 ([#1227](https://github.com/marcoturi/fastify-boilerplate/issues/1227)) ([e5c825d](https://github.com/marcoturi/fastify-boilerplate/commit/e5c825d8ba5d84b1a5c798c477664a2a2ba5a633))
+* **deps:** update dependency @fastify/request-context to v7.0.2 ([#1194](https://github.com/marcoturi/fastify-boilerplate/issues/1194)) ([118be40](https://github.com/marcoturi/fastify-boilerplate/commit/118be40c7fce667541e6d35aa257d9d687506768))
+* **deps:** update dependency @fastify/request-context to v7.0.4 ([#1213](https://github.com/marcoturi/fastify-boilerplate/issues/1213)) ([6f0fc56](https://github.com/marcoturi/fastify-boilerplate/commit/6f0fc56a55a390a59e8ddc4960f57467c4b11b64))
+* **deps:** update dependency @fastify/request-context to v7.0.5 ([#1214](https://github.com/marcoturi/fastify-boilerplate/issues/1214)) ([4544499](https://github.com/marcoturi/fastify-boilerplate/commit/4544499cbe17e03ee8323f0e06cfd6cc317bd2ae))
+* **deps:** update dependency @fastify/swagger to v9.9.0 ([#1161](https://github.com/marcoturi/fastify-boilerplate/issues/1161)) ([7d7dac7](https://github.com/marcoturi/fastify-boilerplate/commit/7d7dac7a47692d777c38c50bd1fe8454071d01b0))
+* **deps:** update dependency @fastify/swagger to v9.9.1 ([#1174](https://github.com/marcoturi/fastify-boilerplate/issues/1174)) ([dbe2318](https://github.com/marcoturi/fastify-boilerplate/commit/dbe23187e8560a4f377cbccb168562100603c0ba))
+* **deps:** update dependency @fastify/swagger to v9.9.2 ([#1195](https://github.com/marcoturi/fastify-boilerplate/issues/1195)) ([f6f1689](https://github.com/marcoturi/fastify-boilerplate/commit/f6f16899e465382f52364ae8564c4e5587174800))
+* **deps:** update dependency @fastify/swagger-ui to v6.1.2 ([#1196](https://github.com/marcoturi/fastify-boilerplate/issues/1196)) ([594a102](https://github.com/marcoturi/fastify-boilerplate/commit/594a102050d90f182dd0a89c4320d6731f980244))
+* **deps:** update dependency @fastify/type-provider-typebox to v6.3.0 ([#1202](https://github.com/marcoturi/fastify-boilerplate/issues/1202)) ([80cd834](https://github.com/marcoturi/fastify-boilerplate/commit/80cd8342f19b62c8be3abe7f7affe5d3c64dedc8))
+* **deps:** update dependency @fastify/under-pressure to v9.2.0 ([#1155](https://github.com/marcoturi/fastify-boilerplate/issues/1155)) ([b779b1e](https://github.com/marcoturi/fastify-boilerplate/commit/b779b1e679c366d8a3a8dabc09c2ace7ef8b18f9))
+* **deps:** update dependency @fastify/under-pressure to v9.2.1 ([#1197](https://github.com/marcoturi/fastify-boilerplate/issues/1197)) ([b42cc85](https://github.com/marcoturi/fastify-boilerplate/commit/b42cc856eaa2a27cd4ed77266169d5fff8fb1b75))
+* **deps:** update dependency @graphql-tools/merge to v9.2.6 ([#1176](https://github.com/marcoturi/fastify-boilerplate/issues/1176)) ([eb5ba81](https://github.com/marcoturi/fastify-boilerplate/commit/eb5ba81007dc04f3720134f3bd3fea19ccf34c5b))
+* **deps:** update dependency @graphql-tools/merge to v9.2.7 ([#1200](https://github.com/marcoturi/fastify-boilerplate/issues/1200)) ([0105242](https://github.com/marcoturi/fastify-boilerplate/commit/01052425f09456909f8d9bf681f4326f143b8438))
+* **deps:** update dependency @graphql-tools/merge to v9.2.8 ([#1208](https://github.com/marcoturi/fastify-boilerplate/issues/1208)) ([21d1b06](https://github.com/marcoturi/fastify-boilerplate/commit/21d1b06a6038038ad3b5c133b5a7fc54626dfa40))
+* **deps:** update dependency fastify to v5.12.4 ([#1143](https://github.com/marcoturi/fastify-boilerplate/issues/1143)) ([51f0f53](https://github.com/marcoturi/fastify-boilerplate/commit/51f0f530628b6fe550718755fae53d1216043e6f))
+* **deps:** update dependency fastify to v5.12.5 ([#1152](https://github.com/marcoturi/fastify-boilerplate/issues/1152)) ([806589c](https://github.com/marcoturi/fastify-boilerplate/commit/806589c1784562c9d6b13016b7d9d41c6c29849e))
+* **deps:** update dependency fastify to v5.12.7 ([#1204](https://github.com/marcoturi/fastify-boilerplate/issues/1204)) ([60b3d29](https://github.com/marcoturi/fastify-boilerplate/commit/60b3d2928b091f513f36a528ccb66f13d220c568))
+* **deps:** update dependency fastify-plugin to v6.0.1 ([#1198](https://github.com/marcoturi/fastify-boilerplate/issues/1198)) ([7f4477f](https://github.com/marcoturi/fastify-boilerplate/commit/7f4477f69c7ca1b75d06335d25018e453b8b1bdb))
+* **deps:** update dependency mercurius to v16.10.1 ([#1168](https://github.com/marcoturi/fastify-boilerplate/issues/1168)) ([5936c8c](https://github.com/marcoturi/fastify-boilerplate/commit/5936c8c978c3e3fbfc1379d7dbce46a23f680f49))
+* **deps:** update dependency mercurius to v16.11.0 ([#1203](https://github.com/marcoturi/fastify-boilerplate/issues/1203)) ([3e5540e](https://github.com/marcoturi/fastify-boilerplate/commit/3e5540eb43e507b736c1d53c4b476cdf787704c0))
+* **deps:** update dependency mercurius to v16.12.0 ([#1206](https://github.com/marcoturi/fastify-boilerplate/issues/1206)) ([1fcdb57](https://github.com/marcoturi/fastify-boilerplate/commit/1fcdb57a96a1790551a856e12d949f5db4a6fa30))
+* **deps:** update dependency mercurius to v16.12.1 ([#1225](https://github.com/marcoturi/fastify-boilerplate/issues/1225)) ([e2d2af6](https://github.com/marcoturi/fastify-boilerplate/commit/e2d2af6d1e5747a1539dafeed93118e7dc900f3e))
+* **deps:** update dependency typebox to v1.3.31 ([#1148](https://github.com/marcoturi/fastify-boilerplate/issues/1148)) ([1621d33](https://github.com/marcoturi/fastify-boilerplate/commit/1621d339088dbe02ac192c93505233d6e46d5f95))
+* **deps:** update dependency typebox to v1.3.32 ([#1150](https://github.com/marcoturi/fastify-boilerplate/issues/1150)) ([789b7dd](https://github.com/marcoturi/fastify-boilerplate/commit/789b7dd8198b26810e6ea3ea7e8276699244df90))
+* **deps:** update dependency typebox to v1.3.33 ([#1153](https://github.com/marcoturi/fastify-boilerplate/issues/1153)) ([fb6b37c](https://github.com/marcoturi/fastify-boilerplate/commit/fb6b37c5ca0212d878003241560d15f0d7a7f4e4))
+* **deps:** update dependency typebox to v1.3.34 ([#1154](https://github.com/marcoturi/fastify-boilerplate/issues/1154)) ([b4f7e7a](https://github.com/marcoturi/fastify-boilerplate/commit/b4f7e7a5b5d54152863a3dc470863df617ff39b7))
+* **deps:** update dependency typebox to v1.3.36 ([#1182](https://github.com/marcoturi/fastify-boilerplate/issues/1182)) ([0846397](https://github.com/marcoturi/fastify-boilerplate/commit/084639798a3c992b0c00df8553cdf78d2cc40d15))
+* **deps:** update dependency typebox to v1.3.37 ([#1201](https://github.com/marcoturi/fastify-boilerplate/issues/1201)) ([3f2b6bf](https://github.com/marcoturi/fastify-boilerplate/commit/3f2b6bfe214b7f28f2385a0c8f6f1130b8a20607))
+* **deps:** update dependency typebox to v1.4.2 ([#1209](https://github.com/marcoturi/fastify-boilerplate/issues/1209)) ([1f6d9c2](https://github.com/marcoturi/fastify-boilerplate/commit/1f6d9c2c955244a5f347e5e1a39b451fa072b4ec))
+* **deps:** update dependency typebox to v1.4.3 ([#1220](https://github.com/marcoturi/fastify-boilerplate/issues/1220)) ([cc66bc9](https://github.com/marcoturi/fastify-boilerplate/commit/cc66bc97ed8a9c50ac0cb106bfe11ca448f9e10f))
+* **deps:** update graphql to v17, graphql-tools, env-schema and Biome ([a655093](https://github.com/marcoturi/fastify-boilerplate/commit/a655093a66de655cb869ac2b4ed536afe97a2bac))
+* **deps:** update opentelemetry-js monorepo ([#1216](https://github.com/marcoturi/fastify-boilerplate/issues/1216)) ([29f2a35](https://github.com/marcoturi/fastify-boilerplate/commit/29f2a358296bcd9a62b08e41f1e25d85b2399429))
+* **deps:** update opentelemetry-js monorepo to v0.223.0 ([#1185](https://github.com/marcoturi/fastify-boilerplate/issues/1185)) ([9aa170b](https://github.com/marcoturi/fastify-boilerplate/commit/9aa170b09ac5a0bff0a1d347e660e483ab3b4214))
+* **lint:** adapt to Biome 2.6 formatting and lint rules ([a3a96c1](https://github.com/marcoturi/fastify-boilerplate/commit/a3a96c116a9a7021a3ef32eef65efe4cb64f12bd))
+* **user:** validate GraphQL putUser input with the REST schema ([eedfec0](https://github.com/marcoturi/fastify-boilerplate/commit/eedfec07e9ae49205404f04ad27d9e60cfb30a44))
+
+
+### BREAKING CHANGES
+
+* Node.js >= 26 and pnpm >= 12 are now required.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+
 ## [2.9.35](https://github.com/marcoturi/fastify-boilerplate/compare/v2.9.34...v2.9.35) (2026-09-12)
 
 
