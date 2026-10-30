@@ -5,6 +5,7 @@ import Helmet from '@fastify/helmet';
 import type { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 import UnderPressure from '@fastify/under-pressure';
 import type { FastifyInstance } from 'fastify';
+import { enableDevMode } from 'graphql';
 import mercurius from 'mercurius';
 import env from '#src/config/env.ts';
 import { di } from '#src/server/di/index.ts';
@@ -27,6 +28,12 @@ export default async function createServer(fastify: FastifyInstance) {
   await fastify.register(Cors, {
     origin: false,
   });
+
+  // graphql >= 17 no longer turns on its development checks from NODE_ENV: enable them
+  // everywhere except production, as graphql 16 did. Must run before the schema is built.
+  if (!env.isProduction) {
+    enableDevMode();
+  }
 
   // Graphql — registered after Helmet/CORS so the /graphql endpoint inherits their hooks.
   await fastify.register(mercurius, {
