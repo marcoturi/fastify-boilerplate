@@ -48,6 +48,8 @@ export default async function createServer(fastify: FastifyInstance) {
   await fastify.register(AutoLoad, {
     dir: path.join(import.meta.dirname, 'plugins'),
     dirNameRoutePrefix: false,
+    // Specs live next to the plugins they test: importing one would run its tests at startup
+    ignoreFilter: /\.spec\.ts$/,
   });
 
   // Configure Dependency Injection
