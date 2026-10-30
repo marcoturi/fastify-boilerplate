@@ -12,7 +12,7 @@
   "scripts": {
     "create:env": "node -e \"require('fs').copyFileSync('.env.example', '.env', require('fs').constants.COPYFILE_EXCL)\"",
     "start": "node --env-file=.env --import ./src/instrumentation.ts --watch src/index.ts | pino-pretty -clSt",
-    "start:prod": "node --env-file=.env --import ./src/instrumentation.ts ./src/index.ts",
+    "start:prod": "node --env-file-if-exists=.env --import ./src/instrumentation.ts ./src/index.ts",
     "test": "pnpm test:unit",
     "test:coverage": "c8 node --test 'src/**/*.spec.ts'",
     "test:unit": "node --test 'src/**/*.spec.ts'",
