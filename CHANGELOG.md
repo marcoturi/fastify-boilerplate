@@ -1,3 +1,26 @@
+# [4.0.0](https://github.com/marcoturi/fastify-boilerplate/compare/v3.0.1...v4.0.0) (2026-10-30)
+
+
+* refactor!: give exceptions a transport-neutral code mapped by each transport ([45e7bae](https://github.com/marcoturi/fastify-boilerplate/commit/45e7bae82ad10e510edbf8a19d212a0ec7588662))
+
+
+### Bug Fixes
+
+* **api:** keep client error status codes and answer unknown routes with the error envelope ([36c3fb7](https://github.com/marcoturi/fastify-boilerplate/commit/36c3fb7802cd4218936c9953c25d24a42ab76763))
+* **test:** quote the unit test glob so every spec runs ([2f13b46](https://github.com/marcoturi/fastify-boilerplate/commit/2f13b46388f156d96645bdf8f5dbb3dceb14fed8))
+* **user:** validate and order paginated user queries ([7e0e328](https://github.com/marcoturi/fastify-boilerplate/commit/7e0e328d30b0eb23dc041478bab92c43cbdcb6e8))
+
+
+### BREAKING CHANGES
+
+* ExceptionBase subclasses declare `code: ErrorCode`
+instead of `statusCode` and `error`. ConflictException and
+InternalServerErrorException are renamed AlreadyExistsException and
+InternalException. On GraphQL, USER_ALREADY_EXISTS errors no longer carry
+a `timestamp` extension.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+
 ## [3.0.1](https://github.com/marcoturi/fastify-boilerplate/compare/v3.0.0...v3.0.1) (2026-10-30)
 
 # [3.0.0](https://github.com/marcoturi/fastify-boilerplate/compare/v2.9.35...v3.0.0) (2026-10-30)
