@@ -14,29 +14,27 @@ describe('requestBus()', () => {
     assert.equal(result, 42);
   });
 
-  // `execute` throws synchronously (it does not return a rejected promise) for
-  // registration/validation errors, so these assert on a synchronous throw.
-  it('throws when executing an unregistered type', () => {
+  it('rejects when executing an unregistered type', async () => {
     const bus = requestBus('Command');
-    assert.throws(
-      () => bus.execute(makeAction('missing', {})),
+    await assert.rejects(
+      bus.execute(makeAction('missing', {})),
       /Command type of missing is not registered/,
     );
   });
 
-  it('unregister removes the handler', () => {
+  it('unregister removes the handler', async () => {
     const bus = requestBus('Query');
     bus.register('q', async () => 'ok');
     bus.unregister('q');
-    assert.throws(() => bus.execute(makeAction('q', {})), /Query type of q is not registered/);
+    await assert.rejects(bus.execute(makeAction('q', {})), /Query type of q is not registered/);
   });
 
-  it('validates its arguments', () => {
+  it('validates its arguments', async () => {
     const bus = requestBus('Command');
     assert.throws(() => bus.register(123 as unknown as string, async () => null), TypeError);
     assert.throws(() => bus.register('t', 'nope' as unknown as CommandHandler), TypeError);
-    assert.throws(() => bus.execute(null as unknown as Action<unknown>), TypeError);
-    assert.throws(() => bus.execute({ payload: {} } as unknown as Action<unknown>), TypeError);
+    await assert.rejects(bus.execute(null as unknown as Action<unknown>), TypeError);
+    await assert.rejects(bus.execute({ payload: {} } as unknown as Action<unknown>), TypeError);
   });
 
   it('applies middlewares as an onion — first added is outermost', async () => {

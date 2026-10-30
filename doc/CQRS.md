@@ -139,9 +139,9 @@ handler: async (req, res) => {
 };
 ```
 
-> `execute()` throws synchronously (a `TypeError`, or `Error: ... is not registered`) for
-> validation/registration errors, and rejects for errors thrown inside the handler. Inside an
-> `async` route handler both are caught by Fastify's error handler.
+> `execute()` always returns a promise: validation and registration errors (a `TypeError`, or
+> `Error: ... is not registered`) reject it like errors thrown inside the handler, so `await`
+> or `.catch()` handles both.
 
 ---
 

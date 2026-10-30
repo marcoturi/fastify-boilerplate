@@ -34,7 +34,8 @@ export function requestBus(label: string): RequestBus {
     handlers.delete(type);
   }
 
-  function execute<R>(action: Action<unknown, R>): Promise<R> {
+  // async, so validation and registration errors reject like handler errors do
+  async function execute<R>(action: Action<unknown, R>): Promise<R> {
     if (!action || typeof action !== 'object') {
       throw new TypeError(`${label} must be an object`);
     }
