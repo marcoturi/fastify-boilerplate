@@ -3,17 +3,19 @@ import { diContainer, fastifyAwilixPlugin } from '@fastify/awilix';
 import { asFunction, Lifetime } from 'awilix';
 import type { FastifyInstance } from 'fastify';
 import { globalDependencies } from '#src/modules/index.ts';
-import { formatName } from '#src/server/di/util.ts';
+import { uniqueNameFormatter } from '#src/server/di/util.ts';
 
 export async function di(fastify: FastifyInstance) {
-  diContainer.register({
-    ...globalDependencies({
-      logger: fastify.log,
-      queryBus: fastify.queryBus,
-      commandBus: fastify.commandBus,
-      eventBus: fastify.eventBus,
-    }),
+  const dependencies = globalDependencies({
+    logger: fastify.log,
+    queryBus: fastify.queryBus,
+    commandBus: fastify.commandBus,
+    eventBus: fastify.eventBus,
   });
+  diContainer.register(dependencies);
+
+  // Shared by both loads, so a name clash is caught across them and with the global dependencies
+  const formatName = uniqueNameFormatter(Object.keys(dependencies));
 
   await diContainer.loadModules(
     [

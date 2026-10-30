@@ -15,7 +15,7 @@ DI uses [Awilix](https://github.com/jeffijoe/awilix) with `@fastify/awilix` (wir
 - Repositories, mappers, domain services are auto-loaded as singletons from `src/modules/**/*.{repository,mapper,service,domain}.ts`
 - Handlers and event-handlers are auto-loaded with `asyncInit: 'init'` from `src/modules/**/*.{handler,event-handler}.ts`
 - All handlers receive dependencies as a single destructured object: `function createUserHandler({ dep1, dep2 }: Dependencies)`
-- DI naming convention: kebab-case filenames are converted to camelCase identifiers (e.g. `create-user.handler.ts` → `createUserHandler` in the container)
+- DI naming convention: kebab-case filenames are converted to camelCase identifiers (e.g. `create-user.handler.ts` → `createUserHandler` in the container). Names must be unique across modules: a clash (two `create-user.handler.ts`, or a file named like a global dependency) fails at startup
 
 ## Adding a new module
 
