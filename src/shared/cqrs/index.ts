@@ -5,9 +5,9 @@ import { eventBus } from '#src/shared/cqrs/event-bus.ts';
 import {
   decorateCommandWithMetadata,
   decorateEventWithMetadata,
-  makeTrackExecutionTime,
+  trackExecutionTimeMiddleware,
 } from '#src/shared/cqrs/middlewares.ts';
-import { makeTracingMiddleware, traceEventMiddleware } from '#src/shared/cqrs/otel-middleware.ts';
+import { traceEventMiddleware, tracingMiddleware } from '#src/shared/cqrs/otel-middleware.ts';
 import { queryBus } from '#src/shared/cqrs/query-bus.ts';
 
 const CQRSPlugin = fastifyPlugin(
@@ -25,13 +25,13 @@ const CQRSPlugin = fastifyPlugin(
 
     const queryBusInstance = queryBus();
     queryBusInstance.addMiddleware(decorateCommandWithMetadata);
-    queryBusInstance.addMiddleware(makeTracingMiddleware('query'));
-    queryBusInstance.addMiddleware(makeTrackExecutionTime(fastify.log));
+    queryBusInstance.addMiddleware(tracingMiddleware('query'));
+    queryBusInstance.addMiddleware(trackExecutionTimeMiddleware(fastify.log));
 
     const commandBusInstance = commandBus();
     commandBusInstance.addMiddleware(decorateCommandWithMetadata);
-    commandBusInstance.addMiddleware(makeTracingMiddleware('command'));
-    commandBusInstance.addMiddleware(makeTrackExecutionTime(fastify.log));
+    commandBusInstance.addMiddleware(tracingMiddleware('command'));
+    commandBusInstance.addMiddleware(trackExecutionTimeMiddleware(fastify.log));
 
     fastify.decorate('queryBus', queryBusInstance);
     fastify.decorate('commandBus', commandBusInstance);

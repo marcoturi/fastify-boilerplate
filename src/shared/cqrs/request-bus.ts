@@ -13,7 +13,7 @@ export interface RequestBus {
  * The `label` parameter is used in error messages to distinguish between the two
  * (e.g. "Command type of X is not registered" vs "Query type of X is not registered").
  */
-export function createRequestBus(label: string): RequestBus {
+export function requestBus(label: string): RequestBus {
   const handlers = new Map<string, CommandHandler>();
   const middlewares: CommandMiddleware[] = [];
 

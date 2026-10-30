@@ -9,7 +9,7 @@ export const createUserCommand = userActionCreator<CreateUserRequestDto, CreateU
   'create',
 );
 
-export default function makeCreateUser({
+export default function createUserHandler({
   userRepository,
   userDomain,
   commandBus,

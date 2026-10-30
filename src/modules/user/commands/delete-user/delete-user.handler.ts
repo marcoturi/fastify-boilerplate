@@ -5,7 +5,7 @@ import { NotFoundException } from '#src/shared/exceptions/index.ts';
 export type DeleteUserResult = boolean;
 export const deleteUserCommand = userActionCreator<{ id: string }, DeleteUserResult>('delete');
 
-export default function makeDeleteUser({ userRepository, commandBus }: Dependencies) {
+export default function deleteUserHandler({ userRepository, commandBus }: Dependencies) {
   return {
     async handler({ payload }: HandlerAction<typeof deleteUserCommand>): Promise<DeleteUserResult> {
       const deleted = await userRepository.delete(payload.id);

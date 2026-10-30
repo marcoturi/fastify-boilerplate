@@ -1,14 +1,14 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import type { Action, CommandHandler } from './bus.types.ts';
-import { createRequestBus } from './request-bus.ts';
+import { requestBus } from './request-bus.ts';
 
 const makeAction = <P>(type: string, payload: P, meta?: Record<string, unknown>): Action<P> =>
   ({ type, payload, meta }) as unknown as Action<P>;
 
-describe('createRequestBus()', () => {
+describe('requestBus()', () => {
   it('executes the registered handler and returns its result', async () => {
-    const bus = createRequestBus('Command');
+    const bus = requestBus('Command');
     bus.register<{ n: number }>('math/double', async (action) => action.payload.n * 2);
     const result = await bus.execute(makeAction('math/double', { n: 21 }));
     assert.equal(result, 42);
@@ -17,7 +17,7 @@ describe('createRequestBus()', () => {
   // `execute` throws synchronously (it does not return a rejected promise) for
   // registration/validation errors, so these assert on a synchronous throw.
   it('throws when executing an unregistered type', () => {
-    const bus = createRequestBus('Command');
+    const bus = requestBus('Command');
     assert.throws(
       () => bus.execute(makeAction('missing', {})),
       /Command type of missing is not registered/,
@@ -25,14 +25,14 @@ describe('createRequestBus()', () => {
   });
 
   it('unregister removes the handler', () => {
-    const bus = createRequestBus('Query');
+    const bus = requestBus('Query');
     bus.register('q', async () => 'ok');
     bus.unregister('q');
     assert.throws(() => bus.execute(makeAction('q', {})), /Query type of q is not registered/);
   });
 
   it('validates its arguments', () => {
-    const bus = createRequestBus('Command');
+    const bus = requestBus('Command');
     assert.throws(() => bus.register(123 as unknown as string, async () => null), TypeError);
     assert.throws(() => bus.register('t', 'nope' as unknown as CommandHandler), TypeError);
     assert.throws(() => bus.execute(null as unknown as Action<unknown>), TypeError);
@@ -40,7 +40,7 @@ describe('createRequestBus()', () => {
   });
 
   it('applies middlewares as an onion — first added is outermost', async () => {
-    const bus = createRequestBus('Command');
+    const bus = requestBus('Command');
     const order: string[] = [];
     bus.addMiddleware(async (action, next) => {
       order.push('outer:before');
@@ -72,7 +72,7 @@ describe('createRequestBus()', () => {
   });
 
   it('lets a middleware enrich the action without mutating the original', async () => {
-    const bus = createRequestBus('Command');
+    const bus = requestBus('Command');
     const original = makeAction('t', { v: 1 });
     let seenMeta: unknown;
     bus.addMiddleware(async (action, next) =>

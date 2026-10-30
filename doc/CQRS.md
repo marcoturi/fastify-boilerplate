@@ -45,7 +45,7 @@ Route / Resolver ──execute()──▶ CommandBus / QueryBus ──▶ Handle
 - An **Action** is a plain object `{ type, payload, meta? }` (`src/shared/cqrs/bus.types.ts`).
 - An **action creator** is a typed factory that stamps the `type` and carries a *phantom*
   `Result` type used only at compile time to infer the return of `execute()`.
-- A **handler** is a factory `makeX({ deps }: Dependencies)` returning `{ handler, init }`.
+- A **handler** is a factory `<name>Handler({ deps }: Dependencies)` returning `{ handler, init }`.
   `init()` registers the handler on the right bus and is called automatically at startup.
 
 ---
@@ -93,7 +93,7 @@ export const createUserCommand = userActionCreator<CreateUserRequestDto, CreateU
   'create',
 );
 
-export default function makeCreateUser({
+export default function createUserHandler({
   userRepository,
   userDomain,
   commandBus,
@@ -158,7 +158,7 @@ export const findUsersQuery = userActionCreator<
   FindUsersResult
 >('find-all-paginated');
 
-export default function makeFindUsersQuery({ queryBus, userRepository }: Dependencies) {
+export default function findUsersHandler({ queryBus, userRepository }: Dependencies) {
   return {
     async handler({ payload }: HandlerAction<typeof findUsersQuery>): Promise<FindUsersResult> {
       const query = paginatedQueryBase(payload);
@@ -226,7 +226,7 @@ alone — every domain and handler stays the same (they already `await`).
 
 ```typescript
 // subscriber — src/modules/settings/commands/create-settings/create-settings.event-handler.ts
-export default function makeCreateSettings({ eventBus, logger }: Dependencies) {
+export default function createSettingsEventHandler({ eventBus, logger }: Dependencies) {
   return {
     handler(action: ReturnType<typeof createUserEvent>) {
       logger.info(action);
@@ -300,7 +300,7 @@ eventBus.emit(walletTransactionEvent({ walletId: 'w2', amount: 3 }));
 | `QueryBus` | idempotent reads | `register(type, handler)` | `execute(action)` → `Promise<R>` (inferred) | `Promise<unknown>` |
 | `EventBus` | fire-and-forget notifications | `on(type, handler, options?)` | `emit(action)` → `void` | `void \| Promise<void>` |
 
-`CommandBus` and `QueryBus` share the `createRequestBus` factory
+`CommandBus` and `QueryBus` share the `requestBus` factory
 (`src/shared/cqrs/request-bus.ts`); the `EventBus` is a separate implementation
 (`src/shared/cqrs/event-bus.ts`) with the multi-subscriber, error-isolation and per-key
 ordering behavior described above.
@@ -335,9 +335,9 @@ event           :  metadata → OTel tracing → handler
 
 - `decorateCommandWithMetadata` / `decorateEventWithMetadata` — inject `correlationId`
   (from the request context) and `timestamp` into `meta`, immutably.
-- `makeTracingMiddleware` / `traceEventMiddleware` — wrap each dispatch in an OpenTelemetry
+- `tracingMiddleware` / `traceEventMiddleware` — wrap each dispatch in an OpenTelemetry
   span named after the action type (noop spans when OTel is disabled).
-- `makeTrackExecutionTime` — logs execution time per action.
+- `trackExecutionTimeMiddleware` — logs execution time per action.
 
 ---
 
@@ -384,7 +384,7 @@ DI uses Awilix (`@fastify/awilix`). Everything is wired automatically:
 2. **Handler** — factory returning `{ handler, init }`; register on the right bus in `init()`:
 
    ```typescript
-   export default function makeActivateUser({ userRepository, commandBus }: Dependencies) {
+   export default function activateUserHandler({ userRepository, commandBus }: Dependencies) {
      return {
        async handler({ payload }: HandlerAction<typeof activateUserCommand>): Promise<void> {
          const user = await userRepository.findOneById(payload.id);

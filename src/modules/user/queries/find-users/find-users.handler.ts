@@ -14,7 +14,7 @@ export const findUsersQuery = userActionCreator<
   FindUsersResult
 >('find-all-paginated');
 
-export default function makeFindUsersQuery({ queryBus, userRepository }: Dependencies) {
+export default function findUsersHandler({ queryBus, userRepository }: Dependencies) {
   return {
     async handler({ payload }: HandlerAction<typeof findUsersQuery>): Promise<FindUsersResult> {
       const query = paginatedQueryBase(payload);

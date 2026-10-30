@@ -1,6 +1,6 @@
 import { createUserEvent } from '#src/modules/user/domain/user.events.ts';
 
-export default function makeCreateSettings({ eventBus, logger }: Dependencies) {
+export default function createSettingsEventHandler({ eventBus, logger }: Dependencies) {
   return {
     handler(action: ReturnType<typeof createUserEvent>) {
       // Log only the id — the event payload carries PII (email, address).

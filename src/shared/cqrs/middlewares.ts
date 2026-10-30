@@ -33,7 +33,7 @@ export async function decorateCommandWithMetadata(
   return handler(withMetadata(action));
 }
 
-export function makeTrackExecutionTime(logger: FastifyBaseLogger) {
+export function trackExecutionTimeMiddleware(logger: FastifyBaseLogger) {
   return async function trackExecutionTime(
     action: Action<unknown>,
     handler: CommandHandler,

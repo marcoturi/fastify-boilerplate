@@ -27,7 +27,7 @@ declare global {
   }
 }
 
-export function makeDependencies({
+export function globalDependencies({
   logger,
   queryBus,
   commandBus,

@@ -2,6 +2,7 @@ import Swagger from '@fastify/swagger';
 import SwaggerUI from '@fastify/swagger-ui';
 import type { FastifyInstance } from 'fastify';
 import fp from 'fastify-plugin';
+import { env } from '#src/config/index.ts';
 import { apiErrorResponseRef } from '#src/shared/api/api-error.response.ts';
 
 async function swaggerGeneratorPlugin(fastify: FastifyInstance) {
@@ -11,7 +12,7 @@ async function swaggerGeneratorPlugin(fastify: FastifyInstance) {
       info: {
         title: 'fastify-boilerplate',
         description: 'The Swagger API documentation for the fastify-boilerplate project.',
-        version: process.env.npm_package_version ?? '0.0.0',
+        version: env.version,
       },
     },
     // Document the shared error envelope once, globally, as the `4XX`/`5XX` range

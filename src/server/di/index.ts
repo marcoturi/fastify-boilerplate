@@ -2,12 +2,12 @@ import path from 'node:path';
 import { diContainer, fastifyAwilixPlugin } from '@fastify/awilix';
 import { asFunction, Lifetime } from 'awilix';
 import type { FastifyInstance } from 'fastify';
-import { makeDependencies } from '#src/modules/index.ts';
+import { globalDependencies } from '#src/modules/index.ts';
 import { formatName } from '#src/server/di/util.ts';
 
 export async function di(fastify: FastifyInstance) {
   diContainer.register({
-    ...makeDependencies({
+    ...globalDependencies({
       logger: fastify.log,
       queryBus: fastify.queryBus,
       commandBus: fastify.commandBus,

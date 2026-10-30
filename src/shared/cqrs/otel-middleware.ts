@@ -8,7 +8,7 @@ const tracer = trace.getTracer('cqrs');
  * Each execution is wrapped in an OTel span named after the action type.
  * When OTel is disabled the API returns noop spans — zero overhead.
  */
-export function makeTracingMiddleware(busType: 'command' | 'query') {
+export function tracingMiddleware(busType: 'command' | 'query') {
   return async function traceAction(
     action: Action<unknown>,
     handler: CommandHandler,
