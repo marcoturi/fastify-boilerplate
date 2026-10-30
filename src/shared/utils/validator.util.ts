@@ -5,7 +5,9 @@ import addFormats from 'ajv-formats';
 // Under `"module": "NodeNext"`, TypeScript resolves the default import as
 // the CJS `module.exports` wrapper, requiring `.default` to reach the
 // actual constructor / function at the type level.
-export const ajv = addFormats.default(new Ajv.default({}), [
+// `example` is allowed as on the Fastify instance (src/index.ts), so the route schemas
+// compile here too (e.g. to validate GraphQL input with the same rules as REST).
+export const ajv = addFormats.default(new Ajv.default({ keywords: ['example'] }), [
   'date-time',
   'time',
   'date',
