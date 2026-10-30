@@ -39,11 +39,12 @@ export function trackExecutionTimeMiddleware(logger: FastifyBaseLogger) {
     handler: CommandHandler,
   ): Promise<unknown> {
     const startTime = performance.now();
-    const result = await handler(action);
-    const endTime = performance.now();
-    logger.debug(
-      `Action ${action.type} took ${(endTime - startTime).toFixed(2)}ms of execution time.`,
-    );
-    return result;
+    try {
+      return await handler(action);
+    } finally {
+      // Logged for failing actions too: a slow failure is worth seeing
+      const duration = (performance.now() - startTime).toFixed(2);
+      logger.debug(`Action ${action.type} took ${duration}ms of execution time.`);
+    }
   };
 }

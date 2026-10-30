@@ -1,8 +1,8 @@
-import { randomUUID } from 'node:crypto';
 import Fastify from 'fastify';
 import { env } from '#src/config/index.ts';
 import { shutdownTelemetry } from '#src/instrumentation.ts';
 import server from '#src/server/index.ts';
+import { requestId } from '#src/server/request-id.ts';
 import { getRequestId } from '#src/shared/app/app-request-context.ts';
 import { closeDbConnection } from '#src/shared/db/postgres.ts';
 
@@ -22,10 +22,7 @@ async function init() {
         return { correlationId: getRequestId() };
       },
     },
-    genReqId: (req) => {
-      // header best practice: don't use "x-" https://www.rfc-editor.org/info/rfc6648 and keep it lowercase
-      return (req.headers['request-id'] as string) ?? randomUUID();
-    },
+    genReqId: requestId,
     routerOptions: {
       ignoreDuplicateSlashes: true,
     },

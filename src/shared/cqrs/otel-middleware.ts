@@ -1,7 +1,14 @@
-import { SpanKind, SpanStatusCode, trace } from '@opentelemetry/api';
+import { type Span, SpanKind, SpanStatusCode, trace } from '@opentelemetry/api';
 import type { Action, CommandHandler, EventHandler } from '#src/shared/cqrs/bus.types.ts';
 
 const tracer = trace.getTracer('cqrs');
+
+/** Marks the span as failed, with the error message, and records the exception on it. */
+function recordFailure(span: Span, error: unknown): void {
+  const exception = error instanceof Error ? error : new Error(String(error));
+  span.setStatus({ code: SpanStatusCode.ERROR, message: exception.message });
+  span.recordException(exception);
+}
 
 /**
  * Creates a tracing middleware for the command or query bus.
@@ -31,8 +38,7 @@ export function tracingMiddleware(busType: 'command' | 'query') {
           span.setStatus({ code: SpanStatusCode.OK });
           return result;
         } catch (error) {
-          span.setStatus({ code: SpanStatusCode.ERROR });
-          if (error instanceof Error) span.recordException(error);
+          recordFailure(span, error);
           throw error;
         } finally {
           span.end();
@@ -69,8 +75,7 @@ export function traceEventMiddleware(
         await handler(action);
         span.setStatus({ code: SpanStatusCode.OK });
       } catch (error) {
-        span.setStatus({ code: SpanStatusCode.ERROR });
-        if (error instanceof Error) span.recordException(error);
+        recordFailure(span, error);
         throw error;
       } finally {
         span.end();

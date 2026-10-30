@@ -26,7 +26,8 @@ import type { NodeSDK } from '@opentelemetry/sdk-node';
 
 let sdk: NodeSDK | undefined;
 
-if (process.env.OTEL_SDK_DISABLED !== 'true') {
+// The OpenTelemetry spec reads boolean env vars case-insensitively ("TRUE" disables it too)
+if (process.env.OTEL_SDK_DISABLED?.toLowerCase() !== 'true') {
   // Register the ESM loader hook so OpenTelemetry can patch imported modules
   // (http, etc.). Must be called before any application imports.
   // Uses synchronous in-thread hooks (module.registerHooks): module.register() with
