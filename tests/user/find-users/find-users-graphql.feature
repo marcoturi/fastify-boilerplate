@@ -20,6 +20,15 @@ Feature: Find users via GraphQL
     And every user is from "Italy"
 
   @user
+  Scenario: I can filter users by any street a user can be created with
+    Given these users exist
+      | email               | country       | street         | postalCode |
+      | luca.bianchi@pec.it | Côte d'Ivoire | Via 4 Novembre | 10121      |
+    When I query the users via GraphQL with
+      | street | Via 4 Novembre |
+    Then I receive 1 of 1 users
+
+  @user
   Scenario: I can paginate users
     When I query the users via GraphQL with
       | country | Italy |
@@ -39,4 +48,4 @@ Feature: Find users via GraphQL
       | limit    | null   |
       | limit    | 100000 |
       | page     | -1     |
-      | country  | Italy1 |
+      | country  | It     |
