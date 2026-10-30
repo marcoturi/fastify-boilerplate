@@ -16,7 +16,7 @@ services:
   # complete successfully (the app image intentionally does not ship db/ or dbmate).
   migrate:
     image: ghcr.io/amacneil/dbmate:2
-    command: [ "--wait", "up" ]
+    command: [ "--wait", "--no-dump-schema", "up" ]
     environment:
       DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?sslmode=disable
     volumes:
