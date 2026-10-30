@@ -10,6 +10,18 @@ Feature: Create a user
     And I can see my user in a list of all users
 
   @user
+  Scenario: I cannot create two users whose emails differ only in case
+    Given user profile data
+      | email              | country | street      | postalCode |
+      | john.doe@gmail.com | England | Road Avenue | 29145      |
+    And I send a request to create a user
+    And user profile data
+      | email              | country | street      | postalCode |
+      | John.Doe@Gmail.com | England | Road Avenue | 29145      |
+    When I send a request to create a user
+    Then I receive an error "Conflict" with status code 409
+
+  @user
   Scenario Outline: I try to create a user with invalid data
     Given user profile data
       | email   | country   | street   | postalCode   |
