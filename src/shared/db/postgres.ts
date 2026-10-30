@@ -1,12 +1,19 @@
+import type { FastifyBaseLogger } from 'fastify';
 import postgres from 'postgres';
-import { LogLevel } from '#src/config/env.ts';
 import { env } from '#src/config/index.ts';
 import { transactionContext } from '#src/shared/db/transaction-context.ts';
 
 type Sql = ReturnType<typeof postgres>;
 
 let sql: Sql | null = null;
+let queryLogger: FastifyBaseLogger | undefined;
 const transactions = transactionContext<postgres.TransactionSql>();
+
+/** Logs every SQL query through `logger` at debug level: its text and the number of
+ *  parameters, never their values (they can hold personal data). */
+export function setQueryLogger(logger: FastifyBaseLogger): void {
+  queryLogger = logger;
+}
 
 /** Returns the singleton DB connection, creating it lazily on first call. */
 export function getDb(): Sql {
@@ -21,17 +28,8 @@ export function getDb(): Sql {
       max: env.db.poolMax,
       idle_timeout: env.db.idleTimeout,
       connect_timeout: env.db.connectTimeout,
-      debug: (conn: number, query: string, params: unknown[], paramTypes: unknown[]) => {
-        if (env.log.level === LogLevel.debug) {
-          // biome-ignore lint/suspicious/noConsole: needed for debugging
-          console.debug(`
-    SQL::
-      Executing query: "${query.trim()}"
-      Params: ${JSON.stringify(params)}
-      Param Types: ${JSON.stringify(paramTypes)}
-      Connection: ${conn}
-    `);
-        }
+      debug: (connection: number, query: string, params: unknown[]) => {
+        queryLogger?.debug({ connection, params: params.length }, `SQL: ${query.trim()}`);
       },
     });
   }

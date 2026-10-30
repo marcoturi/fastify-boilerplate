@@ -13,7 +13,9 @@ async function init() {
   const fastify = Fastify({
     logger: {
       level: env.log.level,
-      redact: ['headers.authorization'],
+      // pino's request serializer logs no headers today: these paths keep credentials out of
+      // the logs if a custom serializer ever adds them
+      redact: ['req.headers.authorization', 'req.headers.cookie'],
       // Attach the request correlation id (from the request-context ALS) to every log line,
       // including those from handlers/repositories. Falls back to a sentinel outside a request.
       mixin() {
