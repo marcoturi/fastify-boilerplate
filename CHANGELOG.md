@@ -1,3 +1,18 @@
+## [4.0.3](https://github.com/marcoturi/fastify-boilerplate/compare/v4.0.2...v4.0.3) (2026-10-30)
+
+
+### Bug Fixes
+
+* **di:** fail at startup on a DI name clash ([8663370](https://github.com/marcoturi/fastify-boilerplate/commit/8663370820452546ab8415f5f327de588eb20b1a))
+* **di:** load only TypeScript sources into the container ([c8db478](https://github.com/marcoturi/fastify-boilerplate/commit/c8db47829f8e99cc5dfe6949040af765e6f36852))
+* **docker:** stop the compose migrate service from writing db/schema.sql ([ea421c1](https://github.com/marcoturi/fastify-boilerplate/commit/ea421c198c1aeaec8d57961e71c7d7da86a10acf))
+* harden graceful shutdown ([69225ba](https://github.com/marcoturi/fastify-boilerplate/commit/69225ba82b96e1359290e6a2bf35b72d2c9aba55))
+* let start:prod run without a .env file ([67fa8d3](https://github.com/marcoturi/fastify-boilerplate/commit/67fa8d36615f33cf2143d879bcdab9442cb88ed8))
+* **server:** do not load spec files as plugins at startup ([75b6533](https://github.com/marcoturi/fastify-boilerplate/commit/75b6533c03721696afd4cd40474a41065c5af4dd))
+* **server:** keep loading routes that sit next to an index.ts ([a171f30](https://github.com/marcoturi/fastify-boilerplate/commit/a171f304c035ed87d7eac6e3a6e03f55ababfc78))
+* **server:** move the GraphQL schema loader out of the autoloaded plugins folder ([a17e4bd](https://github.com/marcoturi/fastify-boilerplate/commit/a17e4bdcbd4fed639aa63b6adb23284ed3688290))
+* **user:** make email uniqueness case-insensitive ([cd08540](https://github.com/marcoturi/fastify-boilerplate/commit/cd0854089d67f5f17a0ce696e92618123a4b4e70))
+
 ## [4.0.2](https://github.com/marcoturi/fastify-boilerplate/compare/v4.0.1...v4.0.2) (2026-10-30)
 
 
