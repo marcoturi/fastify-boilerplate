@@ -1,3 +1,19 @@
+# [4.1.0](https://github.com/marcoturi/fastify-boilerplate/compare/v4.0.3...v4.1.0) (2026-10-30)
+
+
+### Bug Fixes
+
+* **cqrs:** reject instead of throwing synchronously in execute() ([fd0d113](https://github.com/marcoturi/fastify-boilerplate/commit/fd0d11317777940b47bcd2178c57d99434c8e8d5))
+* **db:** log SQL queries through pino without their parameter values ([93e4708](https://github.com/marcoturi/fastify-boilerplate/commit/93e4708f75b3b23c3104b92cc64cc3ffdeb6567c))
+* **docker:** copy pnpm-workspace.yaml, cache Corepack and default LOG_LEVEL to info ([5b89598](https://github.com/marcoturi/fastify-boilerplate/commit/5b89598d1948501107c8707c5a6715bda54c4bb8))
+* harden request ids, execution-time logs and tracing ([e632317](https://github.com/marcoturi/fastify-boilerplate/commit/e632317dec0a23c8a3075fd08fb775277dcfab94))
+
+
+### Features
+
+* **db:** let repositories join transactions opened with withTransaction ([1bbad94](https://github.com/marcoturi/fastify-boilerplate/commit/1bbad941f2b36af98297207b111eb12ee5813bd7))
+* **server:** add a /ready readiness probe that pings the database ([82e47a1](https://github.com/marcoturi/fastify-boilerplate/commit/82e47a1556578d6baf89c41e38787ed26b7f46b0))
+
 ## [4.0.3](https://github.com/marcoturi/fastify-boilerplate/compare/v4.0.2...v4.0.3) (2026-10-30)
 
 
