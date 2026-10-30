@@ -19,8 +19,6 @@ InternalServerErrorException are renamed AlreadyExistsException and
 InternalException. On GraphQL, USER_ALREADY_EXISTS errors no longer carry
 a `timestamp` extension.
 
-Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
-
 ## [3.0.1](https://github.com/marcoturi/fastify-boilerplate/compare/v3.0.0...v3.0.1) (2026-10-30)
 
 # [3.0.0](https://github.com/marcoturi/fastify-boilerplate/compare/v2.9.35...v3.0.0) (2026-10-30)
@@ -81,8 +79,6 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 ### BREAKING CHANGES
 
 * Node.js >= 26 and pnpm >= 12 are now required.
-
-Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 ## [2.9.35](https://github.com/marcoturi/fastify-boilerplate/compare/v2.9.34...v2.9.35) (2026-09-12)
 
