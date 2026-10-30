@@ -1,3 +1,14 @@
+## [4.0.1](https://github.com/marcoturi/fastify-boilerplate/compare/v4.0.0...v4.0.1) (2026-10-30)
+
+
+### Bug Fixes
+
+* **config:** read the version from package.json ([a1f5334](https://github.com/marcoturi/fastify-boilerplate/commit/a1f5334180c178593499e56491d3fa738782aa43))
+* **db:** connect with separate fields so credentials need no escaping ([ebdbc32](https://github.com/marcoturi/fastify-boilerplate/commit/ebdbc3245bbb7db97d1923757d31bced944553b5))
+* **db:** map update() errors like insert() in the base repository ([1c3cd5c](https://github.com/marcoturi/fastify-boilerplate/commit/1c3cd5cc686463a3824c2ad31329ce2b9d4cfb78))
+* **lint:** treat the postgres driver as infrastructure in dependency-cruiser ([4a87d7b](https://github.com/marcoturi/fastify-boilerplate/commit/4a87d7b62f52819f7891e2f584943f5078ae51e5))
+* **user:** let users be found with the values they are created with ([0cfb213](https://github.com/marcoturi/fastify-boilerplate/commit/0cfb2130799f79952dc237e90469ff0ff385ade6))
+
 # [4.0.0](https://github.com/marcoturi/fastify-boilerplate/compare/v3.0.1...v4.0.0) (2026-10-30)
 
 
