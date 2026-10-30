@@ -7,7 +7,7 @@ services:
       - path: ./.env
         required: true
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      test: [ "CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}" ]
       interval: 5s
       timeout: 3s
       retries: 5
@@ -16,7 +16,7 @@ services:
   # complete successfully (the app image intentionally does not ship db/ or dbmate).
   migrate:
     image: ghcr.io/amacneil/dbmate:2
-    command: ["--wait", "up"]
+    command: [ "--wait", "up" ]
     environment:
       DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?sslmode=disable
     volumes:

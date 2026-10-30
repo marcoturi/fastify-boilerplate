@@ -68,7 +68,7 @@ describe('eventBus()', () => {
     const order: string[] = [];
     bus.addMiddleware((event, next) => {
       order.push('middleware');
-      next(event);
+      return next(event);
     });
     bus.on('t', () => {
       order.push('handler');

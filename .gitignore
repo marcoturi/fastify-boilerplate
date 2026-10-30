@@ -30,6 +30,7 @@ coverage
 .specstory
 .history
 .cursor
+.serena
 
 # Generated client types (produced by generate:types script)
 client/rest.d.ts

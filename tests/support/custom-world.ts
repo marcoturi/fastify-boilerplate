@@ -20,7 +20,6 @@ export interface ICustomWorld extends World {
 }
 
 export class CustomWorld extends World implements ICustomWorld {
-  // biome-ignore lint/complexity/noUselessConstructor: needed
   constructor(options: IWorldOptions) {
     super(options);
   }
