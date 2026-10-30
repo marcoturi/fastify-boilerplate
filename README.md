@@ -153,7 +153,8 @@ docker run -p 3000:3000 --env-file .env -e HOST=0.0.0.0 fastify-boilerplate
 
 | Endpoint | Description |
 |---|---|
-| `GET /health` | Health check ([@fastify/under-pressure](https://github.com/fastify/under-pressure)) |
+| `GET /health` | Liveness check: the process is up ([@fastify/under-pressure](https://github.com/fastify/under-pressure)) |
+| `GET /ready` | Readiness check: the database answers (503 otherwise) |
 | `/api/...` | All REST routes are prefixed with `/api` (e.g. `/api/v1/users`) |
 | `GET /api-docs` | Swagger UI (interactive API documentation) |
 | `GET /api-docs/json` | OpenAPI 3.1.0 JSON spec |
