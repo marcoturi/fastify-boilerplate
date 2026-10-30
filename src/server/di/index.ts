@@ -18,12 +18,7 @@ export async function di(fastify: FastifyInstance) {
   const formatName = uniqueNameFormatter(Object.keys(dependencies));
 
   await diContainer.loadModules(
-    [
-      path.join(
-        import.meta.dirname,
-        '../../modules/**/*.{repository,mapper,service,domain}.{js,ts}',
-      ),
-    ],
+    [path.join(import.meta.dirname, '../../modules/**/*.{repository,mapper,service,domain}.ts')],
     {
       formatName,
       esModules: true,
@@ -35,7 +30,7 @@ export async function di(fastify: FastifyInstance) {
   );
 
   await diContainer.loadModules(
-    [path.join(import.meta.dirname, '../../modules/**/*.{handler,event-handler}.{js,ts}')],
+    [path.join(import.meta.dirname, '../../modules/**/*.{handler,event-handler}.ts')],
     {
       formatName,
       esModules: true,
