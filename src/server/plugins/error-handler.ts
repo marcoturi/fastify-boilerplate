@@ -1,33 +1,19 @@
 import { STATUS_CODES } from 'node:http';
-import type { FastifyError, FastifyInstance } from 'fastify';
+import type { FastifyError, FastifyInstance, FastifyReply } from 'fastify';
 import fp from 'fastify-plugin';
 import {
   type ApiErrorResponse,
   apiErrorResponseSchema,
 } from '#src/shared/api/api-error.response.ts';
 import { getRequestId } from '#src/shared/app/app-request-context.ts';
-import { ExceptionBase } from '#src/shared/exceptions/index.ts';
+import { type ErrorCode, ExceptionBase } from '#src/shared/exceptions/index.ts';
 
-const fastifyErrorCodesMap: Record<
-  string,
-  | ((error: FastifyError) => {
-      statusCode: number;
-      message: string;
-      error: string;
-      correlationId?: string;
-      subErrors?: { path: string; message: string }[];
-    })
-  | undefined
-> = {
-  FST_ERR_VALIDATION: (error: FastifyError) => ({
-    subErrors: (error.validation ?? []).map((validationError) => ({
-      path: validationError.instancePath,
-      message: validationError.message ?? '',
-    })),
-    statusCode: 400,
-    message: 'Validation error',
-    error: 'Bad Request', // https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.1
-  }),
+// Transport-neutral exception codes → HTTP status codes (mapping from https://google.aip.dev/193)
+const httpStatusByCode: Record<ErrorCode, number> = {
+  INVALID_ARGUMENT: 400,
+  NOT_FOUND: 404,
+  ALREADY_EXISTS: 409,
+  INTERNAL: 500,
 };
 
 function isClientError(
@@ -41,63 +27,62 @@ function isClientError(
   );
 }
 
+function sendError(
+  res: FastifyReply,
+  statusCode: number,
+  message: string,
+  subErrors?: ApiErrorResponse['subErrors'],
+) {
+  return res.status(statusCode).send({
+    statusCode,
+    message,
+    error: STATUS_CODES[statusCode] ?? 'Error', // HTTP reason phrase, e.g. "Bad Request"
+    correlationId: getRequestId(),
+    subErrors,
+  } satisfies ApiErrorResponse);
+}
+
 async function errorHandlerPlugin(fastify: FastifyInstance) {
   fastify.setErrorHandler((error: FastifyError | Error, _, res) => {
-    // Handle fastify errors
-    if ('code' in error) {
-      const fastifyError = fastifyErrorCodesMap[error.code];
-      if (fastifyError) {
-        const response = fastifyError(error as FastifyError);
-        response.correlationId = getRequestId();
-        return res.status(response.statusCode).send(response);
+    // Known exceptions: 4xx are expected outcomes (log at warn to avoid alert noise),
+    // 5xx are genuine failures (log at error) and their message stays internal.
+    if (error instanceof ExceptionBase) {
+      const statusCode = httpStatusByCode[error.code];
+      if (statusCode >= 500) {
+        fastify.log.error(error);
+        return sendError(res, statusCode, 'Internal Server Error');
       }
+      fastify.log.warn(error);
+      return sendError(res, statusCode, error.message);
     }
 
-    // Known domain errors: 4xx are expected outcomes (log at warn to avoid alert noise),
-    // 5xx are genuine failures (log at error).
-    if (error instanceof ExceptionBase) {
-      if (error.statusCode >= 500) {
-        fastify.log.error(error);
-      } else {
-        fastify.log.warn(error);
-      }
-      return res.status(error.statusCode).send({
-        statusCode: error.statusCode,
-        message: error.message,
-        error: error.error,
-        correlationId: getRequestId(),
-      } satisfies ApiErrorResponse);
+    // Request validation (schema) errors, with one entry per invalid field
+    if ('validation' in error && error.validation) {
+      return sendError(
+        res,
+        400,
+        'Validation error',
+        error.validation.map((validationError) => ({
+          path: validationError.instancePath,
+          message: validationError.message ?? '',
+        })),
+      );
     }
 
     // Other client errors raised by Fastify or its plugins (malformed JSON, unsupported
     // media type, body too large, ...) carry their own 4xx status: keep it instead of a 500.
     if (isClientError(error)) {
-      return res.status(error.statusCode).send({
-        statusCode: error.statusCode,
-        message: error.message,
-        error: STATUS_CODES[error.statusCode] ?? 'Bad Request',
-        correlationId: getRequestId(),
-      } satisfies ApiErrorResponse);
+      return sendError(res, error.statusCode, error.message);
     }
 
     // Unexpected/unknown error
     fastify.log.error(error);
-    return res.status(500).send({
-      statusCode: 500,
-      message: 'Internal Server Error', // https://datatracker.ietf.org/doc/html/rfc7231#section-6.6.1
-      error: 'Internal Server Error',
-      correlationId: getRequestId(),
-    } satisfies ApiErrorResponse);
+    return sendError(res, 500, 'Internal Server Error');
   });
 
   // Unknown routes never reach the error handler: answer with the same error envelope
   fastify.setNotFoundHandler((req, res) =>
-    res.status(404).send({
-      statusCode: 404,
-      message: `Route ${req.method}:${req.url} not found`,
-      error: 'Not Found', // https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.4
-      correlationId: getRequestId(),
-    } satisfies ApiErrorResponse),
+    sendError(res, 404, `Route ${req.method}:${req.url} not found`),
   );
 
   // Add the ExceptionResponse schema to the fastify instance

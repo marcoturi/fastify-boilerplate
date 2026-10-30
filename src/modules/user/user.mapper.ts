@@ -2,7 +2,7 @@ import { type UserModel, userSchema } from '#src/modules/user/database/user.repo
 import type { UserEntity } from '#src/modules/user/domain/user.types.ts';
 import type { UserResponseDto } from '#src/modules/user/dtos/user.response.dto.ts';
 import type { Mapper } from '#src/shared/ddd/mapper.interface.ts';
-import { ArgumentInvalidException } from '#src/shared/exceptions/index.ts';
+import { InternalException } from '#src/shared/exceptions/index.ts';
 import { ajv } from '#src/shared/utils/validator.util.ts';
 
 export default function userMapper(): Mapper<UserEntity, UserModel, UserResponseDto> {
@@ -40,10 +40,9 @@ export default function userMapper(): Mapper<UserEntity, UserModel, UserResponse
       };
       const validate = persistenceValidator(record);
       if (!validate) {
-        throw new ArgumentInvalidException(
-          JSON.stringify(persistenceValidator.errors),
-          new Error('Mapper Validation error'),
-          record,
+        throw new InternalException(
+          'User record failed persistence validation',
+          new Error(ajv.errorsText(persistenceValidator.errors)),
         );
       }
       return record;

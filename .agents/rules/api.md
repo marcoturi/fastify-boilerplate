@@ -19,15 +19,27 @@ paths:
 
 GraphQL types only check that fields are present and have the right scalar type. Resolvers must
 validate their input against the same TypeBox schema as the REST route, through the shared Ajv
-instance (`src/shared/utils/validator.util.ts`), and return a `BAD_USER_INPUT` error when it fails:
+instance (`src/shared/utils/validator.util.ts`), and throw an `ArgumentInvalidException` when it fails:
 
 ```typescript
 const validateInput = ajv.compile<CreateUserRequestDto>(createUserRequestDtoSchema);
 
 if (!validateInput(args.input)) {
-  throw new mercurius.ErrorWithProps(ajv.errorsText(validateInput.errors), { code: 'BAD_USER_INPUT' });
+  throw new ArgumentInvalidException(ajv.errorsText(validateInput.errors));
 }
 ```
 
-Map domain errors to `mercurius.ErrorWithProps` with a stable `code` in `extensions`
-(e.g. `USER_ALREADY_EXISTS`), so clients can tell errors apart.
+## Errors
+
+Handlers and resolvers throw exceptions with a transport-neutral `code` (see AGENTS.md) and do
+not catch them to translate them. The translation happens once per transport:
+
+| `ErrorCode` | REST (`src/server/plugins/error-handler.ts`) | GraphQL `extensions.code` (`src/server/graphql-error-formatter.ts`) |
+|---|---|---|
+| `INVALID_ARGUMENT` | 400 | `BAD_USER_INPUT` |
+| `NOT_FOUND` | 404 | `NOT_FOUND` |
+| `ALREADY_EXISTS` | 409 | `ALREADY_EXISTS` |
+| `INTERNAL` and unknown errors | 500, message hidden | `INTERNAL_SERVER_ERROR`, message hidden |
+
+On GraphQL an exception's `reason`, when set, replaces the generic code (e.g. `USER_ALREADY_EXISTS`).
+A new transport (e.g. gRPC) adds its own table instead of changing the exceptions.

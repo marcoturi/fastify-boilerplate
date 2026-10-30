@@ -1,18 +1,32 @@
 import { getRequestId } from '#src/shared/app/app-request-context.ts';
 
+/**
+ * Transport-neutral error categories, named after the canonical gRPC codes (google.rpc.Code).
+ * Exceptions carry one of these instead of an HTTP status: each transport maps it at its edge
+ * (REST in the error-handler plugin, GraphQL in the Mercurius error formatter).
+ */
+export const ErrorCode = {
+  INVALID_ARGUMENT: 'INVALID_ARGUMENT',
+  NOT_FOUND: 'NOT_FOUND',
+  ALREADY_EXISTS: 'ALREADY_EXISTS',
+  INTERNAL: 'INTERNAL',
+} as const;
+export type ErrorCode = (typeof ErrorCode)[keyof typeof ErrorCode];
+
 export interface SerializedException {
   message: string;
-  error: string;
+  code: ErrorCode;
+  reason?: string;
   correlationId: string;
-  statusCode?: number;
   stack?: string;
   cause?: string;
   metadata?: unknown;
 }
 
 export abstract class ExceptionBase extends Error {
-  abstract error: string;
-  abstract statusCode: number;
+  abstract readonly code: ErrorCode;
+  /** Finer-grained, stable reason clients can branch on (e.g. `USER_ALREADY_EXISTS`) */
+  readonly reason?: string;
 
   public readonly correlationId: string;
   override readonly cause?: Error;
@@ -44,8 +58,8 @@ export abstract class ExceptionBase extends Error {
   toJSON(): SerializedException {
     return {
       message: this.message,
-      error: this.error,
-      statusCode: this.statusCode,
+      code: this.code,
+      reason: this.reason,
       stack: this.stack,
       correlationId: this.correlationId,
       cause: JSON.stringify(this.cause),

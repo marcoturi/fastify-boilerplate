@@ -109,7 +109,7 @@ export default function createUserHandler({
         await created.commit(eventBus); // publish recorded domain events after the write succeeds
         return user.id;
       } catch (error: unknown) {
-        if (error instanceof ConflictException) {
+        if (error instanceof AlreadyExistsException) {
           throw new UserAlreadyExistsError(error);
         }
         throw error;

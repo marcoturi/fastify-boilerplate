@@ -1,5 +1,4 @@
-import mercurius from 'mercurius';
-import { UserAlreadyExistsError } from '#src/modules/user/domain/user.errors.ts';
+import { ArgumentInvalidException } from '#src/shared/exceptions/index.ts';
 import { ajv } from '#src/shared/utils/validator.util.ts';
 import { createUserCommand } from './create-user.handler.ts';
 import { type CreateUserRequestDto, createUserRequestDtoSchema } from './create-user.schema.ts';
@@ -11,23 +10,13 @@ const validateInput = ajv.compile<CreateUserRequestDto>(createUserRequestDtoSche
 export default async function createUserResolver(fastify: FastifyRouteInstance) {
   fastify.graphql.defineResolvers({
     Mutation: {
+      // Exceptions become GraphQL error codes in the error formatter (BAD_USER_INPUT,
+      // USER_ALREADY_EXISTS, ...), so the resolver does not catch them
       putUser: async (_, args) => {
         if (!validateInput(args.input)) {
-          throw new mercurius.ErrorWithProps(ajv.errorsText(validateInput.errors), {
-            code: 'BAD_USER_INPUT',
-          });
+          throw new ArgumentInvalidException(ajv.errorsText(validateInput.errors));
         }
-        try {
-          return await fastify.commandBus.execute(createUserCommand(args.input));
-        } catch (error) {
-          if (error instanceof UserAlreadyExistsError) {
-            throw new mercurius.ErrorWithProps(error.message, {
-              code: 'USER_ALREADY_EXISTS',
-              timestamp: Math.round(Date.now() / 1000),
-            });
-          }
-          throw error;
-        }
+        return await fastify.commandBus.execute(createUserCommand(args.input));
       },
     },
   });

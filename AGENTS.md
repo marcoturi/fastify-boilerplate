@@ -90,9 +90,15 @@ this. Everything else goes through the CQRS buses:
 
 ### Exceptions
 
-- Domain errors extend `ExceptionBase` (in `src/shared/exceptions/`)
-- Built-in exceptions: `NotFoundException`, `ConflictException`, `DatabaseErrorException`, `ArgumentInvalidException`, `InternalServerErrorException`, `ProviderErrorException`
-- Always include a descriptive message: `throw new NotFoundException('User with id X not found')`
+- Exceptions carry a transport-neutral `code` (`ErrorCode` in `src/shared/exceptions/`), never an
+  HTTP status: each transport maps it at its edge (REST in `src/server/plugins/error-handler.ts`,
+  GraphQL in `src/server/graphql-error-formatter.ts`), so handlers serve every transport alike
+- Built-in exceptions: `ArgumentInvalidException`, `NotFoundException`, `AlreadyExistsException`,
+  `InternalException` (extended by `DatabaseErrorException` and `ProviderErrorException`)
+- Domain errors extend one of them and may set a stable `reason` for clients
+  (e.g. `UserAlreadyExistsError` → `USER_ALREADY_EXISTS`)
+- Always include a descriptive message: `throw new NotFoundException('User with id X not found')`.
+  `INTERNAL` messages are logged but never sent to clients
 
 ## Common mistakes to avoid
 

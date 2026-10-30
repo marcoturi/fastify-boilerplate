@@ -1,7 +1,11 @@
 import assert from 'node:assert/strict';
 import { after, before, describe, it } from 'node:test';
 import Fastify from 'fastify';
-import { NotFoundException } from '#src/shared/exceptions/index.ts';
+import {
+  AlreadyExistsException,
+  DatabaseErrorException,
+  NotFoundException,
+} from '#src/shared/exceptions/index.ts';
 import errorHandler from './error-handler.ts';
 
 describe('errorHandler plugin', () => {
@@ -12,6 +16,12 @@ describe('errorHandler plugin', () => {
     app.post('/echo', async (req) => req.body);
     app.get('/missing', async () => {
       throw new NotFoundException('User not found');
+    });
+    app.get('/duplicate', async () => {
+      throw new AlreadyExistsException('Record already exists');
+    });
+    app.get('/database', async () => {
+      throw new DatabaseErrorException('relation "users" does not exist');
     });
     app.get('/boom', async () => {
       throw new Error('secret internal detail');
@@ -55,6 +65,19 @@ describe('errorHandler plugin', () => {
     const res = await app.inject({ method: 'GET', url: '/missing' });
     assert.equal(res.statusCode, 404);
     assert.equal(res.json().message, 'User not found');
+  });
+
+  it('maps ALREADY_EXISTS to 409', async () => {
+    const res = await app.inject({ method: 'GET', url: '/duplicate' });
+    assert.equal(res.statusCode, 409);
+    assert.equal(res.json().error, 'Conflict');
+    assert.equal(res.json().message, 'Record already exists');
+  });
+
+  it('hides the message of INTERNAL exceptions behind a 500', async () => {
+    const res = await app.inject({ method: 'GET', url: '/database' });
+    assert.equal(res.statusCode, 500);
+    assert.equal(res.json().message, 'Internal Server Error');
   });
 
   it('hides the message of unexpected errors behind a 500', async () => {

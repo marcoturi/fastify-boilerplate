@@ -1,4 +1,4 @@
-import mercurius from 'mercurius';
+import { ArgumentInvalidException } from '#src/shared/exceptions/index.ts';
 import { ajv } from '#src/shared/utils/validator.util.ts';
 import { findUsersQuery } from './find-users.handler.ts';
 import { type FindUsersRequestDto, findUsersRequestDtoSchema } from './find-users.schema.ts';
@@ -12,9 +12,7 @@ export default async function findUsersResolver(fastify: FastifyRouteInstance) {
     Query: {
       findUsers: async (_, args) => {
         if (!validateArgs(args)) {
-          throw new mercurius.ErrorWithProps(ajv.errorsText(validateArgs.errors), {
-            code: 'BAD_USER_INPUT',
-          });
+          throw new ArgumentInvalidException(ajv.errorsText(validateArgs.errors));
         }
         return await fastify.queryBus.execute(findUsersQuery(args));
       },

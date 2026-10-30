@@ -7,7 +7,7 @@ import type {
   RepositoryPort,
 } from '#src/shared/db/repository.port.ts';
 import type { Mapper } from '#src/shared/ddd/mapper.interface.ts';
-import { ConflictException, DatabaseErrorException } from '#src/shared/exceptions/index.ts';
+import { AlreadyExistsException, DatabaseErrorException } from '#src/shared/exceptions/index.ts';
 
 export interface SqlRepositoryBaseProps<Entity, DbModel> {
   db: Dependencies['db'];
@@ -64,7 +64,7 @@ export function SqlRepositoryBase<
       } catch (error: unknown) {
         if (error instanceof Error && 'code' in error && error.code === '23505') {
           // https://www.postgresql.org/docs/current/errcodes-appendix.html
-          throw new ConflictException('Record already exists', error);
+          throw new AlreadyExistsException('Record already exists', error);
         }
         throw new DatabaseErrorException(
           'Unknown database error',
