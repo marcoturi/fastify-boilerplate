@@ -1,19 +1,35 @@
 import type { FastifyBaseLogger } from 'fastify';
 import { getRequestId } from '#src/shared/app/app-request-context.ts';
-import { orderByClause } from '#src/shared/db/postgres.ts';
+import { orderByClause } from '#src/shared/db/order-by.ts';
 import type {
   Paginated,
   PaginatedQueryParams,
   RepositoryPort,
 } from '#src/shared/db/repository.port.ts';
 import type { Mapper } from '#src/shared/ddd/mapper.interface.ts';
-import { AlreadyExistsException, DatabaseErrorException } from '#src/shared/exceptions/index.ts';
+import {
+  AlreadyExistsException,
+  DatabaseErrorException,
+  NotFoundException,
+} from '#src/shared/exceptions/index.ts';
 
 export interface SqlRepositoryBaseProps<Entity, DbModel> {
   db: Dependencies['db'];
   tableName: string;
   mapper: Mapper<Entity, DbModel>;
   logger: FastifyBaseLogger;
+}
+
+/** Maps a driver error: a unique violation becomes AlreadyExists, anything else a database error. */
+function toDatabaseException(error: unknown) {
+  if (error instanceof Error && 'code' in error && error.code === '23505') {
+    // https://www.postgresql.org/docs/current/errcodes-appendix.html
+    return new AlreadyExistsException('Record already exists', error);
+  }
+  return new DatabaseErrorException(
+    'Unknown database error',
+    error instanceof Error ? error : new Error(String(error)),
+  );
 }
 
 export function SqlRepositoryBase<
@@ -37,7 +53,7 @@ export function SqlRepositoryBase<
     async findAllPaginated(params: PaginatedQueryParams): Promise<Paginated<Entity>> {
       const [countRow] = await db`SELECT COUNT(*) as total FROM ${db(tableName)}`;
       const result =
-        await db`SELECT * FROM ${db(tableName)} ${orderByClause(params.orderBy)} LIMIT ${params.limit} OFFSET ${params.offset}`;
+        await db`SELECT * FROM ${db(tableName)} ${orderByClause(db, params.orderBy)} LIMIT ${params.limit} OFFSET ${params.offset}`;
       const entities = result.map((r) => mapper.toDomain(r as DbModel));
       return {
         data: entities,
@@ -49,10 +65,15 @@ export function SqlRepositoryBase<
     async update(entity: Entity): Promise<Entity> {
       const record = mapper.toPersistence(entity);
       const { id, ...fields } = record as Record<string, unknown> & { id: string };
-      const [updated] =
-        await db`UPDATE ${db(tableName)} SET ${db(fields)} WHERE id = ${id} RETURNING *`;
+      let updated: unknown;
+      try {
+        [updated] =
+          await db`UPDATE ${db(tableName)} SET ${db(fields)} WHERE id = ${id} RETURNING *`;
+      } catch (error: unknown) {
+        throw toDatabaseException(error);
+      }
       if (!updated) {
-        throw new DatabaseErrorException(`Record with id ${id} not found for update`);
+        throw new NotFoundException(`Record with id ${id} not found`);
       }
       return mapper.toDomain(updated as DbModel);
     },
@@ -62,14 +83,7 @@ export function SqlRepositoryBase<
       try {
         await db`INSERT INTO ${db(tableName)} ${db(records as Record<string, unknown>[])}`;
       } catch (error: unknown) {
-        if (error instanceof Error && 'code' in error && error.code === '23505') {
-          // https://www.postgresql.org/docs/current/errcodes-appendix.html
-          throw new AlreadyExistsException('Record already exists', error);
-        }
-        throw new DatabaseErrorException(
-          'Unknown database error',
-          error instanceof Error ? error : new Error(String(error)),
-        );
+        throw toDatabaseException(error);
       }
     },
     async delete(entityId: string): Promise<boolean> {
