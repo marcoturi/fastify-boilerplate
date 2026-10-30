@@ -37,6 +37,9 @@ jobs:
         uses: actions/checkout@v7
         with:
           fetch-depth: 0
+          # semantic-release pushes the release commit with GH_TOKEN (an admin PAT, allowed to
+          # bypass the main ruleset), not with the github-actions credentials checkout keeps
+          persist-credentials: false
       - name: Install pnpm
         uses: pnpm/action-setup@v6
       - name: Setup Node.js
