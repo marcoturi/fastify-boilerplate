@@ -10,7 +10,7 @@ import mercurius from 'mercurius';
 import env from '#src/config/env.ts';
 import { di } from '#src/server/di/index.ts';
 import { graphqlErrorFormatter } from '#src/server/graphql-error-formatter.ts';
-import getGQL from '#src/server/plugins/gql.ts';
+import { loadGraphqlSchema } from '#src/server/graphql-schema.ts';
 
 export default async function createServer(fastify: FastifyInstance) {
   // Set sensible default security headers.
@@ -38,7 +38,7 @@ export default async function createServer(fastify: FastifyInstance) {
 
   // Graphql — registered after Helmet/CORS so the /graphql endpoint inherits their hooks.
   await fastify.register(mercurius, {
-    schema: await getGQL(),
+    schema: await loadGraphqlSchema(),
     graphiql: env.isDevelopment,
     defineMutation: true,
     errorFormatter: graphqlErrorFormatter,
