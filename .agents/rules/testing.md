@@ -13,7 +13,8 @@ paths:
   shared steps in `tests/shared/`
 - Cover both REST and GraphQL when a slice exposes both
 - Load tests: k6 scripts (`*.k6.ts`) in `tests/<module>/<slice>/`
-- Test server: use `buildApp()` from `tests/support/server.ts` — creates a Fastify instance without listening
+- Test server: use `buildApp()` from `tests/support/server.ts` — creates a Fastify instance without listening,
+  with the server's options (`src/server/options.ts`): change them there, not in the tests
 - Tag scenarios that touch users with `@user`: the hook truncates the table before each one, so
   scenarios stay independent
 - E2E tests need a running Postgres with migrations applied: `docker compose up postgres -d`,

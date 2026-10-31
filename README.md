@@ -293,6 +293,7 @@ Example: [user.repository.ts](src/modules/user/database/user.repository.ts)
     │       └── index.ts                             → DI declarations, action creator re-export
     ├── server/
     │   ├── index.ts               → Fastify setup: Helmet, CORS, GraphQL, plugin and route autoload
+    │   ├── options.ts             → Fastify instance options (logger, request ids, Ajv), shared with the e2e tests
     │   ├── di/                    → Awilix container: global dependencies and module autoload
     │   ├── plugins/               → Autoloaded plugins (CQRS, error handler, readiness, request context, Swagger)
     │   ├── graphql-schema.ts      → Merges the modules' GraphQL schemas

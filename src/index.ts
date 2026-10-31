@@ -2,36 +2,14 @@ import Fastify from 'fastify';
 import { env } from '#src/config/index.ts';
 import { shutdownTelemetry } from '#src/instrumentation.ts';
 import server from '#src/server/index.ts';
-import { requestId } from '#src/server/request-id.ts';
-import { getRequestId } from '#src/shared/app/app-request-context.ts';
+import { serverOptions } from '#src/server/options.ts';
 import { closeDbConnection } from '#src/shared/db/postgres.ts';
 
 // How long a graceful shutdown may take before the process exits anyway
 const SHUTDOWN_TIMEOUT_MS = 10_000;
 
 async function init() {
-  const fastify = Fastify({
-    logger: {
-      level: env.log.level,
-      // pino's request serializer logs no headers today: these paths keep credentials out of
-      // the logs if a custom serializer ever adds them
-      redact: ['req.headers.authorization', 'req.headers.cookie'],
-      // Attach the request correlation id (from the request-context ALS) to every log line,
-      // including those from handlers/repositories. Falls back to a sentinel outside a request.
-      mixin() {
-        return { correlationId: getRequestId() };
-      },
-    },
-    genReqId: requestId,
-    routerOptions: {
-      ignoreDuplicateSlashes: true,
-    },
-    ajv: {
-      customOptions: {
-        keywords: ['example'],
-      },
-    },
-  });
+  const fastify = Fastify(serverOptions);
 
   await server(fastify);
 
