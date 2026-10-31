@@ -1,5 +1,5 @@
 import { ArgumentInvalidException } from '#src/shared/exceptions/index.ts';
-import { ajv } from '#src/shared/utils/validator.util.ts';
+import { ajv, toSubErrors } from '#src/shared/utils/validator.util.ts';
 import { findUsersQuery } from './find-users.handler.ts';
 import { type FindUsersRequestDto, findUsersRequestDtoSchema } from './find-users.schema.ts';
 
@@ -12,7 +12,7 @@ export default async function findUsersResolver(fastify: FastifyRouteInstance) {
     Query: {
       findUsers: async (_, args) => {
         if (!validateArgs(args)) {
-          throw new ArgumentInvalidException(ajv.errorsText(validateArgs.errors));
+          throw new ArgumentInvalidException('Validation error', toSubErrors(validateArgs.errors));
         }
         const result = await fastify.queryBus.execute(findUsersQuery(args));
         return {

@@ -1,5 +1,6 @@
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
+import type { SubError } from '#src/shared/exceptions/index.ts';
 
 // `.default` is needed because Ajv and ajv-formats are CJS packages.
 // Under `"module": "NodeNext"`, TypeScript resolves the default import as
@@ -23,3 +24,14 @@ export const ajv = addFormats.default(new Ajv.default({ keywords: ['example'] })
   'relative-json-pointer',
   'regex',
 ]);
+
+/** The errors of a failed validation (Ajv's, or Fastify's request validation) as sub-errors,
+ *  the shape both transports send: one per invalid field, with its JSON pointer */
+export function toSubErrors(
+  errors: readonly { instancePath: string; message?: string }[] | null | undefined,
+): SubError[] {
+  return (errors ?? []).map((error) => ({
+    path: error.instancePath,
+    message: error.message ?? '',
+  }));
+}

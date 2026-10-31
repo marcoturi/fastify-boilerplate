@@ -42,6 +42,7 @@ Feature: Find users via GraphQL
     When I send a GraphQL query for users with
       | <Argument> | <Value> |
     Then I receive a GraphQL error with code "BAD_USER_INPUT"
+    And the GraphQL error points to "/<Argument>"
 
     Examples:
       | Argument | Value  |

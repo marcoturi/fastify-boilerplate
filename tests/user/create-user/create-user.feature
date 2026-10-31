@@ -28,6 +28,7 @@ Feature: Create a user
       | John.Doe@Gmail.com | England | Road Avenue | 29145      |
     When I send a request to create a user
     Then I receive an error "Conflict" with status code 409
+    And the error reason is "USER_ALREADY_EXISTS"
 
   @user
   Scenario Outline: I try to create a user with invalid data
@@ -36,11 +37,12 @@ Feature: Create a user
       | <Email> | <Country> | <Street> | <PostalCode> |
     When I send a request to create a user
     Then I receive an error "Bad Request" with status code 400
+    And the error points to "<Path>"
 
     Examples:
-      | Email          | Country | Street      | PostalCode |
-      | johngmail.com  | England | Road Avenue | 29145      |
-      | john@gmail.com | 123     | Road Avenue | 29145      |
-      | johng@mail.com | England | 123         | 29145      |
-      | johng@mail.com | England | Road Avenue | @          |
-      | #@!$           | $#@1    | %542        | !321       |
+      | Email          | Country | Street      | PostalCode | Path        |
+      | johngmail.com  | England | Road Avenue | 29145      | /email      |
+      | john@gmail.com | 123     | Road Avenue | 29145      | /country    |
+      | johng@mail.com | England | 123         | 29145      | /street     |
+      | johng@mail.com | England | Road Avenue | @          | /postalCode |
+      | #@!$           | $#@1    | %542        | !321       | /email      |

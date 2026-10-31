@@ -1,5 +1,5 @@
 import { ArgumentInvalidException } from '#src/shared/exceptions/index.ts';
-import { ajv } from '#src/shared/utils/validator.util.ts';
+import { ajv, toSubErrors } from '#src/shared/utils/validator.util.ts';
 import { createUserCommand } from './create-user.handler.ts';
 import { type CreateUserRequestDto, createUserRequestDtoSchema } from './create-user.schema.ts';
 
@@ -14,7 +14,7 @@ export default async function createUserResolver(fastify: FastifyRouteInstance) 
       // USER_ALREADY_EXISTS, ...), so the resolver does not catch them
       createUser: async (_, args) => {
         if (!validateInput(args.input)) {
-          throw new ArgumentInvalidException(ajv.errorsText(validateInput.errors));
+          throw new ArgumentInvalidException('Validation error', toSubErrors(validateInput.errors));
         }
         return await fastify.commandBus.execute(createUserCommand(args.input));
       },

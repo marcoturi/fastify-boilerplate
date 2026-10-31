@@ -4,7 +4,10 @@ import type { ICustomWorld } from '../support/custom-world.ts';
 
 interface GraphQLResponse<T> {
   data?: T | null;
-  errors?: { message: string; extensions?: Record<string, unknown> }[];
+  errors?: {
+    message: string;
+    extensions?: { code?: string; subErrors?: { path: string; message: string }[] };
+  }[];
 }
 
 interface FindUsersData {
@@ -140,6 +143,11 @@ Then('I receive a GraphQL error with code {string}', function (this: ICustomWorl
   const { value, errors } = fieldOf(this);
   assert.strictEqual(value ?? null, null);
   assert.strictEqual(errors?.[0]?.extensions?.code, code);
+});
+
+Then('the GraphQL error points to {string}', function (this: ICustomWorld, path: string) {
+  const { errors } = fieldOf(this);
+  assert.strictEqual(errors?.[0]?.extensions?.subErrors?.[0]?.path, path);
 });
 
 Then('I receive a GraphQL validation error', function (this: ICustomWorld) {

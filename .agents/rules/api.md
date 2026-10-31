@@ -20,13 +20,14 @@ paths:
 
 GraphQL types only check that fields are present and have the right scalar type. Resolvers must
 validate their input against the same TypeBox schema as the REST route, through the shared Ajv
-instance (`src/shared/utils/validator.util.ts`), and throw an `ArgumentInvalidException` when it fails:
+instance (`src/shared/utils/validator.util.ts`), and throw an `ArgumentInvalidException` when it fails,
+with one sub-error per invalid field as REST reports them:
 
 ```typescript
 const validateInput = ajv.compile<CreateUserRequestDto>(createUserRequestDtoSchema);
 
 if (!validateInput(args.input)) {
-  throw new ArgumentInvalidException(ajv.errorsText(validateInput.errors));
+  throw new ArgumentInvalidException('Validation error', toSubErrors(validateInput.errors));
 }
 ```
 
@@ -42,5 +43,7 @@ not catch them to translate them. The translation happens once per transport:
 | `ALREADY_EXISTS` | 409 | `ALREADY_EXISTS` |
 | `INTERNAL` and unknown errors | 500, message hidden | `INTERNAL_SERVER_ERROR`, message hidden |
 
-On GraphQL an exception's `reason`, when set, replaces the generic code (e.g. `USER_ALREADY_EXISTS`).
+An exception's `reason`, when set (e.g. `USER_ALREADY_EXISTS`), is the `reason` field of the REST
+error body and replaces the generic code on GraphQL. The `subErrors` of an `ArgumentInvalidException`
+(`{ path, message }` per invalid field) go in the REST body and in GraphQL `extensions.subErrors`.
 A new transport (e.g. gRPC) adds its own table instead of changing the exceptions.

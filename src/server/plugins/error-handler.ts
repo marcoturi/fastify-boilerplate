@@ -6,7 +6,12 @@ import {
   apiErrorResponseSchema,
 } from '#src/shared/api/api-error.response.ts';
 import { getRequestId } from '#src/shared/app/app-request-context.ts';
-import { type ErrorCode, ExceptionBase } from '#src/shared/exceptions/index.ts';
+import {
+  ArgumentInvalidException,
+  type ErrorCode,
+  ExceptionBase,
+} from '#src/shared/exceptions/index.ts';
+import { toSubErrors } from '#src/shared/utils/validator.util.ts';
 
 // Transport-neutral exception codes → HTTP status codes (mapping from https://google.aip.dev/193)
 const httpStatusByCode: Record<ErrorCode, number> = {
@@ -40,14 +45,14 @@ function sendError(
   res: FastifyReply,
   statusCode: number,
   message: string,
-  subErrors?: ApiErrorResponse['subErrors'],
+  details: Pick<ApiErrorResponse, 'reason' | 'subErrors'> = {},
 ) {
   return res.status(statusCode).send({
     statusCode,
     message,
     error: STATUS_CODES[statusCode] ?? 'Error', // HTTP reason phrase, e.g. "Bad Request"
     correlationId: getRequestId(),
-    subErrors,
+    ...details,
   } satisfies ApiErrorResponse);
 }
 
@@ -62,20 +67,17 @@ async function errorHandlerPlugin(fastify: FastifyInstance) {
         return sendError(res, statusCode, 'Internal Server Error');
       }
       fastify.log.warn(error);
-      return sendError(res, statusCode, error.message);
+      return sendError(res, statusCode, error.message, {
+        reason: error.reason,
+        subErrors: error instanceof ArgumentInvalidException ? error.subErrors : undefined,
+      });
     }
 
     // Request validation (schema) errors, with one entry per invalid field
     if ('validation' in error && error.validation) {
-      return sendError(
-        res,
-        400,
-        'Validation error',
-        error.validation.map((validationError) => ({
-          path: validationError.instancePath,
-          message: validationError.message ?? '',
-        })),
-      );
+      return sendError(res, 400, 'Validation error', {
+        subErrors: toSubErrors(error.validation),
+      });
     }
 
     // Errors raised by Fastify or its plugins carry their own status: 4xx for malformed JSON,

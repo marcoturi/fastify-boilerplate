@@ -25,14 +25,15 @@ Feature: Create a user via GraphQL
       | <Email> | <Country> | <Street> | <PostalCode> |
     When I send a GraphQL mutation to create a user
     Then I receive a GraphQL error with code "BAD_USER_INPUT"
+    And the GraphQL error points to "<Path>"
 
     Examples:
-      | Email          | Country | Street      | PostalCode |
-      | johngmail.com  | England | Road Avenue | 29145      |
-      | john@gmail.com | 123     | Road Avenue | 29145      |
-      | johng@mail.com | England | 123         | 29145      |
-      | johng@mail.com | England | Road Avenue | @          |
-      | #@!$           | $#@1    | %542        | !321       |
+      | Email          | Country | Street      | PostalCode | Path        |
+      | johngmail.com  | England | Road Avenue | 29145      | /email      |
+      | john@gmail.com | 123     | Road Avenue | 29145      | /country    |
+      | johng@mail.com | England | 123         | 29145      | /street     |
+      | johng@mail.com | England | Road Avenue | @          | /postalCode |
+      | #@!$           | $#@1    | %542        | !321       | /email      |
 
   @user
   Scenario: I cannot create a user with missing data

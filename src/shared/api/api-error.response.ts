@@ -11,6 +11,8 @@ export const apiErrorResponseSchema = Type.Object(
     message: Type.String({ example: 'Validation Error' }),
     error: Type.String({ example: 'Bad Request' }),
     correlationId: Type.String({ example: 'YevPQs' }),
+    // Stable reason clients can branch on, when the exception sets one (as GraphQL's code)
+    reason: Type.Optional(Type.String({ example: 'USER_ALREADY_EXISTS' })),
     // Field-level validation errors — only present on 400 validation failures.
     // Shape matches what the error handler emits from `error.validation`.
     subErrors: Type.Optional(

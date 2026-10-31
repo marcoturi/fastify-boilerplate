@@ -15,3 +15,12 @@ Then(
     assert.ok(body.correlationId);
   },
 );
+
+Then('the error reason is {string}', function (this: ICustomWorld, reason: string) {
+  assert.strictEqual(this.context.latestResponse!.json<ApiErrorResponse>().reason, reason);
+});
+
+Then('the error points to {string}', function (this: ICustomWorld, path: string) {
+  const { subErrors } = this.context.latestResponse!.json<ApiErrorResponse>();
+  assert.strictEqual(subErrors?.[0]?.path, path);
+});

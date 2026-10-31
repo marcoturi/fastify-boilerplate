@@ -16,7 +16,11 @@ class ThingAlreadyExistsError extends AlreadyExistsException {
 
 interface GraphQLResponse {
   data: Record<string, unknown> | null;
-  errors?: { message: string; path?: string[]; extensions?: { code?: string } }[];
+  errors?: {
+    message: string;
+    path?: string[];
+    extensions?: { code?: string; subErrors?: unknown };
+  }[];
 }
 
 describe('graphqlErrorFormatter()', () => {
@@ -26,6 +30,7 @@ describe('graphqlErrorFormatter()', () => {
     await app.register(mercurius, {
       schema: `type Query {
         invalid: String
+        invalidFields: String
         missing: String
         duplicate: String
         thing: String
@@ -37,6 +42,11 @@ describe('graphqlErrorFormatter()', () => {
         Query: {
           invalid: () => {
             throw new ArgumentInvalidException('limit must be >= 1');
+          },
+          invalidFields: () => {
+            throw new ArgumentInvalidException('Validation error', [
+              { path: '/limit', message: 'must be >= 1' },
+            ]);
           },
           missing: () => {
             throw new NotFoundException('Thing not found');
@@ -87,6 +97,14 @@ describe('graphqlErrorFormatter()', () => {
       assert.deepEqual(body.errors?.[0]?.path, [field]);
     });
   }
+
+  it('lists the invalid fields of an invalid argument in extensions.subErrors', async () => {
+    const { body } = await query('invalidFields');
+    assert.equal(body.errors?.[0]?.extensions?.code, 'BAD_USER_INPUT');
+    assert.deepEqual(body.errors?.[0]?.extensions?.subErrors, [
+      { path: '/limit', message: 'must be >= 1' },
+    ]);
+  });
 
   for (const field of ['database', 'boom']) {
     it(`hides the message of ${field} behind INTERNAL_SERVER_ERROR`, async () => {

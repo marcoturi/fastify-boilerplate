@@ -1,5 +1,11 @@
 import { ErrorCode, ExceptionBase } from './exception-base.ts';
 
+/** A field-level error: `path` is a JSON pointer to the invalid field (e.g. `/email`) */
+export interface SubError {
+  path: string;
+  message: string;
+}
+
 /**
  * Used to indicate that an incorrect argument was provided to a method/function/class constructor
  *
@@ -8,6 +14,13 @@ import { ErrorCode, ExceptionBase } from './exception-base.ts';
  */
 export class ArgumentInvalidException extends ExceptionBase {
   readonly code = ErrorCode.INVALID_ARGUMENT;
+  /** One entry per invalid field, when the argument is an object; transports send them along */
+  readonly subErrors?: SubError[];
+
+  constructor(message: string, subErrors?: SubError[]) {
+    super(message);
+    this.subErrors = subErrors;
+  }
 }
 
 /**

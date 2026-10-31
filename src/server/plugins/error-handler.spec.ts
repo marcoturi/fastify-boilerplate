@@ -3,10 +3,15 @@ import { after, before, describe, it } from 'node:test';
 import Fastify from 'fastify';
 import {
   AlreadyExistsException,
+  ArgumentInvalidException,
   DatabaseErrorException,
   NotFoundException,
 } from '#src/shared/exceptions/index.ts';
 import errorHandler from './error-handler.ts';
+
+class ThingAlreadyExistsError extends AlreadyExistsException {
+  override readonly reason = 'THING_ALREADY_EXISTS';
+}
 
 describe('errorHandler plugin', () => {
   const app = Fastify({ logger: false });
@@ -19,6 +24,14 @@ describe('errorHandler plugin', () => {
     });
     app.get('/duplicate', async () => {
       throw new AlreadyExistsException('Record already exists');
+    });
+    app.get('/thing', async () => {
+      throw new ThingAlreadyExistsError('Thing already exists');
+    });
+    app.get('/invalid', async () => {
+      throw new ArgumentInvalidException('Validation error', [
+        { path: '/limit', message: 'must be >= 1' },
+      ]);
     });
     app.get('/database', async () => {
       throw new DatabaseErrorException('relation "users" does not exist');
@@ -75,6 +88,18 @@ describe('errorHandler plugin', () => {
     assert.equal(res.statusCode, 409);
     assert.equal(res.json().error, 'Conflict');
     assert.equal(res.json().message, 'Record already exists');
+  });
+
+  it('sends the reason of an exception that sets one', async () => {
+    const res = await app.inject({ method: 'GET', url: '/thing' });
+    assert.equal(res.statusCode, 409);
+    assert.equal(res.json().reason, 'THING_ALREADY_EXISTS');
+  });
+
+  it('sends the sub-errors of an invalid argument', async () => {
+    const res = await app.inject({ method: 'GET', url: '/invalid' });
+    assert.equal(res.statusCode, 400);
+    assert.deepEqual(res.json().subErrors, [{ path: '/limit', message: 'must be >= 1' }]);
   });
 
   it('hides the message of INTERNAL exceptions behind a 500', async () => {

@@ -19,3 +19,4 @@ Feature: Delete a user via GraphQL
   Scenario: I cannot delete a user with an invalid id
     When I send a GraphQL mutation to delete the user "not-a-uuid"
     Then I receive a GraphQL error with code "BAD_USER_INPUT"
+    And the GraphQL error points to "/id"
