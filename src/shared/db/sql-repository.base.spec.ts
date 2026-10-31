@@ -6,7 +6,7 @@ import {
   DatabaseErrorException,
   NotFoundException,
 } from '#src/shared/exceptions/index.ts';
-import { SqlRepositoryBase } from './sql-repository.base.ts';
+import { sqlRepositoryBase } from './sql-repository.base.ts';
 
 interface Thing {
   id: string;
@@ -21,7 +21,7 @@ const fakeDb = (query: () => Promise<unknown[]>) =>
       : { helper: first }) as unknown as Dependencies['db'];
 
 const repository = (query: () => Promise<unknown[]>) =>
-  SqlRepositoryBase<Thing, Record<string, unknown>>({
+  sqlRepositoryBase<Thing, Record<string, unknown>>({
     db: fakeDb(query),
     tableName: 'things',
     mapper: {
@@ -35,7 +35,7 @@ const repository = (query: () => Promise<unknown[]>) =>
 const pgError = (code: string) => Object.assign(new Error(`pg error ${code}`), { code });
 const thing: Thing = { id: '1', name: 'a' };
 
-describe('SqlRepositoryBase()', () => {
+describe('sqlRepositoryBase()', () => {
   describe('update()', () => {
     it('returns the updated entity', async () => {
       const updated = await repository(async () => [{ id: '1', name: 'b' }]).update(thing);

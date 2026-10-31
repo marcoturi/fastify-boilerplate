@@ -12,7 +12,7 @@ import { di } from '#src/server/di/index.ts';
 import { graphqlErrorFormatter } from '#src/server/graphql-error-formatter.ts';
 import { loadGraphqlSchema } from '#src/server/graphql-schema.ts';
 
-export default async function createServer(fastify: FastifyInstance) {
+export default async function server(fastify: FastifyInstance) {
   // Set sensible default security headers.
   // Registered before any route (including GraphQL) so its onRequest hook applies globally.
   await fastify.register(Helmet, {

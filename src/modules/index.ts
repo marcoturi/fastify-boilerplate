@@ -5,8 +5,8 @@ import type { CommandBus, EventBus, QueryBus } from '#src/shared/cqrs/bus.types.
 import { setQueryLogger, transactionAwareDb } from '#src/shared/db/postgres.ts';
 import {
   type RepositoryBase,
-  SqlRepositoryBase,
   type SqlRepositoryBaseProps,
+  sqlRepositoryBase,
 } from '#src/shared/db/sql-repository.base.ts';
 
 type SqlBaseProps<E = { id: string }, D = Record<string, unknown>> = Omit<
@@ -44,7 +44,7 @@ export function globalDependencies({
     tableName,
     mapper,
   }: SqlBaseProps<E, D>) =>
-    SqlRepositoryBase<E, D>({
+    sqlRepositoryBase<E, D>({
       logger,
       db,
       tableName,

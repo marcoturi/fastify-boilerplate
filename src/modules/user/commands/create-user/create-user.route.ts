@@ -4,7 +4,7 @@ import { createUserRequestDtoSchema } from '#src/modules/user/commands/create-us
 import { apiErrorResponseRef } from '#src/shared/api/api-error.response.ts';
 import { idDtoSchema } from '#src/shared/api/id.response.dto.ts';
 
-export default async function createUser(fastify: FastifyRouteInstance) {
+export default async function createUserRoute(fastify: FastifyRouteInstance) {
   fastify.withTypeProvider<TypeBoxTypeProvider>().route({
     method: 'POST',
     url: '/v1/users',

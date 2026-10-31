@@ -45,7 +45,7 @@ function toDatabaseException(error: unknown) {
   );
 }
 
-export function SqlRepositoryBase<
+export function sqlRepositoryBase<
   Entity extends { id: string },
   DbModel extends Record<string, unknown>,
 >({

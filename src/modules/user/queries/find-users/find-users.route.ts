@@ -3,7 +3,7 @@ import { userPaginatedResponseSchema } from '#src/modules/user/dtos/user.paginat
 import { findUsersQuery } from './find-users.handler.ts';
 import { findUsersRequestDtoSchema } from './find-users.schema.ts';
 
-export default async function findUsers(fastify: FastifyRouteInstance) {
+export default async function findUsersRoute(fastify: FastifyRouteInstance) {
   fastify.withTypeProvider<TypeBoxTypeProvider>().route({
     method: 'GET',
     url: '/v1/users',
