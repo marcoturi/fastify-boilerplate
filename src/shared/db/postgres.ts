@@ -24,7 +24,9 @@ export function getDb(): Sql {
       username: env.db.user,
       password: env.db.password,
       database: env.db.database,
-      ssl: env.db.ssl ? 'require' : false,
+      // verify-full also checks the server certificate and host name: 'require' only
+      // encrypts, so it would accept a man-in-the-middle
+      ssl: env.db.ssl ? 'verify-full' : false,
       max: env.db.poolMax,
       idle_timeout: env.db.idleTimeout,
       connect_timeout: env.db.connectTimeout,

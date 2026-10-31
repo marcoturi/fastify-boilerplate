@@ -22,7 +22,8 @@ const schema = Type.Object({
   POSTGRES_USER: Type.String(),
   POSTGRES_DB: Type.String(),
   // Enable TLS for the DB connection. Keep `false` for local/CI Postgres; set `true`
-  // in production (most managed Postgres providers require TLS).
+  // in production (most managed Postgres providers require TLS). The server certificate
+  // must be trusted by Node: for a private CA, point NODE_EXTRA_CA_CERTS to it.
   POSTGRES_SSL: Type.Boolean({ default: false }),
   // Connection pool tuning (see https://github.com/porsager/postgres#connection).
   POSTGRES_POOL_MAX: Type.Number({ default: 10 }),
