@@ -6,6 +6,8 @@ import { transactionContext } from '#src/shared/db/transaction-context.ts';
 type Sql = ReturnType<typeof postgres>;
 
 let sql: Sql | null = null;
+// Set by closeDbConnection(): from then on getDb() throws instead of opening a new pool
+let closed = false;
 let queryLogger: FastifyBaseLogger | undefined;
 const transactions = transactionContext<postgres.TransactionSql>();
 
@@ -15,8 +17,13 @@ export function setQueryLogger(logger: FastifyBaseLogger): void {
   queryLogger = logger;
 }
 
-/** Returns the singleton DB connection, creating it lazily on first call. */
+/** Returns the singleton DB connection, creating it lazily on first call. After
+ *  closeDbConnection() it throws: a late query (e.g. from an event handler still running
+ *  at shutdown) would otherwise open a pool that nothing closes. */
 export function getDb(): Sql {
+  if (closed) {
+    throw new Error('The database connection is closed');
+  }
   if (!sql) {
     sql = postgres({
       host: env.db.host,
@@ -39,6 +46,7 @@ export function getDb(): Sql {
 }
 
 export async function closeDbConnection() {
+  closed = true;
   if (sql) {
     await sql.end({ timeout: 5 });
     sql = null;

@@ -13,7 +13,8 @@ SQL belongs in repository files only. Handlers use the repository **port** (inte
 `src/shared/db/` or `database/` they import only `*.port.ts` files, never the adapter or the DB client.
 
 - Client: `postgres` (postgres.js) — uses tagged template literals for parameterized queries
-- Connection: lazy singleton via `getDb()` in `src/shared/db/postgres.ts`; close with `closeDbConnection()`
+- Connection: lazy singleton via `getDb()` in `src/shared/db/postgres.ts`; close with `closeDbConnection()`,
+  after which `getDb()` throws instead of opening a new pool
 - Transactions: `withTransaction(async () => { ... })` in `src/shared/db/postgres.ts`. The DI `db` is
   transaction-aware, so repositories called inside it join the transaction without receiving `tx`;
   a nested call joins the outer transaction. Publish domain events after it resolves
