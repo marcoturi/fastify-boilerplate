@@ -24,6 +24,11 @@ export function requestBus(label: string): RequestBus {
     if (typeof handler !== 'function') {
       throw new TypeError('handler must be a function');
     }
+    // A command or query has exactly one handler: a second one is a wiring mistake (e.g. two
+    // slices using the same type), which replacing the first would hide
+    if (handlers.has(type)) {
+      throw new Error(`${label} type of ${type} is already registered`);
+    }
     handlers.set(type, handler as CommandHandler);
   }
 

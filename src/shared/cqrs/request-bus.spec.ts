@@ -22,6 +22,15 @@ describe('requestBus()', () => {
     );
   });
 
+  it('refuses a second handler for the same type', () => {
+    const bus = requestBus('Command');
+    bus.register('t', async () => 'first');
+    assert.throws(
+      () => bus.register('t', async () => 'second'),
+      /Command type of t is already registered/,
+    );
+  });
+
   it('unregister removes the handler', async () => {
     const bus = requestBus('Query');
     bus.register('q', async () => 'ok');
