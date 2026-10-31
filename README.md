@@ -38,7 +38,7 @@ A production-ready [Fastify 5](https://github.com/fastify/fastify) boilerplate b
 | **Security** | [@fastify/helmet](https://github.com/fastify/fastify-helmet), [@fastify/under-pressure](https://github.com/fastify/under-pressure) for back-pressure |
 | **Telemetry** | Vendor-agnostic [OpenTelemetry](https://opentelemetry.io/) with auto-instrumentation (disabled by default) |
 | **Linting** | [Biome](https://biomejs.dev/) — single tool for linting, formatting, and import sorting |
-| **Architecture** | [dependency-cruiser](https://github.com/sverweij/dependency-cruiser) validates layer boundaries at CI time |
+| **Architecture** | [dependency-cruiser](https://github.com/sverweij/dependency-cruiser) validates layer boundaries in the pre-commit hook and in CI on every pull request |
 | **Release** | [Husky](https://github.com/typicode/husky) + [Commitlint](https://commitlint.js.org/) + [Semantic Release](https://github.com/semantic-release/semantic-release) |
 | **Client types** | REST (OpenAPI) and GraphQL types [auto-generated and published to npm](#client-types-package) on every release |
 | **Testing** | E2E with [Cucumber](https://cucumber.io/docs/installation/javascript/) (Gherkin), unit/integration with `node:test`, load tests with [k6](https://github.com/grafana/k6) |
@@ -99,7 +99,7 @@ The server starts at **http://localhost:3000** by default. See [API Endpoints](#
 | `pnpm lint` | Run Biome linter with auto-fix |
 | `pnpm type:check` | TypeScript type checking (`tsc --noEmit`) |
 | `pnpm deps:validate` | Validate architecture layer boundaries with dependency-cruiser |
-| `pnpm deps:graph` | Generate a dependency graph SVG in `doc/` |
+| `pnpm deps:graph` | Generate a dependency graph SVG in `doc/` (requires [Graphviz](https://graphviz.org/) `dot`) |
 
 ### Testing
 
@@ -118,6 +118,8 @@ The server starts at **http://localhost:3000** by default. See [API Endpoints](#
 | `pnpm db:create-migration` | Create a new migration file |
 | `pnpm db:seed` | Run database seeds |
 | `pnpm db:create-seed` | Create a new seed file |
+| `pnpm db:seed:users` | Create users through the REST API with [k6](https://github.com/grafana/k6) (requires k6 and a server on port 3000) |
+| `pnpm db` | Show the DBMate help (commands without a script, e.g. `rollback`, run with `pnpm exec dbmate`) |
 
 ### Other
 
@@ -138,8 +140,14 @@ docker compose up     # builds the app image and starts all services
 
 ```bash
 docker build -t fastify-boilerplate .
-docker run -p 3000:3000 --env-file .env -e HOST=0.0.0.0 fastify-boilerplate
+docker run -p 3000:3000 --env-file .env \
+  -e NODE_ENV=production \
+  -e POSTGRES_URL=host.docker.internal:5432 \
+  --add-host=host.docker.internal:host-gateway \
+  fastify-boilerplate
 ```
+
+The `-e` flags override two values of a `.env` made for local development: `NODE_ENV=development` would replace the image's `production`, and `127.0.0.1` inside the container is the container itself, so Postgres is reached through the host. The image already binds to `0.0.0.0`.
 
 ### Dockerfile highlights
 
@@ -159,7 +167,7 @@ docker run -p 3000:3000 --env-file .env -e HOST=0.0.0.0 fastify-boilerplate
 | `GET /api-docs` | Swagger UI (interactive API documentation) |
 | `GET /api-docs/json` | OpenAPI 3.1.0 JSON spec |
 | `POST /graphql` | GraphQL endpoint ([Mercurius](https://github.com/mercurius-js/mercurius)) |
-| `GET /graphql` | GraphiQL IDE (development only) |
+| `GET /graphiql` | GraphiQL IDE (development only) |
 
 ## Architecture
 
@@ -180,7 +188,7 @@ docker run -p 3000:3000 --env-file .env -e HOST=0.0.0.0 fastify-boilerplate
 - **Framework-agnostic core** — business logic has no Fastify dependency. Fastify concerns stay in routes.
 - **Protocol-agnostic handlers** — command/query handlers serve REST, GraphQL, gRPC, or CLI equally.
 - **Database-agnostic domain** — SQL stays in repository files. Handlers interact with data through repository ports (interfaces).
-- **Inward dependency flow** — outer layers depend on inner layers, never the reverse: `Route → Handler → Domain → Repository`.
+- **Inward dependency flow** — outer layers depend on inner layers, never the reverse: `Route/Resolver → Handler → (Service) → Domain + Repository`. The domain is pure and never calls repositories.
 
 Based on:
 
@@ -198,7 +206,7 @@ Each module maps to a domain concept and lives in its own folder under `src/modu
 
 **Key rules:**
 
-- **No direct imports** between modules. Cross-module communication uses the CQRS buses (commands/queries for request-response, events for fire-and-forget).
+- **No direct imports** between modules. Cross-module communication uses the CQRS buses (commands/queries for request-response, events for fire-and-forget). The one exception is another module's domain events (`domain/*.events.ts`), the contract its subscribers depend on; `pnpm deps:validate` enforces both.
 - **Extractable** — any module can be pulled into a separate microservice. The CQRS handler boundary becomes the network boundary.
 - **If two modules are too "chatty"**, they probably belong together — merge them.
 
@@ -206,23 +214,25 @@ Each module maps to a domain concept and lives in its own folder under `src/modu
 
 ### Module Components
 
-Each layer has a single responsibility:
+Each layer has a single responsibility (details in [clean-architecture.md](.agents/rules/clean-architecture.md)):
 
-**Route** — handles the HTTP/GraphQL/gRPC request. Validates input, formats the response. No business logic.
+**Route / Resolver** — handles the transport (REST route, GraphQL resolver; gRPC or CLI would be one more adapter). Validates input, dispatches one action on a bus, shapes the response. No business logic.
 
 > All REST routes are prefixed with `/api` (configured in `src/server/index.ts`).
 
-Example: [find-users.route.ts](src/modules/user/queries/find-users/find-users.route.ts)
+Example: [find-users.route.ts](src/modules/user/queries/find-users/find-users.route.ts), [find-users.resolver.ts](src/modules/user/queries/find-users/find-users.resolver.ts)
 
-**Command/Query Handler** — orchestrates the use case. Receives a command or query, calls domain services and repositories through ports, returns a result. One handler per use case (e.g. `CreateUser`, `FindUsers`).
+**Command/Query Handler** — runs one use case. Receives a command or query, calls a few domain, service or repository functions, returns a result or emits events. One handler per use case (e.g. `CreateUser`, `FindUsers`).
 
 Benefits of the CQRS bus pattern:
-- **Middlewares** — cross-cutting concerns (auth, caching, tracing, rate limiting) plug in between route and handler. Middleware targeting is pattern-based (e.g. `users/*` for all user commands, `users/create` for a specific one). See [middlewares.ts](src/shared/cqrs/middlewares.ts).
+- **Middlewares** — cross-cutting concerns (metadata, tracing, timing; auth, caching, rate limiting) plug in between route and handler. A middleware wraps every action of its bus: one meant for some actions only checks `action.type` (e.g. the `user/` prefix). See [middlewares.ts](src/shared/cqrs/middlewares.ts).
 - **Decoupling** — modules communicate through the bus instead of direct imports, making future extraction to microservices trivial.
 
 Example: [find-users.handler.ts](src/modules/user/queries/find-users/find-users.handler.ts)
 
-**Domain Service** — pure business logic. Computes properties, enforces invariants, composes entities. No infrastructure dependencies.
+**Service** — orchestrates a use case that takes several steps: reads from repositories, asks the domain for decisions, writes, emits events. It decides nothing itself. Add one when a handler grows into orchestration or two handlers share it; the boilerplate has none yet.
+
+**Domain** — pure business logic: decisions, computations, invariants, entity creation. It may record domain events (`withEvents`), but never calls repositories, emits events or does any I/O.
 
 Example: [user.domain.ts](src/modules/user/domain/user.domain.ts)
 
@@ -230,7 +240,7 @@ Example: [user.domain.ts](src/modules/user/domain/user.domain.ts)
 
 Example: [user.repository.ts](src/modules/user/database/user.repository.ts)
 
-> **Guideline:** use as many or as few layers as needed. Not every feature requires a domain service — simpler CRUD operations can go straight from handler to repository.
+> **Guideline:** use as many or as few layers as needed. Not every feature needs a service or domain logic — simple CRUD operations can go straight from handler to repository.
 
 ## Folder Structure
 
@@ -240,52 +250,62 @@ Example: [user.repository.ts](src/modules/user/database/user.repository.ts)
 │   ├── migrations/                → SQL migration files (DBMate)
 │   └── seeds/                     → SQL seed files (DBMate)
 ├── tests/
-│   ├── <feature>/
-│   │   ├── <scenario>.feature     → Gherkin E2E scenarios
-│   │   └── <scenario>.k6.ts      → k6 load test scripts
-│   ├── shared/                    → Shared step definitions
+│   ├── <module>/
+│   │   ├── <slice>/
+│   │   │   ├── <scenario>.feature → Gherkin E2E scenarios (REST and GraphQL)
+│   │   │   └── <slice>.k6.ts      → k6 load test scripts
+│   │   └── <module>*.steps.ts     → Step definitions shared by the module's scenarios
+│   ├── shared/                    → Cross-module scenarios and common steps
 │   └── support/                   → Test server, hooks, custom world
 ├── client/                        → Generated REST + GraphQL client types (npm package)
 ├── scripts/                       → Type generation scripts
 └── src/
+    ├── index.ts                   → Entry point: logger, server start, graceful shutdown
     ├── instrumentation.ts         → OpenTelemetry setup (loaded via --import)
     ├── config/                    → Environment validation (env-schema + TypeBox)
     ├── modules/
-    │   └── <feature>/
-    │   │   ├── commands/
-    │   │   │   └── <command>/
-    │   │   │       ├── command.handler.ts         → Command handler
-    │   │   │       ├── command.route.ts           → REST route
-    │   │   │       ├── command.resolver.ts        → GraphQL resolver
-    │   │   │       ├── command.graphql-schema.ts  → GraphQL type definitions
-    │   │   │       └── command.schema.ts          → TypeBox request/response schemas
-    │   │   ├── queries/
-    │   │   │   └── <query>/
-    │   │   │       ├── query.handler.ts           → Query handler
-    │   │   │       ├── query.route.ts             → REST route
-    │   │   │       ├── query.resolver.ts          → GraphQL resolver
-    │   │   │       ├── query.graphql-schema.ts    → GraphQL type definitions
-    │   │   │       └── query.schema.ts            → TypeBox request/response schemas
-    │   │   ├── database/
-    │   │   │   ├── feature.repository.port.ts     → Repository interface (port)
-    │   │   │   └── feature.repository.ts          → Repository implementation (adapter)
-    │   │   ├── domain/
-    │   │   │   ├── feature.domain.ts              → Domain service
-    │   │   │   ├── feature.errors.ts              → Domain-specific errors
-    │   │   │   └── feature.types.ts               → Domain types
-    │   │   ├── dtos/
-    │   │   │   ├── feature.graphql-schema.ts      → Shared GraphQL schema
-    │   │   │   └── feature.response.dto.ts        → Shared response DTO
-    │   │   ├── index.ts                           → Action creators, DI declarations
-    │   │   └── feature.mapper.ts                  → Entity ↔ DB model ↔ DTO mapper
+    │   ├── index.ts                                 → Global DI dependencies (db, logger, buses, repository base)
+    │   └── <module>/
+    │       ├── commands/
+    │       │   └── <command>/
+    │       │       ├── <command>.handler.ts         → Command handler + its action creator
+    │       │       ├── <command>.event-handler.ts   → Event subscriber (in place of a handler)
+    │       │       ├── <command>.route.ts           → REST route
+    │       │       ├── <command>.resolver.ts        → GraphQL resolver
+    │       │       ├── <command>.graphql-schema.ts  → GraphQL type definitions
+    │       │       └── <command>.schema.ts          → TypeBox request schemas
+    │       ├── queries/
+    │       │   └── <query>/                         → Same files as a command
+    │       ├── database/
+    │       │   ├── <module>.repository.port.ts      → Repository interface (port)
+    │       │   └── <module>.repository.ts           → Repository implementation (adapter)
+    │       ├── domain/
+    │       │   ├── <module>.domain.ts               → Pure business logic
+    │       │   ├── <module>.events.ts               → Domain events (the only cross-module import)
+    │       │   ├── <module>.errors.ts               → Domain-specific errors
+    │       │   └── <module>.types.ts                → Domain types
+    │       ├── dtos/
+    │       │   ├── <module>.graphql-schema.ts       → Shared GraphQL types
+    │       │   └── <module>.response.dto.ts         → Shared response DTOs
+    │       ├── <name>.service.ts                    → Optional orchestration layer (none yet)
+    │       ├── <module>.action-creator.ts           → Action creator with the module prefix
+    │       ├── <module>.mapper.ts                   → Entity ↔ DB model ↔ DTO mapper
+    │       └── index.ts                             → DI declarations, action creator re-export
     ├── server/
-    │   ├── index.ts               → Fastify instance setup
-    │   └── plugins/               → Fastify plugins (swagger, CORS, error handler, CQRS, etc.)
+    │   ├── index.ts               → Fastify setup: Helmet, CORS, GraphQL, plugin and route autoload
+    │   ├── di/                    → Awilix container: global dependencies and module autoload
+    │   ├── plugins/               → Autoloaded plugins (CQRS, error handler, readiness, request context, Swagger)
+    │   ├── graphql-schema.ts      → Merges the modules' GraphQL schemas
+    │   ├── graphql-error-formatter.ts → Maps exceptions to GraphQL errors
+    │   └── request-id.ts          → Request id from the `request-id` header, or a new UUID
     └── shared/
+        ├── api/                   → Shared TypeBox DTOs (ids, pagination, errors)
+        ├── app/                   → Request context accessors
         ├── cqrs/                  → Command/Query/Event bus, middlewares
-        ├── db/                    → Postgres connection, transaction helpers, repository base
-        ├── exceptions/            → Base exception classes
-        └── utils/                 → Cross-cutting utilities
+        ├── db/                    → Postgres connection, transactions, repository base, SQL helpers
+        ├── ddd/                   → Domain events recording (withEvents), mapper interface, query base
+        ├── exceptions/            → Transport-neutral exceptions
+        └── utils/                 → Ajv validator, timeouts, middleware composition
 ```
 
 ## OpenTelemetry
@@ -321,7 +341,7 @@ pnpm test:coverage       # run with c8 coverage
 
 ### E2E tests
 
-Written in [Gherkin](https://cucumber.io/docs/gherkin/) and executed with [Cucumber.js](https://cucumber.io/docs/installation/javascript/). Scenarios live in `tests/<feature>/<scenario>.feature`, step definitions in `tests/<feature>/<feature>.steps.ts`.
+Written in [Gherkin](https://cucumber.io/docs/gherkin/) and executed with [Cucumber.js](https://cucumber.io/docs/installation/javascript/). Scenarios live next to the slice they cover, in `tests/<module>/<slice>/<scenario>.feature` (e.g. `tests/user/create-user/`). Step definitions shared by a module's scenarios are in `tests/<module>/*.steps.ts`; cross-module scenarios and common steps are in `tests/shared/`.
 
 ```bash
 # Requires a running Postgres with migrations applied
@@ -368,20 +388,34 @@ This starts the server, fetches the OpenAPI and GraphQL schemas, writes the type
 
 ## CI/CD Pipeline
 
-The project uses GitHub Actions with two workflows:
+The project uses GitHub Actions with three workflows, and [Renovate](https://docs.renovatebot.com/) for dependency updates.
+
+**[ci.yml](.github/workflows/ci.yml)** — runs on every pull request to `main`. Its `Check and test` job is a required status check of the `main` branch ruleset, so a pull request merges only when it passes:
+
+1. Install dependencies (`pnpm install --frozen-lockfile`)
+2. Code quality checks (`pnpm check`)
+3. Unit tests (`pnpm test`)
+4. Architecture boundaries (`pnpm deps:validate`)
+5. Database migrations (`pnpm db:migrate`) against a Postgres service container
+6. E2E tests (`pnpm test:e2e`)
 
 **[release.yml](.github/workflows/release.yml)** — runs on every push to `main`:
 
 1. Install dependencies (`pnpm install --frozen-lockfile`)
 2. Code quality checks (`pnpm check`)
 3. Unit tests (`pnpm test`)
-4. E2E tests (`pnpm test:e2e`) against a Postgres service container
-5. Generate client types (`pnpm generate:types`)
-6. Publish release via semantic-release (changelog, GitHub release, npm client package)
+4. Database migrations (`pnpm db:migrate`) against a Postgres service container
+5. E2E tests (`pnpm test:e2e`)
+6. Generate client types (`pnpm generate:types`)
+7. Publish release via semantic-release (changelog, GitHub release, npm client package)
+
+semantic-release pushes the release commit with the `GH_TOKEN` secret, a personal access token allowed to bypass the ruleset: the checkout step uses `persist-credentials: false` so that token, not the default workflow credentials, does the push.
 
 **[codeql-analysis.yml](.github/workflows/codeql-analysis.yml)** — runs on pushes and PRs to `main`:
 
 - GitHub CodeQL security analysis for JavaScript/TypeScript
+
+**[Renovate](renovate.json)** — opens a pull request for each dependency update once the release is 3 days old. Minor and patch updates are merged automatically when CI passes; major updates wait for a review.
 
 ## AI-Assisted Development
 
