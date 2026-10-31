@@ -47,6 +47,6 @@ Feature: Find users via GraphQL
       | Argument | Value  |
       | limit    | 0      |
       | limit    | null   |
-      | limit    | 100000 |
+      | limit    | 101    |
       | page     | -1     |
       | country  | It     |

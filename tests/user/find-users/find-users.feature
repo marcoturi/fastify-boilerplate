@@ -22,4 +22,4 @@ Feature: Find users
       | limit=2.5    |
       | limit=0      |
       | page=-1      |
-      | limit=100000 |
+      | limit=101    |
