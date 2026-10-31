@@ -6,6 +6,11 @@
     {
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true
+    },
+    {
+      "description": "The preset major must match the conventional-changelog-writer major of @semantic-release/release-notes-generator (writer 8 → preset 9)",
+      "matchPackageNames": ["conventional-changelog-conventionalcommits"],
+      "allowedVersions": "<10"
     }
   ],
   "timezone": "Europe/Rome",
