@@ -10,7 +10,7 @@ paths:
 
 DI uses [Awilix](https://github.com/jeffijoe/awilix) with `@fastify/awilix` (wired in `src/server/di/index.ts`).
 
-- Global dependencies (`db`, `logger`, `commandBus`, `queryBus`, `eventBus`, `repositoryBase`) are registered in `src/modules/index.ts`
+- Global dependencies (`db`, `logger`, `commandBus`, `queryBus`, `eventBus`, `repositoryBase`) are defined by `globalDependencies()` in `src/modules/index.ts` and registered in `src/server/di/index.ts`
 - Module-specific dependencies are declared via `declare global { export interface Dependencies { ... } }` in the module's `index.ts`
 - Repositories, mappers, domain services are auto-loaded as singletons from `src/modules/**/*.{repository,mapper,service,domain}.ts`
 - Handlers and event-handlers are auto-loaded with `asyncInit: 'init'` from `src/modules/**/*.{handler,event-handler}.ts`

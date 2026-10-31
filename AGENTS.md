@@ -30,12 +30,13 @@ Claude Code loads them automatically through the `.claude/rules` symlink.
 
 | Rule | Covers |
 |---|---|
-| [`clean-architecture.md`](.agents/rules/clean-architecture.md) | Layer responsibilities, services, when to split a file, factory functions |
+| [`clean-architecture.md`](.agents/rules/clean-architecture.md) | Layer responsibilities, services, when to split a file |
 | [`cqrs.md`](.agents/rules/cqrs.md) | Buses, action creators, handlers, middlewares, calls from routes/resolvers |
 | [`database.md`](.agents/rules/database.md) | Repositories, mappers, SQL, migrations |
 | [`api.md`](.agents/rules/api.md) | REST routes, TypeBox schemas, GraphQL resolvers, server setup |
 | [`modules.md`](.agents/rules/modules.md) | Module structure, dependency injection, adding a module |
 | [`testing.md`](.agents/rules/testing.md) | Unit, E2E and load tests |
+| [`infra.md`](.agents/rules/infra.md) | Environment config, Docker, CI, release, dependencies, git hooks |
 
 ## Architecture
 
@@ -46,16 +47,21 @@ The domain is pure and never calls repositories; see `clean-architecture.md` for
 
 ```
 src/
+├── index.ts           ← Entry point: logger, server start, graceful shutdown
 ├── instrumentation.ts ← OpenTelemetry setup (loaded via --import before the app)
-├── modules/         ← Feature code (vertical slices)
-│   └── <feature>/
-│       ├── commands/ ← State-changing operations
-│       ├── queries/  ← Data-retrieval operations (idempotent)
-│       ├── database/ ← Repository port (interface) + adapter (implementation)
-│       ├── domain/   ← Business logic, types, errors
-│       └── dtos/     ← Shared response schemas
-├── server/          ← Fastify setup, plugins, DI wiring
-└── shared/          ← Cross-cutting: CQRS, DB, exceptions, utils
+├── config/            ← Environment variables, validated (env.ts)
+├── modules/           ← Feature code (vertical slices); index.ts defines the global DI dependencies
+│   └── <module>/
+│       ├── commands/  ← State-changing operations, one folder per slice
+│       ├── queries/   ← Data-retrieval operations (idempotent)
+│       ├── database/  ← Repository port (interface) + adapter (implementation)
+│       ├── domain/    ← Pure business logic, events, types, errors
+│       ├── dtos/      ← Shared response schemas
+│       ├── <module>.action-creator.ts ← Action creator with the module prefix
+│       ├── <module>.mapper.ts         ← Entity ↔ DB model ↔ response mapper
+│       └── index.ts   ← DI declarations, action creator re-export
+├── server/            ← Fastify setup, plugins, DI wiring, GraphQL schema and error formatting
+└── shared/            ← Cross-cutting: API DTOs, request context, CQRS, DB, DDD helpers, exceptions, utils
 ```
 
 Handlers get repositories through DI and use them only through their port interfaces: from
@@ -75,9 +81,6 @@ this. Everything else goes through the CQRS buses:
 - Biome enforces formatting and most style rules (quotes, indentation, kebab-case file names,
   no `enum`, no `any` outside tests, no `console`): rely on `pnpm check` instead of restating them
 - No enums — use `const` objects with derived types (e.g. `UserRoles`)
-- No classes except errors: everything else is a factory function (naming, parameters and
-  return types are in `clean-architecture.md`). The Cucumber World in `tests/support/` is a class
-  because Cucumber requires it
 - Code, comments, identifiers, log and error messages are in English
 - Read `process.env` only in `src/config/env.ts`, which validates it; everything else imports
   `env` from `#src/config/index.ts`. The one exception is `src/instrumentation.ts`, which runs
@@ -87,6 +90,26 @@ this. Everything else goes through the CQRS buses:
   `import type { Foo } from './bar.ts'`
 - Path aliases: `#src/*` maps to `./src/*`, `#tests/*` maps to `./tests/*` (Node
   [subpath imports](https://nodejs.org/api/packages.html#subpath-imports) in `package.json`, not `tsconfig.json`)
+
+### Factory functions
+
+No classes except errors: everything else is a factory function that returns an object. The
+Cucumber World in `tests/support/` is a class because Cucumber requires it.
+
+- **Name:** the camelCase key Awilix derives from the file name (`create-user.handler.ts` →
+  `createUserHandler`, `user.repository.ts` → `userRepository`), so searching for a dependency
+  finds its factory. No `make` or `create` prefix. Factories outside the container are named
+  after what they produce (`requestBus`, `tracingMiddleware`).
+- **Parameter:** one destructured `Dependencies` object, or none when the factory needs nothing
+  (e.g. a pure domain).
+- **Return type:** inferred. Annotate it only when the factory implements an interface, so
+  TypeScript checks the implementation against it: a repository port
+  (`userRepository(...): UserRepository`), `Mapper<...>`, a bus type.
+- **Exports:** in a file that holds a factory, every function lives inside it, public ones on the
+  returned object and private helpers as inner closures. Besides the default-exported factory,
+  such a file exports only types, schemas and, in handler files, the action creator: never
+  standalone functions. Stateless helpers in `src/shared/` (e.g. `with-timeout.ts`) are plain
+  exported functions.
 
 ### Exceptions
 

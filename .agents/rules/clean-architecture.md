@@ -39,10 +39,10 @@ Size is a signal, not a rule: the goal is cohesion.
   on one problem or share closures, maps or caches.
 - **Smell test:** if you cannot describe the file in one sentence without "and", it holds two concerns.
 
-## Factory functions
+## Example: a service
 
-No classes except errors. Handlers, services, domains, repositories and mappers are factory
-functions that return an object:
+Handlers, services, domains, repositories and mappers are factory functions (conventions in
+AGENTS.md):
 
 ```typescript
 // user-activation.service.ts → `userActivationService` in the container
@@ -61,16 +61,3 @@ export default function userActivationService({ userRepository, userDomain, even
   return { activate };
 }
 ```
-
-- **Name:** the camelCase key Awilix derives from the file name (`create-user.handler.ts` →
-  `createUserHandler`, `user.repository.ts` → `userRepository`), so searching for a dependency
-  finds its factory. No `make` or `create` prefix. Factories outside the container are named
-  after what they produce (`requestBus`, `tracingMiddleware`).
-- **Parameter:** one destructured `Dependencies` object, or none when the factory needs nothing
-  (e.g. a pure domain).
-- **Return type:** inferred. Annotate it only when the factory implements an interface, so
-  TypeScript checks the implementation against it: a repository port
-  (`userRepository(...): UserRepository`), `Mapper<...>`, a bus type.
-- **Exports:** every function lives inside the factory, public ones on the returned object and
-  private helpers as inner closures. Besides the default-exported factory, a file exports only
-  types, schemas and, in handler files, the action creator: never standalone functions.

@@ -19,7 +19,8 @@ SQL belongs in repository files only. Handlers use the repository **port** (inte
   a nested call joins the outer transaction. Publish domain events after it resolves
 - Repository base: `SqlRepositoryBase` (in `src/shared/db/sql-repository.base.ts`) provides generic CRUD (insert, findOneById, findAll, findAllPaginated, update, delete)
 - Repository ports extend `RepositoryPort<Entity>` (in `src/shared/db/repository.port.ts`)
-- Mapper interface: `Mapper<DomainEntity, DbRecord, Response>` with `toPersistence`, `toDomain`, `toResponse` (in `src/shared/ddd/mapper.interface.ts`); `toPersistence` validates the record with the shared Ajv instance
+- Mapper interface: `Mapper<DomainEntity, DbRecord, Response>` with `toPersistence`, `toDomain`, `toResponse` (in `src/shared/ddd/mapper.interface.ts`). The interface does not validate anything: each mapper's
+  `toPersistence` validates the record against its schema with the shared Ajv instance, as `userMapper` does
 
 ## Migrations
 

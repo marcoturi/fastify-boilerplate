@@ -85,13 +85,17 @@ There are separate types for command/query vs event middlewares (in `src/shared/
 |---|---|---|---|---|
 | `CommandBus` | State-changing mutations | `register(type, handler)` | `execute(action)` → `Promise<R>` (inferred) | `Promise<unknown>` |
 | `QueryBus` | Idempotent reads | `register(type, handler)` | `execute(action)` → `Promise<R>` (inferred) | `Promise<unknown>` |
-| `EventBus` | Fire-and-forget notifications | `on(type, handler)` | `emit(action)` | `void \| Promise<void>` |
+| `EventBus` | Fire-and-forget notifications | `on(type, handler, options?)` | `emit(action)` | `void \| Promise<void>` |
 
 Commands and queries share a `requestBus` factory in `src/shared/cqrs/request-bus.ts`.
 The event bus is a separate implementation in `src/shared/cqrs/event-bus.ts` with a `logger` dependency:
 it logs debug-level warnings when events have no subscribers, and isolates and logs failing handlers
 instead of rejecting. Note the different API: `on`/`emit` for events vs `register`/`execute` for
 commands and queries.
+
+Subscribers run concurrently by default. When events for the same entity must not overlap, pass
+`{ keyExtractor: (event) => <key> }` to `on()`: events with the same key are processed one at a
+time, in emit order, while different keys still run concurrently.
 
 ## Adding a new CQRS middleware
 

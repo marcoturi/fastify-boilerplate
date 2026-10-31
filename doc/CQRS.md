@@ -52,10 +52,12 @@ Route / Resolver ──execute()──▶ CommandBus / QueryBus ──▶ Handle
 
 ## Actions and action creators
 
-Each module exposes a prefixed action-creator factory (in its `index.ts`):
+Each module has a prefixed action-creator factory in `<module>.action-creator.ts`, re-exported
+from its `index.ts`. It lives in its own file so the domain can create events without importing
+`index.ts`, which would form a cycle:
 
 ```typescript
-// src/modules/user/index.ts
+// src/modules/user/user.action-creator.ts
 import { actionCreatorFactory } from '#src/shared/cqrs/action-creator.ts';
 
 export const userActionCreator = actionCreatorFactory('user'); // types become "user/<name>"
@@ -228,8 +230,9 @@ alone — every domain and handler stays the same (they already `await`).
 // subscriber — src/modules/settings/commands/create-settings/create-settings.event-handler.ts
 export default function createSettingsEventHandler({ eventBus, logger }: Dependencies) {
   return {
-    handler(action: ReturnType<typeof createUserEvent>) {
-      logger.info(action);
+    handler(action: HandlerAction<typeof createUserEvent>) {
+      // Log only the id: the payload carries personal data (email, address)
+      logger.info({ userId: action.payload.id }, 'Creating default settings for user');
       // ...create default settings for the new user
     },
     init() {
@@ -346,7 +349,8 @@ event           :  metadata → OTel tracing → handler
 DI uses Awilix (`@fastify/awilix`). Everything is wired automatically:
 
 - Global deps (`db`, `logger`, `commandBus`, `queryBus`, `eventBus`, `repositoryBase`) are
-  registered in `src/modules/index.ts`.
+  defined by `globalDependencies()` in `src/modules/index.ts` and registered in
+  `src/server/di/index.ts`.
 - Module deps are declared by augmenting the global `Dependencies` interface in the module's
   `index.ts`:
 

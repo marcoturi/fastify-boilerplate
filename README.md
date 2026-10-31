@@ -423,7 +423,7 @@ This project ships with an [`AGENTS.md`](AGENTS.md) file — a guide for AI codi
 
 AI assistants automatically pick up `AGENTS.md` and apply the conventions without manual prompting.
 
-Area-specific rules (CQRS, database, API, modules, testing) live in [`.agents/rules/`](.agents/rules), each with a `paths` frontmatter listing the files it covers, so they enter the context only when relevant. `AGENTS.md` points every assistant to them; Claude Code loads them automatically through the `.claude/rules` symlink.
+Area-specific rules (clean architecture, CQRS, database, API, modules, testing, infrastructure) live in [`.agents/rules/`](.agents/rules), each with a `paths` frontmatter listing the files it covers, so they enter the context only when relevant. `AGENTS.md` points every assistant to them; Claude Code loads them automatically through the `.claude/rules` symlink.
 
 > On Windows, clone with symlinks enabled (Developer Mode on, then `git clone -c core.symlinks=true …`), otherwise `.claude/rules` is checked out as a plain text file and Claude Code will not load the rules.
 

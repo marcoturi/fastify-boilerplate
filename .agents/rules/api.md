@@ -3,6 +3,7 @@ paths:
   - "src/modules/**/*.{route,resolver,schema,graphql-schema}.ts"
   - "src/modules/**/dtos/**"
   - "src/shared/api/**"
+  - "src/shared/exceptions/**"
   - "src/server/**"
 ---
 
