@@ -1,3 +1,9 @@
+## [4.2.0](https://github.com/marcoturi/fastify-boilerplate/compare/v4.1.0...v4.2.0) (2026-10-31)
+
+### Features
+
+* **graphql:** add createUser and deleteUser mutations and user dates ([76efe9c](https://github.com/marcoturi/fastify-boilerplate/commit/76efe9ca85c6ddd183dbab56c33192c40cf4f0fa))
+
 # [4.1.0](https://github.com/marcoturi/fastify-boilerplate/compare/v4.0.3...v4.1.0) (2026-10-30)
 
 
