@@ -121,7 +121,8 @@ Cucumber World in `tests/support/` is a class because Cucumber requires it.
   HTTP status: each transport maps it at its edge (REST in `src/server/plugins/error-handler.ts`,
   GraphQL in `src/server/graphql-error-formatter.ts`), so handlers serve every transport alike
 - Built-in exceptions: `ArgumentInvalidException`, `NotFoundException`, `AlreadyExistsException`,
-  `InternalException` (extended by `DatabaseErrorException` and `ProviderErrorException`)
+  `InternalException` (extended by `DatabaseErrorException`). The error that caused one goes in
+  `cause` (the native `Error` option): it is logged with it, never sent to clients
 - Domain errors extend one of them and may set a stable `reason` for clients
   (e.g. `UserAlreadyExistsError` → `USER_ALREADY_EXISTS`)
 - Always include a descriptive message: `throw new NotFoundException('User with id X not found')`.

@@ -43,8 +43,8 @@ export class NotFoundException extends ExceptionBase {
   static readonly message = 'Not found';
   readonly code = ErrorCode.NOT_FOUND;
 
-  constructor(message: string = NotFoundException.message, cause?: Error, metadata?: unknown) {
-    super(message, cause, metadata);
+  constructor(message: string = NotFoundException.message, cause?: Error) {
+    super(message, cause);
   }
 }
 
@@ -59,8 +59,8 @@ export class InternalException extends ExceptionBase {
   static readonly message: string = 'Internal error';
   readonly code = ErrorCode.INTERNAL;
 
-  constructor(message: string = InternalException.message, cause?: Error, metadata?: unknown) {
-    super(message, cause, metadata);
+  constructor(message: string = InternalException.message, cause?: Error) {
+    super(message, cause);
   }
 }
 
@@ -68,14 +68,6 @@ export class DatabaseErrorException extends InternalException {
   static override readonly message = 'Database error';
 
   constructor(message: string = DatabaseErrorException.message, cause?: Error) {
-    super(message, cause);
-  }
-}
-
-export class ProviderErrorException extends InternalException {
-  static override readonly message = 'Provider error';
-
-  constructor(message: string = ProviderErrorException.message, cause?: Error) {
     super(message, cause);
   }
 }

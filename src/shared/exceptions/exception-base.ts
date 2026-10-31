@@ -1,5 +1,3 @@
-import { getRequestId } from '#src/shared/app/app-request-context.ts';
-
 /**
  * Transport-neutral error categories, named after the canonical gRPC codes (google.rpc.Code).
  * Exceptions carry one of these instead of an HTTP status: each transport maps it at its edge
@@ -18,23 +16,8 @@ export abstract class ExceptionBase extends Error {
   /** Finer-grained, stable reason clients can branch on (e.g. `USER_ALREADY_EXISTS`) */
   readonly reason?: string;
 
-  public readonly correlationId: string;
-  override readonly cause?: Error;
-  readonly metadata?: unknown;
-
-  /**
-   * @param {string} message
-   * @param cause
-   * @param {Object} [metadata={}]
-   * **BE CAREFUL** not to include sensitive info in 'metadata'
-   * to prevent leaks since all exception's data will end up
-   * in application's log files. Only include non-sensitive
-   * info that may help with debugging.
-   */
-  constructor(message: string, cause?: Error, metadata?: unknown) {
-    super(message);
-    this.cause = cause;
-    this.metadata = metadata;
-    this.correlationId = getRequestId();
+  /** @param cause the error that led to this one: logged with it, never sent to clients */
+  constructor(message: string, cause?: Error) {
+    super(message, { cause });
   }
 }
