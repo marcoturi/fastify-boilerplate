@@ -1,6 +1,7 @@
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
-import type { SubError } from '#src/shared/exceptions/index.ts';
+import type { Static, TSchema } from 'typebox';
+import { ArgumentInvalidException, type SubError } from '#src/shared/exceptions/index.ts';
 
 // `.default` is needed because Ajv and ajv-formats are CJS packages.
 // Under `"module": "NodeNext"`, TypeScript resolves the default import as
@@ -34,4 +35,16 @@ export function toSubErrors(
     path: error.instancePath,
     message: error.message ?? '',
   }));
+}
+
+/** Compiles `schema` with the shared Ajv instance into a function that returns its input,
+ *  typed by the schema, or throws ArgumentInvalidException with one sub-error per invalid field */
+export function validator<T extends TSchema>(schema: T) {
+  const validate = ajv.compile<Static<T>>(schema);
+  return (input: unknown): Static<T> => {
+    if (!validate(input)) {
+      throw new ArgumentInvalidException('Validation error', toSubErrors(validate.errors));
+    }
+    return input;
+  };
 }

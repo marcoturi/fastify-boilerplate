@@ -19,16 +19,16 @@ paths:
 ## GraphQL input validation
 
 GraphQL types only check that fields are present and have the right scalar type. Resolvers must
-validate their input against the same TypeBox schema as the REST route, through the shared Ajv
-instance (`src/shared/utils/validator.util.ts`), and throw an `ArgumentInvalidException` when it fails,
-with one sub-error per invalid field as REST reports them:
+validate their input against the same TypeBox schema as the REST route with `validator(schema)`
+(`src/shared/utils/validator.util.ts`, on the shared Ajv instance). It returns the input typed by
+the schema, or throws an `ArgumentInvalidException` with one sub-error per invalid field, as REST
+reports them:
 
 ```typescript
-const validateInput = ajv.compile<CreateUserRequestDto>(createUserRequestDtoSchema);
+const validateInput = validator(createUserRequestDtoSchema);
 
-if (!validateInput(args.input)) {
-  throw new ArgumentInvalidException('Validation error', toSubErrors(validateInput.errors));
-}
+createUser: async (_, args) =>
+  fastify.commandBus.execute(createUserCommand(validateInput(args.input))),
 ```
 
 ## Errors
