@@ -18,7 +18,9 @@ SQL belongs in repository files only. Handlers use the repository **port** (inte
 - Transactions: `withTransaction(async () => { ... })` in `src/shared/db/postgres.ts`. The DI `db` is
   transaction-aware, so repositories called inside it join the transaction without receiving `tx`;
   a nested call joins the outer transaction. Publish domain events after it resolves
-- Repository base: `sqlRepositoryBase` (in `src/shared/db/sql-repository.base.ts`) provides generic CRUD (insert, findOneById, findAll, findAllPaginated, update, delete)
+- Repository base: `sqlRepositoryBase(db)` (in `src/shared/db/sql-repository.base.ts`), registered in DI
+  as `repositoryBase` already bound to the transaction-aware `db`, provides generic CRUD (insert,
+  findOneById, findAll, findAllPaginated, update, delete)
 - Errors: repository methods throw domain exceptions, never a driver error. The base maps them
   for its methods and for the custom ones it receives (`mapDatabaseErrors` in
   `src/shared/db/database-errors.ts`): a unique violation becomes `AlreadyExistsException`,

@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
-import type { FastifyBaseLogger } from 'fastify';
 import {
   AlreadyExistsException,
   DatabaseErrorException,
@@ -20,18 +19,16 @@ const fakeDb = (query: () => Promise<unknown[]>) =>
       ? query()
       : { helper: first }) as unknown as Dependencies['db'];
 
-const props = (query: () => Promise<unknown[]>) => ({
-  db: fakeDb(query),
+const props = {
   tableName: 'things',
   mapper: {
     toPersistence: (thing: Thing) => ({ ...thing }) as Record<string, unknown>,
     toDomain: (record: Record<string, unknown>) => record as unknown as Thing,
     toResponse: (thing: Thing) => thing,
   },
-  logger: { debug: () => undefined } as unknown as FastifyBaseLogger,
-});
+};
 
-const repository = (query: () => Promise<unknown[]>) => sqlRepositoryBase(props(query));
+const repository = (query: () => Promise<unknown[]>) => sqlRepositoryBase(fakeDb(query))(props);
 
 const pgError = (code: string) => Object.assign(new Error(`pg error ${code}`), { code });
 const thing: Thing = { id: '1', name: 'a' };
@@ -88,8 +85,8 @@ describe('sqlRepositoryBase()', () => {
 
   describe('custom methods', () => {
     it('are built from the query helpers and added to the generic ones', async () => {
-      const { db, ...rest } = props(async () => [{ id: '1', name: 'a' }]);
-      const things = sqlRepositoryBase({ db, ...rest }, ({ where, orderBy }) => ({
+      const db = fakeDb(async () => [{ id: '1', name: 'a' }]);
+      const things = sqlRepositoryBase(db)(props, ({ where, orderBy }) => ({
         async findByName(name: string) {
           assert.equal(typeof where, 'function');
           assert.equal(typeof orderBy, 'function');
@@ -101,8 +98,8 @@ describe('sqlRepositoryBase()', () => {
     });
 
     it('map driver errors like the generic ones', async () => {
-      const { db, ...rest } = props(() => Promise.reject(pgError('23505')));
-      const things = sqlRepositoryBase({ db, ...rest }, () => ({
+      const db = fakeDb(() => Promise.reject(pgError('23505')));
+      const things = sqlRepositoryBase(db)(props, () => ({
         async rename(name: string) {
           await db`UPDATE things SET name = ${name}`;
         },
