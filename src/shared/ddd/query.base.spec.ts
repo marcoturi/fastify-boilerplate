@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
-import { paginatedQueryBase } from './query.base.ts';
+import { paginatedQuery } from './query.base.ts';
 
-describe('paginatedQueryBase()', () => {
+describe('paginatedQuery()', () => {
   it('applies the defaults when no pagination is given', () => {
-    const query = paginatedQueryBase({});
+    const query = paginatedQuery({});
     assert.equal(query.limit, 20);
     assert.equal(query.page, 0);
     assert.equal(query.offset, 0);
@@ -12,7 +12,7 @@ describe('paginatedQueryBase()', () => {
   });
 
   it('computes the offset from page and limit', () => {
-    const query = paginatedQueryBase({ limit: 10, page: 3 });
+    const query = paginatedQuery({ limit: 10, page: 3 });
     assert.equal(query.offset, 30);
   });
 
@@ -21,19 +21,19 @@ describe('paginatedQueryBase()', () => {
       limit: null as unknown as number,
       page: undefined,
     };
-    const query = paginatedQueryBase(props);
+    const query = paginatedQuery(props);
     assert.equal(query.limit, 20);
     assert.equal(query.page, 0);
     assert.equal(query.offset, 0);
   });
 
-  it('does not let caller input override the computed offset', () => {
-    const query = paginatedQueryBase({ limit: 10, page: 2, offset: 999 });
-    assert.equal(query.offset, 20);
-  });
-
-  it('keeps the extra props of the caller', () => {
-    const query = paginatedQueryBase({ limit: 5, country: 'Italy' });
-    assert.equal(query.country, 'Italy');
+  it('returns the pagination only, computing the offset whatever the request carries', () => {
+    const request = { limit: 10, page: 2, offset: 999, country: 'Italy' };
+    assert.deepEqual(paginatedQuery(request), {
+      limit: 10,
+      page: 2,
+      offset: 20,
+      orderBy: { field: 'createdAt', param: 'desc' },
+    });
   });
 });

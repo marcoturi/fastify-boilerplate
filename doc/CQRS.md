@@ -155,20 +155,17 @@ idempotent / side-effect-free**.
 ```typescript
 // src/modules/user/queries/find-users/find-users.handler.ts
 export type FindUsersResult = Paginated<UserEntity>;
-export const findUsersQuery = userActionCreator<
-  Partial<PaginatedQueryParams> & { country?: string; postalCode?: string; street?: string },
-  FindUsersResult
->('find-all-paginated');
+export const findUsersQuery = userActionCreator<FindUsersRequestDto, FindUsersResult>(
+  'find-all-paginated',
+);
 
 export default function findUsersHandler({ queryBus, userRepository }: Dependencies) {
   return {
     async handler({ payload }: HandlerAction<typeof findUsersQuery>): Promise<FindUsersResult> {
-      const query = paginatedQueryBase(payload);
-      return userRepository.findAllPaginatedFiltered(query, {
-        country: query.country,
-        postalCode: query.postalCode,
-        street: query.street,
-      });
+      // Pick known fields only: the request schema does not reject extra keys (e.g. orderBy)
+      const { limit, page, country, postalCode, street } = payload;
+      const query = paginatedQuery({ limit, page });
+      return userRepository.findAllPaginatedFiltered(query, { country, postalCode, street });
     },
     init() {
       queryBus.register(findUsersQuery.type, this.handler);
