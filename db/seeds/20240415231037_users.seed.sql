@@ -20,7 +20,8 @@ VALUES
     '24312',
     'Road Avenue',
     'guest'
-  );
+  )
+ON CONFLICT DO NOTHING;
 
 -- migrate:down
 DELETE FROM users WHERE id='f59d0748-d455-4465-b0a8-8d8260b1c877'

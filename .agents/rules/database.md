@@ -37,6 +37,8 @@ DBMate runs plain SQL files from `db/migrations/` (seeds in `db/seeds/`).
 - One table per migration
 - Every migration is reversible: a `-- migrate:down` section that undoes `-- migrate:up`
 - Never edit a migration that has already run anywhere: add a new one
+- Seeds are recorded in their own table, `schema_seeds`, so a migration rollback never meets
+  one. Write their rows with `ON CONFLICT DO NOTHING`: a seed must be safe to run again
 
 ## SQL parameterization
 

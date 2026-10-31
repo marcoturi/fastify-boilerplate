@@ -26,7 +26,7 @@
     "db:create-migration": "dbmate new",
     "db:migrate": "dbmate -e DBMATE_DATABASE_URL --no-dump-schema up",
     "db:create-seed": "dbmate -e DBMATE_DATABASE_URL -d ./db/seeds/ new",
-    "db:seed": "dbmate -e DBMATE_DATABASE_URL -d ./db/seeds/ up",
+    "db:seed": "dbmate -e DBMATE_DATABASE_URL -d ./db/seeds/ --migrations-table schema_seeds --no-dump-schema up",
     "db:seed:users": "k6 run ./tests/user/create-user/create-user.k6.ts",
     "generate:types": "bash scripts/generate-types.sh",
     "deps:validate": "depcruise src --config .dependency-cruiser.cjs --output-type err-long",
