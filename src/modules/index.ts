@@ -2,8 +2,10 @@ import { asValue } from 'awilix';
 import type { FastifyBaseLogger } from 'fastify';
 import type postgres from 'postgres';
 import type { CommandBus, EventBus, QueryBus } from '#src/shared/cqrs/bus.types.ts';
+import type { AsyncMethods } from '#src/shared/db/database-errors.ts';
 import { setQueryLogger, transactionAwareDb } from '#src/shared/db/postgres.ts';
 import {
+  type CustomMethods,
   type RepositoryBase,
   type SqlRepositoryBaseProps,
   sqlRepositoryBase,
@@ -18,9 +20,14 @@ declare global {
   export interface Dependencies {
     logger: FastifyBaseLogger;
     db: ReturnType<typeof postgres>;
-    repositoryBase: <E extends { id: string }, D extends Record<string, unknown>>(
+    repositoryBase: <
+      E extends { id: string },
+      D extends Record<string, unknown>,
+      C extends AsyncMethods = Record<never, never>,
+    >(
       props: SqlBaseProps<E, D>,
-    ) => RepositoryBase<E>;
+      custom?: CustomMethods<C>,
+    ) => RepositoryBase<E, C>;
     queryBus: QueryBus;
     commandBus: CommandBus;
     eventBus: EventBus;
@@ -40,16 +47,14 @@ export function globalDependencies({
 }) {
   setQueryLogger(logger);
   const db = transactionAwareDb();
-  const repositoryBaseFn = <E extends { id: string }, D extends Record<string, unknown>>({
-    tableName,
-    mapper,
-  }: SqlBaseProps<E, D>) =>
-    sqlRepositoryBase<E, D>({
-      logger,
-      db,
-      tableName,
-      mapper,
-    });
+  const repositoryBaseFn = <
+    E extends { id: string },
+    D extends Record<string, unknown>,
+    C extends AsyncMethods = Record<never, never>,
+  >(
+    { tableName, mapper }: SqlBaseProps<E, D>,
+    custom?: CustomMethods<C>,
+  ) => sqlRepositoryBase<E, D, C>({ logger, db, tableName, mapper }, custom);
   return {
     logger: asValue(logger),
     db: asValue(db),

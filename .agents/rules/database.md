@@ -19,6 +19,10 @@ SQL belongs in repository files only. Handlers use the repository **port** (inte
   transaction-aware, so repositories called inside it join the transaction without receiving `tx`;
   a nested call joins the outer transaction. Publish domain events after it resolves
 - Repository base: `sqlRepositoryBase` (in `src/shared/db/sql-repository.base.ts`) provides generic CRUD (insert, findOneById, findAll, findAllPaginated, update, delete)
+- Errors: repository methods throw domain exceptions, never a driver error. The base maps them
+  for its methods and for the custom ones it receives (`mapDatabaseErrors` in
+  `src/shared/db/database-errors.ts`): a unique violation becomes `AlreadyExistsException`,
+  anything else `DatabaseErrorException`. A repository that does not use the base calls it itself
 - Repository ports extend `RepositoryPort<Entity>` (in `src/shared/db/repository.port.ts`)
 - Mapper interface: `Mapper<DomainEntity, DbRecord, Response>` with `toPersistence`, `toDomain`, `toResponse` (in `src/shared/ddd/mapper.interface.ts`). The interface does not validate anything: each mapper's
   `toPersistence` validates the record against its schema with the shared Ajv instance, as `userMapper` does
@@ -37,6 +41,6 @@ DBMate runs plain SQL files from `db/migrations/` (seeds in `db/seeds/`).
 - Always use tagged templates: `` db`SELECT * FROM ${db(tableName)} WHERE id = ${id}` ``
 - Table names use `db(tableName)` (identifier interpolation)
 - Values use `${value}` (parameterized automatically)
-- Custom queries compose conditions and ordering with the `where()` and `orderBy()` helpers of the
-  repository base, bound to its client. Destructure them before spreading the base, so they do
-  not become repository methods: `const { where, orderBy, ...base } = repositoryBase({ tableName, mapper })`
+- Custom queries are methods the repository passes to the base, which hands them the `where()` and
+  `orderBy()` helpers bound to its client:
+  `return repositoryBase({ tableName, mapper }, ({ where, orderBy }) => ({ async findByEmail(email: string) { ... } }))`

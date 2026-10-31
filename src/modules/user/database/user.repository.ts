@@ -23,12 +23,8 @@ export default function userRepository({
   userMapper,
   repositoryBase,
 }: Dependencies): UserRepository {
-  const tableName = 'users';
-  // where/orderBy are query helpers, not repository methods: keep them out of the spread
-  const { where, orderBy, ...base } = repositoryBase({ tableName, mapper: userMapper });
-  return {
-    ...base,
-
+  // Custom methods next to the generic CRUD: the base maps their driver errors too
+  return repositoryBase({ tableName: 'users', mapper: userMapper }, ({ where, orderBy }) => ({
     async findAllPaginatedFiltered(
       params: PaginatedQueryParams,
       filters: UserFilters,
@@ -53,5 +49,5 @@ export default function userRepository({
         page: params.page,
       };
     },
-  };
+  }));
 }
