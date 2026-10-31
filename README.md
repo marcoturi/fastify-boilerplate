@@ -38,7 +38,7 @@ A production-ready [Fastify 5](https://github.com/fastify/fastify) boilerplate b
 | **Security** | [@fastify/helmet](https://github.com/fastify/fastify-helmet), [@fastify/under-pressure](https://github.com/fastify/under-pressure) for back-pressure |
 | **Telemetry** | Vendor-agnostic [OpenTelemetry](https://opentelemetry.io/) with auto-instrumentation (disabled by default) |
 | **Linting** | [Biome](https://biomejs.dev/) — single tool for linting, formatting, and import sorting |
-| **Architecture** | [dependency-cruiser](https://github.com/sverweij/dependency-cruiser) validates layer boundaries in the pre-commit hook and in CI on every pull request |
+| **Architecture** | [dependency-cruiser](https://github.com/sverweij/dependency-cruiser) validates layer boundaries in the pre-commit hook and in CI |
 | **Release** | [Husky](https://github.com/typicode/husky) + [Commitlint](https://commitlint.js.org/) + [Semantic Release](https://github.com/semantic-release/semantic-release) |
 | **Client types** | REST (OpenAPI) and GraphQL types [auto-generated and published to npm](#client-types-package) on every release |
 | **Testing** | E2E with [Cucumber](https://cucumber.io/docs/installation/javascript/) (Gherkin), unit/integration with `node:test`, load tests with [k6](https://github.com/grafana/k6) |
@@ -404,10 +404,11 @@ The project uses GitHub Actions with three workflows, and [Renovate](https://doc
 1. Install dependencies (`pnpm install --frozen-lockfile`)
 2. Code quality checks (`pnpm check`)
 3. Unit tests (`pnpm test`)
-4. Database migrations (`pnpm db:migrate`) against a Postgres service container
-5. E2E tests (`pnpm test:e2e`)
-6. Generate client types (`pnpm generate:types`)
-7. Publish release via semantic-release (changelog, GitHub release, npm client package)
+4. Architecture boundaries (`pnpm deps:validate`)
+5. Database migrations (`pnpm db:migrate`) against a Postgres service container
+6. E2E tests (`pnpm test:e2e`)
+7. Generate client types (`pnpm generate:types`)
+8. Publish release via semantic-release (changelog, GitHub release, npm client package)
 
 semantic-release pushes the release commit with the `GH_TOKEN` secret, a personal access token allowed to bypass the ruleset: the checkout step uses `persist-credentials: false` so that token, not the default workflow credentials, does the push.
 

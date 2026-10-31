@@ -53,6 +53,8 @@ jobs:
         run: pnpm check
       - name: Run tests
         run: pnpm test
+      - name: Validate architecture boundaries
+        run: pnpm deps:validate
       - name: Seed DB
         run: pnpm db:migrate
         env:
