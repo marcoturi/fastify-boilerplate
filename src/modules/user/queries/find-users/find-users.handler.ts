@@ -1,8 +1,8 @@
+import type { UserEntity } from '#src/modules/user/domain/user.types.ts';
 import { userActionCreator } from '#src/modules/user/index.ts';
 import type { HandlerAction } from '#src/shared/cqrs/bus.types.ts';
 import type { Paginated } from '#src/shared/db/repository.port.ts';
 import { paginatedQueryBase } from '#src/shared/ddd/query.base.ts';
-import type { UserEntity } from '../../domain/user.types.ts';
 import type { FindUsersRequestDto } from './find-users.schema.ts';
 
 export type FindUsersResult = Paginated<UserEntity>;

@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import { Given, Then, When } from '@cucumber/cucumber';
 import type { UserModel } from '#src/modules/user/database/user.repository.ts';
 import type { Paginated } from '#src/shared/db/repository.port.ts';
-import type { ICustomWorld } from '../support/custom-world.ts';
+import type { ICustomWorld } from '#tests/support/custom-world.ts';
 
 Given(/^user profile data$/, function (this: ICustomWorld, table) {
   this.context.createUserDto = table.hashes()[0];

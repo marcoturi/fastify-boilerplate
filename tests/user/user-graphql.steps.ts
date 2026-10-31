@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import { type DataTable, Given, Then, When } from '@cucumber/cucumber';
-import type { ICustomWorld } from '../support/custom-world.ts';
+import type { ICustomWorld } from '#tests/support/custom-world.ts';
 
 interface GraphQLResponse<T> {
   data?: T | null;

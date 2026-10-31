@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import { Then, When } from '@cucumber/cucumber';
 import { withTransaction } from '#src/shared/db/postgres.ts';
-import type { ICustomWorld } from '../support/custom-world.ts';
+import type { ICustomWorld } from '#tests/support/custom-world.ts';
 
 const newUser = {
   email: 'tx@example.com',

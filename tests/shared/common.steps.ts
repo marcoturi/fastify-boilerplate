@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import { Then } from '@cucumber/cucumber';
 import type { ApiErrorResponse } from '#src/shared/api/api-error.response.ts';
-import type { ICustomWorld } from '../support/custom-world.ts';
+import type { ICustomWorld } from '#tests/support/custom-world.ts';
 
 Then(
   /^I receive an error "(.*)" with status code (\d+)$/,

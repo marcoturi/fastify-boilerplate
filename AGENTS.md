@@ -91,7 +91,9 @@ this. Everything else goes through the CQRS buses:
 - TypeScript: `strict: true`; always include the `.ts` extension in imports (ESM); prefer
   `import type { Foo } from './bar.ts'`
 - Path aliases: `#src/*` maps to `./src/*`, `#tests/*` maps to `./tests/*` (Node
-  [subpath imports](https://nodejs.org/api/packages.html#subpath-imports) in `package.json`, not `tsconfig.json`)
+  [subpath imports](https://nodejs.org/api/packages.html#subpath-imports) in `package.json`, not `tsconfig.json`).
+  A file in a parent folder is imported through an alias, never with `../` (Biome
+  `noRestrictedImports` enforces it); `./` is for the same folder and below
 
 ### Factory functions
 

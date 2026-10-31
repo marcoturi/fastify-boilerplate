@@ -1,5 +1,6 @@
 import envSchema from 'env-schema';
 import { type Static, Type } from 'typebox';
+// biome-ignore lint/style/noRestrictedImports: package.json sits outside the aliased folders
 import packageJson from '../../package.json' with { type: 'json' };
 
 const NodeEnv = {

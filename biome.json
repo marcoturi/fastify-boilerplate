@@ -87,6 +87,17 @@
         "noNamespace": "error",
         "noNegationElse": "off",
         "noNonNullAssertion": "error",
+        "noRestrictedImports": {
+          "level": "error",
+          "options": {
+            "patterns": [
+              {
+                "group": ["../**"],
+                "message": "Import from a parent folder through the #src/ or #tests/ alias"
+              }
+            ]
+          }
+        },
         "noSubstr": "error",
         "useArrayLiterals": "error",
         "useAsConstAssertion": "error",
