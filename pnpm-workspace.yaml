@@ -1,7 +1,8 @@
 # Quarantine newly published versions for 24h (1440 min) before they may be installed,
-# giving the community time to catch hijacked releases. Set to 0 to disable, or 10080 (7d)
-# for a stricter window. Keep in sync with Renovate's minimumReleaseAge/stabilityDays.
-minimumReleaseAge: 0
+# giving the community time to catch hijacked releases. pnpm also checks the lockfile against
+# it, so an install fails while it holds a younger version. Set to 0 to disable, or 10080 (7d)
+# for a stricter window. Renovate waits 3 days (minimumReleaseAge in renovate.json).
+minimumReleaseAge: 1440
 # Escape hatch for trusted namespaces / urgent updates, e.g.:
 # minimumReleaseAgeExclude:
 #   - '@types/*'

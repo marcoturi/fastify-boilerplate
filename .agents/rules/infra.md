@@ -49,6 +49,9 @@ paths:
 
 - Renovate (`renovate.json`) proposes updates once a release is 3 days old and automerges minor
   and patch updates when CI passes
+- pnpm refuses versions younger than `minimumReleaseAge` (`pnpm-workspace.yaml`), also when they
+  are already in the lockfile: `pnpm update` picks older versions on its own, while a version
+  pinned by hand must wait or go in `minimumReleaseAgeExclude`
 - pnpm installs only reviewed lifecycle scripts: a new dependency with one must be listed in
   `allowBuilds` in `pnpm-workspace.yaml`
 - Husky hooks: pre-commit runs `biome check --staged` (it fails, it does not fix), `type:check`,

@@ -415,7 +415,7 @@ semantic-release pushes the release commit with the `GH_TOKEN` secret, a persona
 
 - GitHub CodeQL security analysis for JavaScript/TypeScript
 
-**[Renovate](renovate.json)** — opens a pull request for each dependency update once the release is 3 days old. Minor and patch updates are merged automatically when CI passes; major updates wait for a review.
+**[Renovate](renovate.json)** — opens a pull request for each dependency update once the release is 3 days old. Minor and patch updates are merged automatically when CI passes; major updates wait for a review. pnpm also refuses releases younger than `minimumReleaseAge` in [pnpm-workspace.yaml](pnpm-workspace.yaml) when installing, lockfile included.
 
 ## AI-Assisted Development
 
