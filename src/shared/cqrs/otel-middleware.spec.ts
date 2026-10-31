@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { after, before, beforeEach, describe, it } from 'node:test';
 import { type SpanStatus, SpanStatusCode, type TracerProvider, trace } from '@opentelemetry/api';
 import type { Action } from './bus.types.ts';
-import { traceEventMiddleware, tracingMiddleware } from './otel-middleware.ts';
+import { tracingMiddleware } from './otel-middleware.ts';
 
 /** What the middleware did to a span: enough to check it without the OpenTelemetry SDK */
 interface RecordedSpan {
@@ -87,7 +87,7 @@ describe('OpenTelemetry middlewares', () => {
       const failing = async () => {
         throw new Error('boom');
       };
-      await assert.rejects(tracingMiddleware('query')(action, failing), /boom/);
+      await assert.rejects(async () => tracingMiddleware('query')(action, failing), /boom/);
       const [span] = spans;
       assert.deepEqual(span?.status, { code: SpanStatusCode.ERROR, message: 'boom' });
       assert.equal(span?.exceptions.length, 1);
@@ -95,9 +95,9 @@ describe('OpenTelemetry middlewares', () => {
     });
   });
 
-  describe('traceEventMiddleware()', () => {
+  describe("tracingMiddleware('event')", () => {
     it('wraps the event handler in a span on the event bus', async () => {
-      await traceEventMiddleware(action, () => undefined);
+      await tracingMiddleware('event')(action, () => undefined);
       const [span] = spans;
       assert.equal(span?.attributes['cqrs.bus'], 'event');
       assert.equal(span?.status?.code, SpanStatusCode.OK);
@@ -108,7 +108,7 @@ describe('OpenTelemetry middlewares', () => {
       const failing = () => {
         throw new Error('boom');
       };
-      await assert.rejects(async () => traceEventMiddleware(action, failing), /boom/);
+      await assert.rejects(async () => tracingMiddleware('event')(action, failing), /boom/);
       assert.equal(spans[0]?.status?.code, SpanStatusCode.ERROR);
       assert.equal(spans[0]?.ended, true);
     });

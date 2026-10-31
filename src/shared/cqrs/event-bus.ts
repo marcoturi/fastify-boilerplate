@@ -4,7 +4,7 @@ import type {
   EventBus,
   EventBusOptions,
   EventHandler,
-  EventMiddleware,
+  Middleware,
   SequentialProcessingOptions,
 } from '#src/shared/cqrs/bus.types.ts';
 import { withMetadata } from '#src/shared/cqrs/middlewares.ts';
@@ -29,7 +29,7 @@ interface HandlerRegistration {
 
 export function eventBus({ logger }: EventBusOptions): EventBus {
   const handlers = new Map<string, HandlerRegistration[]>();
-  const middlewares: EventMiddleware[] = [];
+  const middlewares: Middleware[] = [];
 
   function logHandlerError(event: Action<unknown>, error: unknown): void {
     logger.error(
@@ -40,10 +40,7 @@ export function eventBus({ logger }: EventBusOptions): EventBus {
 
   /** Runs the handler through the middleware chain; result may be sync or a Promise. */
   function executeChain(event: Action<unknown>, handler: EventHandler): unknown {
-    if (middlewares.length > 0) {
-      return composeMiddlewares(middlewares)(event, handler);
-    }
-    return handler(event);
+    return composeMiddlewares(middlewares)(event, handler);
   }
 
   /** Fire-and-forget dispatch that never lets a handler failure escape as an
@@ -153,7 +150,7 @@ export function eventBus({ logger }: EventBusOptions): EventBus {
     }
   }
 
-  function addMiddleware(fn: EventMiddleware) {
+  function addMiddleware(fn: Middleware) {
     middlewares.push(fn);
   }
 

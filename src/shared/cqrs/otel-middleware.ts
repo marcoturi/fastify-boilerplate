@@ -1,5 +1,5 @@
 import { type Span, SpanKind, SpanStatusCode, trace } from '@opentelemetry/api';
-import type { Action, CommandHandler, EventHandler } from '#src/shared/cqrs/bus.types.ts';
+import type { Middleware } from '#src/shared/cqrs/bus.types.ts';
 
 const tracer = trace.getTracer('cqrs');
 
@@ -11,21 +11,19 @@ function recordFailure(span: Span, error: unknown): void {
 }
 
 /**
- * Creates a tracing middleware for the command or query bus.
- * Each execution is wrapped in an OTel span named after the action type.
+ * Creates the tracing middleware of a bus: each action runs in an OTel span named after its
+ * type, which also covers an async event handler, so the event bus awaits it. A failure is
+ * recorded on the span and rethrown, for the caller or the event bus to handle.
  * When OTel is disabled the API returns noop spans — zero overhead.
  */
-export function tracingMiddleware(busType: 'command' | 'query') {
-  return async function traceAction(
-    action: Action<unknown>,
-    handler: CommandHandler,
-  ): Promise<unknown> {
-    return tracer.startActiveSpan(
+export function tracingMiddleware(bus: 'command' | 'query' | 'event'): Middleware {
+  return (action, next) =>
+    tracer.startActiveSpan(
       action.type,
       {
         kind: SpanKind.INTERNAL,
         attributes: {
-          'cqrs.bus': busType,
+          'cqrs.bus': bus,
           'cqrs.action': action.type,
         },
       },
@@ -34,7 +32,7 @@ export function tracingMiddleware(busType: 'command' | 'query') {
           span.setAttribute('cqrs.correlation_id', String(action.meta.correlationId));
         }
         try {
-          const result = await handler(action);
+          const result = await next(action);
           span.setStatus({ code: SpanStatusCode.OK });
           return result;
         } catch (error) {
@@ -45,41 +43,4 @@ export function tracingMiddleware(busType: 'command' | 'query') {
         }
       },
     );
-  };
-}
-
-/**
- * Event bus tracing middleware.
- * The span covers the (possibly async) handler and is returned so the event bus can
- * await it for sequential processing; failures are recorded on the span and rethrown
- * for the bus to isolate/log.
- */
-export function traceEventMiddleware(
-  action: Action<unknown>,
-  handler: EventHandler,
-): void | Promise<void> {
-  return tracer.startActiveSpan(
-    action.type,
-    {
-      kind: SpanKind.INTERNAL,
-      attributes: {
-        'cqrs.bus': 'event',
-        'cqrs.action': action.type,
-      },
-    },
-    async (span) => {
-      if (action.meta?.correlationId) {
-        span.setAttribute('cqrs.correlation_id', String(action.meta.correlationId));
-      }
-      try {
-        await handler(action);
-        span.setStatus({ code: SpanStatusCode.OK });
-      } catch (error) {
-        recordFailure(span, error);
-        throw error;
-      } finally {
-        span.end();
-      }
-    },
-  );
 }

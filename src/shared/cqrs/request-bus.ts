@@ -1,12 +1,5 @@
-import type { Action, CommandHandler, CommandMiddleware } from '#src/shared/cqrs/bus.types.ts';
+import type { Action, CommandHandler, Middleware, RequestBus } from '#src/shared/cqrs/bus.types.ts';
 import { composeMiddlewares } from '#src/shared/utils/compose-middlewares.ts';
-
-export interface RequestBus {
-  register<P>(type: string, handler: (action: Action<P>) => Promise<unknown>): void;
-  unregister(type: string): void;
-  execute<R>(action: Action<unknown, R>): Promise<R>;
-  addMiddleware(fn: CommandMiddleware): void;
-}
 
 /**
  * Shared factory for command and query buses.
@@ -15,7 +8,7 @@ export interface RequestBus {
  */
 export function requestBus(label: string): RequestBus {
   const handlers = new Map<string, CommandHandler>();
-  const middlewares: CommandMiddleware[] = [];
+  const middlewares: Middleware[] = [];
 
   function register<P>(type: string, handler: (action: Action<P>) => Promise<unknown>): void {
     if (typeof type !== 'string') {
@@ -51,13 +44,10 @@ export function requestBus(label: string): RequestBus {
     if (!handler) {
       throw new Error(`${label} type of ${action.type} is not registered`);
     }
-    if (middlewares.length > 0) {
-      return composeMiddlewares(middlewares)(action, handler) as Promise<R>;
-    }
-    return handler(action) as Promise<R>;
+    return composeMiddlewares(middlewares)(action, handler) as Promise<R>;
   }
 
-  function addMiddleware(fn: CommandMiddleware) {
+  function addMiddleware(fn: Middleware) {
     middlewares.push(fn);
   }
 

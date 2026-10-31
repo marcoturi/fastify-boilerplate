@@ -1,11 +1,3 @@
-import type { FastifyInstance } from 'fastify';
-import fp from 'fastify-plugin';
-import fastifyCqrs from '#src/shared/cqrs/index.ts';
-
-async function cqrsPlugin(fastify: FastifyInstance) {
-  await fastify.register(fastifyCqrs);
-}
-
-export default fp(cqrsPlugin, {
-  name: 'CQRSPlugin',
-});
+// Loaded by autoload like the other server plugins: the CQRS plugin is already wrapped with
+// fastify-plugin, so its buses are visible to the whole app
+export { default } from '#src/shared/cqrs/index.ts';

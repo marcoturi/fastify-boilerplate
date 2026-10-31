@@ -69,15 +69,15 @@ Do **not** pass a manual generic to `execute()`. The type is inferred from the a
 Middlewares use an onion-model pipeline (composed via `reduceRight`). They must **never mutate** the action — always spread into a new object, and return the result of the next handler:
 
 ```typescript
-function myMiddleware(action: Action<unknown>, handler: CommandHandler): Promise<unknown> {
+const myMiddleware: Middleware = (action, next) => {
   const enrichedAction = { ...action, meta: { ...action.meta, foo: 'bar' } } as Action<unknown>;
-  return handler(enrichedAction);
-}
+  return next(enrichedAction);
+};
 ```
 
-There are separate types for command/query vs event middlewares (in `src/shared/cqrs/bus.types.ts`):
-- `CommandMiddleware` — returns `Promise<unknown>` (used by CommandBus and QueryBus)
-- `EventMiddleware` — returns `void | Promise<void>` (used by EventBus); return the handler's result so the bus can await it and isolate failures
+One `Middleware` type (in `src/shared/cqrs/bus.types.ts`) serves the three buses. Always return
+what `next` returns: commands and queries resolve to the handler's result, and the event bus
+awaits it to keep per-key order and isolate failures
 
 ## Bus differences
 
@@ -100,7 +100,7 @@ time, in emit order, while different keys still run concurrently.
 ## Adding a new CQRS middleware
 
 1. Define the middleware function in `src/shared/cqrs/middlewares.ts` (or a new file)
-2. Match the correct signature: `CommandMiddleware` for command/query buses, `EventMiddleware` for event bus
+2. Type it as `Middleware` and return what `next` returns
 3. Never mutate the action — spread into a new object
 4. Register in `src/shared/cqrs/index.ts` via `busInstance.addMiddleware(myMiddleware)`
 5. Middleware order matters: first added = outermost wrapper

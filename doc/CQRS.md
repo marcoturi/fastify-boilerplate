@@ -316,17 +316,15 @@ Middlewares wrap handlers in an **onion** (composed via `reduceRight` in
 They must **never mutate** the action — always spread into a new object.
 
 ```typescript
-function myMiddleware(action: Action<unknown>, next: CommandHandler): Promise<unknown> {
+const myMiddleware: Middleware = (action, next) => {
   const enriched = { ...action, meta: { ...action.meta, foo: 'bar' } } as Action<unknown>;
   return next(enriched); // return the result so it propagates
-}
+};
 ```
 
-Two signatures exist (`src/shared/cqrs/bus.types.ts`):
-
-- `CommandMiddleware` — returns `Promise<unknown>` (CommandBus & QueryBus).
-- `EventMiddleware` — returns `void | Promise<void>` (EventBus); must **return** the handler
-  result so the bus can await it (for per-key ordering) and isolate failures.
+One `Middleware` type (`src/shared/cqrs/bus.types.ts`) serves the three buses. It must
+**return** what `next` returns: commands and queries resolve to the handler's result, and the
+event bus awaits it (for per-key ordering) and isolates failures.
 
 Registered in `src/shared/cqrs/index.ts`, outermost first:
 
@@ -338,8 +336,8 @@ event           :  OTel tracing → handler
 - `decorateCommandWithMetadata` — injects `correlationId` (from the request context) and
   `timestamp` into `meta`, immutably. The event bus adds the same metadata itself in
   `emit()`, once per event, so every subscriber sees the time the event was emitted.
-- `tracingMiddleware` / `traceEventMiddleware` — wrap each dispatch in an OpenTelemetry
-  span named after the action type (noop spans when OTel is disabled).
+- `tracingMiddleware(bus)` — wraps each dispatch in an OpenTelemetry span named after the
+  action type, on all three buses (noop spans when OTel is disabled).
 - `trackExecutionTimeMiddleware` — logs execution time per action.
 
 ---

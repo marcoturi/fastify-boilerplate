@@ -35,18 +35,13 @@ export type QueryHandler = (query: Action<unknown>) => Promise<unknown>;
 /** Event handlers may be sync or async; the bus isolates and logs their failures. */
 export type EventHandler = (event: Action<unknown>) => void | Promise<void>;
 
-/** Middleware for command/query buses — wraps a handler that returns a Promise. */
-export type CommandMiddleware = (
-  action: Action<unknown>,
-  handler: CommandHandler,
-) => Promise<unknown>;
+/** Runs the rest of a middleware chain, ending with the handler. */
+export type Next = (action: Action<unknown>) => unknown;
 
-/** Middleware for the event bus. Returns the (possibly async) handler result so the
- *  bus can await it for sequential processing and catch failures. */
-export type EventMiddleware = (
-  action: Action<unknown>,
-  handler: EventHandler,
-) => void | Promise<void>;
+/** Wraps every action of a bus, first added = outermost. It calls `next` with the action, or a
+ *  new one (never mutate it), and returns its result: commands and queries resolve to the
+ *  handler's result, and the event bus awaits it to keep per-key order and isolate failures. */
+export type Middleware = (action: Action<unknown>, next: Next) => unknown;
 
 /** Opt-in ordering for an event subscription: events whose `keyExtractor` returns the
  *  same key are processed one at a time, in emit order (e.g. per aggregate/entity id),
@@ -55,21 +50,19 @@ export interface SequentialProcessingOptions {
   keyExtractor: (event: Action<unknown>) => string;
 }
 
-export interface CommandBus {
-  register<P>(type: string, handler: (command: Action<P>) => Promise<unknown>): void;
+/** A bus of commands or queries: one handler per type, whose result `execute` returns. */
+export interface RequestBus {
+  register<P>(type: string, handler: (action: Action<P>) => Promise<unknown>): void;
   unregister(type: string): void;
-  execute<R>(command: Action<unknown, R>): Promise<R>;
-  addMiddleware(fn: CommandMiddleware): void;
+  execute<R>(action: Action<unknown, R>): Promise<R>;
+  addMiddleware(fn: Middleware): void;
 }
 
-/** QueryBus is semantically distinct from CommandBus:
- *  queries must be idempotent and side-effect-free. */
-export interface QueryBus {
-  register<P>(type: string, handler: (query: Action<P>) => Promise<unknown>): void;
-  unregister(type: string): void;
-  execute<R>(query: Action<unknown, R>): Promise<R>;
-  addMiddleware(fn: CommandMiddleware): void;
-}
+/** Commands change state. */
+export type CommandBus = RequestBus;
+
+/** Queries have the same shape on a separate bus: they must be idempotent and side-effect-free. */
+export type QueryBus = RequestBus;
 
 /** Minimal publishing port. Anything that can publish an event satisfies this — the event
  *  bus today, a transactional-outbox writer tomorrow. Consumers (e.g. `DomainResult.commit`)
@@ -85,7 +78,7 @@ export interface EventBus extends EventPublisher {
     options?: SequentialProcessingOptions,
   ): void;
   emit(event: Action<unknown>): void;
-  addMiddleware(fn: EventMiddleware): void;
+  addMiddleware(fn: Middleware): void;
 }
 
 /** Options for creating an event bus instance. */
