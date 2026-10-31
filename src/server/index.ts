@@ -7,7 +7,7 @@ import UnderPressure from '@fastify/under-pressure';
 import type { FastifyInstance } from 'fastify';
 import { enableDevMode } from 'graphql';
 import mercurius from 'mercurius';
-import env from '#src/config/env.ts';
+import { env } from '#src/config/index.ts';
 import { di } from '#src/server/di/index.ts';
 import { graphqlErrorFormatter } from '#src/server/graphql-error-formatter.ts';
 import { loadGraphqlSchema } from '#src/server/graphql-schema.ts';
