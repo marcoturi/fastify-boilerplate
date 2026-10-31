@@ -35,3 +35,6 @@ coverage
 # Generated client types (produced by generate:types script)
 client/rest.d.ts
 client/graphql.ts
+
+# Generated dependency graph (produced by deps:graph script)
+doc/dependency-graph.svg
