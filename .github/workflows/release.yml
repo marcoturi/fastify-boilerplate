@@ -55,7 +55,7 @@ jobs:
         run: pnpm test
       - name: Validate architecture boundaries
         run: pnpm deps:validate
-      - name: Seed DB
+      - name: Migrate DB
         run: pnpm db:migrate
         env:
           DBMATE_DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable
