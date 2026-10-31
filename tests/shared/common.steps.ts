@@ -1,12 +1,12 @@
 import assert from 'node:assert';
 import { Then } from '@cucumber/cucumber';
 import type { ApiErrorResponse } from '#src/shared/api/api-error.response.ts';
-import type { ICustomWorld } from '#tests/support/custom-world.ts';
+import type { CustomWorld } from '#tests/support/custom-world.ts';
 
 Then(
   /^I receive an error "(.*)" with status code (\d+)$/,
-  async function (this: ICustomWorld, error: string, statusCode: string) {
-    const response = this.context.latestResponse!;
+  async function (this: CustomWorld, error: string, statusCode: string) {
+    const response = this.response;
     assert.strictEqual(response.statusCode, +statusCode);
     // The body follows the shared error envelope (src/shared/api/api-error.response.ts)
     const body = response.json<ApiErrorResponse>();
@@ -16,11 +16,11 @@ Then(
   },
 );
 
-Then('the error reason is {string}', function (this: ICustomWorld, reason: string) {
-  assert.strictEqual(this.context.latestResponse!.json<ApiErrorResponse>().reason, reason);
+Then('the error reason is {string}', function (this: CustomWorld, reason: string) {
+  assert.strictEqual(this.response.json<ApiErrorResponse>().reason, reason);
 });
 
-Then('the error points to {string}', function (this: ICustomWorld, path: string) {
-  const { subErrors } = this.context.latestResponse!.json<ApiErrorResponse>();
+Then('the error points to {string}', function (this: CustomWorld, path: string) {
+  const { subErrors } = this.response.json<ApiErrorResponse>();
   assert.strictEqual(subErrors?.[0]?.path, path);
 });

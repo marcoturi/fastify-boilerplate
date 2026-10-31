@@ -1,33 +1,26 @@
-import { type IWorldOptions, setWorldConstructor, World } from '@cucumber/cucumber';
-import type * as messages from '@cucumber/messages';
+import assert from 'node:assert';
+import { setWorldConstructor, World } from '@cucumber/cucumber';
 import type { FastifyInstance, LightMyRequestResponse } from 'fastify';
 import type postgres from 'postgres';
 
+/** State the steps of a scenario share */
 export interface TestContext {
   createUserDto?: Record<string, string>;
   latestResponse?: LightMyRequestResponse;
   [key: string]: unknown;
 }
 
-export interface ICustomWorld extends World {
-  debug: boolean;
-  feature?: messages.Pickle;
-  testName?: string;
-  startTime?: Date;
-  db: ReturnType<typeof postgres>;
-  server: FastifyInstance;
-  context: TestContext;
-}
-
-export class CustomWorld extends World implements ICustomWorld {
-  constructor(options: IWorldOptions) {
-    super(options);
-  }
-
-  debug = false;
-  server = undefined as unknown as FastifyInstance;
-  db = undefined as unknown as ReturnType<typeof postgres>;
+export class CustomWorld extends World {
+  // Set for every scenario by the Before hook (common-hooks.ts)
+  declare server: FastifyInstance;
+  declare db: ReturnType<typeof postgres>;
   context: TestContext = {};
+
+  /** The latest response: reading it before any request was sent is a broken scenario */
+  get response(): LightMyRequestResponse {
+    assert.ok(this.context.latestResponse, 'No response yet: the scenario sent no request');
+    return this.context.latestResponse;
+  }
 }
 
 setWorldConstructor(CustomWorld);

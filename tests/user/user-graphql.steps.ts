@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import { type DataTable, Given, Then, When } from '@cucumber/cucumber';
-import type { ICustomWorld } from '#tests/support/custom-world.ts';
+import type { CustomWorld } from '#tests/support/custom-world.ts';
 
 interface GraphQLResponse<T> {
   data?: T | null;
@@ -42,17 +42,17 @@ const findUsersQuery = `
   }
 `;
 
-function sendGraphQL(world: ICustomWorld, query: string, variables: Record<string, unknown> = {}) {
+function sendGraphQL(world: CustomWorld, query: string, variables: Record<string, unknown> = {}) {
   return world.server.inject({ method: 'POST', url: '/graphql', body: { query, variables } });
 }
 
 /** The value of the single field of a GraphQL response, or the errors when it failed. */
-function fieldOf(world: ICustomWorld) {
-  const body = world.context.latestResponse!.json<GraphQLResponse<Record<string, unknown>>>();
+function fieldOf(world: CustomWorld) {
+  const body = world.response.json<GraphQLResponse<Record<string, unknown>>>();
   return { value: body.data ? Object.values(body.data)[0] : null, errors: body.errors };
 }
 
-async function findUsers(world: ICustomWorld, variables: Record<string, unknown> = {}) {
+async function findUsers(world: CustomWorld, variables: Record<string, unknown> = {}) {
   const response = await sendGraphQL(world, findUsersQuery, variables);
   const body = response.json<GraphQLResponse<FindUsersData>>();
   assert.strictEqual(body.errors, undefined);
@@ -69,57 +69,54 @@ function toFindUsersVariables(table: DataTable) {
   );
 }
 
-Given('these users exist', async function (this: ICustomWorld, table: DataTable) {
+Given('these users exist', async function (this: CustomWorld, table: DataTable) {
   for (const input of table.hashes()) {
     const response = await sendGraphQL(this, createUserMutation, { input });
     assert.strictEqual(response.json<GraphQLResponse<unknown>>().errors, undefined);
   }
 });
 
-When('I send a GraphQL mutation to create a user', async function (this: ICustomWorld) {
+When('I send a GraphQL mutation to create a user', async function (this: CustomWorld) {
   this.context.latestResponse = await sendGraphQL(this, createUserMutation, {
     input: this.context.createUserDto,
   });
 });
 
-When('I send a GraphQL mutation to delete my user', async function (this: ICustomWorld) {
+When('I send a GraphQL mutation to delete my user', async function (this: CustomWorld) {
   const { value: id } = fieldOf(this);
   this.context.latestResponse = await sendGraphQL(this, deleteUserMutation, { id });
 });
 
 When(
   'I send a GraphQL mutation to delete the user {string}',
-  async function (this: ICustomWorld, id: string) {
+  async function (this: CustomWorld, id: string) {
     this.context.latestResponse = await sendGraphQL(this, deleteUserMutation, { id });
   },
 );
 
-When('I query the users via GraphQL', async function (this: ICustomWorld) {
+When('I query the users via GraphQL', async function (this: CustomWorld) {
   this.context.users = await findUsers(this);
 });
 
-When('I query the users via GraphQL with', async function (this: ICustomWorld, table: DataTable) {
+When('I query the users via GraphQL with', async function (this: CustomWorld, table: DataTable) {
   this.context.users = await findUsers(this, toFindUsersVariables(table));
 });
 
-When(
-  'I send a GraphQL query for users with',
-  async function (this: ICustomWorld, table: DataTable) {
-    this.context.latestResponse = await sendGraphQL(
-      this,
-      findUsersQuery,
-      toFindUsersVariables(table),
-    );
-  },
-);
+When('I send a GraphQL query for users with', async function (this: CustomWorld, table: DataTable) {
+  this.context.latestResponse = await sendGraphQL(
+    this,
+    findUsersQuery,
+    toFindUsersVariables(table),
+  );
+});
 
-Then('I receive my user ID from GraphQL', function (this: ICustomWorld) {
+Then('I receive my user ID from GraphQL', function (this: CustomWorld) {
   const { value, errors } = fieldOf(this);
   assert.strictEqual(errors, undefined);
   assert.strictEqual(typeof value, 'string');
 });
 
-Then('I can see my user in the GraphQL list of users', async function (this: ICustomWorld) {
+Then('I can see my user in the GraphQL list of users', async function (this: CustomWorld) {
   const { value: id } = fieldOf(this);
   const users = await findUsers(this);
   assert.strictEqual(
@@ -128,48 +125,48 @@ Then('I can see my user in the GraphQL list of users', async function (this: ICu
   );
 });
 
-Then('GraphQL confirms the deletion', function (this: ICustomWorld) {
+Then('GraphQL confirms the deletion', function (this: CustomWorld) {
   const { value, errors } = fieldOf(this);
   assert.strictEqual(errors, undefined);
   assert.strictEqual(value, true);
 });
 
-Then('the GraphQL list of users is empty', async function (this: ICustomWorld) {
+Then('the GraphQL list of users is empty', async function (this: CustomWorld) {
   const users = await findUsers(this);
   assert.strictEqual(users.count, 0);
 });
 
-Then('I receive a GraphQL error with code {string}', function (this: ICustomWorld, code: string) {
+Then('I receive a GraphQL error with code {string}', function (this: CustomWorld, code: string) {
   const { value, errors } = fieldOf(this);
   assert.strictEqual(value ?? null, null);
   assert.strictEqual(errors?.[0]?.extensions?.code, code);
 });
 
-Then('the GraphQL error points to {string}', function (this: ICustomWorld, path: string) {
+Then('the GraphQL error points to {string}', function (this: CustomWorld, path: string) {
   const { errors } = fieldOf(this);
   assert.strictEqual(errors?.[0]?.extensions?.subErrors?.[0]?.path, path);
 });
 
-Then('I receive a GraphQL validation error', function (this: ICustomWorld) {
-  const response = this.context.latestResponse!;
+Then('I receive a GraphQL validation error', function (this: CustomWorld) {
+  const response = this.response;
   const body = response.json<GraphQLResponse<unknown>>();
   assert.strictEqual(response.statusCode, 400);
   assert.strictEqual(body.data ?? null, null);
   assert.ok(body.errors?.length);
 });
 
-Then('I receive {int} of {int} users', function (this: ICustomWorld, size: number, count: number) {
+Then('I receive {int} of {int} users', function (this: CustomWorld, size: number, count: number) {
   const users = this.context.users as FindUsersData['findUsers'];
   assert.strictEqual(users.data.length, size);
   assert.strictEqual(users.count, count);
 });
 
-Then('every user is from {string}', function (this: ICustomWorld, country: string) {
+Then('every user is from {string}', function (this: CustomWorld, country: string) {
   const users = this.context.users as FindUsersData['findUsers'];
   assert.ok(users.data.every((user) => user.country === country));
 });
 
-Then('every user has ISO creation and update dates', function (this: ICustomWorld) {
+Then('every user has ISO creation and update dates', function (this: CustomWorld) {
   const users = this.context.users as FindUsersData['findUsers'];
   for (const { createdAt, updatedAt } of users.data) {
     assert.strictEqual(new Date(createdAt).toISOString(), createdAt);
