@@ -11,6 +11,7 @@ Feature: Find users via GraphQL
   Scenario: I can list all users
     When I query the users via GraphQL
     Then I receive 3 of 3 users
+    And every user has ISO creation and update dates
 
   @user
   Scenario: I can filter users by country

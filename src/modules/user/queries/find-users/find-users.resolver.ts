@@ -14,7 +14,11 @@ export default async function findUsersResolver(fastify: FastifyRouteInstance) {
         if (!validateArgs(args)) {
           throw new ArgumentInvalidException(ajv.errorsText(validateArgs.errors));
         }
-        return await fastify.queryBus.execute(findUsersQuery(args));
+        const result = await fastify.queryBus.execute(findUsersQuery(args));
+        return {
+          ...result,
+          data: result.data.map(fastify.diContainer.cradle.userMapper.toResponse),
+        };
       },
     },
   });

@@ -1,12 +1,12 @@
 import { userBaseSchema } from '#src/modules/user/dtos/user.graphql-schema.ts';
 
 const userCreateSchema = `
-  input PutUserPayload {
+  input CreateUserInput {
     ${userBaseSchema}
   }
 
   type Mutation {
-    putUser(input: PutUserPayload!): ID!
+    createUser(input: CreateUserInput!): ID!
   }
 `;
 

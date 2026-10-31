@@ -12,7 +12,7 @@ export default async function createUserResolver(fastify: FastifyRouteInstance) 
     Mutation: {
       // Exceptions become GraphQL error codes in the error formatter (BAD_USER_INPUT,
       // USER_ALREADY_EXISTS, ...), so the resolver does not catch them
-      putUser: async (_, args) => {
+      createUser: async (_, args) => {
         if (!validateInput(args.input)) {
           throw new ArgumentInvalidException(ajv.errorsText(validateInput.errors));
         }

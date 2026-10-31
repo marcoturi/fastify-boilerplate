@@ -1,4 +1,5 @@
 import { type Static, Type } from 'typebox';
+import { UserRoles } from '#src/modules/user/domain/user.types.ts';
 import { baseResponseDtoSchema } from '#src/shared/api/response.base.ts';
 
 export const userResponseDtoSchema = Type.Intersect([
@@ -21,7 +22,7 @@ export const userResponseDtoSchema = Type.Intersect([
       example: 'Park Avenue',
       description: 'Street where the user is registered',
     }),
-    role: Type.Union([Type.Literal('admin'), Type.Literal('moderator'), Type.Literal('guest')], {
+    role: Type.Enum(UserRoles, {
       example: 'guest',
       description: "User's role",
     }),
