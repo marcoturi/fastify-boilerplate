@@ -43,6 +43,19 @@ describe('parseEnv()', () => {
     assert.equal(development.isProduction, false);
   });
 
+  it('rejects a POSTGRES_URL that is not host[:port]', () => {
+    for (const url of ['db:', 'db:abc', 'postgres://app:pw@db:5432/app']) {
+      assert.throws(() => parseEnv({ ...required, POSTGRES_URL: url }), /POSTGRES_URL/, url);
+    }
+  });
+
+  it('rejects a port out of range and a pool without connections', () => {
+    for (const port of ['0', '-1', '3000.5', '65536']) {
+      assert.throws(() => parseEnv({ ...required, PORT: port }), /PORT/, port);
+    }
+    assert.throws(() => parseEnv({ ...required, POSTGRES_POOL_MAX: '0' }), /POSTGRES_POOL_MAX/);
+  });
+
   it('rejects a missing variable or an unknown value', () => {
     const { POSTGRES_URL: _, ...withoutUrl } = required;
     assert.throws(() => parseEnv(withoutUrl), /POSTGRES_URL/);

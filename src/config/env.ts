@@ -18,7 +18,9 @@ export const LogLevel = {
 export type LogLevel = (typeof LogLevel)[keyof typeof LogLevel];
 
 const schema = Type.Object({
-  POSTGRES_URL: Type.String(),
+  // `host` or `host:port`, not a connection URL: anything else fails at startup, rather than
+  // as an unclear connection error on the first query
+  POSTGRES_URL: Type.String({ pattern: '^[^:/\\s]+(:\\d{1,5})?$' }),
   POSTGRES_PASSWORD: Type.String(),
   POSTGRES_USER: Type.String(),
   POSTGRES_DB: Type.String(),
@@ -27,13 +29,13 @@ const schema = Type.Object({
   // must be trusted by Node: for a private CA, point NODE_EXTRA_CA_CERTS to it.
   POSTGRES_SSL: Type.Boolean({ default: false }),
   // Connection pool tuning (see https://github.com/porsager/postgres#connection).
-  POSTGRES_POOL_MAX: Type.Number({ default: 10 }),
-  POSTGRES_IDLE_TIMEOUT: Type.Number({ default: 20 }),
-  POSTGRES_CONNECT_TIMEOUT: Type.Number({ default: 30 }),
+  POSTGRES_POOL_MAX: Type.Integer({ minimum: 1, default: 10 }),
+  POSTGRES_IDLE_TIMEOUT: Type.Number({ minimum: 0, default: 20 }),
+  POSTGRES_CONNECT_TIMEOUT: Type.Number({ minimum: 0, default: 30 }),
   LOG_LEVEL: Type.Enum(LogLevel, { default: LogLevel.info }),
   NODE_ENV: Type.Enum(NodeEnv),
   HOST: Type.String({ default: 'localhost' }),
-  PORT: Type.Number({ default: 3000 }),
+  PORT: Type.Integer({ minimum: 1, maximum: 65_535, default: 3000 }),
 });
 
 /**
