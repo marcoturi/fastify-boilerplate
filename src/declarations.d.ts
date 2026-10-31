@@ -6,12 +6,8 @@ import {
   RawRequestDefaultExpression,
   RawServerDefault,
 } from 'fastify';
-import { Dependencies as InfrastructureDependencies } from '#src/modules/index.ts';
 
 declare global {
-  // Declare global DI container type
-  // type Dependencies = InfrastructureDependencies;
-  interface Dependencies extends InfrastructureDependencies {}
   // Ensures HTTP request is strongly typed from the schema
   type FastifyRouteInstance = FastifyInstance<
     RawServerDefault,
