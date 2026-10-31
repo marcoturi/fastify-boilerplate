@@ -3,11 +3,15 @@
 # Used by CI (release pipeline) and can be run locally.
 set -euo pipefail
 
-SERVER_URL="http://127.0.0.1:3000"
+PORT=3000
+SERVER_URL="http://127.0.0.1:$PORT"
 MAX_WAIT=30  # seconds
 
 # ── Start the server in the background ──────────────────────────────────────
-node --import ./src/instrumentation.ts ./src/index.ts &
+# .env provides the database settings locally (in CI the workflow sets them). Telemetry stays
+# off and the port is the one polled below, whatever .env says: Node keeps a variable already
+# in the environment over the same one in the file.
+OTEL_SDK_DISABLED=true PORT=$PORT node --env-file-if-exists=.env ./src/index.ts &
 SERVER_PID=$!
 trap 'kill $SERVER_PID 2>/dev/null || true' EXIT
 

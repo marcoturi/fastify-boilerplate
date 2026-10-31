@@ -89,7 +89,6 @@ jobs:
           POSTGRES_DB: postgres
           LOG_LEVEL: error
           NODE_ENV: test
-          OTEL_SDK_DISABLED: "true"
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
