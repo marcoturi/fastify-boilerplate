@@ -1,5 +1,7 @@
+// Global types and module augmentations. A .ts file, not .d.ts: skipLibCheck skips every .d.ts,
+// so declarations kept in one would never be type-checked.
 import type { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
-import {
+import type {
   FastifyBaseLogger,
   FastifyInstance,
   RawReplyDefaultExpression,
