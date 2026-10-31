@@ -31,7 +31,7 @@ screenshots/
 .dependency-cruiser.cjs
 biome.json
 tsconfig.json
-commitlint.config.ts
+commitlint.config.cjs
 cucumber.json
 .specstory
 .history

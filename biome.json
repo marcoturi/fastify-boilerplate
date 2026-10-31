@@ -3,7 +3,7 @@
   "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!.dependency-cruiser.cjs", "!cucumber.setup.js", "!doc"]
+    "includes": ["**", "!.dependency-cruiser.cjs", "!doc"]
   },
   "formatter": {
     "enabled": true,

@@ -13,16 +13,6 @@ export const ErrorCode = {
 } as const;
 export type ErrorCode = (typeof ErrorCode)[keyof typeof ErrorCode];
 
-export interface SerializedException {
-  message: string;
-  code: ErrorCode;
-  reason?: string;
-  correlationId: string;
-  stack?: string;
-  cause?: string;
-  metadata?: unknown;
-}
-
 export abstract class ExceptionBase extends Error {
   abstract readonly code: ErrorCode;
   /** Finer-grained, stable reason clients can branch on (e.g. `USER_ALREADY_EXISTS`) */
@@ -46,24 +36,5 @@ export abstract class ExceptionBase extends Error {
     this.cause = cause;
     this.metadata = metadata;
     this.correlationId = getRequestId();
-  }
-
-  /**
-   * By default in NodeJS Error objects are not
-   * serialized properly when sending plain objects
-   * to external processes. This method is a workaround.
-   * Keep in mind not to return a stack trace to user when in production.
-   * https://iaincollins.medium.com/error-handling-in-javascript-a6172ccdf9af
-   */
-  toJSON(): SerializedException {
-    return {
-      message: this.message,
-      code: this.code,
-      reason: this.reason,
-      stack: this.stack,
-      correlationId: this.correlationId,
-      cause: JSON.stringify(this.cause),
-      metadata: this.metadata,
-    };
   }
 }

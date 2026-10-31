@@ -12,7 +12,6 @@ export interface UserFilters {
 }
 
 export interface UserRepository extends RepositoryPort<UserEntity> {
-  findOneByEmail(email: string): Promise<UserEntity | undefined>;
   findAllPaginatedFiltered(
     params: PaginatedQueryParams,
     filters: UserFilters,
