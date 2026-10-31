@@ -35,37 +35,42 @@ const schema = Type.Object({
   PORT: Type.Number({ default: 3000 }),
 });
 
-const env = envSchema<Static<typeof schema>>({
-  dotenv: true,
-  schema,
-});
+/**
+ * Validates the environment variables and derives the app configuration from them. It reads
+ * process.env and the .env file; `data`, when given, replaces both (unit tests use it).
+ */
+export function parseEnv(data?: Record<string, string>) {
+  const env = envSchema<Static<typeof schema>>(
+    data ? { schema, data, env: false } : { schema, dotenv: true },
+  );
 
-// POSTGRES_URL holds `host:port` (the port is optional), not a connection URL
-const [dbHost = 'localhost', dbPort = '5432'] = env.POSTGRES_URL.split(':');
+  // POSTGRES_URL holds `host:port` (the port is optional), not a connection URL
+  const [dbHost = 'localhost', dbPort = '5432'] = env.POSTGRES_URL.split(':');
 
-export default {
-  nodeEnv: env.NODE_ENV,
-  isDevelopment: env.NODE_ENV === NodeEnv.development,
-  isProduction: env.NODE_ENV === NodeEnv.production,
-  // Read from package.json: npm_package_version is set only when started through pnpm
-  version: packageJson.version,
-  log: {
-    level: env.LOG_LEVEL,
-  },
-  server: {
-    host: env.HOST,
-    port: env.PORT,
-  },
-  db: {
-    // Separate fields rather than a connection URL, so credentials need no escaping
-    host: dbHost,
-    port: Number(dbPort),
-    user: env.POSTGRES_USER,
-    password: env.POSTGRES_PASSWORD,
-    database: env.POSTGRES_DB,
-    ssl: env.POSTGRES_SSL,
-    poolMax: env.POSTGRES_POOL_MAX,
-    idleTimeout: env.POSTGRES_IDLE_TIMEOUT,
-    connectTimeout: env.POSTGRES_CONNECT_TIMEOUT,
-  },
-};
+  return {
+    nodeEnv: env.NODE_ENV,
+    isDevelopment: env.NODE_ENV === NodeEnv.development,
+    isProduction: env.NODE_ENV === NodeEnv.production,
+    // Read from package.json: npm_package_version is set only when started through pnpm
+    version: packageJson.version,
+    log: {
+      level: env.LOG_LEVEL,
+    },
+    server: {
+      host: env.HOST,
+      port: env.PORT,
+    },
+    db: {
+      // Separate fields rather than a connection URL, so credentials need no escaping
+      host: dbHost,
+      port: Number(dbPort),
+      user: env.POSTGRES_USER,
+      password: env.POSTGRES_PASSWORD,
+      database: env.POSTGRES_DB,
+      ssl: env.POSTGRES_SSL,
+      poolMax: env.POSTGRES_POOL_MAX,
+      idleTimeout: env.POSTGRES_IDLE_TIMEOUT,
+      connectTimeout: env.POSTGRES_CONNECT_TIMEOUT,
+    },
+  };
+}

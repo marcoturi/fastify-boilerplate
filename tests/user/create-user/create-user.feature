@@ -23,6 +23,7 @@ Feature: Create a user
       | email              | country | street      | postalCode |
       | john.doe@gmail.com | England | Road Avenue | 29145      |
     And I send a request to create a user
+    And I receive my user ID
     And user profile data
       | email              | country | street      | postalCode |
       | John.Doe@Gmail.com | England | Road Avenue | 29145      |

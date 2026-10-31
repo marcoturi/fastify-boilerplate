@@ -13,6 +13,18 @@ Feature: Find users
     Then I see every user exactly once, newest first
 
   @user
+  Scenario: I can filter users by country
+    When I request the users with "country=Italy"
+    Then I receive 2 of 2 users
+    And every user is from "Italy"
+
+  @user
+  Scenario: I can page through filtered users
+    When I request the users with "country=Italy&limit=1&page=1"
+    Then I receive 1 of 2 users
+    And every user is from "Italy"
+
+  @user
   Scenario Outline: I try to list users with invalid pagination
     When I request the users with "<Query>"
     Then I receive an error "Bad Request" with status code 400

@@ -1,1 +1,3 @@
-export { default as env } from './env.ts';
+import { parseEnv } from './env.ts';
+
+export const env = parseEnv();

@@ -51,7 +51,19 @@ When('I request the users with {string}', async function (this: ICustomWorld, qu
     method: 'GET',
     url: `/api/v1/users?${query}`,
   });
+  // Read by the list assertions shared with the GraphQL steps (e.g. "I receive 1 of 2 users")
+  this.context.users = this.context.latestResponse.json();
 });
+
+When(
+  'I send a request to delete the user {string}',
+  async function (this: ICustomWorld, id: string) {
+    this.context.latestResponse = await this.server.inject({
+      method: 'DELETE',
+      url: `/api/v1/users/${id}`,
+    });
+  },
+);
 
 When(
   'I page through the users {int} at a time',

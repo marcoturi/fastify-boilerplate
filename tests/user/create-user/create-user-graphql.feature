@@ -15,6 +15,7 @@ Feature: Create a user via GraphQL
       | email              | country | street   | postalCode |
       | jane.doe@gmail.com | Italy   | Via Roma | 10100      |
     And I send a GraphQL mutation to create a user
+    And I receive my user ID from GraphQL
     When I send a GraphQL mutation to create a user
     Then I receive a GraphQL error with code "USER_ALREADY_EXISTS"
 
