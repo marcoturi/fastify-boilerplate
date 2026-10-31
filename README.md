@@ -155,7 +155,7 @@ The `-e` flags override two values of a `.env` made for local development: `NODE
 - **Node Alpine** — small footprint, native TypeScript execution (no build step)
 - **Non-root user** — runs as an unprivileged `fastify` user (UID 1001)
 - **dumb-init** — proper PID 1 signal forwarding for graceful shutdown
-- **HEALTHCHECK** — built-in Docker health check against `/health` every 30 seconds
+- **HEALTHCHECK** — built-in Docker health check against `/health` every 30 seconds, on the port in `PORT`
 
 ## API Endpoints
 

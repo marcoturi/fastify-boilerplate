@@ -3,14 +3,17 @@
 # ---- Base ----
 # Node 26 Alpine for small image size; native TS execution (no build step needed)
 FROM node:26-alpine AS base
-
-# Node >= 25 no longer bundles Corepack: install it to get the pnpm pinned in packageManager
-RUN npm install -g corepack@0.36.0 && corepack enable
 WORKDIR /app
 
 # ---- Dependencies ----
 # Install production dependencies in an isolated stage for layer caching
 FROM base AS deps
+
+# Node >= 25 no longer bundles Corepack: install it to get the pnpm pinned in packageManager.
+# Only this stage needs it: the production image runs node alone
+# renovate: datasource=npm depName=corepack
+ARG COREPACK_VERSION=0.36.0
+RUN npm install -g corepack@${COREPACK_VERSION} && corepack enable
 
 # pnpm-workspace.yaml holds pnpm settings (e.g. overrides) that a frozen install checks
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
@@ -29,6 +32,8 @@ RUN apk add --no-cache dumb-init
 ENV NODE_ENV=production
 # Bind to all interfaces so the container is reachable from the Docker network
 ENV HOST=0.0.0.0
+# The port the app listens on; override it at run time with -e PORT=...
+ENV PORT=3000
 # OpenTelemetry disabled by default; set to "false" and configure
 # OTEL_EXPORTER_OTLP_ENDPOINT to enable telemetry export.
 ENV OTEL_SDK_DISABLED=true
@@ -48,9 +53,11 @@ COPY src ./src
 
 USER fastify
 
-EXPOSE 3000
+# Documents the default port only: a PORT set at run time still works, publish it with -p
+EXPOSE $PORT
 
+# Reads PORT when it runs, so it follows a port set at run time
 HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
-  CMD ["node", "-e", "fetch('http://localhost:3000/health').then(r=>{if(!r.ok)throw r;process.exit(0)}).catch(()=>process.exit(1))"]
+  CMD ["node", "-e", "fetch('http://localhost:'+process.env.PORT+'/health').then(r=>{if(!r.ok)throw r;process.exit(0)}).catch(()=>process.exit(1))"]
 
 CMD ["dumb-init", "node", "--import", "./src/instrumentation.ts", "./src/index.ts"]
