@@ -15,6 +15,22 @@ describe('userDomain()', () => {
     assert.equal(entity.role, UserRoles.guest);
   });
 
+  it('should generate the id and dates even when the input carries them', () => {
+    const forged = {
+      email: 'test@test.it',
+      country: 'Italy',
+      postalCode: '12345',
+      street: 'Via Roma',
+      id: 'chosen-by-the-client',
+      createdAt: '2000-01-01',
+      role: UserRoles.admin,
+    };
+    const { entity } = userDomain().createUser(forged);
+    assert.notEqual(entity.id, forged.id);
+    assert.ok(entity.createdAt instanceof Date);
+    assert.equal(entity.role, UserRoles.guest);
+  });
+
   it('should record a user/created domain event carrying the new entity', () => {
     const { entity, events } = userDomain().createUser({
       email: 'test@test.it',

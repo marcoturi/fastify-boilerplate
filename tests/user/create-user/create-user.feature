@@ -10,6 +10,14 @@ Feature: Create a user
     And I can see my user in a list of all users
 
   @user
+  Scenario: The server ignores an id and dates sent with the user
+    Given user profile data
+      | email              | country | street      | postalCode | id                                   | createdAt |
+      | john.doe@gmail.com | England | Road Avenue | 29145      | 2cdc8ab1-6d50-49cc-ba14-54e4ac7ec231 | yesterday |
+    When I send a request to create a user
+    Then I receive a user ID other than "2cdc8ab1-6d50-49cc-ba14-54e4ac7ec231"
+
+  @user
   Scenario: I cannot create two users whose emails differ only in case
     Given user profile data
       | email              | country | street      | postalCode |

@@ -20,6 +20,12 @@ Then('I receive my user ID', function (this: ICustomWorld) {
   assert.deepStrictEqual(typeof this.context.latestResponse!.json().id, 'string');
 });
 
+Then('I receive a user ID other than {string}', function (this: ICustomWorld, id: string) {
+  const response = this.context.latestResponse!;
+  assert.strictEqual(response.statusCode, 201);
+  assert.notStrictEqual(response.json().id, id);
+});
+
 Then('I can see my user in a list of all users', async function (this: ICustomWorld) {
   const response = await this.server.inject({
     method: 'GET',

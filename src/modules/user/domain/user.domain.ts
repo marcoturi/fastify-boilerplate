@@ -12,11 +12,12 @@ export default function userDomain() {
     createUser: (create: CreateUserProps): DomainResult<UserEntity> => {
       const now = new Date();
 
+      // Generated fields come after the spread, so the input cannot set them
       const user: UserEntity = {
+        ...create,
         id: randomUUID(),
         createdAt: now,
         updatedAt: now,
-        ...create,
         role: UserRoles.guest,
       };
 
