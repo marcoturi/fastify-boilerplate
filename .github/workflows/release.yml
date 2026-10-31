@@ -7,6 +7,12 @@ on:
 permissions:
   contents: read # for checkout
 
+# One release at a time: a push that lands while a release runs waits for it, instead of
+# racing it to the same tag. Never cancelled, so a release is not stopped halfway
+concurrency:
+  group: release
+  cancel-in-progress: false
+
 jobs:
   release:
     name: Release
