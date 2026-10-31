@@ -47,8 +47,8 @@ paths:
 
 ## Dependencies and hooks
 
-- Renovate (`renovate.json`) proposes updates once a release is 3 days old and automerges minor
-  and patch updates when CI passes
+- Renovate (`renovate.json`) proposes updates once a release is older than its `minimumReleaseAge`
+  and automerges minor and patch updates when CI passes
 - pnpm refuses versions younger than `minimumReleaseAge` (`pnpm-workspace.yaml`), also when they
   are already in the lockfile: `pnpm update` picks older versions on its own, while a version
   pinned by hand must wait or go in `minimumReleaseAgeExclude`
