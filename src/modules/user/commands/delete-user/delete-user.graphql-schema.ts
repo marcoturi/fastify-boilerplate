@@ -1,7 +1,7 @@
-const userDeleteSchema = `
+const deleteUserGraphqlSchema = `
   type Mutation {
     deleteUser(id: ID!): Boolean!
   }
 `;
 
-export default userDeleteSchema;
+export default deleteUserGraphqlSchema;

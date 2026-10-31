@@ -18,17 +18,16 @@ export default function createUserHandler({
   return {
     async handler({ payload }: HandlerAction<typeof createUserCommand>): Promise<CreateUserResult> {
       const created = userDomain.createUser(payload);
-      const user = created.entity;
       try {
-        await userRepository.insert(user);
-        await created.commit(eventBus); // publish recorded domain events after the write succeeds
-        return user.id;
+        await userRepository.insert(created.entity);
       } catch (error: unknown) {
         if (error instanceof AlreadyExistsException) {
           throw new UserAlreadyExistsError(error);
         }
         throw error;
       }
+      await created.commit(eventBus); // publish recorded domain events after the write succeeds
+      return created.entity.id;
     },
     init() {
       commandBus.register(createUserCommand.type, this.handler);

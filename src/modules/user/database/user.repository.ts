@@ -6,7 +6,7 @@ import type {
 import { UserRoles } from '#src/modules/user/domain/user.types.ts';
 import type { PaginatedQueryParams } from '#src/shared/db/repository.port.ts';
 
-export const userSchema = Type.Object({
+export const userModelSchema = Type.Object({
   id: Type.String({ format: 'uuid' }),
   createdAt: Type.String({ format: 'date-time' }),
   updatedAt: Type.String({ format: 'date-time' }),
@@ -16,7 +16,7 @@ export const userSchema = Type.Object({
   street: Type.String({ minLength: 1, maxLength: 255 }),
   role: Type.Enum(UserRoles),
 });
-export type UserModel = Static<typeof userSchema>;
+export type UserModel = Static<typeof userModelSchema>;
 
 export default function userRepository({
   db,

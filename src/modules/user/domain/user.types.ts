@@ -1,11 +1,3 @@
-// Properties that are needed for a user creation
-export interface CreateUserProps {
-  email: string;
-  country: string;
-  postalCode: string;
-  street: string;
-}
-
 /**
  * `UserRoles` is both a value object (for runtime enum-like access, e.g. `UserRoles.admin`)
  * and a type (union of `'admin' | 'moderator' | 'guest'`).
@@ -28,3 +20,6 @@ export interface UserEntity {
   createdAt: Date;
   updatedAt: Date;
 }
+
+/** What a client provides to create a user: the rest is generated */
+export type CreateUserProps = Pick<UserEntity, 'email' | 'country' | 'postalCode' | 'street'>;

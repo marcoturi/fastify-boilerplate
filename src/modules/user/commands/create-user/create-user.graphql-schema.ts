@@ -1,6 +1,6 @@
 import { userBaseSchema } from '#src/modules/user/dtos/user.graphql-schema.ts';
 
-const userCreateSchema = `
+const createUserGraphqlSchema = `
   input CreateUserInput {
     ${userBaseSchema}
   }
@@ -10,4 +10,4 @@ const userCreateSchema = `
   }
 `;
 
-export default userCreateSchema;
+export default createUserGraphqlSchema;

@@ -1,4 +1,4 @@
-import { type UserModel, userSchema } from '#src/modules/user/database/user.repository.ts';
+import { type UserModel, userModelSchema } from '#src/modules/user/database/user.repository.ts';
 import type { UserEntity } from '#src/modules/user/domain/user.types.ts';
 import type { UserResponseDto } from '#src/modules/user/dtos/user.response.dto.ts';
 import type { Mapper } from '#src/shared/ddd/mapper.interface.ts';
@@ -6,7 +6,7 @@ import { InternalException } from '#src/shared/exceptions/index.ts';
 import { ajv } from '#src/shared/utils/validator.util.ts';
 
 export default function userMapper(): Mapper<UserEntity, UserModel, UserResponseDto> {
-  const persistenceValidator = ajv.compile(userSchema);
+  const persistenceValidator = ajv.compile(userModelSchema);
   return {
     toDomain(record: UserModel): UserEntity {
       return {

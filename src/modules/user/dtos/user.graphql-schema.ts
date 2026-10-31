@@ -7,7 +7,7 @@ export const userBaseSchema = `
     street: String!
 `;
 
-const userSchema = `
+const userGraphqlSchema = `
 
   enum UserRole {
     ${Object.values(UserRoles).join('\n    ')}
@@ -23,4 +23,4 @@ const userSchema = `
 
 `;
 
-export default userSchema;
+export default userGraphqlSchema;

@@ -1,4 +1,4 @@
-const userSchema = `
+const findUsersGraphqlSchema = `
   type UserPaginatedResponse {
     page: Int!
     count: Int!
@@ -11,4 +11,4 @@ const userSchema = `
   }
 `;
 
-export default userSchema;
+export default findUsersGraphqlSchema;
