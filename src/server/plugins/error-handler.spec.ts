@@ -95,4 +95,24 @@ describe('errorHandler plugin', () => {
     assert.equal(res.json().error, 'Service Unavailable');
     assert.equal(res.json().message, 'Service Unavailable');
   });
+
+  it('logs load shedding as a warning, without the stack', async () => {
+    const lines: { level: number; msg: string; err?: unknown }[] = [];
+    const shedding = Fastify({
+      logger: { level: 'warn', stream: { write: (line: string) => lines.push(JSON.parse(line)) } },
+    });
+    await shedding.register(errorHandler);
+    shedding.get('/', async () => {
+      throw Object.assign(new Error('Service Unavailable'), {
+        statusCode: 503,
+        code: 'FST_UNDER_PRESSURE',
+      });
+    });
+    const res = await shedding.inject({ method: 'GET', url: '/' });
+    await shedding.close();
+    assert.equal(res.statusCode, 503);
+    const logged = lines.find((line) => line.msg.includes('under pressure'));
+    assert.equal(logged?.level, 40);
+    assert.equal(logged?.err, undefined);
+  });
 });

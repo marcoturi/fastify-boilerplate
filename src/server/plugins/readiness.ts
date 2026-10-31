@@ -9,6 +9,7 @@ const DB_PING_TIMEOUT_MS = 2000;
  * Readiness probe. `/health` (under-pressure) is the liveness probe: it only says the process
  * is up, because restarting the app never fixes an unreachable database. `/ready` also checks
  * that the database answers, so an orchestrator stops routing traffic here until it does.
+ * Under pressure it answers 503 like any route (see under-pressure in src/server/index.ts).
  */
 async function readinessPlugin(fastify: FastifyInstance) {
   fastify.get('/ready', { logLevel: 'silent', schema: { hide: true } }, async (_req, res) => {

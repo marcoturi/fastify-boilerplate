@@ -1,5 +1,5 @@
 import { STATUS_CODES } from 'node:http';
-import type { FastifyError, FastifyInstance, FastifyReply } from 'fastify';
+import type { FastifyBaseLogger, FastifyError, FastifyInstance, FastifyReply } from 'fastify';
 import fp from 'fastify-plugin';
 import {
   type ApiErrorResponse,
@@ -24,6 +24,16 @@ function statusCodeOf(error: FastifyError | Error): number {
     error.statusCode < 600
     ? error.statusCode
     : 500;
+}
+
+/** Logs a 5xx. Load shedding (under-pressure's 503) is expected under load: a warning without
+ *  the stack, which would cost time and log volume exactly when the server is overloaded */
+function logServerError(log: FastifyBaseLogger, error: FastifyError | Error) {
+  if ('code' in error && error.code === 'FST_UNDER_PRESSURE') {
+    log.warn({ code: error.code }, 'Request rejected: the server is under pressure');
+  } else {
+    log.error(error);
+  }
 }
 
 function sendError(
@@ -77,7 +87,7 @@ async function errorHandlerPlugin(fastify: FastifyInstance) {
     }
 
     // A 5xx message can hold internal details: answer with the reason phrase only
-    fastify.log.error(error);
+    logServerError(fastify.log, error);
     return sendError(res, statusCode, STATUS_CODES[statusCode] ?? 'Internal Server Error');
   });
 

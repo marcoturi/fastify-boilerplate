@@ -68,11 +68,17 @@ export default async function server(fastify: FastifyInstance) {
     indexPattern: /^$/,
   });
 
+  // Load shedding: while the event loop is saturated, requests get a 503 with Retry-After
+  // instead of queueing up past any useful timeout. /health is exempt (a no-op
+  // pressureHandler lets it through): an overloaded process is alive, and restarting it
+  // would not help.
   await fastify.register(UnderPressure, {
+    maxEventLoopDelay: 1000,
+    maxEventLoopUtilization: 0.98,
     healthCheck: async () => true,
     healthCheckInterval: 5000,
     exposeStatusRoute: {
-      routeOpts: { logLevel: 'silent' },
+      routeOpts: { logLevel: 'silent', config: { pressureHandler: () => undefined } },
       url: '/health',
     },
   });
