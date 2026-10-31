@@ -66,7 +66,9 @@ src/
 
 Handlers get repositories through DI and use them only through their port interfaces: from
 `src/shared/db/` or `database/` they import nothing but port files (`*.port.ts`), never an
-adapter or the DB client. `pnpm deps:validate` enforces this. SQL belongs in repository files only.
+adapter or the DB client. Repositories never import handlers or services, the domain never imports
+request schemas (`*.schema.ts`), and `src/shared` never imports a module. `pnpm deps:validate`
+enforces all of this. SQL belongs in repository files only.
 
 ### Module independence
 

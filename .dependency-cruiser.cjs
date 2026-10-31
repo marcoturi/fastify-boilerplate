@@ -54,12 +54,45 @@ module.exports = {
       },
     },
     {
+      name: 'no-domain-to-request-schema-deps',
+      comment:
+        'Domain layer cannot depend on request schemas (*.schema.ts): they belong to the api ' +
+        'layer. Define the domain types the domain needs in domain/*.types.ts',
+      severity: 'error',
+      from: { path: domainLayerPaths },
+      to: {
+        path: '[.]schema[.]ts$',
+      },
+    },
+    {
       name: 'no-infra-to-api-deps',
       comment: 'Infrastructure layer cannot depend on api layer',
       severity: 'error',
       from: { path: infrastructureLayerPaths },
       to: {
         path: apiLayerPaths,
+      },
+    },
+    {
+      name: 'no-infra-to-app-deps',
+      comment:
+        'Infrastructure layer cannot depend on application layer: handlers and services use ' +
+        'repositories, not the other way around',
+      severity: 'error',
+      from: { path: infrastructureLayerPaths },
+      to: {
+        path: applicationLayerPaths,
+      },
+    },
+    {
+      name: 'no-shared-to-modules-deps',
+      comment:
+        'src/shared is the code every module builds on: it cannot depend on a module. Move ' +
+        'what both need into src/shared',
+      severity: 'error',
+      from: { path: '^src/shared/' },
+      to: {
+        path: '^src/modules/',
       },
     },
     {
@@ -90,12 +123,12 @@ module.exports = {
       name: 'no-cross-module-deps',
       comment:
         "Modules must not import each other directly, except another module's domain events " +
-        '(*.events.ts), which are the cross-module contract. Use the CQRS buses for the rest.',
+        '(domain/*.events.ts), which are the cross-module contract. Use the CQRS buses for the rest.',
       severity: 'error',
       from: { path: '^src/modules/([^/]+)/' },
       to: {
         path: '^src/modules/[^/]+/',
-        pathNot: ['^src/modules/$1/', '[.]events[.]ts$'],
+        pathNot: ['^src/modules/$1/', '^src/modules/[^/]+/domain/[^/]+[.]events[.]ts$'],
       },
     },
 
@@ -187,7 +220,6 @@ module.exports = {
         'in your package.json.',
       from: {},
       to: {
-        pathNot: ['ajv'],
         dependencyTypes: ['npm-no-pkg', 'npm-unknown'],
       },
     },
