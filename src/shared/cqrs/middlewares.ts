@@ -1,10 +1,11 @@
 import type { FastifyBaseLogger } from 'fastify';
 import { getRequestId } from '#src/shared/app/app-request-context.ts';
-import type { Action, CommandHandler, EventHandler } from '#src/shared/cqrs/bus.types.ts';
+import type { Action, CommandHandler } from '#src/shared/cqrs/bus.types.ts';
 
 /** Creates a new action with correlation ID and timestamp injected into meta.
- *  Does NOT mutate the original action. */
-function withMetadata(action: Action<unknown>): Action<unknown> {
+ *  Does NOT mutate the original action. The event bus calls it once per emitted event,
+ *  so every subscriber sees the same metadata, stamped when the event was emitted. */
+export function withMetadata(action: Action<unknown>): Action<unknown> {
   return {
     ...action,
     meta: {
@@ -13,16 +14,6 @@ function withMetadata(action: Action<unknown>): Action<unknown> {
       timestamp: action.meta?.timestamp ?? Date.now(),
     },
   } as Action<unknown>;
-}
-
-/** Metadata middleware for the event bus — creates a new action, does not mutate.
- *  Returns the handler result so the bus can await it (sequential processing) and
- *  isolate failures. */
-export function decorateEventWithMetadata(
-  action: Action<unknown>,
-  handler: EventHandler,
-): void | Promise<void> {
-  return handler(withMetadata(action));
 }
 
 /** Metadata middleware for the command/query bus — creates a new action, does not mutate. */

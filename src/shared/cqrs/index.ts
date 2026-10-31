@@ -4,7 +4,6 @@ import { commandBus } from '#src/shared/cqrs/command-bus.ts';
 import { eventBus } from '#src/shared/cqrs/event-bus.ts';
 import {
   decorateCommandWithMetadata,
-  decorateEventWithMetadata,
   trackExecutionTimeMiddleware,
 } from '#src/shared/cqrs/middlewares.ts';
 import { traceEventMiddleware, tracingMiddleware } from '#src/shared/cqrs/otel-middleware.ts';
@@ -18,9 +17,9 @@ const CQRSPlugin = fastifyPlugin(
 
     // Middleware order (first added = outermost wrapper):
     //   metadata → tracing → trackExecutionTime → handler
+    // The event bus stamps the metadata itself, once per emitted event
 
     const eventBusInstance = eventBus({ logger: fastify.log });
-    eventBusInstance.addMiddleware(decorateEventWithMetadata);
     eventBusInstance.addMiddleware(traceEventMiddleware);
 
     const queryBusInstance = queryBus();

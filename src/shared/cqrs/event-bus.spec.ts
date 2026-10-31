@@ -117,6 +117,40 @@ describe('eventBus()', () => {
     assert.deepEqual(done, ['a1', 'a2', 'a3']);
   });
 
+  it('stamps the metadata once, when the event is emitted', async () => {
+    const { logger } = fakeLogger();
+    const bus = eventBus({ logger });
+    const timestamps: unknown[] = [];
+    let releaseFirst: () => void = () => undefined;
+    const firstHeld = new Promise<void>((resolve) => {
+      releaseFirst = resolve;
+    });
+    bus.on<{ label: string }>(
+      'job',
+      async (event) => {
+        // Holds the queue, so the second event waits for its turn
+        if (event.payload.label === 'first') await firstHeld;
+        timestamps.push(event.meta?.timestamp);
+      },
+      { keyExtractor: () => 'k' },
+    );
+    bus.on<{ label: string }>('job', (event) => {
+      timestamps.push(event.meta?.timestamp);
+    });
+
+    bus.emit(makeEvent('job', { label: 'first' }));
+    bus.emit(makeEvent('job', { label: 'second' }));
+    const emittedAt = Date.now();
+    await new Promise((resolve) => setTimeout(resolve, 10));
+    releaseFirst();
+
+    await flushUntil(() => timestamps.length === 4);
+    // Both subscribers see the same stamp, and the queued event keeps its emit time
+    assert.equal(timestamps.length, 4);
+    assert.ok(timestamps.every((timestamp) => typeof timestamp === 'number'));
+    assert.ok(timestamps.every((timestamp) => (timestamp as number) <= emittedAt));
+  });
+
   it('runs each queued event in the async context it was emitted in', async () => {
     const { logger } = fakeLogger();
     const bus = eventBus({ logger });

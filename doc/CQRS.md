@@ -333,11 +333,12 @@ Registered in `src/shared/cqrs/index.ts`, outermost first:
 
 ```text
 command / query :  metadata → OTel tracing → trackExecutionTime → handler
-event           :  metadata → OTel tracing → handler
+event           :  OTel tracing → handler
 ```
 
-- `decorateCommandWithMetadata` / `decorateEventWithMetadata` — inject `correlationId`
-  (from the request context) and `timestamp` into `meta`, immutably.
+- `decorateCommandWithMetadata` — injects `correlationId` (from the request context) and
+  `timestamp` into `meta`, immutably. The event bus adds the same metadata itself in
+  `emit()`, once per event, so every subscriber sees the time the event was emitted.
 - `tracingMiddleware` / `traceEventMiddleware` — wrap each dispatch in an OpenTelemetry
   span named after the action type (noop spans when OTel is disabled).
 - `trackExecutionTimeMiddleware` — logs execution time per action.

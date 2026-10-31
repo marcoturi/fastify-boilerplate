@@ -7,6 +7,7 @@ import type {
   EventMiddleware,
   SequentialProcessingOptions,
 } from '#src/shared/cqrs/bus.types.ts';
+import { withMetadata } from '#src/shared/cqrs/middlewares.ts';
 import { composeMiddlewares } from '#src/shared/utils/compose-middlewares.ts';
 
 /** A queued event and a snapshot of the async context it was emitted in (request context,
@@ -144,8 +145,11 @@ export function eventBus({ logger }: EventBusOptions): EventBus {
       logger.debug(`No handlers registered for event "${event.type}"`);
       return;
     }
+    // Stamped here, not in a middleware: a middleware runs per subscriber, and a queued
+    // event only when its turn comes, so each would see a different timestamp
+    const stamped = withMetadata(event);
     for (const registration of registrations) {
-      dispatch(event, registration);
+      dispatch(stamped, registration);
     }
   }
 
