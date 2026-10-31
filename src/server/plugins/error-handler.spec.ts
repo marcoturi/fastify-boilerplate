@@ -26,6 +26,9 @@ describe('errorHandler plugin', () => {
     app.get('/boom', async () => {
       throw new Error('secret internal detail');
     });
+    app.get('/overloaded', async () => {
+      throw Object.assign(new Error('secret internal detail'), { statusCode: 503 });
+    });
     await app.ready();
   });
 
@@ -84,5 +87,12 @@ describe('errorHandler plugin', () => {
     const res = await app.inject({ method: 'GET', url: '/boom' });
     assert.equal(res.statusCode, 500);
     assert.equal(res.json().message, 'Internal Server Error');
+  });
+
+  it('keeps the 5xx status of an error that carries one, hiding its message', async () => {
+    const res = await app.inject({ method: 'GET', url: '/overloaded' });
+    assert.equal(res.statusCode, 503);
+    assert.equal(res.json().error, 'Service Unavailable');
+    assert.equal(res.json().message, 'Service Unavailable');
   });
 });

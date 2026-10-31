@@ -16,15 +16,14 @@ const httpStatusByCode: Record<ErrorCode, number> = {
   INTERNAL: 500,
 };
 
-function isClientError(
-  error: FastifyError | Error,
-): error is FastifyError & { statusCode: number } {
-  return (
-    'statusCode' in error &&
+/** The HTTP error status the error carries (Fastify and its plugins set one), else 500 */
+function statusCodeOf(error: FastifyError | Error): number {
+  return 'statusCode' in error &&
     typeof error.statusCode === 'number' &&
     error.statusCode >= 400 &&
-    error.statusCode < 500
-  );
+    error.statusCode < 600
+    ? error.statusCode
+    : 500;
 }
 
 function sendError(
@@ -69,15 +68,17 @@ async function errorHandlerPlugin(fastify: FastifyInstance) {
       );
     }
 
-    // Other client errors raised by Fastify or its plugins (malformed JSON, unsupported
-    // media type, body too large, ...) carry their own 4xx status: keep it instead of a 500.
-    if (isClientError(error)) {
-      return sendError(res, error.statusCode, error.message);
+    // Errors raised by Fastify or its plugins carry their own status: 4xx for malformed JSON,
+    // an unsupported media type or a body too large, 503 from under-pressure when overloaded.
+    // Keep it instead of a 500; unknown errors become a 500.
+    const statusCode = statusCodeOf(error);
+    if (statusCode < 500) {
+      return sendError(res, statusCode, error.message);
     }
 
-    // Unexpected/unknown error
+    // A 5xx message can hold internal details: answer with the reason phrase only
     fastify.log.error(error);
-    return sendError(res, 500, 'Internal Server Error');
+    return sendError(res, statusCode, STATUS_CODES[statusCode] ?? 'Internal Server Error');
   });
 
   // Unknown routes never reach the error handler: answer with the same error envelope
