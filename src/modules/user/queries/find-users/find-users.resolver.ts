@@ -1,3 +1,4 @@
+import { mapPage } from '#src/shared/api/paginated.response.base.ts';
 import { validator } from '#src/shared/utils/validator.util.ts';
 import { findUsersQuery } from './find-users.handler.ts';
 import { findUsersRequestDtoSchema } from './find-users.schema.ts';
@@ -11,10 +12,7 @@ export default async function findUsersResolver(fastify: FastifyRouteInstance) {
     Query: {
       findUsers: async (_, args) => {
         const result = await fastify.queryBus.execute(findUsersQuery(validateArgs(args)));
-        return {
-          ...result,
-          data: result.data.map(fastify.diContainer.cradle.userMapper.toResponse),
-        };
+        return mapPage(result, fastify.diContainer.cradle.userMapper.toResponse);
       },
     },
   });

@@ -1,10 +1,10 @@
-import type { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 import { userPaginatedResponseSchema } from '#src/modules/user/dtos/user.paginated.response.dto.ts';
+import { mapPage } from '#src/shared/api/paginated.response.base.ts';
 import { findUsersQuery } from './find-users.handler.ts';
 import { findUsersRequestDtoSchema } from './find-users.schema.ts';
 
 export default async function findUsersRoute(fastify: FastifyRouteInstance) {
-  fastify.withTypeProvider<TypeBoxTypeProvider>().route({
+  fastify.route({
     method: 'GET',
     url: '/v1/users',
     schema: {
@@ -15,13 +15,9 @@ export default async function findUsersRoute(fastify: FastifyRouteInstance) {
       },
       tags: ['users'],
     },
-    handler: async (req, res) => {
+    handler: async (req) => {
       const result = await fastify.queryBus.execute(findUsersQuery(req.query));
-      const response = {
-        ...result,
-        data: result.data?.map(fastify.diContainer.cradle.userMapper.toResponse),
-      };
-      return res.status(200).send(response);
+      return mapPage(result, fastify.diContainer.cradle.userMapper.toResponse);
     },
   });
 }

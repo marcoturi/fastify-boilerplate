@@ -1,10 +1,9 @@
-import type { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 import { apiErrorResponseRef } from '#src/shared/api/api-error.response.ts';
 import { idDtoSchema } from '#src/shared/api/id.response.dto.ts';
 import { deleteUserCommand } from './delete-user.handler.ts';
 
 export default async function deleteUserRoute(fastify: FastifyRouteInstance) {
-  fastify.withTypeProvider<TypeBoxTypeProvider>().route({
+  fastify.route({
     method: 'DELETE',
     url: '/v1/users/:id',
     schema: {
