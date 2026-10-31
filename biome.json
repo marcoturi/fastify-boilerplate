@@ -115,7 +115,7 @@
         "noClassAssign": "error",
         "noCompareNegZero": "error",
         "noConfusingVoidType": "error",
-        "noConsole": "warn",
+        "noConsole": "error",
         "noConstantBinaryExpressions": "error",
         "noControlCharactersInRegex": "error",
         "noDebugger": "error",
