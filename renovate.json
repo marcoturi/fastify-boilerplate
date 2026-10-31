@@ -5,16 +5,33 @@
     "customManagers:biomeVersions",
     "customManagers:dockerfileVersions"
   ],
-  "minimumReleaseAge": "3 days",
+  "osvVulnerabilityAlerts": true,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true
+  },
+  "minimumReleaseAge": "1 day",
   "packageRules": [
     {
+      "description": "Automerge minor and patch updates, except 0.x versions, where a minor can break",
       "matchUpdateTypes": ["minor", "patch"],
+      "matchCurrentVersion": "!/^0/",
       "automerge": true
     },
     {
       "description": "The preset major must match the conventional-changelog-writer major of @semantic-release/release-notes-generator (writer 8 → preset 9)",
       "matchPackageNames": ["conventional-changelog-conventionalcommits"],
       "allowedVersions": "<10"
+    },
+    {
+      "description": "Keep GitHub Actions on major tags (@v7), never digests",
+      "matchManagers": ["github-actions"],
+      "pinDigests": false
+    },
+    {
+      "description": "Node.js types follow the Node.js major in .nvmrc",
+      "matchPackageNames": ["@types/node"],
+      "allowedVersions": "26.x"
     }
   ],
   "timezone": "Europe/Rome",
