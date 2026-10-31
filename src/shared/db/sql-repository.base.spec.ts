@@ -12,11 +12,13 @@ interface Thing {
   name: string;
 }
 
-/** Fake postgres.js client: tagged-template calls run `query`, helper calls (identifiers, rows) are inert. */
+/** Fake postgres.js client: a tagged-template call runs `query` once awaited, like a real query
+ *  (so fragments, never awaited, run nothing); helper calls (identifiers, rows) are inert. */
 const fakeDb = (query: () => Promise<unknown[]>) =>
   ((first: unknown) =>
     Array.isArray(first) && 'raw' in first
-      ? query()
+      ? // biome-ignore lint/suspicious/noThenProperty: a lazy thenable, as postgres.js queries are
+        { then: (resolve: never, reject: never) => query().then(resolve, reject) }
       : { helper: first }) as unknown as Dependencies['db'];
 
 const props = {
@@ -86,10 +88,11 @@ describe('sqlRepositoryBase()', () => {
   describe('custom methods', () => {
     it('are built from the query helpers and added to the generic ones', async () => {
       const db = fakeDb(async () => [{ id: '1', name: 'a' }]);
-      const things = sqlRepositoryBase(db)(props, ({ where, orderBy }) => ({
+      const things = sqlRepositoryBase(db)(props, ({ where, orderBy, paginate }) => ({
         async findByName(name: string) {
           assert.equal(typeof where, 'function');
           assert.equal(typeof orderBy, 'function');
+          assert.equal(typeof paginate, 'function');
           return db`SELECT * FROM things WHERE name = ${name}`;
         },
       }));
@@ -105,6 +108,33 @@ describe('sqlRepositoryBase()', () => {
         },
       }));
       await assert.rejects(things.rename('b'), AlreadyExistsException);
+    });
+  });
+
+  describe('findAllPaginated()', () => {
+    const params = {
+      limit: 10,
+      offset: 0,
+      page: 0,
+      orderBy: { field: 'id', param: 'asc' },
+    } as const;
+
+    it('returns the page and the total count from a single query', async () => {
+      let queries = 0;
+      const page = await repository(async () => {
+        queries++;
+        return [{ rows: [thing], count: '7' }];
+      }).findAllPaginated(params);
+      assert.equal(queries, 1);
+      assert.deepEqual(page, { data: [thing], count: 7, limit: 10, page: 0 });
+    });
+
+    it('returns an empty page when no row matches', async () => {
+      const page = await repository(async () => [{ rows: null, count: '0' }]).findAllPaginated(
+        params,
+      );
+      assert.deepEqual(page.data, []);
+      assert.equal(page.count, 0);
     });
   });
 

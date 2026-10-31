@@ -3,8 +3,8 @@ import type {
   UserFilters,
   UserRepository,
 } from '#src/modules/user/database/user.repository.port.ts';
-import { type UserEntity, UserRoles } from '#src/modules/user/domain/user.types.ts';
-import type { Paginated, PaginatedQueryParams } from '#src/shared/db/repository.port.ts';
+import { UserRoles } from '#src/modules/user/domain/user.types.ts';
+import type { PaginatedQueryParams } from '#src/shared/db/repository.port.ts';
 
 export const userSchema = Type.Object({
   id: Type.String({ format: 'uuid' }),
@@ -24,30 +24,12 @@ export default function userRepository({
   repositoryBase,
 }: Dependencies): UserRepository {
   // Custom methods next to the generic CRUD: the base maps their driver errors too
-  return repositoryBase({ tableName: 'users', mapper: userMapper }, ({ where, orderBy }) => ({
-    async findAllPaginatedFiltered(
-      params: PaginatedQueryParams,
-      filters: UserFilters,
-    ): Promise<Paginated<UserEntity>> {
-      const conditions = [
+  return repositoryBase({ tableName: 'users', mapper: userMapper }, ({ paginate }) => ({
+    findAllPaginatedFiltered: (params: PaginatedQueryParams, filters: UserFilters) =>
+      paginate(params, [
         filters.country && db`country = ${filters.country}`,
         filters.street && db`street = ${filters.street}`,
         filters.postalCode && db`"postalCode" = ${filters.postalCode}`,
-      ];
-      const [result]: { rows: UserModel[] | null; count: number }[] = await db`
-        SELECT
-          (SELECT COUNT(*) FROM users ${where(conditions)}) as count,
-          (SELECT json_agg(t.* ${orderBy(params.orderBy)}) FROM
-            (SELECT * FROM users ${where(conditions)} ${orderBy(params.orderBy)}
-              LIMIT ${params.limit} OFFSET ${params.offset})
-          AS t) AS rows
-      `;
-      return {
-        data: result?.rows?.map((user) => userMapper.toDomain(user)) ?? [],
-        count: Number(result?.count ?? 0),
-        limit: params.limit,
-        page: params.page,
-      };
-    },
+      ]),
   }));
 }

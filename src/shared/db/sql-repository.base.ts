@@ -14,16 +14,20 @@ export interface RepositoryProps<Entity, DbModel> {
   mapper: Mapper<Entity, DbModel>;
 }
 
-/** SQL helpers bound to the repository's client, for its custom queries */
-export interface QueryHelpers {
+/** SQL helpers bound to the repository's client and table, for its custom queries */
+export interface QueryHelpers<Entity> {
   /** WHERE clause joining the set conditions with AND: empty when none is set */
   where(conditions: Condition[]): ReturnType<typeof whereClause>;
   /** Deterministic ORDER BY on the field, with `id` as a tiebreaker */
   orderBy(order: OrderBy): ReturnType<typeof orderByClause>;
+  /** A page of the table's rows that match the set conditions, with their total count */
+  paginate(params: PaginatedQueryParams, conditions?: Condition[]): Promise<Paginated<Entity>>;
 }
 
 /** Builds a repository's custom methods from the query helpers */
-export type CustomMethods<Custom extends AsyncMethods> = (helpers: QueryHelpers) => Custom;
+export type CustomMethods<Entity, Custom extends AsyncMethods> = (
+  helpers: QueryHelpers<Entity>,
+) => Custom;
 
 /** The generic CRUD of a repository plus its custom methods */
 export type RepositoryBase<
@@ -38,19 +42,38 @@ export type RepositoryBase<
  * repository never wraps them itself.
  */
 export function sqlRepositoryBase(db: Dependencies['db']) {
-  const helpers: QueryHelpers = {
-    where: (conditions) => whereClause(db, conditions),
-    orderBy: (order) => orderByClause(db, order),
-  };
-
   return function repositoryBase<
     Entity extends { id: string },
     DbModel extends Record<string, unknown>,
     Custom extends AsyncMethods = Record<never, never>,
   >(
     { tableName, mapper }: RepositoryProps<Entity, DbModel>,
-    custom?: CustomMethods<Custom>,
+    custom?: CustomMethods<Entity, Custom>,
   ): RepositoryBase<Entity, Custom> {
+    const helpers: QueryHelpers<Entity> = {
+      where: (conditions) => whereClause(db, conditions),
+      orderBy: (order) => orderByClause(db, order),
+      // One query, so the count and the page come from the same snapshot of the table
+      async paginate(params, conditions = []) {
+        const where = whereClause(db, conditions);
+        const orderBy = orderByClause(db, params.orderBy);
+        const [result] = await db<{ rows: DbModel[] | null; count: string }[]>`
+          SELECT
+            (SELECT COUNT(*) FROM ${db(tableName)} ${where}) AS count,
+            (SELECT json_agg(t.* ${orderBy}) FROM
+              (SELECT * FROM ${db(tableName)} ${where} ${orderBy}
+                LIMIT ${params.limit} OFFSET ${params.offset})
+            AS t) AS rows
+        `;
+        return {
+          data: result?.rows?.map(mapper.toDomain) ?? [],
+          count: Number(result?.count ?? 0),
+          limit: params.limit,
+          page: params.page,
+        };
+      },
+    };
+
     const crud = mapDatabaseErrors({
       async findOneById(id: string): Promise<Entity | undefined> {
         const [result] = await db<DbModel[]>`SELECT * FROM ${db(tableName)} WHERE id = ${id}`;
@@ -60,19 +83,7 @@ export function sqlRepositoryBase(db: Dependencies['db']) {
         const records = await db<DbModel[]>`SELECT * FROM ${db(tableName)}`;
         return records.map(mapper.toDomain);
       },
-      async findAllPaginated(params: PaginatedQueryParams): Promise<Paginated<Entity>> {
-        const [countRow] = await db`SELECT COUNT(*) as total FROM ${db(tableName)}`;
-        const result = await db<DbModel[]>`
-          SELECT * FROM ${db(tableName)} ${helpers.orderBy(params.orderBy)}
-            LIMIT ${params.limit} OFFSET ${params.offset}
-        `;
-        return {
-          data: result.map(mapper.toDomain),
-          count: Number(countRow?.total ?? 0),
-          limit: params.limit,
-          page: params.page,
-        };
-      },
+      findAllPaginated: (params: PaginatedQueryParams) => helpers.paginate(params),
       async update(entity: Entity): Promise<Entity> {
         // postgres.js helpers do not type-check a generic record: they take a plain one
         const { id: _, ...fields } = mapper.toPersistence(entity) as Record<string, unknown>;

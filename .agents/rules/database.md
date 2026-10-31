@@ -43,6 +43,7 @@ DBMate runs plain SQL files from `db/migrations/` (seeds in `db/seeds/`).
 - Always use tagged templates: `` db`SELECT * FROM ${db(tableName)} WHERE id = ${id}` ``
 - Table names use `db(tableName)` (identifier interpolation)
 - Values use `${value}` (parameterized automatically)
-- Custom queries are methods the repository passes to the base, which hands them the `where()` and
-  `orderBy()` helpers bound to its client:
-  `return repositoryBase({ tableName, mapper }, ({ where, orderBy }) => ({ async findByEmail(email: string) { ... } }))`
+- Custom queries are methods the repository passes to the base, which hands them helpers bound to
+  its client and table: `where()`, `orderBy()` and `paginate(params, conditions)`, a page plus the
+  total count in one query. A filtered list only lists its conditions:
+  ``return repositoryBase({ tableName, mapper }, ({ paginate }) => ({ findByCountry: (params, country: string) => paginate(params, [db`country = ${country}`]) }))``
