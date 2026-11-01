@@ -5,6 +5,9 @@ const config: CodegenConfig = {
   generates: {
     './client/graphql.ts': {
       plugins: ['typescript'],
+      // Union types instead of TypeScript enums: an enum is not erasable syntax, so Node's
+      // type stripping could not load the file
+      config: { enumsAsTypes: true },
     },
   },
 };
