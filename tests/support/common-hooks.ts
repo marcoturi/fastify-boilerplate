@@ -19,6 +19,9 @@ After(async function (this: CustomWorld, { result }: ITestCaseHookParameter) {
   if (result) {
     this.attach(`Status: ${result.status}. Duration:${result.duration.seconds}s`);
   }
-  // The server is missing when buildApp() failed in Before: let that error surface instead
+  // The server is missing when buildApp() failed in Before: let that error surface instead.
+  // Let the event handlers finish first, or their queries would hit the next scenario's
+  // TRUNCATE (src/index.ts does the same on shutdown)
+  await this.server?.eventBus.drain();
   await this.server?.close();
 });
