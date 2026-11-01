@@ -1,6 +1,5 @@
 Feature: Delete a user via GraphQL
 
-  @user
   Scenario: I can delete a user
     Given user profile data
       | email              | country | street      | postalCode |
@@ -10,12 +9,10 @@ Feature: Delete a user via GraphQL
     Then GraphQL confirms the deletion
     And the GraphQL list of users is empty
 
-  @user
   Scenario: I cannot delete a user that does not exist
     When I send a GraphQL mutation to delete the user "2cdc8ab1-6d50-49cc-ba14-54e4ac7ec231"
     Then I receive a GraphQL error with code "NOT_FOUND"
 
-  @user
   Scenario: I cannot delete a user with an invalid id
     When I send a GraphQL mutation to delete the user "not-a-uuid"
     Then I receive a GraphQL error with code "BAD_USER_INPUT"

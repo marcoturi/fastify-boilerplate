@@ -36,7 +36,7 @@ A production-ready [Fastify 5](https://github.com/fastify/fastify) boilerplate b
 | **API** | REST ([TypeBox](https://github.com/sinclairzx81/typebox) schemas, Swagger UI) + GraphQL ([Mercurius](https://github.com/mercurius-js/mercurius), GraphiQL in dev) |
 | **Database** | [Postgres.js](https://github.com/porsager/postgres) client + [DBMate](https://github.com/amacneil/dbmate) migrations & seeds |
 | **Security** | [@fastify/helmet](https://github.com/fastify/fastify-helmet), [@fastify/under-pressure](https://github.com/fastify/under-pressure) for back-pressure |
-| **Telemetry** | Vendor-agnostic [OpenTelemetry](https://opentelemetry.io/) with auto-instrumentation (disabled by default) |
+| **Telemetry** | Vendor-agnostic [OpenTelemetry](https://opentelemetry.io/) with auto-instrumentation (off in `.env.example` and the Docker image) |
 | **Linting** | [Biome](https://biomejs.dev/) — single tool for linting, formatting, and import sorting |
 | **Architecture** | [dependency-cruiser](https://github.com/sverweij/dependency-cruiser) validates layer boundaries in the pre-commit hook and in CI |
 | **Release** | [Husky](https://github.com/typicode/husky) + [Commitlint](https://commitlint.js.org/) + [Semantic Release](https://github.com/semantic-release/semantic-release) |
@@ -125,7 +125,7 @@ The server starts at **http://localhost:3000** by default. See [API Endpoints](#
 
 | Script | Description |
 |---|---|
-| `pnpm generate:types` | Generate REST and GraphQL client types (requires running server + DB) |
+| `pnpm generate:types` | Generate REST and GraphQL client types (starts the server itself: requires Postgres with migrations applied) |
 
 ## Running with Docker
 
@@ -133,7 +133,7 @@ The server starts at **http://localhost:3000** by default. See [API Endpoints](#
 
 ```bash
 pnpm create:env       # create .env from .env.example (if not done already)
-docker compose up     # builds the app image and starts all services
+docker compose up     # starts Postgres, applies the migrations (one-shot `migrate` service), then the app
 ```
 
 ### Standalone image
@@ -262,6 +262,7 @@ Example: [user.repository.ts](src/modules/user/database/user.repository.ts)
 └── src/
     ├── index.ts                   → Entry point: logger, server start, graceful shutdown
     ├── instrumentation.ts         → OpenTelemetry setup (loaded via --import)
+    ├── declarations.ts            → Global types and module augmentations (DI cradle, request context)
     ├── config/                    → Environment validation (env-schema + TypeBox)
     ├── modules/
     │   ├── index.ts                                 → Global DI dependencies (db, logger, buses, repository base)
@@ -286,6 +287,7 @@ Example: [user.repository.ts](src/modules/user/database/user.repository.ts)
     │       │   └── <module>.types.ts                → Domain types
     │       ├── dtos/
     │       │   ├── <module>.graphql-schema.ts       → Shared GraphQL types
+    │       │   ├── <module>.paginated.response.dto.ts → Paginated response DTO
     │       │   └── <module>.response.dto.ts         → Shared response DTOs
     │       ├── <name>.service.ts                    → Optional orchestration layer (none yet)
     │       ├── <module>.action-creator.ts           → Action creator with the module prefix
@@ -306,7 +308,7 @@ Example: [user.repository.ts](src/modules/user/database/user.repository.ts)
         ├── db/                    → Postgres connection, transactions, repository base, SQL helpers
         ├── ddd/                   → Domain events recording (withEvents), mapper interface, query base
         ├── exceptions/            → Transport-neutral exceptions
-        └── utils/                 → Ajv validator, timeouts, middleware composition
+        └── utils/                 → Ajv validator, timeouts
 ```
 
 ## OpenTelemetry
@@ -315,9 +317,9 @@ The project ships with a vendor-agnostic [OpenTelemetry](https://opentelemetry.i
 
 **How it works:**
 
-- **HTTP + Fastify** — the SDK registers the [ESM loader hook](https://github.com/open-telemetry/opentelemetry-js/blob/main/doc/esm-support.md) and initialises with `instrumentation-http` and [`@fastify/otel`](https://github.com/fastify/otel). Every request gets a trace span with route, method, status code, and lifecycle hooks.
+- **HTTP + Fastify** — `src/instrumentation.ts` registers the ESM hooks of [import-in-the-middle](https://github.com/nodejs/import-in-the-middle) with Node's synchronous [`module.registerHooks()`](https://nodejs.org/api/module.html#moduleregisterhooksoptions), then starts the SDK with `instrumentation-http` and [`@fastify/otel`](https://github.com/fastify/otel). Every request gets a trace span with route, method, status code, and lifecycle hooks.
 - **CQRS** — a tracing middleware in [`src/shared/cqrs/otel-middleware.ts`](src/shared/cqrs/otel-middleware.ts) wraps every command, query, and event in a span. Spans include the action type, bus kind, and correlation ID.
-- **Disabled by default** (`OTEL_SDK_DISABLED=true`). When disabled, `@opentelemetry/api` returns noop implementations — zero overhead.
+- **Off unless enabled**: `.env.example` and the Docker image set `OTEL_SDK_DISABLED=true`. When disabled, `@opentelemetry/api` returns noop implementations — zero overhead.
 
 To enable, set the standard OTel environment variables in your `.env`:
 
@@ -401,7 +403,7 @@ semantic-release pushes the release commit with the `GH_TOKEN` secret, a persona
 
 - GitHub CodeQL security analysis for JavaScript/TypeScript
 
-**[Renovate](renovate.json)** — opens a pull request for each dependency update once the release is older than its `minimumReleaseAge`. Minor and patch updates are merged automatically when CI passes; major updates wait for a review. pnpm also refuses releases younger than `minimumReleaseAge` in [pnpm-workspace.yaml](pnpm-workspace.yaml) when installing, lockfile included.
+**[Renovate](renovate.json)** — opens a pull request for each dependency update; which ones it merges automatically, and how old a release must be, is in its config. pnpm also refuses releases younger than `minimumReleaseAge` in [pnpm-workspace.yaml](pnpm-workspace.yaml) when installing, lockfile included.
 
 ## AI-Assisted Development
 

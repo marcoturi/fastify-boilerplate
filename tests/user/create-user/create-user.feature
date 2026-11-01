@@ -1,6 +1,5 @@
 Feature: Create a user
 
-  @user
   Scenario: I can create a user
     Given user profile data
       | email              | country | street      | postalCode |
@@ -9,7 +8,6 @@ Feature: Create a user
     Then I receive my user ID
     And I can see my user in a list of all users
 
-  @user
   Scenario: The server ignores an id and dates sent with the user
     Given user profile data
       | email              | country | street      | postalCode | id                                   | createdAt |
@@ -17,7 +15,6 @@ Feature: Create a user
     When I send a request to create a user
     Then I receive a user ID other than "2cdc8ab1-6d50-49cc-ba14-54e4ac7ec231"
 
-  @user
   Scenario: I cannot create two users whose emails differ only in case
     Given user profile data
       | email              | country | street      | postalCode |
@@ -31,7 +28,6 @@ Feature: Create a user
     Then I receive an error "Conflict" with status code 409
     And the error reason is "USER_ALREADY_EXISTS"
 
-  @user
   Scenario Outline: I try to create a user with invalid data
     Given user profile data
       | email   | country   | street   | postalCode   |

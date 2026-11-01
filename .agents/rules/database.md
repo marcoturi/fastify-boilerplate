@@ -17,7 +17,9 @@ SQL belongs in repository files only. Handlers use the repository **port** (inte
   after which `getDb()` throws instead of opening a new pool
 - Transactions: `withTransaction(async () => { ... })` in `src/shared/db/postgres.ts`. The DI `db` is
   transaction-aware, so repositories called inside it join the transaction without receiving `tx`;
-  a nested call joins the outer transaction. Publish domain events after it resolves
+  a nested call joins the outer transaction. Publish domain events after it resolves. Call it from
+  a service or a repository: handlers may not import `src/shared/db/` beyond ports
+  (dependency-cruiser), so a handler that needs a transaction delegates it to a service
 - Repository base: `sqlRepositoryBase(db)` (in `src/shared/db/sql-repository.base.ts`), registered in DI
   as `repositoryBase` already bound to the transaction-aware `db`, provides generic CRUD (insert,
   findOneById, findAll, findAllPaginated, update, delete)
@@ -47,5 +49,5 @@ DBMate runs plain SQL files from `db/migrations/` (seeds in `db/seeds/`).
 - Values use `${value}` (parameterized automatically)
 - Custom queries are methods the repository passes to the base, which hands them helpers bound to
   its client and table: `where()`, `orderBy()` and `paginate(params, conditions)`, a page plus the
-  total count in one query. A filtered list only lists its conditions:
-  ``return repositoryBase({ tableName, mapper }, ({ paginate }) => ({ findByCountry: (params, country: string) => paginate(params, [db`country = ${country}`]) }))``
+  total count in one query. A filtered list only lists its conditions: see
+  `findAllPaginatedFiltered` in `src/modules/user/database/user.repository.ts`

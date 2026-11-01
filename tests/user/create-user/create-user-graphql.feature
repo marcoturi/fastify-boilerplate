@@ -1,6 +1,5 @@
 Feature: Create a user via GraphQL
 
-  @user
   Scenario: I can create a user
     Given user profile data
       | email              | country | street   | postalCode |
@@ -9,7 +8,6 @@ Feature: Create a user via GraphQL
     Then I receive my user ID from GraphQL
     And I can see my user in the GraphQL list of users
 
-  @user
   Scenario: I cannot create two users with the same email
     Given user profile data
       | email              | country | street   | postalCode |
@@ -19,7 +17,6 @@ Feature: Create a user via GraphQL
     When I send a GraphQL mutation to create a user
     Then I receive a GraphQL error with code "USER_ALREADY_EXISTS"
 
-  @user
   Scenario Outline: I try to create a user with invalid data
     Given user profile data
       | email   | country   | street   | postalCode   |
@@ -36,7 +33,6 @@ Feature: Create a user via GraphQL
       | johng@mail.com | England | Road Avenue | @          | /postalCode |
       | #@!$           | $#@1    | %542        | !321       | /email      |
 
-  @user
   Scenario: I cannot create a user with missing data
     Given user profile data
       | email              | country | street   |

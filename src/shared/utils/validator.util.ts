@@ -7,7 +7,7 @@ import { ArgumentInvalidException, type SubError } from '#src/shared/exceptions/
 // Under `"module": "NodeNext"`, TypeScript resolves the default import as
 // the CJS `module.exports` wrapper, requiring `.default` to reach the
 // actual constructor / function at the type level.
-// `example` is allowed as on the Fastify instance (src/index.ts), so the route schemas
+// `example` is allowed as on the Fastify instance (src/server/options.ts), so the route schemas
 // compile here too (e.g. to validate GraphQL input with the same rules as REST).
 export const ajv = addFormats.default(new Ajv.default({ keywords: ['example'] }), [
   'date-time',

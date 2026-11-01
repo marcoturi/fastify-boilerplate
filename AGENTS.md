@@ -49,6 +49,7 @@ The domain is pure and never calls repositories; see `clean-architecture.md` for
 src/
 ├── index.ts           ← Entry point: logger, server start, graceful shutdown
 ├── instrumentation.ts ← OpenTelemetry setup (loaded via --import before the app)
+├── declarations.ts    ← Global types and module augmentations (DI cradle, request context)
 ├── config/            ← Environment variables, validated (env.ts)
 ├── modules/           ← Feature code (vertical slices); index.ts defines the global DI dependencies
 │   └── <module>/
@@ -122,7 +123,8 @@ Cucumber World in `tests/support/` is a class because Cucumber requires it.
   GraphQL in `src/server/graphql-error-formatter.ts`), so handlers serve every transport alike
 - Built-in exceptions: `ArgumentInvalidException`, `NotFoundException`, `AlreadyExistsException`,
   `InternalException` (extended by `DatabaseErrorException`). The error that caused one goes in
-  `cause` (the native `Error` option): it is logged with it, never sent to clients
+  `cause` (the native `Error` option): it is logged with it, never sent to clients.
+  `ArgumentInvalidException` takes the invalid fields (`subErrors`) instead
 - Domain errors extend one of them and may set a stable `reason` for clients
   (e.g. `UserAlreadyExistsError` → `USER_ALREADY_EXISTS`)
 - Always include a descriptive message: `throw new NotFoundException('User with id X not found')`.
@@ -132,7 +134,6 @@ Cucumber World in `tests/support/` is a class because Cucumber requires it.
 
 - Using `execute<ManualType>(action)` instead of letting the type be inferred from the action creator
 - Mutating `action.meta` in middleware instead of spreading
-- Using `ReturnType<typeof creator>` for handler params (incompatible with register — use `HandlerAction<typeof creator>`)
 - Putting business logic in route files
 - Importing anything from another module other than its domain events
 - Accepting GraphQL input without validating it against the route's TypeBox schema

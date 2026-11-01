@@ -30,7 +30,8 @@ paths:
   the Dockerfile sets `NODE_ENV=production` and `HOST=0.0.0.0`
 - Only `package.json`, the production `node_modules` and `src/` reach the image: a file needed at
   runtime outside `src/` must be copied explicitly and must not be excluded by `.dockerignore`
-- Migrations do not run in the image: `db/` is excluded and `pnpm db:migrate` runs separately
+- Migrations do not run in the image: `db/` is excluded and `pnpm db:migrate` runs separately.
+  In `docker-compose.yml` the one-shot `migrate` service applies them before `app` starts
 
 ## CI and release
 
@@ -39,16 +40,17 @@ paths:
 - semantic-release pushes the release commit with the `GH_TOKEN` secret (a personal access token
   allowed to bypass the ruleset). The release checkout keeps `persist-credentials: false`:
   otherwise the push uses the workflow credentials and the ruleset rejects it
-- Actions are pinned to major versions (`@v7`), not to commit digests: a deliberate choice
+- Actions are pinned to major tags (e.g. `actions/checkout@v7`), not to commit digests: a
+  deliberate choice
 - `db:migrate` runs with `--no-dump-schema`: there is no `db/schema.sql` to commit
 - Versions come from the commit type (`.releaserc`): `feat` → minor; `fix`, `perf`, `refactor`,
-  `style` and `docs(README)` → patch; a `!` or a `BREAKING CHANGE:` footer → major; `chore`,
+  `style`, `docs(README)` and `revert` → patch; a `!` or a `BREAKING CHANGE:` footer → major; `chore`,
   `ci`, `build`, `test` and other `docs` → no release
 
 ## Dependencies and hooks
 
-- Renovate (`renovate.json`) proposes updates once a release is older than its `minimumReleaseAge`
-  and automerges minor and patch updates when CI passes
+- Renovate (`renovate.json`) proposes the dependency updates: what it automerges and how long
+  it waits are in that file, each rule with its `description`
 - pnpm refuses versions younger than `minimumReleaseAge` (`pnpm-workspace.yaml`), also when they
   are already in the lockfile: `pnpm update` picks older versions on its own, while a version
   pinned by hand must wait or go in `minimumReleaseAgeExclude`
