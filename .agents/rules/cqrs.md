@@ -28,8 +28,7 @@ type-safe `execute()` calls:
 export const userActionCreator = actionCreatorFactory('user');
 
 // In the handler file — embed both Payload and Result types
-export type CreateUserResult = string;
-export const createUserCommand = userActionCreator<CreateUserRequestDto, CreateUserResult>('create');
+export const createUserCommand = userActionCreator<CreateUserRequestDto, string>('create');
 ```
 
 ## Handler pattern
@@ -37,21 +36,20 @@ export const createUserCommand = userActionCreator<CreateUserRequestDto, CreateU
 Every handler follows this structure:
 
 ```typescript
-export default function doThingHandler({ commandBus, repository, ...deps }: Dependencies) {
+export default function doThingHandler({ commandBus, ...deps }: Dependencies) {
   return {
-    async handler({ payload }: HandlerAction<typeof myCommand>): Promise<MyResult> {
-      // business logic here
-    },
     init() {
-      commandBus.register(myCommand, this.handler);
+      commandBus.register(myCommand, async ({ payload }) => {
+        // business logic here
+      });
     },
   };
 }
 ```
 
 Key rules:
-- Handler parameters use `HandlerAction<typeof creator>` (strips the phantom Result type for register() compatibility)
-- The result type (e.g. `CreateUserResult`) is the **unwrapped** value, not `Promise<X>` — the `Promise` wrapper comes from `execute()`
+- `register()` types the handler from the creator, so it needs no annotations: it must resolve to the creator's result type
+- The result type (e.g. `string`) is the **unwrapped** value, not `Promise<X>` — the `Promise` wrapper comes from `execute()`
 - Events use `userActionCreator<PayloadType>('event-name')` without a Result generic (events return void)
 - Handlers are auto-loaded and wired via Awilix DI — the `init()` method is called automatically
 

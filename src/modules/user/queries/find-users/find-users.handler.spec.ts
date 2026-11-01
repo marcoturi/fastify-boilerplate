@@ -1,11 +1,12 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import type { UserFilters } from '#src/modules/user/database/user.repository.port.ts';
+import { requestBus } from '#src/shared/cqrs/request-bus.ts';
 import type { PaginatedQueryParams } from '#src/shared/db/repository.port.ts';
 import findUsersHandler, { findUsersQuery } from './find-users.handler.ts';
 import type { FindUsersRequestDto } from './find-users.schema.ts';
 
-/** Runs the handler with a fake repository and returns what the repository received */
+/** Runs the query through a bus with a fake repository: returns what the repository received */
 async function run(payload: FindUsersRequestDto) {
   const calls: { params: PaginatedQueryParams; filters: UserFilters }[] = [];
   const userRepository = {
@@ -14,8 +15,9 @@ async function run(payload: FindUsersRequestDto) {
       return { data: [], count: 0, limit: params.limit, page: params.page };
     },
   };
-  const { handler } = findUsersHandler({ userRepository } as unknown as Dependencies);
-  await handler(findUsersQuery(payload));
+  const queryBus = requestBus('Query');
+  findUsersHandler({ userRepository, queryBus } as unknown as Dependencies).init();
+  await queryBus.execute(findUsersQuery(payload));
   assert.equal(calls.length, 1);
   return calls[0]!;
 }

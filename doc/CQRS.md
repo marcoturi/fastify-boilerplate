@@ -45,8 +45,9 @@ Route / Resolver ──execute()──▶ CommandBus / QueryBus ──▶ Handle
 - An **Action** is a plain object `{ type, payload, meta? }` (`src/shared/cqrs/bus.types.ts`).
 - An **action creator** is a typed factory that stamps the `type` and carries a *phantom*
   `Result` type used only at compile time to infer the return of `execute()`.
-- A **handler** is a factory `<name>Handler({ deps }: Dependencies)` returning `{ handler, init }`.
-  `init()` registers the handler on the right bus and is called automatically at startup.
+- A **handler** is a factory `<name>Handler({ deps }: Dependencies)` returning `{ init }`.
+  `init()` registers the handler function on the right bus and is called automatically at
+  startup.
 
 ---
 
@@ -66,10 +67,9 @@ export const userActionCreator = actionCreatorFactory('user'); // types become "
 An action creator embeds **both** the payload type and the (phantom) result type:
 
 ```typescript
-export type CreateUserResult = string; // the unwrapped value — NOT Promise<string>
-export const createUserCommand = userActionCreator<CreateUserRequestDto, CreateUserResult>(
-  'create',
-); // createUserCommand.type === 'user/create'
+// The result is the unwrapped value — NOT Promise<string>
+export const createUserCommand = userActionCreator<CreateUserRequestDto, string>('create');
+// createUserCommand.type === 'user/create'
 
 const action = createUserCommand({ email, country, street, postalCode });
 // => { type: 'user/create', payload: { ... } }
@@ -88,12 +88,7 @@ A command mutates state and returns a result. The handler registers itself on th
 
 ```typescript
 // src/modules/user/commands/create-user/create-user.handler.ts
-import type { HandlerAction } from '#src/shared/cqrs/bus.types.ts';
-
-export type CreateUserResult = string;
-export const createUserCommand = userActionCreator<CreateUserRequestDto, CreateUserResult>(
-  'create',
-);
+export const createUserCommand = userActionCreator<CreateUserRequestDto, string>('create');
 
 export default function createUserHandler({
   userRepository,
@@ -102,33 +97,28 @@ export default function createUserHandler({
   eventBus,
 }: Dependencies) {
   return {
-    async handler({ payload }: HandlerAction<typeof createUserCommand>): Promise<CreateUserResult> {
-      // The domain returns the entity + the events it produced (see "Domain events" below).
-      const created = userDomain.createUser(payload);
-      try {
-        await userRepository.insert(created.entity);
-      } catch (error: unknown) {
-        if (error instanceof AlreadyExistsException) {
-          throw new UserAlreadyExistsError(error);
-        }
-        throw error;
-      }
-      await created.commit(eventBus); // publish recorded domain events after the write succeeds
-      return created.entity.id;
-    },
     init() {
-      commandBus.register(createUserCommand, this.handler);
+      commandBus.register(createUserCommand, async ({ payload }) => {
+        // The domain returns the entity + the events it produced (see "Domain events" below).
+        const created = userDomain.createUser(payload);
+        try {
+          await userRepository.insert(created.entity);
+        } catch (error: unknown) {
+          if (error instanceof AlreadyExistsException) {
+            throw new UserAlreadyExistsError(error);
+          }
+          throw error;
+        }
+        await created.commit(eventBus); // publish recorded domain events after the write succeeds
+        return created.entity.id;
+      });
     },
   };
 }
 ```
 
-Key rules:
-
-- Handler params use `HandlerAction<typeof creator>` — it strips the phantom `Result` type so
-  the handler stays compatible with `register()`. Do **not** use `ReturnType<typeof creator>`.
-- The return type (`CreateUserResult`) is the **unwrapped** value; the `Promise` wrapper comes
-  from `execute()`.
+`register()` types the handler from the creator: the payload is the creator's, and the handler
+must resolve to the creator's result (here `string`), so it needs no annotation.
 
 Dispatch from a route — the return type is inferred, no manual generic:
 
@@ -153,21 +143,19 @@ idempotent / side-effect-free**.
 
 ```typescript
 // src/modules/user/queries/find-users/find-users.handler.ts
-export type FindUsersResult = Paginated<UserEntity>;
-export const findUsersQuery = userActionCreator<FindUsersRequestDto, FindUsersResult>(
+export const findUsersQuery = userActionCreator<FindUsersRequestDto, Paginated<UserEntity>>(
   'find-all-paginated',
 );
 
 export default function findUsersHandler({ queryBus, userRepository }: Dependencies) {
   return {
-    async handler({ payload }: HandlerAction<typeof findUsersQuery>): Promise<FindUsersResult> {
-      // Pick known fields only: the request schema does not reject extra keys (e.g. orderBy)
-      const { limit, page, country, postalCode, street } = payload;
-      const query = paginatedQuery({ limit, page });
-      return userRepository.findAllPaginatedFiltered(query, { country, postalCode, street });
-    },
     init() {
-      queryBus.register(findUsersQuery, this.handler);
+      queryBus.register(findUsersQuery, async ({ payload }) => {
+        // Pick known fields only: the request schema does not reject extra keys (e.g. orderBy)
+        const { limit, page, country, postalCode, street } = payload;
+        const query = paginatedQuery({ limit, page });
+        return userRepository.findAllPaginatedFiltered(query, { country, postalCode, street });
+      });
     },
   };
 }
@@ -231,13 +219,12 @@ alone — every domain and handler stays the same (they already `await`).
 // subscriber — src/modules/settings/commands/create-settings/create-settings.event-handler.ts
 export default function createSettingsEventHandler({ eventBus, logger }: Dependencies) {
   return {
-    handler(action: HandlerAction<typeof createUserEvent>) {
-      // Log only the id: the payload carries personal data (email, address)
-      logger.info({ userId: action.payload.id }, 'Creating default settings for user');
-      // ...create default settings for the new user
-    },
     init() {
-      eventBus.on(createUserEvent, this.handler);
+      eventBus.on(createUserEvent, ({ payload }) => {
+        // Log only the id: the payload carries personal data (email, address)
+        logger.info({ userId: payload.id }, 'Creating default settings for user');
+        // ...create default settings for the new user
+      });
     },
   };
 }
@@ -378,24 +365,20 @@ DI uses Awilix (`@fastify/awilix`). Everything is wired automatically:
    types:
 
    ```typescript
-   export type ActivateUserResult = void;
-   export const activateUserCommand = userActionCreator<{ id: string }, ActivateUserResult>(
-     'activate',
-   );
+   export const activateUserCommand = userActionCreator<{ id: string }, void>('activate');
    ```
 
-2. **Handler** — factory returning `{ handler, init }`; register on the right bus in `init()`:
+2. **Handler** — factory returning `{ init }`; register the handler on the right bus in `init()`:
 
    ```typescript
    export default function activateUserHandler({ userRepository, commandBus }: Dependencies) {
      return {
-       async handler({ payload }: HandlerAction<typeof activateUserCommand>): Promise<void> {
-         const user = await userRepository.findOneById(payload.id);
-         if (!user) throw new NotFoundException(`User ${payload.id} not found`);
-         await userRepository.update({ ...user, /* ...activate */ });
-       },
        init() {
-         commandBus.register(activateUserCommand, this.handler);
+         commandBus.register(activateUserCommand, async ({ payload }) => {
+           const user = await userRepository.findOneById(payload.id);
+           if (!user) throw new NotFoundException(`User ${payload.id} not found`);
+           await userRepository.update({ ...user, /* ...activate */ });
+         });
        },
      };
    }
@@ -417,9 +400,8 @@ generic on the creator and subscribe with `eventBus.on(creator, handler, options
 
 - Passing a manual generic to `execute<T>(action)` — the type is inferred from the action
   creator's phantom `Result`.
-- Using `ReturnType<typeof creator>` for handler params — use `HandlerAction<typeof creator>`.
 - Mutating `action.meta` in a middleware — always spread into a new object.
-- Returning `Promise<X>` as the handler `Result` type — it must be the **unwrapped** value.
+- Declaring `Promise<X>` as the creator's `Result` type — it must be the **unwrapped** value.
 - Forgetting to `return` the handler result inside an event middleware — breaks per-key
   ordering and error isolation.
 - Treating events as durable — they are in-process and best-effort; use an outbox/broker for

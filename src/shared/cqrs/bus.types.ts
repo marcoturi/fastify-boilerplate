@@ -20,10 +20,6 @@ export interface Action<Payload, Result = unknown> {
 /** Extracts the Result type from an Action. */
 export type ActionResult<A> = A extends Action<unknown, infer R> ? R : unknown;
 
-/** Produces an `Action<Payload>` (Result = unknown) from a CommandCreator.
- *  Use this for handler parameter types so they stay compatible with `register()`. */
-export type HandlerAction<C> = C extends CommandCreator<infer P, unknown> ? Action<P> : never;
-
 export interface CommandCreator<Payload, Result = unknown> {
   type: string;
 

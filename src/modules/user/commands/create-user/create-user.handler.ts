@@ -1,13 +1,9 @@
 import { UserAlreadyExistsError } from '#src/modules/user/domain/user.errors.ts';
 import { userActionCreator } from '#src/modules/user/index.ts';
-import type { HandlerAction } from '#src/shared/cqrs/bus.types.ts';
 import { AlreadyExistsException } from '#src/shared/exceptions/index.ts';
 import type { CreateUserRequestDto } from './create-user.schema.ts';
 
-export type CreateUserResult = string;
-export const createUserCommand = userActionCreator<CreateUserRequestDto, CreateUserResult>(
-  'create',
-);
+export const createUserCommand = userActionCreator<CreateUserRequestDto, string>('create');
 
 export default function createUserHandler({
   userRepository,
@@ -16,21 +12,20 @@ export default function createUserHandler({
   eventBus,
 }: Dependencies) {
   return {
-    async handler({ payload }: HandlerAction<typeof createUserCommand>): Promise<CreateUserResult> {
-      const created = userDomain.createUser(payload);
-      try {
-        await userRepository.insert(created.entity);
-      } catch (error: unknown) {
-        if (error instanceof AlreadyExistsException) {
-          throw new UserAlreadyExistsError(error);
-        }
-        throw error;
-      }
-      await created.commit(eventBus); // publish recorded domain events after the write succeeds
-      return created.entity.id;
-    },
     init() {
-      commandBus.register(createUserCommand, this.handler);
+      commandBus.register(createUserCommand, async ({ payload }) => {
+        const created = userDomain.createUser(payload);
+        try {
+          await userRepository.insert(created.entity);
+        } catch (error: unknown) {
+          if (error instanceof AlreadyExistsException) {
+            throw new UserAlreadyExistsError(error);
+          }
+          throw error;
+        }
+        await created.commit(eventBus); // publish recorded domain events after the write succeeds
+        return created.entity.id;
+      });
     },
   };
 }
