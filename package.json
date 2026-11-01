@@ -72,7 +72,6 @@
     "@commitlint/cli": "21.2.4",
     "@commitlint/config-conventional": "21.2.4",
     "@cucumber/cucumber": "13.3.0",
-    "@cucumber/messages": "34.2.1",
     "@graphql-codegen/cli": "7.4.6",
     "@graphql-codegen/typescript": "6.1.2",
     "@semantic-release/changelog": "7.0.0",

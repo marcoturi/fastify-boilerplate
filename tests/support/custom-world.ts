@@ -13,7 +13,7 @@ export interface TestContext {
 export class CustomWorld extends World {
   // Set for every scenario by the Before hook (common-hooks.ts)
   declare server: FastifyInstance;
-  declare db: ReturnType<typeof postgres>;
+  declare db: postgres.Sql;
   context: TestContext = {};
 
   /** The latest response: reading it before any request was sent is a broken scenario */

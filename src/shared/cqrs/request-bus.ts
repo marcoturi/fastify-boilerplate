@@ -5,8 +5,7 @@ import type {
   Middleware,
   RequestBus,
 } from '#src/shared/cqrs/bus.types.ts';
-import { withMetadata } from '#src/shared/cqrs/middlewares.ts';
-import { composeMiddlewares } from '#src/shared/utils/compose-middlewares.ts';
+import { composeMiddlewares, withMetadata } from '#src/shared/cqrs/middlewares.ts';
 
 /**
  * Shared factory for command and query buses.

@@ -8,8 +8,7 @@ import type {
   Middleware,
   SequentialProcessingOptions,
 } from '#src/shared/cqrs/bus.types.ts';
-import { withMetadata } from '#src/shared/cqrs/middlewares.ts';
-import { composeMiddlewares } from '#src/shared/utils/compose-middlewares.ts';
+import { composeMiddlewares, withMetadata } from '#src/shared/cqrs/middlewares.ts';
 
 /** A queued event and a snapshot of the async context it was emitted in (request context,
  *  OTel span). The drain loop runs the event inside that snapshot: otherwise it would inherit
@@ -20,12 +19,12 @@ interface QueuedEvent {
 }
 
 /** One subscription for an event type. When `keyExtractor` is set, events are queued
- *  per key and drained one at a time (ordered per key, concurrent across keys). */
+ *  per key and drained one at a time (ordered per key, concurrent across keys): a key has a
+ *  queue exactly while its drain loop runs. */
 interface HandlerRegistration {
   handler: EventHandler;
   keyExtractor?: SequentialProcessingOptions['keyExtractor'];
   queues: Map<string, QueuedEvent[]>;
-  processing: Set<string>;
 }
 
 export function eventBus({ logger }: EventBusOptions): EventBus {
@@ -66,7 +65,6 @@ export function eventBus({ logger }: EventBusOptions): EventBus {
   }
 
   async function drainQueue(registration: HandlerRegistration, key: string): Promise<void> {
-    registration.processing.add(key);
     try {
       // Re-reads the queue each iteration so events emitted while awaiting are included.
       for (
@@ -84,7 +82,6 @@ export function eventBus({ logger }: EventBusOptions): EventBus {
         });
       }
     } finally {
-      registration.processing.delete(key);
       registration.queues.delete(key);
     }
   }
@@ -94,12 +91,14 @@ export function eventBus({ logger }: EventBusOptions): EventBus {
     registration: HandlerRegistration,
     key: string,
   ): void {
-    const queue = registration.queues.get(key) ?? [];
-    queue.push({ event, runInEmitContext: AsyncLocalStorage.snapshot() });
-    registration.queues.set(key, queue);
-    if (!registration.processing.has(key)) {
-      track(drainQueue(registration, key));
+    const queued = { event, runInEmitContext: AsyncLocalStorage.snapshot() };
+    const queue = registration.queues.get(key);
+    if (queue) {
+      queue.push(queued); // the running drain loop picks it up
+      return;
     }
+    registration.queues.set(key, [queued]);
+    track(drainQueue(registration, key));
   }
 
   function on<P>(
@@ -112,7 +111,6 @@ export function eventBus({ logger }: EventBusOptions): EventBus {
       handler: handler as EventHandler,
       keyExtractor: options?.keyExtractor,
       queues: new Map(),
-      processing: new Set(),
     });
     handlers.set(creator.type, existing);
   }

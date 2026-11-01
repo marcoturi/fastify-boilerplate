@@ -2,7 +2,6 @@ import path from 'node:path';
 import AutoLoad from '@fastify/autoload';
 import Cors from '@fastify/cors';
 import Helmet from '@fastify/helmet';
-import type { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 import UnderPressure from '@fastify/under-pressure';
 import type { FastifyInstance } from 'fastify';
 import { enableDevMode } from 'graphql';
@@ -75,13 +74,9 @@ export default async function server(fastify: FastifyInstance) {
   await fastify.register(UnderPressure, {
     maxEventLoopDelay: 1000,
     maxEventLoopUtilization: 0.98,
-    healthCheck: async () => true,
-    healthCheckInterval: 5000,
     exposeStatusRoute: {
       routeOpts: { logLevel: 'silent', config: { pressureHandler: () => undefined } },
       url: '/health',
     },
   });
-
-  return fastify.withTypeProvider<TypeBoxTypeProvider>();
 }

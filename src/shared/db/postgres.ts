@@ -3,9 +3,7 @@ import postgres from 'postgres';
 import { env } from '#src/config/index.ts';
 import { transactionContext } from '#src/shared/db/transaction-context.ts';
 
-type Sql = ReturnType<typeof postgres>;
-
-let sql: Sql | null = null;
+let sql: postgres.Sql | null = null;
 // Set by closeDbConnection(): from then on getDb() throws instead of opening a new pool
 let closed = false;
 let queryLogger: FastifyBaseLogger | undefined;
@@ -20,7 +18,7 @@ export function setQueryLogger(logger: FastifyBaseLogger): void {
 /** Returns the singleton DB connection, creating it lazily on first call. After
  *  closeDbConnection() it throws: a late query (e.g. from an event handler still running
  *  at shutdown) would otherwise open a pool that nothing closes. */
-export function getDb(): Sql {
+export function getDb(): postgres.Sql {
   if (closed) {
     throw new Error('The database connection is closed');
   }
@@ -54,9 +52,9 @@ export async function closeDbConnection() {
 }
 
 /** The client for the current query: the open transaction inside withTransaction(), else the pool. */
-function currentDb(): Sql {
-  // A TransactionSql runs queries and helpers like Sql: it only lacks the pool-level methods
-  return (transactions.current() as unknown as Sql | undefined) ?? getDb();
+function currentDb(): postgres.Sql {
+  // A TransactionSql runs queries and helpers like postgres.Sql: it only lacks the pool-level methods
+  return (transactions.current() as unknown as postgres.Sql | undefined) ?? getDb();
 }
 
 /**
@@ -64,7 +62,7 @@ function currentDb(): Sql {
  * outside one, on the pool. Registered in DI as `db`, so repositories join transactions
  * without passing `tx` around.
  */
-export function transactionAwareDb(): Sql {
+export function transactionAwareDb(): postgres.Sql {
   return new Proxy(getDb(), {
     apply: (_target, _thisArg, args) => Reflect.apply(currentDb(), undefined, args),
     get: (_target, property) => Reflect.get(currentDb(), property),

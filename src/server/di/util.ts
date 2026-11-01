@@ -1,13 +1,6 @@
+/** The container key of a module file: `create-user.handler` → `createUserHandler` */
 export function formatName(fileName: string): string {
-  // Split the filename by delimiters (".", "-")
-  const parts = fileName.split(/[.-]/);
-
-  // Capitalize the first letter of each word (except the first)
-  const formattedParts = parts.map((part, index) =>
-    index === 0 ? part : part.charAt(0).toUpperCase() + part.slice(1),
-  );
-
-  return formattedParts.join('');
+  return fileName.replace(/[.-](\w)/g, (_, letter: string) => letter.toUpperCase());
 }
 
 /**

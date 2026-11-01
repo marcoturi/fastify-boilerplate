@@ -8,7 +8,7 @@ import { sqlRepositoryBase } from '#src/shared/db/sql-repository.base.ts';
 declare global {
   export interface Dependencies {
     logger: FastifyBaseLogger;
-    db: ReturnType<typeof postgres>;
+    db: postgres.Sql;
     repositoryBase: ReturnType<typeof sqlRepositoryBase>;
     queryBus: QueryBus;
     commandBus: CommandBus;

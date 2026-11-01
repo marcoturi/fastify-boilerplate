@@ -17,9 +17,6 @@ export interface Action<Payload, Result = unknown> {
   readonly meta?: Meta;
 }
 
-/** Extracts the Result type from an Action. */
-export type ActionResult<A> = A extends Action<unknown, infer R> ? R : unknown;
-
 export interface CommandCreator<Payload, Result = unknown> {
   type: string;
 
@@ -27,7 +24,6 @@ export interface CommandCreator<Payload, Result = unknown> {
 }
 
 export type CommandHandler = (command: Action<unknown>) => Promise<unknown>;
-export type QueryHandler = (query: Action<unknown>) => Promise<unknown>;
 /** Event handlers may be sync or async; the bus isolates and logs their failures. */
 export type EventHandler = (event: Action<unknown>) => void | Promise<void>;
 

@@ -23,8 +23,6 @@ declare global {
 // Strongly Type DI container
 declare module '@fastify/awilix' {
   interface Cradle extends Dependencies {}
-
-  interface RequestCradle extends Dependencies {}
 }
 
 declare module '@fastify/request-context' {

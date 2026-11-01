@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import type { FastifyBaseLogger } from 'fastify';
-import type { Action, CommandHandler } from './bus.types.ts';
-import { trackExecutionTimeMiddleware } from './middlewares.ts';
+import type { Action, CommandHandler, Middleware } from './bus.types.ts';
+import { composeMiddlewares, trackExecutionTimeMiddleware } from './middlewares.ts';
 
 const action = { type: 'user/create', payload: {} } as unknown as Action<unknown>;
 
@@ -27,5 +27,31 @@ describe('trackExecutionTimeMiddleware()', () => {
     };
     await assert.rejects(trackExecutionTimeMiddleware(logger)(action, failing), /boom/);
     assert.equal(messages.length, 1);
+  });
+});
+
+describe('composeMiddlewares()', () => {
+  it('returns the handler result when there are no middlewares', async () => {
+    assert.equal(await composeMiddlewares([])(action, async () => 10), 10);
+  });
+
+  it('wraps middlewares as an onion — first in the array is outermost', async () => {
+    const order: string[] = [];
+    const step =
+      (name: string): Middleware =>
+      async (a, next) => {
+        order.push(`${name}:in`);
+        const result = await next(a);
+        order.push(`${name}:out`);
+        return result;
+      };
+
+    const result = await composeMiddlewares([step('first'), step('second')])(action, async () => {
+      order.push('handler');
+      return 'ok';
+    });
+
+    assert.equal(result, 'ok');
+    assert.deepEqual(order, ['first:in', 'second:in', 'handler', 'second:out', 'first:out']);
   });
 });

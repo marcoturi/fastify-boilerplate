@@ -299,7 +299,7 @@ ordering behavior described above.
 ## Middlewares
 
 Middlewares wrap handlers in an **onion** (composed via `reduceRight` in
-`src/shared/utils/compose-middlewares.ts`): the **first added is the outermost** wrapper.
+`src/shared/cqrs/middlewares.ts`): the **first added is the outermost** wrapper.
 They must **never mutate** the action — always spread into a new object.
 
 ```typescript
