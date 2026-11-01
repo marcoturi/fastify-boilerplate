@@ -40,12 +40,7 @@ export class AlreadyExistsException extends ExceptionBase {
  * @extends {ExceptionBase}
  */
 export class NotFoundException extends ExceptionBase {
-  static readonly message = 'Not found';
   readonly code = ErrorCode.NOT_FOUND;
-
-  constructor(message: string = NotFoundException.message, cause?: Error) {
-    super(message, cause);
-  }
 }
 
 /**
@@ -56,18 +51,7 @@ export class NotFoundException extends ExceptionBase {
  * @extends {ExceptionBase}
  */
 export class InternalException extends ExceptionBase {
-  static readonly message: string = 'Internal error';
   readonly code = ErrorCode.INTERNAL;
-
-  constructor(message: string = InternalException.message, cause?: Error) {
-    super(message, cause);
-  }
 }
 
-export class DatabaseErrorException extends InternalException {
-  static override readonly message = 'Database error';
-
-  constructor(message: string = DatabaseErrorException.message, cause?: Error) {
-    super(message, cause);
-  }
-}
+export class DatabaseErrorException extends InternalException {}
