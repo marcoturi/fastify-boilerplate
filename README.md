@@ -119,7 +119,7 @@ The server starts at **http://localhost:3000** by default. See [API Endpoints](#
 | `pnpm db:seed` | Run database seeds |
 | `pnpm db:create-seed` | Create a new seed file |
 | `pnpm db:seed:users` | Create users through the REST API with [k6](https://github.com/grafana/k6) (requires k6 and a server on port 3000) |
-| `pnpm db` | Show the DBMate help (commands without a script, e.g. `rollback`, run with `pnpm exec dbmate`) |
+| `pnpm db` | Show the DBMate help. Commands without a script take the flags of `db:migrate`, e.g. `pnpm exec dbmate -e DBMATE_DATABASE_URL --no-dump-schema rollback` |
 
 ### Other
 
