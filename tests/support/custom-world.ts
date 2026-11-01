@@ -3,11 +3,23 @@ import { setWorldConstructor, World } from '@cucumber/cucumber';
 import type { FastifyInstance, LightMyRequestResponse } from 'fastify';
 import type postgres from 'postgres';
 
+/** A user as both transports list it, with the fields the steps check */
+interface ListedUser {
+  id: string;
+  country: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 /** State the steps of a scenario share */
 export interface TestContext {
   createUserDto?: Record<string, string>;
   latestResponse?: LightMyRequestResponse;
-  [key: string]: unknown;
+  /** The latest page of users, from either transport */
+  users?: { data: ListedUser[]; count: number };
+  /** Every user read page by page, and the total the first page reported */
+  pagedUsers?: ListedUser[];
+  userCount?: number;
 }
 
 export class CustomWorld extends World {

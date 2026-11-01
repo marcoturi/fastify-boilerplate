@@ -26,17 +26,18 @@ Then('I receive a user ID other than {string}', function (this: CustomWorld, id:
   assert.notStrictEqual(response.json().id, id);
 });
 
-Then('I can see my user in a list of all users', async function (this: CustomWorld) {
-  const response = await this.server.inject({
-    method: 'GET',
-    url: '/api/v1/users',
-  });
-  const users = response.json<Paginated<UserResponseDto>>();
-  assert.strictEqual(
-    users.data.some((item) => item.id === this.response.json().id),
-    true,
-  );
-});
+Then(
+  /^I (can|cannot) see my user in a list of all users$/,
+  async function (this: CustomWorld, can: string) {
+    const response = await this.server.inject({ method: 'GET', url: '/api/v1/users' });
+    const users = response.json<Paginated<UserResponseDto>>();
+    const id = this.response.json().id;
+    assert.strictEqual(
+      users.data.some((item) => item.id === id),
+      can === 'can',
+    );
+  },
+);
 
 Then('I send a request to delete my user', async function (this: CustomWorld) {
   const response = await this.server.inject({
@@ -83,21 +84,9 @@ When('I page through the users {int} at a time', async function (this: CustomWor
 });
 
 Then('I see every user exactly once, newest first', function (this: CustomWorld) {
-  const users = this.context.pagedUsers as UserResponseDto[];
+  const users = this.context.pagedUsers!;
   assert.strictEqual(users.length, this.context.userCount);
   assert.strictEqual(new Set(users.map((user) => user.id)).size, users.length);
   const createdAt = users.map((user) => Date.parse(user.createdAt));
   assert.ok(createdAt.every((time, i) => i === 0 || time <= createdAt[i - 1]!));
-});
-
-Then('I cannot see my user in a list of all users', async function (this: CustomWorld) {
-  const response = await this.server.inject({
-    method: 'GET',
-    url: '/api/v1/users',
-  });
-  const users = response.json<Paginated<UserResponseDto>>();
-  assert.strictEqual(
-    users.data.some((item) => item.id === this.response.json().id),
-    false,
-  );
 });

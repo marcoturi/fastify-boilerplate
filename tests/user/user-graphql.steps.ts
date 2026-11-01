@@ -156,18 +156,18 @@ Then('I receive a GraphQL validation error', function (this: CustomWorld) {
 });
 
 Then('I receive {int} of {int} users', function (this: CustomWorld, size: number, count: number) {
-  const users = this.context.users as FindUsersData['findUsers'];
+  const users = this.context.users!;
   assert.strictEqual(users.data.length, size);
   assert.strictEqual(users.count, count);
 });
 
 Then('every user is from {string}', function (this: CustomWorld, country: string) {
-  const users = this.context.users as FindUsersData['findUsers'];
+  const users = this.context.users!;
   assert.ok(users.data.every((user) => user.country === country));
 });
 
 Then('every user has ISO creation and update dates', function (this: CustomWorld) {
-  const users = this.context.users as FindUsersData['findUsers'];
+  const users = this.context.users!;
   for (const { createdAt, updatedAt } of users.data) {
     assert.strictEqual(new Date(createdAt).toISOString(), createdAt);
     assert.strictEqual(new Date(updatedAt).toISOString(), updatedAt);

@@ -8,7 +8,6 @@ setDefaultTimeout(60 * 1000);
 Before({ tags: '@pending' }, () => 'skipped' as unknown as undefined);
 
 Before(async function (this: CustomWorld) {
-  this.context = {};
   this.db = getDb();
   // Start every scenario from an empty table, even after a run that stopped halfway
   await this.db`TRUNCATE TABLE users CASCADE`;
