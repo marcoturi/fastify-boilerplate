@@ -21,8 +21,9 @@ paths:
 GraphQL types only check that fields are present and have the right scalar type. Resolvers must
 validate their input against the same TypeBox schema as the REST route with `validator(schema)`
 (`src/shared/utils/validator.util.ts`, on the shared Ajv instance). It returns the input typed by
-the schema, or throws an `ArgumentInvalidException` with one sub-error per invalid field, as REST
-reports them:
+the schema, or throws an `ArgumentInvalidException` with a sub-error for the invalid field, as REST
+reports it. Validation stops at the first invalid field, on both transports: Ajv's `allErrors`
+would let a crafted request cost more CPU.
 
 ```typescript
 const validateInput = validator(createUserRequestDtoSchema);
@@ -46,5 +47,5 @@ not catch them to translate them. The translation happens once per transport:
 
 An exception's `reason`, when set (e.g. `USER_ALREADY_EXISTS`), is the `reason` field of the REST
 error body and replaces the generic code on GraphQL. The `subErrors` of an `ArgumentInvalidException`
-(`{ path, message }` per invalid field) go in the REST body and in GraphQL `extensions.subErrors`.
+(`{ path, message }` of the invalid field) go in the REST body and in GraphQL `extensions.subErrors`.
 A new transport (e.g. gRPC) adds its own table instead of changing the exceptions.

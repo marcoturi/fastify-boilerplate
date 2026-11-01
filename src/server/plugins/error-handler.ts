@@ -73,7 +73,7 @@ async function errorHandlerPlugin(fastify: FastifyInstance) {
       });
     }
 
-    // Request validation (schema) errors, with one entry per invalid field
+    // Request validation (schema) errors, with the invalid field
     if ('validation' in error && error.validation) {
       return sendError(res, 400, 'Validation error', {
         subErrors: toSubErrors(error.validation),

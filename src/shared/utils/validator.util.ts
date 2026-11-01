@@ -27,12 +27,19 @@ export const ajv = addFormats.default(new Ajv.default({ keywords: ['example'] })
 ]);
 
 /** The errors of a failed validation (Ajv's, or Fastify's request validation) as sub-errors,
- *  the shape both transports send: one per invalid field, with its JSON pointer */
+ *  the shape both transports send: the JSON pointer of the invalid field and the message */
 export function toSubErrors(
-  errors: readonly { instancePath: string; message?: string }[] | null | undefined,
+  errors:
+    | readonly { instancePath: string; message?: string; params?: Record<string, unknown> }[]
+    | null
+    | undefined,
 ): SubError[] {
   return (errors ?? []).map((error) => ({
-    path: error.instancePath,
+    // Ajv reports a missing field on its parent object: point to the field itself
+    path:
+      typeof error.params?.missingProperty === 'string'
+        ? `${error.instancePath}/${error.params.missingProperty}`
+        : error.instancePath,
     message: error.message ?? '',
   }));
 }
@@ -54,8 +61,8 @@ function withoutNulls(value: unknown): unknown {
 }
 
 /** Compiles `schema` with the shared Ajv instance into a function that returns its input
- *  without null fields, typed by the schema, or throws ArgumentInvalidException with one
- *  sub-error per invalid field */
+ *  without null fields, typed by the schema, or throws ArgumentInvalidException with a
+ *  sub-error for the first invalid field */
 export function validator<T extends TSchema>(schema: T) {
   const validate = ajv.compile<Static<T>>(schema);
   return (input: unknown): Static<T> => {

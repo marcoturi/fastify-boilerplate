@@ -14,7 +14,7 @@ export interface SubError {
  */
 export class ArgumentInvalidException extends ExceptionBase {
   readonly code = ErrorCode.INVALID_ARGUMENT;
-  /** One entry per invalid field, when the argument is an object; transports send them along */
+  /** The invalid field, when the argument is an object; transports send it along */
   readonly subErrors?: SubError[];
 
   constructor(message: string, subErrors?: SubError[]) {

@@ -22,13 +22,21 @@ describe('validator()', () => {
     });
   });
 
-  it('throws ArgumentInvalidException with one sub-error per invalid field', () => {
+  it('throws ArgumentInvalidException with the invalid field', () => {
     assert.throws(
       () => validate({ email: 'not-an-email' }),
       (error: unknown) =>
         error instanceof ArgumentInvalidException &&
         error.subErrors?.length === 1 &&
         error.subErrors[0]?.path === '/email',
+    );
+  });
+
+  it('points a missing field to the field, not to its parent object', () => {
+    assert.throws(
+      () => validate({ street: 'Via Roma' }),
+      (error: unknown) =>
+        error instanceof ArgumentInvalidException && error.subErrors?.[0]?.path === '/email',
     );
   });
 });
