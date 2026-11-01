@@ -44,7 +44,7 @@ describe('parseEnv()', () => {
   });
 
   it('rejects a POSTGRES_URL that is not host[:port]', () => {
-    for (const url of ['db:', 'db:abc', 'postgres://app:pw@db:5432/app']) {
+    for (const url of ['db:', 'db:abc', 'db:0', 'db:99999', 'postgres://app:pw@db:5432/app']) {
       assert.throws(() => parseEnv({ ...required, POSTGRES_URL: url }), /POSTGRES_URL/, url);
     }
   });
