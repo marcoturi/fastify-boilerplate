@@ -216,6 +216,11 @@ await userRepository.insert(created.entity);
 await created.commit(eventBus);
 ```
 
+Delivery is **at most once**. The bus lives in memory: an event is lost if the process dies
+between the write and `commit()`, and a failing subscriber is logged, not retried. Fine for
+side effects you can afford to miss (a log, a cache refresh); a subscriber that must never miss
+an event needs the outbox below.
+
 `commit(publisher)` depends on the minimal `EventPublisher` port (`{ emit }`), not the full
 bus, and is async. This is the seam for durability: `commit()` is the single place that
 publishes, so making events at-least-once (a transactional-outbox writer that implements
