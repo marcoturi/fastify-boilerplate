@@ -32,9 +32,9 @@ describe('whereClause()', () => {
     assert.equal(render(whereClause(db, [false, undefined, null, ''])), '');
   });
 
-  it('joins the set conditions with AND, skipping the unset ones', () => {
+  it('joins the set conditions with AND, each in parentheses, skipping the unset ones', () => {
     const clause = whereClause(db, [condition('a'), undefined, condition('b')]);
-    assert.equal(render(clause), "WHERE 'a' AND 'b'");
+    assert.equal(render(clause), "WHERE ('a') AND ('b')");
   });
 });
 
