@@ -3,8 +3,8 @@ import { getRequestId } from '#src/shared/app/app-request-context.ts';
 import type { Action, Next } from '#src/shared/cqrs/bus.types.ts';
 
 /** Creates a new action with correlation ID and timestamp injected into meta.
- *  Does NOT mutate the original action. The event bus calls it once per emitted event,
- *  so every subscriber sees the same metadata, stamped when the event was emitted. */
+ *  Does NOT mutate the original action. The buses call it once per dispatched action, before
+ *  the middlewares: every event subscriber sees the same metadata, stamped at emit time. */
 export function withMetadata(action: Action<unknown>): Action<unknown> {
   return {
     ...action,
@@ -14,11 +14,6 @@ export function withMetadata(action: Action<unknown>): Action<unknown> {
       timestamp: action.meta?.timestamp ?? Date.now(),
     },
   } as Action<unknown>;
-}
-
-/** Metadata middleware for the command/query bus — creates a new action, does not mutate. */
-export function decorateCommandWithMetadata(action: Action<unknown>, next: Next): unknown {
-  return next(withMetadata(action));
 }
 
 export function trackExecutionTimeMiddleware(logger: FastifyBaseLogger) {

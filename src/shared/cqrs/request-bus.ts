@@ -5,6 +5,7 @@ import type {
   Middleware,
   RequestBus,
 } from '#src/shared/cqrs/bus.types.ts';
+import { withMetadata } from '#src/shared/cqrs/middlewares.ts';
 import { composeMiddlewares } from '#src/shared/utils/compose-middlewares.ts';
 
 /**
@@ -35,7 +36,7 @@ export function requestBus(label: string): RequestBus {
     if (!handler) {
       throw new Error(`${label} type of ${action.type} is not registered`);
     }
-    return composeMiddlewares(middlewares)(action, handler) as Promise<R>;
+    return composeMiddlewares(middlewares)(withMetadata(action), handler) as Promise<R>;
   }
 
   function addMiddleware(fn: Middleware) {

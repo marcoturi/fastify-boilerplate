@@ -31,6 +31,15 @@ describe('requestBus()', () => {
     bus.register(b, async (action: Action<{ s: string }>) => action.payload.s.length);
   });
 
+  it('stamps the correlation id and the timestamp in meta', async () => {
+    const bus = requestBus('Query');
+    const readMeta = creator<unknown, Action<unknown>['meta']>('t');
+    bus.register(readMeta, async (action) => action.meta);
+    const meta = await bus.execute(readMeta({}));
+    assert.equal(typeof meta?.correlationId, 'string');
+    assert.equal(typeof meta?.timestamp, 'number');
+  });
+
   it('rejects when executing an unregistered type', async () => {
     const bus = requestBus('Command');
     await assert.rejects(
@@ -94,7 +103,7 @@ describe('requestBus()', () => {
 
     await bus.execute(original);
 
-    assert.deepEqual(seenMeta, { tag: 'x' });
+    assert.partialDeepStrictEqual(seenMeta, { tag: 'x' });
     assert.equal(original.meta, undefined);
   });
 });
