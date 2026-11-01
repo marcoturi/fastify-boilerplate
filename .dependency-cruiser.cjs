@@ -2,12 +2,10 @@
 
 const apiLayerPaths = ['dtos', 'dto\\.ts$', 'route\\.ts$', 'resolver\\.ts$'];
 
-const applicationLayerPaths = [
-  'application',
-  '\\.service\\.ts$',
-  '\\.handler\\.ts$',
-  '\\.event-handler\\.ts$',
-];
+// Command, query and event handlers (not e.g. src/server/plugins/error-handler.ts)
+const handlerPaths = ['\\.handler\\.ts$', '\\.event-handler\\.ts$'];
+
+const applicationLayerPaths = ['application', '\\.service\\.ts$', ...handlerPaths];
 
 const infrastructureLayerPaths = [
   'infrastructure',
@@ -100,7 +98,7 @@ module.exports = {
       comment: 'Commands and Queries cannot depend on api layer',
       severity: 'error',
       from: {
-        path: ['handler\\.ts$', 'event-handler\\.ts$'],
+        path: handlerPaths,
       },
       to: {
         path: apiLayerPaths,
@@ -112,7 +110,7 @@ module.exports = {
         'Handlers/event-handlers must not import infrastructure/DB directly — go through a repository port (interface).',
       severity: 'error',
       from: {
-        path: ['handler\\.ts$', 'event-handler\\.ts$'],
+        path: handlerPaths,
       },
       to: {
         path: infrastructureLayerPaths,
