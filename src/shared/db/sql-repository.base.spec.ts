@@ -138,6 +138,16 @@ describe('sqlRepositoryBase()', () => {
     });
   });
 
+  describe('delete()', () => {
+    // postgres.js resolves a query to its rows, with the number of affected rows in `count`
+    const deleting = (count: number) => repository(async () => Object.assign([], { count }));
+
+    it('returns true when a row was deleted, false when none matched the id', async () => {
+      assert.equal(await deleting(1).delete('1'), true);
+      assert.equal(await deleting(0).delete('1'), false);
+    });
+  });
+
   describe('insert()', () => {
     it('throws AlreadyExistsException on a unique violation', async () => {
       await assert.rejects(
