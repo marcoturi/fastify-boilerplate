@@ -15,7 +15,7 @@ export default function deleteUserHandler({ userRepository, commandBus }: Depend
       return deleted;
     },
     init() {
-      commandBus.register(deleteUserCommand.type, this.handler);
+      commandBus.register(deleteUserCommand, this.handler);
     },
   };
 }

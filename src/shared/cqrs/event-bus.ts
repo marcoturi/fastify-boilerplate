@@ -1,6 +1,7 @@
 import { AsyncLocalStorage } from 'node:async_hooks';
 import type {
   Action,
+  CommandCreator,
   EventBus,
   EventBusOptions,
   EventHandler,
@@ -102,12 +103,13 @@ export function eventBus({ logger }: EventBusOptions): EventBus {
   }
 
   function on<P>(
-    type: string,
+    creator: CommandCreator<P>,
     handler: (event: Action<P>) => void | Promise<void>,
     options?: SequentialProcessingOptions,
   ): void {
+    const type = creator?.type;
     if (typeof type !== 'string') {
-      throw new TypeError('type must be a string');
+      throw new TypeError('creator.type must be a string');
     }
     if (typeof handler !== 'function') {
       throw new TypeError('handler must be a function');

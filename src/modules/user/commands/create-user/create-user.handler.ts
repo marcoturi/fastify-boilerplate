@@ -30,7 +30,7 @@ export default function createUserHandler({
       return created.entity.id;
     },
     init() {
-      commandBus.register(createUserCommand.type, this.handler);
+      commandBus.register(createUserCommand, this.handler);
     },
   };
 }

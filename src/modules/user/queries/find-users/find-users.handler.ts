@@ -19,7 +19,7 @@ export default function findUsersHandler({ queryBus, userRepository }: Dependenc
       return userRepository.findAllPaginatedFiltered(query, { country, postalCode, street });
     },
     init() {
-      queryBus.register(findUsersQuery.type, this.handler);
+      queryBus.register(findUsersQuery, this.handler);
     },
   };
 }

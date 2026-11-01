@@ -1,4 +1,10 @@
-import type { Action, CommandHandler, Middleware, RequestBus } from '#src/shared/cqrs/bus.types.ts';
+import type {
+  Action,
+  CommandCreator,
+  CommandHandler,
+  Middleware,
+  RequestBus,
+} from '#src/shared/cqrs/bus.types.ts';
 import { composeMiddlewares } from '#src/shared/utils/compose-middlewares.ts';
 
 /**
@@ -10,9 +16,13 @@ export function requestBus(label: string): RequestBus {
   const handlers = new Map<string, CommandHandler>();
   const middlewares: Middleware[] = [];
 
-  function register<P>(type: string, handler: (action: Action<P>) => Promise<unknown>): void {
+  function register<P, R>(
+    creator: CommandCreator<P, R>,
+    handler: (action: Action<NoInfer<P>>) => Promise<NoInfer<R>>,
+  ): void {
+    const type = creator?.type;
     if (typeof type !== 'string') {
-      throw new TypeError('type must be a string');
+      throw new TypeError('creator.type must be a string');
     }
     if (typeof handler !== 'function') {
       throw new TypeError('handler must be a function');
@@ -25,11 +35,11 @@ export function requestBus(label: string): RequestBus {
     handlers.set(type, handler as CommandHandler);
   }
 
-  function unregister(type: string): void {
-    if (typeof type !== 'string') {
-      throw new TypeError('type must be a string');
+  function unregister(creator: { type: string }): void {
+    if (typeof creator?.type !== 'string') {
+      throw new TypeError('creator.type must be a string');
     }
-    handlers.delete(type);
+    handlers.delete(creator.type);
   }
 
   // async, so validation and registration errors reject like handler errors do

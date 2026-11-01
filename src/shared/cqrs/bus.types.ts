@@ -52,8 +52,13 @@ export interface SequentialProcessingOptions {
 
 /** A bus of commands or queries: one handler per type, whose result `execute` returns. */
 export interface RequestBus {
-  register<P>(type: string, handler: (action: Action<P>) => Promise<unknown>): void;
-  unregister(type: string): void;
+  /** Registers the handler of the creator's actions: it must return the creator's result type.
+   *  NoInfer: P and R come from the creator only, else a wrong handler would widen them */
+  register<P, R>(
+    creator: CommandCreator<P, R>,
+    handler: (action: Action<NoInfer<P>>) => Promise<NoInfer<R>>,
+  ): void;
+  unregister(creator: { type: string }): void;
   execute<R>(action: Action<unknown, R>): Promise<R>;
   addMiddleware(fn: Middleware): void;
 }
@@ -73,7 +78,7 @@ export interface EventPublisher {
 
 export interface EventBus extends EventPublisher {
   on<P>(
-    type: string,
+    creator: CommandCreator<P>,
     handler: (event: Action<P>) => void | Promise<void>,
     options?: SequentialProcessingOptions,
   ): void;

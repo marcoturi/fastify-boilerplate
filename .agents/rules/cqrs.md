@@ -43,7 +43,7 @@ export default function doThingHandler({ commandBus, repository, ...deps }: Depe
       // business logic here
     },
     init() {
-      commandBus.register(myCommand.type, this.handler);
+      commandBus.register(myCommand, this.handler);
     },
   };
 }
@@ -83,9 +83,9 @@ awaits it to keep per-key order and isolate failures
 
 | Bus | Purpose | Register method | Dispatch method | Handler return |
 |---|---|---|---|---|
-| `CommandBus` | State-changing mutations | `register(type, handler)` | `execute(action)` → `Promise<R>` (inferred) | `Promise<unknown>` |
-| `QueryBus` | Idempotent reads | `register(type, handler)` | `execute(action)` → `Promise<R>` (inferred) | `Promise<unknown>` |
-| `EventBus` | Fire-and-forget notifications | `on(type, handler, options?)` | `emit(action)` | `void \| Promise<void>` |
+| `CommandBus` | State-changing mutations | `register(creator, handler)` | `execute(action)` → `Promise<R>` (inferred) | `Promise<R>` of the creator |
+| `QueryBus` | Idempotent reads | `register(creator, handler)` | `execute(action)` → `Promise<R>` (inferred) | `Promise<R>` of the creator |
+| `EventBus` | Fire-and-forget notifications | `on(creator, handler, options?)` | `emit(action)` | `void \| Promise<void>` |
 
 Commands and queries share a `requestBus` factory in `src/shared/cqrs/request-bus.ts`.
 The event bus is a separate implementation in `src/shared/cqrs/event-bus.ts` with a `logger` dependency:

@@ -2,8 +2,12 @@ import assert from 'node:assert/strict';
 import { AsyncLocalStorage } from 'node:async_hooks';
 import { describe, it } from 'node:test';
 import type { FastifyBaseLogger } from 'fastify';
+import { actionCreatorFactory } from './action-creator.ts';
 import type { Action } from './bus.types.ts';
 import { eventBus } from './event-bus.ts';
+
+/** A creator for `type`, as modules make them with their action creator */
+const creator = <P = unknown, R = unknown>(type: string) => actionCreatorFactory()<P, R>(type);
 
 const makeEvent = <P>(type: string, payload: P): Action<P> =>
   ({ type, payload }) as unknown as Action<P>;
@@ -30,10 +34,10 @@ describe('eventBus()', () => {
     const { logger } = fakeLogger();
     const bus = eventBus({ logger });
     const received: number[] = [];
-    bus.on<{ n: number }>('user/created', (event) => {
+    bus.on(creator<{ n: number }>('user/created'), (event) => {
       received.push(event.payload.n);
     });
-    bus.on<{ n: number }>('user/created', (event) => {
+    bus.on(creator<{ n: number }>('user/created'), (event) => {
       received.push(event.payload.n + 1);
     });
 
@@ -57,8 +61,8 @@ describe('eventBus()', () => {
   it('validates its arguments', () => {
     const { logger } = fakeLogger();
     const bus = eventBus({ logger });
-    assert.throws(() => bus.on(1 as unknown as string, () => undefined), TypeError);
-    assert.throws(() => bus.on('t', 'x' as unknown as () => void), TypeError);
+    assert.throws(() => bus.on(1 as never, () => undefined), TypeError);
+    assert.throws(() => bus.on(creator('t'), 'x' as unknown as () => void), TypeError);
     assert.throws(() => bus.emit(null as unknown as Action<unknown>), TypeError);
     assert.throws(() => bus.emit({ payload: {} } as unknown as Action<unknown>), TypeError);
   });
@@ -71,7 +75,7 @@ describe('eventBus()', () => {
       order.push('middleware');
       return next(event);
     });
-    bus.on('t', () => {
+    bus.on(creator('t'), () => {
       order.push('handler');
     });
 
@@ -83,7 +87,7 @@ describe('eventBus()', () => {
   it('isolates and logs a failing async handler instead of rejecting', async () => {
     const { logger, errorCalls } = fakeLogger();
     const bus = eventBus({ logger });
-    bus.on('t', async () => {
+    bus.on(creator('t'), async () => {
       throw new Error('boom');
     });
 
@@ -100,8 +104,8 @@ describe('eventBus()', () => {
     const { logger } = fakeLogger();
     const bus = eventBus({ logger });
     const done: string[] = [];
-    bus.on<{ id: string; label: string }>(
-      'job',
+    bus.on(
+      creator<{ id: string; label: string }>('job'),
       async (event) => {
         await new Promise((resolve) => setImmediate(resolve));
         done.push(event.payload.label);
@@ -125,8 +129,8 @@ describe('eventBus()', () => {
     const firstHeld = new Promise<void>((resolve) => {
       releaseFirst = resolve;
     });
-    bus.on<{ label: string }>(
-      'job',
+    bus.on(
+      creator<{ label: string }>('job'),
       async (event) => {
         // Holds the queue, so the second event waits for its turn
         if (event.payload.label === 'first') await firstHeld;
@@ -134,7 +138,7 @@ describe('eventBus()', () => {
       },
       { keyExtractor: () => 'k' },
     );
-    bus.on<{ label: string }>('job', (event) => {
+    bus.on(creator<{ label: string }>('job'), (event) => {
       timestamps.push(event.meta?.timestamp);
     });
 
@@ -156,17 +160,17 @@ describe('eventBus()', () => {
     const bus = eventBus({ logger });
     const tick = () => new Promise((resolve) => setImmediate(resolve));
     const done: string[] = [];
-    bus.on('first', async () => {
+    bus.on(creator('first'), async () => {
       await tick();
       bus.emit(makeEvent('second', {}));
       done.push('first');
     });
-    bus.on('second', async () => {
+    bus.on(creator('second'), async () => {
       await tick();
       done.push('second');
     });
     bus.on(
-      'queued',
+      creator('queued'),
       async () => {
         await tick();
         done.push('queued');
@@ -196,8 +200,8 @@ describe('eventBus()', () => {
     const firstHeld = new Promise<void>((resolve) => {
       releaseFirst = resolve;
     });
-    bus.on<{ id: string; label: string }>(
-      'job',
+    bus.on(
+      creator<{ id: string; label: string }>('job'),
       async (event) => {
         // Holds the drain loop started by request A, so B's event is queued behind it
         if (event.payload.label === 'a') await firstHeld;

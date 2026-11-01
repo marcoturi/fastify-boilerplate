@@ -9,7 +9,7 @@ export default function createSettingsEventHandler({ eventBus, logger }: Depende
       // todo: add some logic here to create default settings for the user
     },
     init() {
-      eventBus.on(createUserEvent.type, this.handler);
+      eventBus.on(createUserEvent, this.handler);
     },
   };
 }

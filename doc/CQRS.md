@@ -117,7 +117,7 @@ export default function createUserHandler({
       return created.entity.id;
     },
     init() {
-      commandBus.register(createUserCommand.type, this.handler);
+      commandBus.register(createUserCommand, this.handler);
     },
   };
 }
@@ -167,7 +167,7 @@ export default function findUsersHandler({ queryBus, userRepository }: Dependenc
       return userRepository.findAllPaginatedFiltered(query, { country, postalCode, street });
     },
     init() {
-      queryBus.register(findUsersQuery.type, this.handler);
+      queryBus.register(findUsersQuery, this.handler);
     },
   };
 }
@@ -191,7 +191,7 @@ for subscribers. Events are declared with an action creator **without** a `Resul
 export const createUserEvent = userActionCreator<UserEntity>('created'); // type: 'user/created'
 
 // a subscriber (any module) reacts to it
-eventBus.on(createUserEvent.type, provisionDefaultSettings);
+eventBus.on(createUserEvent, provisionDefaultSettings);
 ```
 
 ### Domain events
@@ -237,7 +237,7 @@ export default function createSettingsEventHandler({ eventBus, logger }: Depende
       // ...create default settings for the new user
     },
     init() {
-      eventBus.on(createUserEvent.type, this.handler);
+      eventBus.on(createUserEvent, this.handler);
     },
   };
 }
@@ -251,8 +251,8 @@ error.
 Any number of handlers can subscribe to the same event type; all are invoked.
 
 ```typescript
-eventBus.on('user/created', sendWelcomeEmail);
-eventBus.on('user/created', provisionDefaultSettings);
+eventBus.on(createUserEvent, sendWelcomeEmail);
+eventBus.on(createUserEvent, provisionDefaultSettings);
 eventBus.emit(createUserEvent(user)); // both handlers run
 ```
 
@@ -263,7 +263,7 @@ rejected promise is caught and logged via the injected logger — it never escap
 unhandled rejection, and one failing subscriber does not stop the others.
 
 ```typescript
-eventBus.on('user/created', async (event) => {
+eventBus.on(createUserEvent, async (event) => {
   await mailer.sendWelcome(event.payload.email); // if this rejects, it is logged, not fatal
 });
 ```
@@ -276,7 +276,7 @@ order**, while different keys still run concurrently. This prevents races on the
 
 ```typescript
 eventBus.on(
-  'wallet/transaction',
+  walletTransactionEvent,
   async (event) => {
     await walletRepository.applyTransaction(event.payload); // must not overlap per wallet
   },
@@ -300,9 +300,9 @@ eventBus.emit(walletTransactionEvent({ walletId: 'w2', amount: 3 }));
 
 | Bus | Purpose | Subscribe | Dispatch | Handler return |
 | --- | --- | --- | --- | --- |
-| `CommandBus` | state-changing mutations | `register(type, handler)` | `execute(action)` → `Promise<R>` (inferred) | `Promise<unknown>` |
-| `QueryBus` | idempotent reads | `register(type, handler)` | `execute(action)` → `Promise<R>` (inferred) | `Promise<unknown>` |
-| `EventBus` | fire-and-forget notifications | `on(type, handler, options?)` | `emit(action)` → `void` | `void \| Promise<void>` |
+| `CommandBus` | state-changing mutations | `register(creator, handler)` | `execute(action)` → `Promise<R>` (inferred) | `Promise<R>` of the creator |
+| `QueryBus` | idempotent reads | `register(creator, handler)` | `execute(action)` → `Promise<R>` (inferred) | `Promise<R>` of the creator |
+| `EventBus` | fire-and-forget notifications | `on(creator, handler, options?)` | `emit(action)` → `void` | `void \| Promise<void>` |
 
 A command or query type has exactly one handler: registering a second one for the same type
 throws. An event type can have any number of subscribers.
@@ -399,7 +399,7 @@ DI uses Awilix (`@fastify/awilix`). Everything is wired automatically:
          await userRepository.update({ ...user, /* ...activate */ });
        },
        init() {
-         commandBus.register(activateUserCommand.type, this.handler);
+         commandBus.register(activateUserCommand, this.handler);
        },
      };
    }
@@ -412,7 +412,7 @@ DI uses Awilix (`@fastify/awilix`). Everything is wired automatically:
    ```
 
 For a **query**, use `queryBus` / `queryBus.register`. For an **event**, drop the `Result`
-generic on the creator and subscribe with `eventBus.on(type, handler, options?)` in an
+generic on the creator and subscribe with `eventBus.on(creator, handler, options?)` in an
 `*.event-handler.ts` file.
 
 ---
