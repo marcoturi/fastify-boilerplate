@@ -6,12 +6,7 @@ import { globalDependencies } from '#src/modules/index.ts';
 import { uniqueNameFormatter } from '#src/server/di/util.ts';
 
 export async function di(fastify: FastifyInstance) {
-  const dependencies = globalDependencies({
-    logger: fastify.log,
-    queryBus: fastify.queryBus,
-    commandBus: fastify.commandBus,
-    eventBus: fastify.eventBus,
-  });
+  const dependencies = globalDependencies(fastify);
   diContainer.register(dependencies);
 
   // Shared by both loads, so a name clash is caught across them and with the global dependencies

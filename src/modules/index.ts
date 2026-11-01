@@ -1,5 +1,5 @@
 import { asValue } from 'awilix';
-import type { FastifyBaseLogger } from 'fastify';
+import type { FastifyBaseLogger, FastifyInstance } from 'fastify';
 import type postgres from 'postgres';
 import type { CommandBus, EventBus, QueryBus } from '#src/shared/cqrs/bus.types.ts';
 import { setQueryLogger, transactionAwareDb } from '#src/shared/db/postgres.ts';
@@ -16,17 +16,13 @@ declare global {
   }
 }
 
+/** The dependencies every module gets, taken from the Fastify instance (logger, buses) */
 export function globalDependencies({
-  logger,
+  log: logger,
   queryBus,
   commandBus,
   eventBus,
-}: {
-  logger: FastifyBaseLogger;
-  queryBus: QueryBus;
-  commandBus: CommandBus;
-  eventBus: EventBus;
-}) {
+}: FastifyInstance) {
   setQueryLogger(logger);
   const db = transactionAwareDb();
   return {
