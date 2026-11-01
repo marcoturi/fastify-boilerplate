@@ -391,25 +391,9 @@ This starts the server, fetches the OpenAPI and GraphQL schemas, writes the type
 
 The project uses GitHub Actions with three workflows, and [Renovate](https://docs.renovatebot.com/) for dependency updates.
 
-**[ci.yml](.github/workflows/ci.yml)** — runs on every pull request to `main`. Its `Check and test` job is a required status check of the `main` branch ruleset, so a pull request merges only when it passes:
+**[ci.yml](.github/workflows/ci.yml)** — runs on every pull request to `main`: the checks, unit and E2E tests (against a Postgres service container), architecture boundaries and client type generation. Its `Check and test` job is a required status check of the `main` branch ruleset, so a pull request merges only when it passes.
 
-1. Install dependencies (`pnpm install --frozen-lockfile`)
-2. Code quality checks (`pnpm check`)
-3. Unit tests (`pnpm test`)
-4. Architecture boundaries (`pnpm deps:validate`)
-5. Database migrations (`pnpm db:migrate`) against a Postgres service container
-6. E2E tests (`pnpm test:e2e`)
-
-**[release.yml](.github/workflows/release.yml)** — runs on every push to `main`:
-
-1. Install dependencies (`pnpm install --frozen-lockfile`)
-2. Code quality checks (`pnpm check`)
-3. Unit tests (`pnpm test`)
-4. Architecture boundaries (`pnpm deps:validate`)
-5. Database migrations (`pnpm db:migrate`) against a Postgres service container
-6. E2E tests (`pnpm test:e2e`)
-7. Generate client types (`pnpm generate:types`)
-8. Publish release via semantic-release (changelog, GitHub release, npm client package)
+**[release.yml](.github/workflows/release.yml)** — runs on every push to `main`: the same steps, then semantic-release publishes the release (changelog, GitHub release, npm client package).
 
 semantic-release pushes the release commit with the `GH_TOKEN` secret, a personal access token allowed to bypass the ruleset: the checkout step uses `persist-credentials: false` so that token, not the default workflow credentials, does the push.
 
