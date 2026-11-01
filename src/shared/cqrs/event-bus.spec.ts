@@ -151,6 +151,41 @@ describe('eventBus()', () => {
     assert.ok(timestamps.every((timestamp) => (timestamp as number) <= emittedAt));
   });
 
+  it('drain() waits for the running handlers, also those of events emitted meanwhile', async () => {
+    const { logger } = fakeLogger();
+    const bus = eventBus({ logger });
+    const tick = () => new Promise((resolve) => setImmediate(resolve));
+    const done: string[] = [];
+    bus.on('first', async () => {
+      await tick();
+      bus.emit(makeEvent('second', {}));
+      done.push('first');
+    });
+    bus.on('second', async () => {
+      await tick();
+      done.push('second');
+    });
+    bus.on(
+      'queued',
+      async () => {
+        await tick();
+        done.push('queued');
+      },
+      { keyExtractor: () => 'k' },
+    );
+
+    bus.emit(makeEvent('first', {}));
+    bus.emit(makeEvent('queued', {}));
+    await bus.drain();
+
+    assert.deepEqual(done.sort(), ['first', 'queued', 'second']);
+  });
+
+  it('drain() resolves at once when no handler is running', async () => {
+    const { logger } = fakeLogger();
+    await eventBus({ logger }).drain();
+  });
+
   it('runs each queued event in the async context it was emitted in', async () => {
     const { logger } = fakeLogger();
     const bus = eventBus({ logger });

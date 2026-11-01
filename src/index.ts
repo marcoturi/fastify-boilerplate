@@ -13,8 +13,10 @@ async function init() {
 
   await server(fastify);
 
-  // Graceful shutdown: close DB connection when the server shuts down
+  // Graceful shutdown: once the HTTP requests are done, let the event handlers they started
+  // finish their queries, then close the DB connection
   fastify.addHook('onClose', async (instance) => {
+    await instance.eventBus.drain();
     instance.log.info('Closing database connection…');
     await closeDbConnection();
   });

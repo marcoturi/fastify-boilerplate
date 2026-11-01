@@ -30,6 +30,14 @@ interface HandlerRegistration {
 export function eventBus({ logger }: EventBusOptions): EventBus {
   const handlers = new Map<string, HandlerRegistration[]>();
   const middlewares: Middleware[] = [];
+  // Async handlers still running, so drain() can wait for them (e.g. before the DB closes).
+  // Only promises that never reject go in: their failures are already logged.
+  const running = new Set<Promise<unknown>>();
+
+  function track(promise: Promise<unknown>): void {
+    running.add(promise);
+    void promise.finally(() => running.delete(promise));
+  }
 
   function logHandlerError(event: Action<unknown>, error: unknown): void {
     logger.error(
@@ -49,7 +57,7 @@ export function eventBus({ logger }: EventBusOptions): EventBus {
     try {
       const result = executeChain(event, handler);
       if (result instanceof Promise) {
-        result.catch((error) => logHandlerError(event, error));
+        track(result.catch((error) => logHandlerError(event, error)));
       }
     } catch (error) {
       logHandlerError(event, error);
@@ -89,7 +97,7 @@ export function eventBus({ logger }: EventBusOptions): EventBus {
     queue.push({ event, runInEmitContext: AsyncLocalStorage.snapshot() });
     registration.queues.set(key, queue);
     if (!registration.processing.has(key)) {
-      void drainQueue(registration, key);
+      track(drainQueue(registration, key));
     }
   }
 
@@ -154,9 +162,17 @@ export function eventBus({ logger }: EventBusOptions): EventBus {
     middlewares.push(fn);
   }
 
+  async function drain(): Promise<void> {
+    // A handler can emit more events while it runs: wait again until none is left
+    while (running.size > 0) {
+      await Promise.all(running);
+    }
+  }
+
   return {
     on,
     emit,
     addMiddleware,
+    drain,
   };
 }

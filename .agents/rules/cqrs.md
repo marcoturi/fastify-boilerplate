@@ -91,7 +91,8 @@ Commands and queries share a `requestBus` factory in `src/shared/cqrs/request-bu
 The event bus is a separate implementation in `src/shared/cqrs/event-bus.ts` with a `logger` dependency:
 it logs debug-level warnings when events have no subscribers, and isolates and logs failing handlers
 instead of rejecting. Note the different API: `on`/`emit` for events vs `register`/`execute` for
-commands and queries.
+commands and queries. On shutdown the server awaits `eventBus.drain()`, which resolves once no
+handler is running, before it closes the DB connection.
 
 Subscribers run concurrently by default. When events for the same entity must not overlap, pass
 `{ keyExtractor: (event) => <key> }` to `on()`: events with the same key are processed one at a

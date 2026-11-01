@@ -79,6 +79,8 @@ export interface EventBus extends EventPublisher {
   ): void;
   emit(event: Action<unknown>): void;
   addMiddleware(fn: Middleware): void;
+  /** Resolves once no handler is running, including the handlers of events emitted meanwhile */
+  drain(): Promise<void>;
 }
 
 /** Options for creating an event bus instance. */
