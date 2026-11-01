@@ -54,7 +54,6 @@ export interface RequestBus {
     creator: CommandCreator<P, R>,
     handler: (action: Action<NoInfer<P>>) => Promise<NoInfer<R>>,
   ): void;
-  unregister(creator: { type: string }): void;
   execute<R>(action: Action<unknown, R>): Promise<R>;
   addMiddleware(fn: Middleware): void;
 }

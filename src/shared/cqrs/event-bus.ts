@@ -107,21 +107,14 @@ export function eventBus({ logger }: EventBusOptions): EventBus {
     handler: (event: Action<P>) => void | Promise<void>,
     options?: SequentialProcessingOptions,
   ): void {
-    const type = creator?.type;
-    if (typeof type !== 'string') {
-      throw new TypeError('creator.type must be a string');
-    }
-    if (typeof handler !== 'function') {
-      throw new TypeError('handler must be a function');
-    }
-    const existing = handlers.get(type) ?? [];
+    const existing = handlers.get(creator.type) ?? [];
     existing.push({
       handler: handler as EventHandler,
       keyExtractor: options?.keyExtractor,
       queues: new Map(),
       processing: new Set(),
     });
-    handlers.set(type, existing);
+    handlers.set(creator.type, existing);
   }
 
   function dispatch(event: Action<unknown>, registration: HandlerRegistration): void {
@@ -141,12 +134,6 @@ export function eventBus({ logger }: EventBusOptions): EventBus {
   }
 
   function emit(event: Action<unknown>): void {
-    if (!event || typeof event !== 'object') {
-      throw new TypeError('event must be an object');
-    }
-    if (typeof event.type !== 'string') {
-      throw new TypeError('event.type must be a string');
-    }
     const registrations = handlers.get(event.type);
     if (!registrations || registrations.length === 0) {
       logger.debug(`No handlers registered for event "${event.type}"`);

@@ -58,15 +58,6 @@ describe('eventBus()', () => {
     assert.match(firstDebug, /nobody\/listening/);
   });
 
-  it('validates its arguments', () => {
-    const { logger } = fakeLogger();
-    const bus = eventBus({ logger });
-    assert.throws(() => bus.on(1 as never, () => undefined), TypeError);
-    assert.throws(() => bus.on(creator('t'), 'x' as unknown as () => void), TypeError);
-    assert.throws(() => bus.emit(null as unknown as Action<unknown>), TypeError);
-    assert.throws(() => bus.emit({ payload: {} } as unknown as Action<unknown>), TypeError);
-  });
-
   it('runs middlewares before the handler', () => {
     const { logger } = fakeLogger();
     const bus = eventBus({ logger });

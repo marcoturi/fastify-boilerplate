@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import { actionCreatorFactory } from './action-creator.ts';
-import type { Action, CommandHandler } from './bus.types.ts';
+import type { Action } from './bus.types.ts';
 import { requestBus } from './request-bus.ts';
 
 /** A creator for `type`, as modules make them with their action creator */
@@ -23,12 +23,12 @@ describe('requestBus()', () => {
 
   it('types the handler by its creator (checked by tsc)', () => {
     const bus = requestBus('Command');
-    const double = creator<{ n: number }, number>('math/double');
+    const a = creator<{ n: number }, number>('a');
+    const b = creator<{ n: number }, number>('b');
     // @ts-expect-error the handler must return the creator's result, not undefined
-    bus.register(double, async () => undefined);
-    bus.unregister(double);
+    bus.register(a, async () => undefined);
     // @ts-expect-error the handler must take the creator's payload
-    bus.register(double, async (action: Action<{ s: string }>) => action.payload.s.length);
+    bus.register(b, async (action: Action<{ s: string }>) => action.payload.s.length);
   });
 
   it('rejects when executing an unregistered type', async () => {
@@ -46,21 +46,6 @@ describe('requestBus()', () => {
       () => bus.register(creator('t'), async () => 'second'),
       /Command type of t is already registered/,
     );
-  });
-
-  it('unregister removes the handler', async () => {
-    const bus = requestBus('Query');
-    bus.register(creator('q'), async () => 'ok');
-    bus.unregister(creator('q'));
-    await assert.rejects(bus.execute(makeAction('q', {})), /Query type of q is not registered/);
-  });
-
-  it('validates its arguments', async () => {
-    const bus = requestBus('Command');
-    assert.throws(() => bus.register(123 as never, async () => null), TypeError);
-    assert.throws(() => bus.register(creator('t'), 'nope' as unknown as CommandHandler), TypeError);
-    await assert.rejects(bus.execute(null as unknown as Action<unknown>), TypeError);
-    await assert.rejects(bus.execute({ payload: {} } as unknown as Action<unknown>), TypeError);
   });
 
   it('applies middlewares as an onion — first added is outermost', async () => {

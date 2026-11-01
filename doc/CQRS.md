@@ -130,9 +130,8 @@ handler: async (req, res) => {
 };
 ```
 
-> `execute()` always returns a promise: validation and registration errors (a `TypeError`, or
-> `Error: ... is not registered`) reject it like errors thrown inside the handler, so `await`
-> or `.catch()` handles both.
+> `execute()` always returns a promise: a type with no handler (`Error: ... is not registered`)
+> rejects it like an error thrown inside the handler, so `await` or `.catch()` handles both.
 
 ---
 
