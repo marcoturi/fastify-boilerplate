@@ -290,10 +290,6 @@ eventBus.emit(walletTransactionEvent({ walletId: 'w1', amount: -5 }));
 eventBus.emit(walletTransactionEvent({ walletId: 'w2', amount: 3 }));
 ```
 
-> These are **in-process** events: they are not durable and do not survive a crash. For
-> at-least-once / cross-service delivery, publish to a real broker or a transactional outbox
-> from the event handler.
-
 ---
 
 ## The three buses at a glance
