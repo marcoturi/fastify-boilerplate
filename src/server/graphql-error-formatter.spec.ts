@@ -27,6 +27,15 @@ describe('graphqlErrorFormatter()', () => {
   const app = Fastify({ logger: false });
 
   before(async () => {
+    // Stands in for under-pressure, which rejects requests while the server is overloaded
+    app.addHook('onRequest', async (req) => {
+      if (req.headers['x-overloaded']) {
+        throw Object.assign(new Error('Service Unavailable'), {
+          statusCode: 503,
+          code: 'FST_UNDER_PRESSURE',
+        });
+      }
+    });
     await app.register(mercurius, {
       schema: `type Query {
         invalid: String
@@ -108,11 +117,37 @@ describe('graphqlErrorFormatter()', () => {
 
   for (const field of ['database', 'boom']) {
     it(`hides the message of ${field} behind INTERNAL_SERVER_ERROR`, async () => {
-      const { body } = await query(field);
+      const { statusCode, body } = await query(field);
+      assert.equal(statusCode, 200);
       assert.equal(body.errors?.[0]?.extensions?.code, 'INTERNAL_SERVER_ERROR');
       assert.equal(body.errors?.[0]?.message, 'Internal Server Error');
     });
   }
+
+  it('keeps the status of a malformed request body', async () => {
+    const res = await app.inject({
+      method: 'POST',
+      url: '/graphql',
+      headers: { 'content-type': 'application/json' },
+      body: '{"query":',
+    });
+    assert.equal(res.statusCode, 400);
+    assert.match(res.json<GraphQLResponse>().errors?.[0]?.message ?? '', /JSON/);
+  });
+
+  it('keeps the 503 of load shedding', async () => {
+    const res = await app.inject({
+      method: 'POST',
+      url: '/graphql',
+      headers: { 'x-overloaded': '1' },
+      body: { query: '{ boom }' },
+    });
+    assert.equal(res.statusCode, 503);
+    assert.deepEqual(res.json<GraphQLResponse>().errors?.[0], {
+      message: 'Service Unavailable',
+      extensions: { code: 'INTERNAL_SERVER_ERROR' },
+    });
+  });
 
   it('leaves ErrorWithProps as they are', async () => {
     const { body } = await query('withProps');

@@ -42,6 +42,7 @@ not catch them to translate them. The translation happens once per transport:
 | `NOT_FOUND` | 404 | `NOT_FOUND` |
 | `ALREADY_EXISTS` | 409 | `ALREADY_EXISTS` |
 | `INTERNAL` and unknown errors | 500, message hidden | `INTERNAL_SERVER_ERROR`, message hidden |
+| Fastify and plugin errors (malformed JSON, body too large, under-pressure) | their status, message hidden if 5xx | the same HTTP status |
 
 An exception's `reason`, when set (e.g. `USER_ALREADY_EXISTS`), is the `reason` field of the REST
 error body and replaces the generic code on GraphQL. The `subErrors` of an `ArgumentInvalidException`

@@ -22,7 +22,7 @@ const httpStatusByCode: Record<ErrorCode, number> = {
 };
 
 /** The HTTP error status the error carries (Fastify and its plugins set one), else 500 */
-function statusCodeOf(error: FastifyError | Error): number {
+export function statusCodeOf(error: FastifyError | Error): number {
   return 'statusCode' in error &&
     typeof error.statusCode === 'number' &&
     error.statusCode >= 400 &&
@@ -33,7 +33,7 @@ function statusCodeOf(error: FastifyError | Error): number {
 
 /** Logs a 5xx. Load shedding (under-pressure's 503) is expected under load: a warning without
  *  the stack, which would cost time and log volume exactly when the server is overloaded */
-function logServerError(log: FastifyBaseLogger, error: FastifyError | Error) {
+export function logServerError(log: FastifyBaseLogger, error: FastifyError | Error) {
   if ('code' in error && error.code === 'FST_UNDER_PRESSURE') {
     log.warn({ code: error.code }, 'Request rejected: the server is under pressure');
   } else {
