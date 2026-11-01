@@ -1,7 +1,7 @@
 import { AsyncLocalStorage } from 'node:async_hooks';
 import type {
   Action,
-  CommandCreator,
+  ActionCreator,
   EventBus,
   EventBusOptions,
   EventHandler,
@@ -102,7 +102,7 @@ export function eventBus({ logger }: EventBusOptions): EventBus {
   }
 
   function on<P>(
-    creator: CommandCreator<P>,
+    creator: ActionCreator<P>,
     handler: (event: Action<P>) => void | Promise<void>,
     options?: SequentialProcessingOptions,
   ): void {

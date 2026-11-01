@@ -1,26 +1,15 @@
-import type { Action, CommandCreator, Meta } from '#src/shared/cqrs/bus.types.ts';
+import type { Action, ActionCreator, Meta } from '#src/shared/cqrs/bus.types.ts';
 
-export function actionCreatorFactory(prefix?: string | null) {
+/** Builds the action creators of a module: their types are `<prefix>/<type>` */
+export function actionCreatorFactory(prefix?: string) {
   const base = prefix ? `${prefix}/` : '';
 
-  function actionCreator<Payload, Result = unknown>(type: string, commonMeta?: Meta) {
+  return <Payload, Result = unknown>(type: string): ActionCreator<Payload, Result> => {
     const fullType = base + type;
-
     return Object.assign(
-      (payload: Payload, meta?: Meta) => {
-        const action = {
-          type: fullType,
-          payload,
-          ...(commonMeta || meta ? { meta: { ...commonMeta, ...meta } } : {}),
-        } as Action<Payload, Result>;
-
-        return action;
-      },
-      {
-        type: fullType,
-      },
-    ) as CommandCreator<Payload, Result>;
-  }
-
-  return actionCreator;
+      (payload: Payload, meta?: Meta) =>
+        ({ type: fullType, payload, ...(meta && { meta }) }) as Action<Payload, Result>,
+      { type: fullType },
+    );
+  };
 }

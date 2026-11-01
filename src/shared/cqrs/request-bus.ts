@@ -1,6 +1,6 @@
 import type {
   Action,
-  CommandCreator,
+  ActionCreator,
   CommandHandler,
   Middleware,
   RequestBus,
@@ -17,7 +17,7 @@ export function requestBus(label: string): RequestBus {
   const middlewares: Middleware[] = [];
 
   function register<P, R>(
-    creator: CommandCreator<P, R>,
+    creator: ActionCreator<P, R>,
     handler: (action: Action<NoInfer<P>>) => Promise<NoInfer<R>>,
   ): void {
     const { type } = creator;

@@ -17,7 +17,8 @@ export interface Action<Payload, Result = unknown> {
   readonly meta?: Meta;
 }
 
-export interface CommandCreator<Payload, Result = unknown> {
+/** Makes the actions of one type (commands, queries and events alike) and carries that type */
+export interface ActionCreator<Payload, Result = unknown> {
   type: string;
 
   (payload: Payload, meta?: Meta): Action<Payload, Result>;
@@ -47,7 +48,7 @@ export interface RequestBus {
   /** Registers the handler of the creator's actions: it must return the creator's result type.
    *  NoInfer: P and R come from the creator only, else a wrong handler would widen them */
   register<P, R>(
-    creator: CommandCreator<P, R>,
+    creator: ActionCreator<P, R>,
     handler: (action: Action<NoInfer<P>>) => Promise<NoInfer<R>>,
   ): void;
   execute<R>(action: Action<unknown, R>): Promise<R>;
@@ -69,7 +70,7 @@ export interface EventPublisher {
 
 export interface EventBus extends EventPublisher {
   on<P>(
-    creator: CommandCreator<P>,
+    creator: ActionCreator<P>,
     handler: (event: Action<P>) => void | Promise<void>,
     options?: SequentialProcessingOptions,
   ): void;

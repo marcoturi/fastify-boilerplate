@@ -20,16 +20,9 @@ describe('actionCreatorFactory()', () => {
     assert.equal(ping.type, 'ping');
   });
 
-  it('omits meta when neither common nor per-call meta is provided', () => {
-    const create = actionCreatorFactory('user');
-    const action = create<null>('x')(null);
-    assert.equal('meta' in action, false);
-  });
-
-  it('merges common meta with per-call meta', () => {
-    const create = actionCreatorFactory('user');
-    const withCommonMeta = create<null>('x', { source: 'test' });
-    const action = withCommonMeta(null, { extra: true });
-    assert.deepEqual(action.meta, { source: 'test', extra: true });
+  it('adds meta only when the call passes one', () => {
+    const create = actionCreatorFactory('user')<null>('x');
+    assert.equal('meta' in create(null), false);
+    assert.deepEqual(create(null, { extra: true }).meta, { extra: true });
   });
 });
