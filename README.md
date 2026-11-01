@@ -31,7 +31,7 @@ A production-ready [Fastify 5](https://github.com/fastify/fastify) boilerplate b
 
 | Category | Details |
 |---|---|
-| **Runtime** | Native TypeScript via [Node.js >= 26](https://nodejs.org/en/blog/release/v26.0.0) type stripping — no build step, no transpiler |
+| **Runtime** | Native TypeScript via [Node.js type stripping](https://nodejs.org/api/typescript.html) — no build step, no transpiler |
 | **Framework** | [Fastify 5](https://github.com/fastify/fastify) with [Awilix](https://github.com/jeffijoe/awilix) DI and [Pino](https://github.com/pinojs/pino) logging |
 | **API** | REST ([TypeBox](https://github.com/sinclairzx81/typebox) schemas, Swagger UI) + GraphQL ([Mercurius](https://github.com/mercurius-js/mercurius), GraphiQL in dev) |
 | **Database** | [Postgres.js](https://github.com/porsager/postgres) client + [DBMate](https://github.com/amacneil/dbmate) migrations & seeds |
@@ -49,8 +49,8 @@ A production-ready [Fastify 5](https://github.com/fastify/fastify) boilerplate b
 
 | Tool | Notes |
 |---|---|
-| **Node.js** | >= 26 — required for native TypeScript execution and synchronous module hooks (OpenTelemetry). A `.nvmrc` is included — run `fnm use` or `nvm use` |
-| **pnpm** | >= 12 — package manager. Node >= 25 no longer bundles Corepack: `npm install -g corepack && corepack enable` to activate the pinned version |
+| **Node.js** | The version in [`.nvmrc`](.nvmrc) — run `fnm use` or `nvm use`. It runs TypeScript natively and has the synchronous module hooks OpenTelemetry needs |
+| **pnpm** | The version pinned in `packageManager` ([package.json](package.json)). Node no longer bundles Corepack: `npm install -g corepack && corepack enable` activates it |
 | **Docker** | Used to run PostgreSQL via Docker Compose. Alternatively, use a local Postgres install |
 
 ## Getting Started
@@ -153,9 +153,9 @@ The `-e` flags override two values of a `.env` made for local development: `NODE
 
 - **Multi-stage build** — dependencies installed in an isolated stage for optimal layer caching
 - **Node Alpine** — small footprint, native TypeScript execution (no build step)
-- **Non-root user** — runs as an unprivileged `fastify` user (UID 1001)
+- **Non-root user** — runs as an unprivileged `fastify` user
 - **dumb-init** — proper PID 1 signal forwarding for graceful shutdown
-- **HEALTHCHECK** — built-in Docker health check against `/health` every 30 seconds, on the port in `PORT`
+- **HEALTHCHECK** — built-in Docker health check against `/health`, on the port in `PORT`
 
 ## API Endpoints
 
@@ -265,7 +265,7 @@ Example: [user.repository.ts](src/modules/user/database/user.repository.ts)
     ├── declarations.ts            → Global types and module augmentations (DI cradle, request context)
     ├── config/                    → Environment validation (env-schema + TypeBox)
     ├── modules/
-    │   ├── index.ts                                 → Global DI dependencies (db, logger, buses, repository base)
+    │   ├── index.ts                                 → Global DI dependencies
     │   └── <module>/
     │       ├── commands/
     │       │   └── <command>/

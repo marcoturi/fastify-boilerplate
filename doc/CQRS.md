@@ -30,7 +30,6 @@ instance (`fastify.commandBus`, `fastify.queryBus`, `fastify.eventBus`).
 - [Middlewares](#middlewares)
 - [Dependency injection & registration](#dependency-injection--registration)
 - [Adding a new command / query / event](#adding-a-new-command--query--event)
-- [Common mistakes](#common-mistakes)
 
 ---
 
@@ -331,30 +330,9 @@ event           :  OTel tracing → handler
 
 ## Dependency injection & registration
 
-DI uses Awilix (`@fastify/awilix`). Everything is wired automatically:
-
-- Global deps (`db`, `logger`, `commandBus`, `queryBus`, `eventBus`, `repositoryBase`) are
-  defined by `globalDependencies()` in `src/modules/index.ts` and registered in
-  `src/server/di/index.ts`.
-- Module deps are declared by augmenting the global `Dependencies` interface in the module's
-  `index.ts`:
-
-  ```typescript
-  declare global {
-    export interface Dependencies {
-      userMapper: Mapper<UserEntity, UserModel, UserResponseDto>;
-      userRepository: UserRepository;
-      userDomain: ReturnType<typeof userDomain>;
-    }
-  }
-  ```
-
-- Repositories / mappers / services / domains are auto-loaded as **singletons** from
-  `src/modules/**/*.{repository,mapper,service,domain}.ts`.
-- Handlers / event-handlers are auto-loaded with `asyncInit: 'init'` from
-  `src/modules/**/*.{handler,event-handler}.ts` — so their `init()` (which calls
-  `register()` / `on()`) runs at startup with no manual wiring.
-- File names map to camelCase container keys: `create-user.handler.ts` → `createUserHandler`.
+Handler files are auto-loaded by Awilix, which calls their `init()` at startup: no manual wiring.
+How modules declare and receive their dependencies is in the
+[modules rule](../.agents/rules/modules.md#dependency-injection).
 
 ---
 
@@ -393,16 +371,3 @@ For a **query**, use `queryBus` / `queryBus.register`. For an **event**, drop th
 generic on the creator and subscribe with `eventBus.on(creator, handler, options?)` in an
 `*.event-handler.ts` file.
 
----
-
-## Common mistakes
-
-- Passing a manual generic to `execute<T>(action)` — the type is inferred from the action
-  creator's phantom `Result`.
-- Mutating `action.meta` in a middleware — always spread into a new object.
-- Declaring `Promise<X>` as the creator's `Result` type — it must be the **unwrapped** value.
-- Forgetting to `return` the handler result inside an event middleware — breaks per-key
-  ordering and error isolation.
-- Treating events as durable — they are in-process and best-effort; use an outbox/broker for
-  guaranteed delivery.
-- Importing DB/infrastructure inside handlers — go through repository ports only.

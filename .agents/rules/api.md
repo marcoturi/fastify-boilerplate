@@ -35,15 +35,11 @@ createUser: async (_, args) =>
 ## Errors
 
 Handlers and resolvers throw exceptions with a transport-neutral `code` (see AGENTS.md) and do
-not catch them to translate them. The translation happens once per transport:
-
-| `ErrorCode` | REST (`src/server/plugins/error-handler.ts`) | GraphQL `extensions.code` (`src/server/graphql-error-formatter.ts`) |
-|---|---|---|
-| `INVALID_ARGUMENT` | 400 | `BAD_USER_INPUT` |
-| `NOT_FOUND` | 404 | `NOT_FOUND` |
-| `ALREADY_EXISTS` | 409 | `ALREADY_EXISTS` |
-| `INTERNAL` and unknown errors | 500, message hidden | `INTERNAL_SERVER_ERROR`, message hidden |
-| Fastify and plugin errors (malformed JSON, body too large, under-pressure) | their status, message hidden if 5xx | the same HTTP status |
+not catch them to translate them. The translation happens once per transport, in a map from
+`ErrorCode`: `httpStatusByCode` in `src/server/plugins/error-handler.ts` (REST status) and
+`graphqlCodeByCode` in `src/server/graphql-error-formatter.ts` (GraphQL `extensions.code`).
+On both, `INTERNAL` and unknown errors are logged and their message hidden, and the errors of
+Fastify and its plugins (malformed JSON, body too large, under-pressure) keep their HTTP status.
 
 An exception's `reason`, when set (e.g. `USER_ALREADY_EXISTS`), is the `reason` field of the REST
 error body and replaces the generic code on GraphQL. The `subErrors` of an `ArgumentInvalidException`

@@ -5,7 +5,7 @@
 ## Project overview
 
 A production-ready Fastify 5 boilerplate using Clean Architecture, CQRS, DDD, and functional programming.
-TypeScript strict mode, ESM-only, Node >= 26 (native TS execution, no build step).
+TypeScript strict mode, ESM-only, Node in the version of `.nvmrc` (native TS execution, no build step).
 
 ## Quick reference
 
@@ -45,25 +45,7 @@ Claude Code loads them automatically through the `.claude/rules` symlink.
 The dependency flow is strictly **inward**: `Route/Resolver → Handler → (Service) → Domain + Repository`.
 The domain is pure and never calls repositories; see `clean-architecture.md` for what each layer does.
 
-```
-src/
-├── index.ts           ← Entry point: logger, server start, graceful shutdown
-├── instrumentation.ts ← OpenTelemetry setup (loaded via --import before the app)
-├── declarations.ts    ← Global types and module augmentations (DI cradle, request context)
-├── config/            ← Environment variables, validated (env.ts)
-├── modules/           ← Feature code (vertical slices); index.ts defines the global DI dependencies
-│   └── <module>/
-│       ├── commands/  ← State-changing operations, one folder per slice
-│       ├── queries/   ← Data-retrieval operations (idempotent)
-│       ├── database/  ← Repository port (interface) + adapter (implementation)
-│       ├── domain/    ← Pure business logic, events, types, errors
-│       ├── dtos/      ← Shared response schemas
-│       ├── <module>.action-creator.ts ← Action creator with the module prefix
-│       ├── <module>.mapper.ts         ← Entity ↔ DB model ↔ response mapper
-│       └── index.ts   ← DI declarations, action creator re-export
-├── server/            ← Fastify setup, plugins, DI wiring, GraphQL schema and error formatting
-└── shared/            ← Cross-cutting: API DTOs, request context, CQRS, DB, DDD helpers, exceptions, utils
-```
+The folders and what each file holds: [README](README.md#folder-structure).
 
 Handlers get repositories through DI and use them only through their port interfaces: from
 `src/shared/db/` or `database/` they import nothing but port files (`*.port.ts`), never an
@@ -129,11 +111,3 @@ Cucumber World in `tests/support/` is a class because Cucumber requires it.
   (e.g. `UserAlreadyExistsError` → `USER_ALREADY_EXISTS`)
 - Always include a descriptive message: `throw new NotFoundException('User with id X not found')`.
   `INTERNAL` messages are logged but never sent to clients
-
-## Common mistakes to avoid
-
-- Using `execute<ManualType>(action)` instead of letting the type be inferred from the action creator
-- Mutating `action.meta` in middleware instead of spreading
-- Putting business logic in route files
-- Importing anything from another module other than its domain events
-- Accepting GraphQL input without validating it against the route's TypeBox schema

@@ -26,8 +26,7 @@ paths:
 
 ## Docker
 
-- The image runs the TypeScript sources directly (no build step) as the non-root `fastify` user;
-  the Dockerfile sets `NODE_ENV=production` and `HOST=0.0.0.0`
+- The image runs the TypeScript sources directly (no build step) as a non-root user
 - Only `package.json`, the production `node_modules` and `src/` reach the image: a file needed at
   runtime outside `src/` must be copied explicitly and must not be excluded by `.dockerignore`
 - Migrations do not run in the image: `db/` is excluded and `pnpm db:migrate` runs separately.

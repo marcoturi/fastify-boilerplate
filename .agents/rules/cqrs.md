@@ -8,98 +8,45 @@ paths:
 
 # CQRS
 
-This project uses three buses: `CommandBus`, `QueryBus`, and `EventBus`.
-
-> Full guide with examples: [doc/CQRS.md](../../doc/CQRS.md) (domain events, event error
-> isolation and ordered per-key processing are documented there).
+Three in-process buses: `CommandBus`, `QueryBus` and `EventBus`. The examples, the comparison of
+the buses and the middleware order are in the guide, [doc/CQRS.md](../../doc/CQRS.md): this file
+holds the rules.
 
 ## Action creators
 
-Each module has one action creator, built with `actionCreatorFactory` and the module prefix in
-`src/modules/<name>/<name>.action-creator.ts`, and re-exported from the module's `index.ts`.
-It lives in its own layer-free file so the domain can create events without importing
-`index.ts` (which would form a domain ↔ index cycle).
+- One per module, built with `actionCreatorFactory('<module>')` in
+  `src/modules/<name>/<name>.action-creator.ts` and re-exported from the module's `index.ts`. It
+  lives in its own layer-free file so the domain can create events without importing `index.ts`
+  (which would form a domain ↔ index cycle)
+- A command or query creator embeds the payload and the **unwrapped** result type
+  (`userActionCreator<CreateUserRequestDto, string>('create')`), never `Promise<X>`; an event
+  creator has no result type
+- Never pass a manual generic to `execute()`: the result type is inferred from the creator
 
-The `Result` type parameter is a phantom type — it exists only at the type level to enable
-type-safe `execute()` calls:
+## Handlers
 
-```typescript
-// src/modules/user/user.action-creator.ts
-export const userActionCreator = actionCreatorFactory('user');
+- A handler file default-exports a factory that returns `{ init }`: `init()` registers the
+  handler inline, with `commandBus.register(creator, handler)` (or `queryBus`) or
+  `eventBus.on(creator, handler, options?)`. DI calls it at startup
+- `register()` and `on()` type the handler from the creator: no annotations on it
+- Helpers are functions in the factory's closure (at module level when they need no dependency),
+  never methods of the returned object: the bus calls the handler detached from it, and DI reads
+  only `init`. Logic that deserves its own tests, or that several handlers share, goes in the
+  domain or in a service
+- A command or query type has exactly one handler (a second `register()` throws); an event type
+  can have any number of subscribers
 
-// In the handler file — embed both Payload and Result types
-export const createUserCommand = userActionCreator<CreateUserRequestDto, string>('create');
-```
+## Events
 
-## Handler pattern
-
-Every handler follows this structure:
-
-```typescript
-export default function doThingHandler({ commandBus, ...deps }: Dependencies) {
-  return {
-    init() {
-      commandBus.register(myCommand, async ({ payload }) => {
-        // business logic here
-      });
-    },
-  };
-}
-```
-
-Key rules:
-- `register()` types the handler from the creator, so it needs no annotations: it must resolve to the creator's result type
-- The result type (e.g. `string`) is the **unwrapped** value, not `Promise<X>` — the `Promise` wrapper comes from `execute()`
-- Events use `userActionCreator<PayloadType>('event-name')` without a Result generic (events return void)
-- Handlers are auto-loaded and wired via Awilix DI — the `init()` method is called automatically
-
-## Calling from routes/resolvers
-
-```typescript
-// Return type is inferred from the action's phantom Result — no manual generic needed
-const id = await fastify.commandBus.execute(createUserCommand(req.body));
-```
-
-Do **not** pass a manual generic to `execute()`. The type is inferred from the action creator's `Result` parameter.
+- A failing subscriber is logged, never rethrown, and does not stop the others. Delivery is at
+  most once: read the guide before relying on an event
+- Subscribers run concurrently: pass `{ keyExtractor }` to `on()` to process the events with the
+  same key one at a time, in emit order
+- On shutdown the server awaits `eventBus.drain()` before it closes the DB connection
 
 ## Middlewares
 
-Middlewares use an onion-model pipeline (composed via `reduceRight`). They must **never mutate** the action — always spread into a new object, and return the result of the next handler:
-
-```typescript
-const myMiddleware: Middleware = (action, next) => {
-  const enrichedAction = { ...action, meta: { ...action.meta, foo: 'bar' } } as Action<unknown>;
-  return next(enrichedAction);
-};
-```
-
-One `Middleware` type (in `src/shared/cqrs/bus.types.ts`) serves the three buses. Always return
-what `next` returns: commands and queries resolve to the handler's result, and the event bus
-awaits it to keep per-key order and isolate failures
-
-## Bus differences
-
-| Bus | Purpose | Register method | Dispatch method | Handler return |
-|---|---|---|---|---|
-| `CommandBus` | State-changing mutations | `register(creator, handler)` | `execute(action)` → `Promise<R>` (inferred) | `Promise<R>` of the creator |
-| `QueryBus` | Idempotent reads | `register(creator, handler)` | `execute(action)` → `Promise<R>` (inferred) | `Promise<R>` of the creator |
-| `EventBus` | Fire-and-forget notifications | `on(creator, handler, options?)` | `emit(action)` | `void \| Promise<void>` |
-
-Commands and queries share a `requestBus` factory in `src/shared/cqrs/request-bus.ts`.
-The event bus is a separate implementation in `src/shared/cqrs/event-bus.ts` with a `logger` dependency:
-it logs debug-level warnings when events have no subscribers, and isolates and logs failing handlers
-instead of rejecting. Note the different API: `on`/`emit` for events vs `register`/`execute` for
-commands and queries. On shutdown the server awaits `eventBus.drain()`, which resolves once no
-handler is running, before it closes the DB connection.
-
-Subscribers run concurrently by default. When events for the same entity must not overlap, pass
-`{ keyExtractor: (event) => <key> }` to `on()`: events with the same key are processed one at a
-time, in emit order, while different keys still run concurrently.
-
-## Adding a new CQRS middleware
-
-1. Define the middleware function in `src/shared/cqrs/middlewares.ts` (or a new file)
-2. Type it as `Middleware` and return what `next` returns
-3. Never mutate the action — spread into a new object
-4. Register in `src/shared/cqrs/index.ts` via `busInstance.addMiddleware(myMiddleware)`
-5. Middleware order matters: first added = outermost wrapper
+- Typed as `Middleware` (`src/shared/cqrs/bus.types.ts`), one type for the three buses
+- Never mutate the action: spread it into a new one. Always return what `next` returns: the event
+  bus awaits it to keep per-key order and isolate failures
+- Registered in `src/shared/cqrs/index.ts`: the first added is the outermost
