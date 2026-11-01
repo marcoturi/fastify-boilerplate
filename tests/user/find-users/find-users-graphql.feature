@@ -38,6 +38,13 @@ Feature: Find users via GraphQL
     Then I receive 1 of 2 users
 
   @user
+  Scenario: Null arguments count as absent, as clients send them for unset variables
+    When I query the users via GraphQL with
+      | country | null |
+      | limit   | null |
+    Then I receive 3 of 3 users
+
+  @user
   Scenario Outline: I try to list users with invalid arguments
     When I send a GraphQL query for users with
       | <Argument> | <Value> |
@@ -47,7 +54,6 @@ Feature: Find users via GraphQL
     Examples:
       | Argument | Value  |
       | limit    | 0      |
-      | limit    | null   |
       | limit    | 101    |
       | page     | -1     |
       | country  | It     |

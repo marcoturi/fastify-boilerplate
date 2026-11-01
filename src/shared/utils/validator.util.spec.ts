@@ -5,11 +5,21 @@ import { ArgumentInvalidException } from '#src/shared/exceptions/index.ts';
 import { validator } from './validator.util.ts';
 
 describe('validator()', () => {
-  const validate = validator(Type.Object({ email: Type.String({ format: 'email' }) }));
+  const validate = validator(
+    Type.Object({
+      email: Type.String({ format: 'email' }),
+      street: Type.Optional(Type.String()),
+    }),
+  );
 
   it('returns the input when it matches the schema', () => {
-    const input = { email: 'mario.rossi@pec.it' };
-    assert.equal(validate(input), input);
+    assert.deepEqual(validate({ email: 'mario.rossi@pec.it' }), { email: 'mario.rossi@pec.it' });
+  });
+
+  it('treats null fields as absent, as GraphQL sends them for optional arguments', () => {
+    assert.deepEqual(validate({ email: 'mario.rossi@pec.it', street: null }), {
+      email: 'mario.rossi@pec.it',
+    });
   });
 
   it('throws ArgumentInvalidException with one sub-error per invalid field', () => {
