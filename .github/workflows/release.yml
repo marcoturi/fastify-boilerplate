@@ -18,10 +18,9 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    # semantic-release writes with GH_TOKEN (push, GitHub release, comments), not with this token
     permissions:
-      contents: write # to be able to publish a GitHub release
-      issues: write # to be able to comment on released issues
-      pull-requests: write # to be able to comment on released pull requests
+      contents: read # for checkout
       id-token: write # to enable use of OIDC for npm provenance
 
     services:
