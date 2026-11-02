@@ -44,7 +44,7 @@ paths:
   deliberate choice
 - `db:migrate` runs with `--no-dump-schema`: there is no `db/schema.sql` to commit
 - Versions come from the commit type (`.releaserc`): `feat` → minor; `fix`, `perf`, `refactor`,
-  `style`, `docs(README)` and `revert` → patch; a `!` or a `BREAKING CHANGE:` footer → major; `chore`,
+  `style`, `docs(README)` and `revert` → patch; a `!` or a `BREAKING CHANGE:` (or `BREAKING-CHANGE:`) footer → major; `chore`,
   `ci`, `build`, `test` and other `docs` → no release
 
 ## Dependencies and hooks

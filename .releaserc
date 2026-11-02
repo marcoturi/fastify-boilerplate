@@ -9,10 +9,6 @@
         "preset": "conventionalcommits",
         "releaseRules": [
           {
-            "breaking": true,
-            "release": "major"
-          },
-          {
             "type": "docs",
             "scope": "README",
             "release": "patch"
@@ -25,13 +21,7 @@
             "type": "style",
             "release": "patch"
           }
-        ],
-        "parserOpts": {
-          "noteKeywords": [
-            "BREAKING CHANGE",
-            "BREAKING CHANGES"
-          ]
-        }
+        ]
       }
     ],
     [
