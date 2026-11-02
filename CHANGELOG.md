@@ -1,3 +1,31 @@
+## [4.3.3](https://github.com/marcoturi/fastify-boilerplate/compare/v4.3.2...v4.3.3) (2026-11-02)
+
+### Bug Fixes
+
+* **db:** log Postgres notices through the logger ([2860c05](https://github.com/marcoturi/fastify-boilerplate/commit/2860c0522913853b07af4de60826206a7f54a7d5))
+* **swagger:** name the shared error schema ApiErrorResponse ([6e2f779](https://github.com/marcoturi/fastify-boilerplate/commit/6e2f7796b6bb873553b84de6bff4641fd42124c7))
+
+### Refactoring
+
+* **cqrs:** drop null from the Meta type ([9774433](https://github.com/marcoturi/fastify-boilerplate/commit/97744334ec913d3ffc70d232e5442e3f4059ca09))
+* **cqrs:** require the action creator prefix ([01b4183](https://github.com/marcoturi/fastify-boilerplate/commit/01b418327a67126fe3cd1612770bbe1d86f084d7))
+* **db:** order pages by createdAt in the query ([1b5bc54](https://github.com/marcoturi/fastify-boilerplate/commit/1b5bc542c535a31ecbb3d8f061d8e09f417dac6c))
+* **user:** pass the find-users payload as it is ([5a0286d](https://github.com/marcoturi/fastify-boilerplate/commit/5a0286d7f74179cbd923eb0c24c35153952c1d37))
+* **validation:** register every ajv-formats format, as Fastify does ([f5cb36e](https://github.com/marcoturi/fastify-boilerplate/commit/f5cb36e47b6fb8d6c945a13244f9914600b68f20))
+
+### Documentation
+
+* **agents:** drop pnpm format from the quick reference ([82a1403](https://github.com/marcoturi/fastify-boilerplate/commit/82a14037a86c6a5939dde48d30cd2e1cfbb0d4bd))
+* **api:** subErrors also come from an ArgumentInvalidException ([0bdda59](https://github.com/marcoturi/fastify-boilerplate/commit/0bdda599e6a04e0be96de852d6e3e625d4be5387))
+* **cqrs:** drop the handler count that the CQRS rule already states ([9d6e9c7](https://github.com/marcoturi/fastify-boilerplate/commit/9d6e9c7e76313ddea83e23d5e5462f64dc587193))
+* **cqrs:** drop the rule that events live in the domain ([b85204b](https://github.com/marcoturi/fastify-boilerplate/commit/b85204b3be4dd2e2da02527431cb7c61817e3bf9))
+* **cqrs:** the event bus rejects only creators with a result ([f0b67e0](https://github.com/marcoturi/fastify-boilerplate/commit/f0b67e0f70be1386c077ab328ed68124df098d14))
+* **README:** leave "no services yet" to the clean-architecture rule ([6bd55c9](https://github.com/marcoturi/fastify-boilerplate/commit/6bd55c90e53c2cc27da9e7b2b814f6ed6bab42e4))
+* **README:** say once what generate:types needs ([668c862](https://github.com/marcoturi/fastify-boilerplate/commit/668c862dc49b940d1628a1decf343bc6f003da11))
+* **README:** warn that the e2e tests empty the users table ([a06d7d2](https://github.com/marcoturi/fastify-boilerplate/commit/a06d7d2a6cefbcaf546a375c45ae1b3ff5f639fd))
+* **rules:** add a variable to compose only when the container needs another value ([11752c0](https://github.com/marcoturi/fastify-boilerplate/commit/11752c0cf2751cfdc126892eb23253f3670985c6))
+* **rules:** leave the middleware order to the guide ([dd1b689](https://github.com/marcoturi/fastify-boilerplate/commit/dd1b68951b5c4a6b9db58eb49e9a8a2bc2d7bb15))
+
 ## [4.3.2](https://github.com/marcoturi/fastify-boilerplate/compare/v4.3.1...v4.3.2) (2026-11-02)
 
 ### Bug Fixes
