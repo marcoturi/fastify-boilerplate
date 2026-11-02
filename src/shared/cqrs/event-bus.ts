@@ -106,13 +106,11 @@ export function eventBus({ logger }: EventBusOptions): EventBus {
     handler: (event: Action<P, void>) => void | Promise<void>,
     options?: SequentialProcessingOptions<P>,
   ): void {
-    const existing = handlers.get(creator.type) ?? [];
-    existing.push({
+    handlers.getOrInsert(creator.type, []).push({
       handler: handler as EventHandler,
       keyExtractor: options?.keyExtractor as HandlerRegistration['keyExtractor'],
       queues: new Map(),
     });
-    handlers.set(creator.type, existing);
   }
 
   function dispatch(event: Action<unknown>, registration: HandlerRegistration): void {
