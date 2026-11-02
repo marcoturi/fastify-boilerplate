@@ -88,10 +88,8 @@ describe('sqlRepositoryBase()', () => {
   describe('custom methods', () => {
     it('are built from the query helpers and added to the generic ones', async () => {
       const db = fakeDb(async () => [{ id: '1', name: 'a' }]);
-      const things = sqlRepositoryBase(db)(props, ({ where, orderBy, paginate }) => ({
+      const things = sqlRepositoryBase(db)(props, ({ paginate }) => ({
         async findByName(name: string) {
-          assert.equal(typeof where, 'function');
-          assert.equal(typeof orderBy, 'function');
           assert.equal(typeof paginate, 'function');
           return db`SELECT * FROM things WHERE name = ${name}`;
         },

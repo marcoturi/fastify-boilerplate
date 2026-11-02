@@ -49,6 +49,6 @@ DBMate runs plain SQL files from `db/migrations/` (seeds in `db/seeds/`).
 - Table names use `db(tableName)` (identifier interpolation)
 - Values use `${value}` (parameterized automatically)
 - Custom queries are methods the repository passes to the base, which hands them helpers bound to
-  its client and table: `where()`, `orderBy()` and `paginate(params, conditions)`, a page plus the
-  total count in one query. A filtered list only lists its conditions: see
+  its client and table: `paginate(params, conditions)` returns a page plus the total count in one
+  query. A filtered list only lists its conditions: see
   `findAllPaginatedFiltered` in `src/modules/user/database/user.repository.ts`

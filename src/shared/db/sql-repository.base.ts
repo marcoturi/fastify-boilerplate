@@ -1,6 +1,5 @@
 import { type AsyncMethods, mapDatabaseErrors } from '#src/shared/db/database-errors.ts';
 import type {
-  OrderBy,
   Paginated,
   PaginatedQueryParams,
   RepositoryPort,
@@ -16,10 +15,6 @@ export interface RepositoryProps<Entity, DbModel> {
 
 /** SQL helpers bound to the repository's client and table, for its custom queries */
 export interface QueryHelpers<Entity> {
-  /** WHERE clause joining the set conditions with AND: empty when none is set */
-  where(conditions: Condition[]): ReturnType<typeof whereClause>;
-  /** Deterministic ORDER BY on the field, with `id` as a tiebreaker */
-  orderBy(order: OrderBy): ReturnType<typeof orderByClause>;
   /** A page of the table's rows that match the set conditions, with their total count */
   paginate(params: PaginatedQueryParams, conditions?: Condition[]): Promise<Paginated<Entity>>;
 }
@@ -51,8 +46,6 @@ export function sqlRepositoryBase(db: Dependencies['db']) {
     custom?: CustomMethods<Entity, Custom>,
   ): RepositoryBase<Entity, Custom> {
     const helpers: QueryHelpers<Entity> = {
-      where: (conditions) => whereClause(db, conditions),
-      orderBy: (order) => orderByClause(db, order),
       // One query, so the count and the page come from the same snapshot of the table
       async paginate(params, conditions = []) {
         const where = whereClause(db, conditions);
