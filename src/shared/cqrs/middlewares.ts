@@ -3,8 +3,7 @@ import { getRequestId } from '#src/shared/app/app-request-context.ts';
 import type { Action, Middleware, Next } from '#src/shared/cqrs/bus.types.ts';
 
 /** Creates a new action with correlation ID and timestamp injected into meta.
- *  Does NOT mutate the original action. The buses call it once per dispatched action, before
- *  the middlewares: every event subscriber sees the same metadata, stamped at emit time. */
+ *  Does NOT mutate the original action. */
 export function withMetadata(action: Action<unknown>): Action<unknown> {
   return {
     ...action,
