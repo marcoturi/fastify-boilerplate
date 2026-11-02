@@ -24,11 +24,6 @@
       "allowedVersions": "<10"
     },
     {
-      "description": "Keep GitHub Actions on major tags (@v7), never digests",
-      "matchManagers": ["github-actions"],
-      "pinDigests": false
-    },
-    {
       "description": "Node.js types follow the Node.js major in .nvmrc",
       "matchPackageNames": ["@types/node"],
       "allowedVersions": "26.x"
