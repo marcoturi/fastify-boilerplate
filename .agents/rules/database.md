@@ -25,7 +25,8 @@ SQL belongs in repository files only. Handlers use the repository **port** (inte
   findOneById, findAll, findAllPaginated, update, delete)
 - Errors: repository methods throw domain exceptions, never a driver error. The base maps them
   for its methods and for the custom ones it receives (`mapDatabaseErrors` in
-  `src/shared/db/database-errors.ts`): a unique violation becomes `AlreadyExistsException`,
+  `src/shared/db/database-errors.ts`): a unique violation becomes `AlreadyExistsException`, a
+  value the column cannot hold (malformed uuid, NUL character) `ArgumentInvalidException`,
   anything else `DatabaseErrorException`. A repository that does not use the base calls it itself
 - Repository ports extend `RepositoryPort<Entity>` (in `src/shared/db/repository.port.ts`)
 - Mapper interface: `Mapper<DomainEntity, DbRecord, Response>` with `toPersistence`, `toDomain`, `toResponse` (in `src/shared/ddd/mapper.interface.ts`). The interface does not validate anything: each mapper's

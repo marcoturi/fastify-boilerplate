@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import {
   AlreadyExistsException,
+  ArgumentInvalidException,
   DatabaseErrorException,
   NotFoundException,
 } from '#src/shared/exceptions/index.ts';
@@ -12,6 +13,11 @@ const pgError = (code: string) => Object.assign(new Error(`pg error ${code}`), {
 describe('toDatabaseException()', () => {
   it('maps a unique violation to AlreadyExistsException', () => {
     assert.ok(toDatabaseException(pgError('23505')) instanceof AlreadyExistsException);
+  });
+
+  it('maps a value the column cannot hold to ArgumentInvalidException', () => {
+    assert.ok(toDatabaseException(pgError('22P02')) instanceof ArgumentInvalidException);
+    assert.ok(toDatabaseException(pgError('22021')) instanceof ArgumentInvalidException);
   });
 
   it('maps any other driver error to DatabaseErrorException', () => {
