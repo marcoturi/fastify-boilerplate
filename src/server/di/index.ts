@@ -9,28 +9,18 @@ export async function di(fastify: FastifyInstance) {
   const dependencies = globalDependencies(fastify);
   diContainer.register(dependencies);
 
-  // Shared by both loads, so a name clash is caught across them and with the global dependencies
-  const formatName = uniqueNameFormatter(Object.keys(dependencies));
-
   await diContainer.loadModules(
-    [path.join(import.meta.dirname, '../../modules/**/*.{repository,mapper,service,domain}.ts')],
+    [
+      path.join(import.meta.dirname, '../../modules/**/*.{repository,mapper,service,domain}.ts'),
+      [
+        path.join(import.meta.dirname, '../../modules/**/*.{handler,event-handler}.ts'),
+        { asyncInit: 'init' },
+      ],
+    ],
     {
-      formatName,
+      formatName: uniqueNameFormatter(Object.keys(dependencies)),
       esModules: true,
       resolverOptions: {
-        register: asFunction,
-        lifetime: Lifetime.SINGLETON,
-      },
-    },
-  );
-
-  await diContainer.loadModules(
-    [path.join(import.meta.dirname, '../../modules/**/*.{handler,event-handler}.ts')],
-    {
-      formatName,
-      esModules: true,
-      resolverOptions: {
-        asyncInit: 'init',
         register: asFunction,
         lifetime: Lifetime.SINGLETON,
       },
