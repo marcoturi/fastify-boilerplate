@@ -107,7 +107,7 @@ export default function createUserHandler({
           }
           throw error;
         }
-        eventBus.emit(createUserEvent(user)); // only once the write has succeeded (see "Domain events")
+        eventBus.emit(createUserEvent(user)); // only once the write has succeeded
         return user.id;
       });
     },
@@ -194,9 +194,9 @@ export default function createSettingsEventHandler({ eventBus, logger }: Depende
   return {
     init() {
       eventBus.on(createUserEvent, ({ payload }) => {
-        // Log only the id: the payload carries personal data (email, address)
+        // Log only the id — the event payload carries PII (email, address).
         logger.info({ userId: payload.id }, 'Creating default settings for user');
-        // ...create default settings for the new user
+        // todo: add some logic here to create default settings for the user
       });
     },
   };
