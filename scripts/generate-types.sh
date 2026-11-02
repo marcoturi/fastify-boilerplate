@@ -13,10 +13,10 @@ if curl -sf "$SERVER_URL/health" > /dev/null 2>&1; then
   echo "Port $PORT is in use: stop the server running there first" >&2
   exit 1
 fi
-# .env provides the database settings locally (in CI the workflow sets them). Telemetry stays
-# off and the port is the one polled below, whatever .env says: Node keeps a variable already
-# in the environment over the same one in the file.
-OTEL_SDK_DISABLED=true PORT=$PORT node --env-file-if-exists=.env ./src/index.ts &
+# The database settings come from the environment (the CI workflows set them) or from .env,
+# which the config reads by itself. Telemetry stays off and the port is the one polled below,
+# whatever .env says: a variable already in the environment wins over the same one in .env.
+OTEL_SDK_DISABLED=true PORT=$PORT node ./src/index.ts &
 SERVER_PID=$!
 trap 'kill $SERVER_PID 2>/dev/null || true' EXIT
 
