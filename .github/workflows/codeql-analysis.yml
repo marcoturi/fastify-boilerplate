@@ -15,6 +15,8 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
+      actions: read # for a private repository
+      contents: read # for checkout
       security-events: write
 
     steps:
