@@ -52,8 +52,7 @@ Route / Resolver ──execute()──▶ CommandBus / QueryBus ──▶ Handle
 
 ## Actions and action creators
 
-Each module has a prefixed action-creator factory in `<module>.action-creator.ts`, re-exported
-from its `index.ts`. It lives in its own file so the domain can create events without importing
+Each module has a prefixed action-creator factory in `<module>.action-creator.ts`. It lives in its own file so the domain can create events without importing
 `index.ts`, which would form a cycle:
 
 ```typescript

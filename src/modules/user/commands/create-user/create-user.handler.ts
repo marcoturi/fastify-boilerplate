@@ -1,6 +1,6 @@
 import { UserAlreadyExistsError } from '#src/modules/user/domain/user.errors.ts';
 import { createUserEvent } from '#src/modules/user/domain/user.events.ts';
-import { userActionCreator } from '#src/modules/user/index.ts';
+import { userActionCreator } from '#src/modules/user/user.action-creator.ts';
 import { AlreadyExistsException } from '#src/shared/exceptions/index.ts';
 import type { CreateUserRequestDto } from './create-user.schema.ts';
 

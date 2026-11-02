@@ -12,5 +12,3 @@ declare global {
     userDomain: ReturnType<typeof userDomain>;
   }
 }
-
-export { userActionCreator } from '#src/modules/user/user.action-creator.ts';

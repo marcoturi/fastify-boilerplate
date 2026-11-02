@@ -292,7 +292,7 @@ Example: [user.repository.ts](src/modules/user/database/user.repository.ts)
     │       ├── <name>.service.ts                    → Optional orchestration layer (none yet)
     │       ├── <module>.action-creator.ts           → Action creator with the module prefix
     │       ├── <module>.mapper.ts                   → Entity ↔ DB model ↔ DTO mapper
-    │       └── index.ts                             → DI declarations, action creator re-export
+    │       └── index.ts                             → DI declarations
     ├── server/
     │   ├── index.ts               → Fastify setup: Helmet, CORS, GraphQL, plugin and route autoload
     │   ├── options.ts             → Fastify instance options (logger, request ids, Ajv), shared with the e2e tests

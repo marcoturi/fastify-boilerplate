@@ -1,4 +1,4 @@
-import { userActionCreator } from '#src/modules/user/index.ts';
+import { userActionCreator } from '#src/modules/user/user.action-creator.ts';
 import { NotFoundException } from '#src/shared/exceptions/index.ts';
 
 export const deleteUserCommand = userActionCreator<{ id: string }, boolean>('delete');

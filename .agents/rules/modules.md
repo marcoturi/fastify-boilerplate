@@ -21,7 +21,7 @@ DI uses [Awilix](https://github.com/jeffijoe/awilix) with `@fastify/awilix` (wir
 
 1. Create `src/modules/<name>/` with the vertical slice structure
 2. Create the action creator in `src/modules/<name>/<name>.action-creator.ts` with `actionCreatorFactory('<name>')`
-3. Create `src/modules/<name>/index.ts` with the `declare global` Dependencies and re-export the action creator
+3. Create `src/modules/<name>/index.ts` with the `declare global` Dependencies
 4. Create domain types in `domain/<name>.types.ts`
 5. Create repository port in `database/<name>.repository.port.ts` (interface extending `RepositoryPort<Entity>`)
 6. Create repository adapter in `database/<name>.repository.ts` (implements the port)
