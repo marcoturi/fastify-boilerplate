@@ -260,9 +260,6 @@ eventBus.emit(walletTransactionEvent({ walletId: 'w2', amount: 3 }));
 | `QueryBus` | idempotent reads | `register(creator, handler)` | `execute(action)` → `Promise<R>` (inferred) | `Promise<R>` of the creator |
 | `EventBus` | fire-and-forget notifications | `on(creator, handler, options?)` | `emit(action)` → `void` | `void \| Promise<void>` |
 
-A command or query type has exactly one handler: registering a second one for the same type
-throws. An event type can have any number of subscribers.
-
 `CommandBus` and `QueryBus` share the `requestBus` factory
 (`src/shared/cqrs/request-bus.ts`); the `EventBus` is a separate implementation
 (`src/shared/cqrs/event-bus.ts`) with the multi-subscriber, error-isolation and per-key
