@@ -16,7 +16,7 @@
     "test": "pnpm test:unit",
     "test:coverage": "c8 node --test 'src/**/*.spec.ts'",
     "test:unit": "node --test 'src/**/*.spec.ts'",
-    "test:e2e": "FASTIFY_AUTOLOAD_TYPESCRIPT=1 cucumber-js --exit",
+    "test:e2e": "cucumber-js --exit",
     "format": "biome format --write .",
     "lint": "biome lint --write .",
     "type:check": "tsc --noEmit",
