@@ -76,7 +76,9 @@ const action = createUserCommand({ email, country, street, postalCode });
 
 - The `Result` type parameter never exists at runtime; it lets `execute()` infer its return
   type, so you **never** pass a manual generic to `execute()`.
-- `meta` is merged from the creator's common meta and per-call meta; omitted when both absent.
+- A creator takes an optional `meta` as second argument (`createUserCommand(payload, meta)`);
+  the action has a `meta` only when the call passes one. The buses add the correlation id and
+  the timestamp to it.
 
 ---
 
