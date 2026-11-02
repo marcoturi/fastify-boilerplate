@@ -133,7 +133,7 @@ export function eventBus({ logger }: EventBusOptions): EventBus {
 
   function emit(event: Action<unknown>): void {
     const registrations = handlers.get(event.type);
-    if (!registrations || registrations.length === 0) {
+    if (!registrations) {
       logger.debug(`No handlers registered for event "${event.type}"`);
       return;
     }
