@@ -218,8 +218,6 @@ Each layer has a single responsibility (details in [clean-architecture.md](.agen
 
 **Route / Resolver** — handles the transport (REST route, GraphQL resolver; gRPC or CLI would be one more adapter). Validates input, dispatches one action on a bus, shapes the response. No business logic.
 
-> All REST routes are prefixed with `/api` (configured in `src/server/index.ts`).
-
 Example: [find-users.route.ts](src/modules/user/queries/find-users/find-users.route.ts), [find-users.resolver.ts](src/modules/user/queries/find-users/find-users.resolver.ts)
 
 **Command/Query Handler** — runs one use case. Receives a command or query, calls a few domain, service or repository functions, returns a result or emits events. One handler per use case (e.g. `CreateUser`, `FindUsers`).
