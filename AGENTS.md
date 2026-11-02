@@ -93,7 +93,7 @@ Cucumber World in `tests/support/` is a class because Cucumber requires it.
 - **Return type:** inferred. Annotate it only when the factory implements an interface, so
   TypeScript checks the implementation against it: a repository port
   (`userRepository(...): UserRepository`), `Mapper<...>`, a bus type.
-- **Exports:** in a file that holds a factory, every function lives inside it, public ones on the
+- **Exports:** in a file that default-exports a factory, every function lives inside it, public ones on the
   returned object and private helpers as inner closures. Besides the default-exported factory,
   such a file exports only types, schemas and, in handler files, the action creator: never
   standalone functions. Stateless helpers in `src/shared/` (e.g. `with-timeout.ts`) are plain
