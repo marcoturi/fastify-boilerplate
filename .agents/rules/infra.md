@@ -31,7 +31,8 @@ paths:
 - Only `package.json`, the production `node_modules` and `src/` reach the image: a file needed at
   runtime outside `src/` must be copied explicitly and let in by `.dockerignore`, which admits
   only what the Dockerfile copies
-- Migrations do not run in the image: `db/` is excluded and `pnpm db:migrate` runs separately
+- Migrations do not run in the image: `db/` is excluded and they run separately (`pnpm db:migrate`,
+  or the `migrate` service under Compose)
 
 ## CI and release
 
