@@ -15,7 +15,6 @@ export default async function server(fastify: FastifyInstance) {
   // Set sensible default security headers.
   // Registered before any route (including GraphQL) so its onRequest hook applies globally.
   await fastify.register(Helmet, {
-    global: true,
     // The following settings are needed for graphiql, see https://github.com/graphql/graphql-playground/issues/1283
     contentSecurityPolicy: !env.isDevelopment,
     crossOriginEmbedderPolicy: !env.isDevelopment,
