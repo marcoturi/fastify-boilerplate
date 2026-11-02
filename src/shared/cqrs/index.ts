@@ -7,9 +7,6 @@ import { requestBus } from '#src/shared/cqrs/request-bus.ts';
 
 const CQRSPlugin = fastifyPlugin(
   (fastify, _opts, done) => {
-    // Middleware order (first added = outermost wrapper): tracing → trackExecutionTime → handler.
-    // The buses stamp the metadata (correlationId, timestamp) themselves, before the middlewares
-
     const eventBusInstance = eventBus({ logger: fastify.log });
     eventBusInstance.addMiddleware(tracingMiddleware('event'));
 
