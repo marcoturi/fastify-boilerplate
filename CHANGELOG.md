@@ -1,3 +1,36 @@
+## [4.3.5](https://github.com/marcoturi/fastify-boilerplate/compare/v4.3.4...v4.3.5) (2026-11-02)
+
+### Refactoring
+
+* **cqrs:** drop an unneeded cast in withMetadata ([49348a9](https://github.com/marcoturi/fastify-boilerplate/commit/49348a9d649e3bc259afb0ee916de3fc46df2d77))
+* **cqrs:** register event subscribers with Map.prototype.getOrInsert ([0902779](https://github.com/marcoturi/fastify-boilerplate/commit/0902779ed2273b87ac387a0949c3ad98a1ddafdb))
+* **db:** drop the cast on the WHERE conditions ([89b921f](https://github.com/marcoturi/fastify-boilerplate/commit/89b921fc5f41b8d1c5ef6816b791fe1401402d82))
+* **graphql:** load the schema files with fs.glob, without @graphql-tools/load-files ([69b22aa](https://github.com/marcoturi/fastify-boilerplate/commit/69b22aad46de4954e9a54c4f36fc6168a813f850))
+* **utils:** let using clear the withTimeout timer ([f9b13b6](https://github.com/marcoturi/fastify-boilerplate/commit/f9b13b6a59bfaa955b2f2da8484c067d7b14504f))
+
+### Documentation
+
+* **config:** explain the POSTGRES_URL format once, at the schema ([8eed223](https://github.com/marcoturi/fastify-boilerplate/commit/8eed2234bb5fb721e116515420a061fa6ff8ceed))
+* **cqrs:** drop the middleware order comment, wrong for the event bus ([e4ed1b3](https://github.com/marcoturi/fastify-boilerplate/commit/e4ed1b32cbf7f5f6a7ffd75af531bb094bc98561))
+* **cqrs:** keep the middleware contract in the CQRS rule ([9d4b884](https://github.com/marcoturi/fastify-boilerplate/commit/9d4b88423536ae8f9ecd1aa0870d97b0ed6d52c5))
+* **cqrs:** leave to the buses why they stamp the metadata before the middlewares ([64567ac](https://github.com/marcoturi/fastify-boilerplate/commit/64567ac1ef75952639286b6f50f4af7761e608e5))
+* **cqrs:** match the guide snippets to the files they copy ([3f133d3](https://github.com/marcoturi/fastify-boilerplate/commit/3f133d3637187fdf6a8c1e1269a1c40b9ba7ae19))
+* **cqrs:** state once that events have no result ([5d72fd4](https://github.com/marcoturi/fastify-boilerplate/commit/5d72fd4b490d207722caa24c035ddbc9549c018f))
+* **db:** keep the connection and transaction behaviour in the postgres.ts JSDoc ([095cd34](https://github.com/marcoturi/fastify-boilerplate/commit/095cd34f35ed1f4d38021b72fd64fcb411e409c2))
+* **docker:** drop the Node major from the base image comment ([240311d](https://github.com/marcoturi/fastify-boilerplate/commit/240311d071d4e2339683115f8960b08813bbb697))
+* drop comments that restate the code next to them ([ca40366](https://github.com/marcoturi/fastify-boilerplate/commit/ca40366c38f5aceecb9948ff2697cdac9c35e00c))
+* **modules:** drop the globalDependencies comment that named half of them ([e6b7a94](https://github.com/marcoturi/fastify-boilerplate/commit/e6b7a943ac8954c7f701a5e965f62b5e20817c84))
+* **otel:** link the OpenTelemetry variables instead of listing them ([d1b1511](https://github.com/marcoturi/fastify-boilerplate/commit/d1b1511af3b9bd646d240869ec6e5fe101082abe))
+* point to the exceptions, CRUD methods and DI patterns instead of listing them ([0934124](https://github.com/marcoturi/fastify-boilerplate/commit/093412409e264e6485eb5af887b95a0b23cec001))
+* **rules:** leave persist-credentials and the migrate service to their files ([2f0df6a](https://github.com/marcoturi/fastify-boilerplate/commit/2f0df6a2f3c137a569e1b1124e4e0c68128efa1a))
+* **rules:** make Renovate wait at least as long as pnpm before a release ([84762f3](https://github.com/marcoturi/fastify-boilerplate/commit/84762f3260739904003f07062c8baad1b2b6c897))
+* **rules:** only reverts with the git revert body release a patch ([5986476](https://github.com/marcoturi/fastify-boilerplate/commit/59864762f71fb690a5478594fff5ae443fd23bff))
+* **server:** state the plugin order once ([e60a4e6](https://github.com/marcoturi/fastify-boilerplate/commit/e60a4e64b7fd0ed6e76ef8d7eb29efca73f84a4e))
+* **user:** drop the fourth copy of the repository error mapping ([c37dda4](https://github.com/marcoturi/fastify-boilerplate/commit/c37dda40108f6df5a389dd49a1a020c64e4b5206))
+* **user:** drop the UserRoles comment that repeated the roles ([6218c17](https://github.com/marcoturi/fastify-boilerplate/commit/6218c1756985d12a1a4332c90599f8d0144da9b1))
+* **user:** leave the 4XX/5XX error responses to the swagger plugin ([bb76032](https://github.com/marcoturi/fastify-boilerplate/commit/bb76032a7e27f134884d880cdcc4a56c1a2185be))
+* **user:** leave the GraphQL validation and error rules to the API rule ([c9a1498](https://github.com/marcoturi/fastify-boilerplate/commit/c9a14988d0eb9beb62c473e0d3375182933b0907))
+
 ## [4.3.4](https://github.com/marcoturi/fastify-boilerplate/compare/v4.3.3...v4.3.4) (2026-11-02)
 
 ### Bug Fixes
