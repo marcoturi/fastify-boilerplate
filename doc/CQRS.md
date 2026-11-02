@@ -169,7 +169,8 @@ for subscribers. Events are declared with an action creator **without** a `Resul
 (they return nothing), and subscribers register with `eventBus.on()`.
 
 ```typescript
-// the event is owned by the domain — src/modules/user/domain/user.events.ts
+// src/modules/user/domain/user.events.ts: another module subscribes, and across modules only
+// domain/*.events.ts can be imported
 export const createUserEvent = userActionCreator<UserEntity>('created'); // type: 'user/created'
 
 // a subscriber (any module) reacts to it
@@ -178,9 +179,8 @@ eventBus.on(createUserEvent, provisionDefaultSettings);
 
 ### Domain events
 
-The domain defines its events (`domain/<module>.events.ts`) and the command handler emits them
-**after the write succeeds**, so a failed write announces nothing (see the handler under
-[Commands](#commands)).
+The command handler emits an event **after the write succeeds**, so a failed write announces
+nothing (see the handler under [Commands](#commands)).
 
 Delivery is **at most once**. The bus lives in memory: an event is lost if the process dies
 between the write and `emit()`, and a failing subscriber is logged, not retried. Fine for
