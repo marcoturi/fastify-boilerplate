@@ -4,7 +4,6 @@ import { env } from '#src/config/index.ts';
 import { transactionContext } from '#src/shared/db/transaction-context.ts';
 
 let sql: postgres.Sql | null = null;
-// Set by closeDbConnection(): from then on getDb() throws instead of opening a new pool
 let closed = false;
 let queryLogger: FastifyBaseLogger | undefined;
 const transactions = transactionContext<postgres.TransactionSql>();
