@@ -87,4 +87,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           HUSKY: 0
+          # semantic-release replaces the value of any *PASSWORD* variable with [secure] in its
+          # output, release notes included: "postgres" would turn postgres.js into [secure].js
+          POSTGRES_PASSWORD: ""
         run: pnpm semantic-release
