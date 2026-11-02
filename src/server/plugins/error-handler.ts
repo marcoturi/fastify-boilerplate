@@ -98,7 +98,6 @@ async function errorHandlerPlugin(fastify: FastifyInstance) {
     sendError(res, 404, `Route ${req.method}:${req.url} not found`),
   );
 
-  // Add the ExceptionResponse schema to the fastify instance
   fastify.addSchema(apiErrorResponseSchema);
 }
 
