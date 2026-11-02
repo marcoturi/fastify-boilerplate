@@ -1,3 +1,47 @@
+## [4.3.2](https://github.com/marcoturi/fastify-boilerplate/compare/v4.3.1...v4.3.2) (2026-11-02)
+
+### Bug Fixes
+
+* **db:** answer 400 to values the column cannot hold ([735f3cb](https://github.com/marcoturi/fastify-boilerplate/commit/735f3cb7d951c05e8f6266b507f5ad7b14b751c7))
+* **db:** make insert([]) a no-op ([d4fe0af](https://github.com/marcoturi/fastify-boilerplate/commit/d4fe0af225cd185b7e8e351f39749a0e3e638af4))
+* **db:** run a nested withTransaction in a savepoint ([685754e](https://github.com/marcoturi/fastify-boilerplate/commit/685754ef1727ebff610d6f4ed2d2fd3c9174e419))
+* **db:** turn on [secure].js debug mode only at debug log level ([56d88ee](https://github.com/marcoturi/fastify-boilerplate/commit/56d88ee6cca42c7539486237b24bd4c5408360c3))
+* **graphql:** cap a query at 1000 tokens ([42bb469](https://github.com/marcoturi/fastify-boilerplate/commit/42bb469709700e226bd13e82e0ff40de39c02ee1))
+* **graphql:** declare the users of a page non-null ([ea6cbe8](https://github.com/marcoturi/fastify-boilerplate/commit/ea6cbe82e94ab59cce7da67725c3bfbadcfa5a9b))
+* **server:** close keep-alive connections that turn idle during shutdown ([5e469b7](https://github.com/marcoturi/fastify-boilerplate/commit/5e469b717404aee35d7b331c4d1d5b6c216a3e19))
+* **server:** log the correlation id on the incoming request line ([7df4912](https://github.com/marcoturi/fastify-boilerplate/commit/7df491219e9e5af6cce3672f8e2cd0842cc38b54))
+
+### Refactoring
+
+* **api:** stop exporting API_ERROR_RESPONSE_ID ([da19416](https://github.com/marcoturi/fastify-boilerplate/commit/da194162f9c76d43d1b6e28ba91cd69afba1106a))
+* **cqrs:** drop a check that can never be true ([fed3435](https://github.com/marcoturi/fastify-boilerplate/commit/fed34358f3feb18dea4956144f28cf34a5126680))
+* **cqrs:** reject commands and queries on the event bus at compile time ([467b549](https://github.com/marcoturi/fastify-boilerplate/commit/467b549d7cadece77e48f583c86f0487e120fd66))
+* **cqrs:** type keyExtractor by the event payload ([95542e7](https://github.com/marcoturi/fastify-boilerplate/commit/95542e745e2250e7b84258870b18d2cf82fcd896))
+* **db:** drop the unused where and orderBy helpers and paginatedQuery's orderBy ([f89d514](https://github.com/marcoturi/fastify-boilerplate/commit/f89d514e03d0283ff4af04b50f75cf8323482d5b))
+* **db:** type the pool-level methods of the DI db as never ([ab51e1e](https://github.com/marcoturi/fastify-boilerplate/commit/ab51e1e5063a67bf2db5945f26239f218d9443d2))
+* **di:** drop the asyncInit option that repeats the default ([3480ca9](https://github.com/marcoturi/fastify-boilerplate/commit/3480ca94bda635fe3e0cb5b28ad74323ff6959a6))
+* **server:** register request-context through the autoload autoConfig ([ea6b759](https://github.com/marcoturi/fastify-boilerplate/commit/ea6b7598a5c1949ac7e216c7ad31abf64c9e8e34))
+* **user:** import the action creator from its own file ([7d605da](https://github.com/marcoturi/fastify-boilerplate/commit/7d605dacb5ff628918d264636ecc13aee3173c97))
+* **user:** inline the single-use paginated response schema ([c0c8f4b](https://github.com/marcoturi/fastify-boilerplate/commit/c0c8f4b1c153ce4f6be511154f121ad99c99dc74))
+* **validation:** drop the array branch of withoutNulls ([cdea426](https://github.com/marcoturi/fastify-boilerplate/commit/cdea426e2b4e92094e53d4a5ab1fd51df2234d58))
+
+### Documentation
+
+* **agents:** fold the enum and console notes into the Biome line ([449ab58](https://github.com/marcoturi/fastify-boilerplate/commit/449ab58eb9089a2a26a3a00944f17a7fd6fe2cf7))
+* **agents:** limit the factory export rule to files that default-export one ([5b1fa2e](https://github.com/marcoturi/fastify-boilerplate/commit/5b1fa2e56ce65fb622224433ddba548bc1f074df))
+* **agents:** point the error mapping to the API rule ([764d3b4](https://github.com/marcoturi/fastify-boilerplate/commit/764d3b4858605062844e6b7825d96be9be29d438))
+* **cqrs:** drop a snippet that repeats the handler ([e33a38c](https://github.com/marcoturi/fastify-boilerplate/commit/e33a38cd00e2d254bddefb061a7f7fef9fb479cb))
+* **cqrs:** fix the syntax of the route example ([b6091f6](https://github.com/marcoturi/fastify-boilerplate/commit/b6091f6b0c4525995adf10090ec128461c923c75))
+* **cqrs:** link the middleware rules instead of repeating them ([1f83ac8](https://github.com/marcoturi/fastify-boilerplate/commit/1f83ac8be450d53d2cdd5fdad7bd946cfa50475b))
+* drop the stale reason for the action-creator file ([8b2a745](https://github.com/marcoturi/fastify-boilerplate/commit/8b2a7451e45ac59c4a2ee585db0264c223a40273))
+* **README:** drop the repeated /api prefix note ([8655287](https://github.com/marcoturi/fastify-boilerplate/commit/8655287fe95e80671bea77729e79b0c51e8487b0))
+* **README:** generate:types needs the database settings, not a database ([2574619](https://github.com/marcoturi/fastify-boilerplate/commit/25746192eecc1b76651eef6b9e6810edd0f86455))
+* **README:** link the CI and release details instead of repeating them ([896e61c](https://github.com/marcoturi/fastify-boilerplate/commit/896e61c5c19b45cd79926db684acb6f313961371))
+* **README:** the buses stamp the metadata, not a middleware ([1517540](https://github.com/marcoturi/fastify-boilerplate/commit/1517540f6b47725026d48dcd41219734b0fca124))
+* **rules:** drop the database lines that repeat AGENTS.md ([c7a5b3f](https://github.com/marcoturi/fastify-boilerplate/commit/c7a5b3f689ac83dbf2b4e2ec0406ea73aade242c))
+* **rules:** drop the infra and modules rules that repeat AGENTS.md ([f0ec02b](https://github.com/marcoturi/fastify-boilerplate/commit/f0ec02bf4c7f6972eca64fbed4bf490cb9885a2d))
+* **rules:** load the database rule for services ([1f3dd14](https://github.com/marcoturi/fastify-boilerplate/commit/1f3dd1419a7b57c91f74d804aa8c3b7b80ca5bec))
+
 ## [4.3.1](https://github.com/marcoturi/fastify-boilerplate/compare/v4.3.0...v4.3.1) (2026-11-02)
 
 ### Bug Fixes
