@@ -276,8 +276,8 @@ ordering behavior described above.
 ## Middlewares
 
 Middlewares wrap handlers in an **onion** (composed via `reduceRight` in
-`src/shared/cqrs/middlewares.ts`): the **first added is the outermost** wrapper.
-They must **never mutate** the action — always spread into a new object.
+`src/shared/cqrs/middlewares.ts`): the **first added is the outermost** wrapper. What a
+middleware must and must not do is in the [CQRS rule](../.agents/rules/cqrs.md#middlewares).
 
 ```typescript
 const myMiddleware: Middleware = (action, next) => {
@@ -285,10 +285,6 @@ const myMiddleware: Middleware = (action, next) => {
   return next(enriched); // return the result so it propagates
 };
 ```
-
-One `Middleware` type (`src/shared/cqrs/bus.types.ts`) serves the three buses. It must
-**return** what `next` returns: commands and queries resolve to the handler's result, and the
-event bus awaits it (for per-key ordering) and isolates failures.
 
 Registered in `src/shared/cqrs/index.ts`, outermost first:
 
