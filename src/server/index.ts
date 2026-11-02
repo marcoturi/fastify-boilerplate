@@ -44,6 +44,9 @@ export default async function server(fastify: FastifyInstance) {
     // Caps the size of a query: otherwise one request could repeat under thousands
     // of aliases, each a paginated query. Introspection stays well below it
     graphql: { parseOptions: { maxTokens: 1000 } },
+    // The query caches are keyed by the whole text, comments included (they are not tokens):
+    // a client could fill them with ~1 MB queries. Parsing 1000 tokens costs little
+    cache: false,
   });
   // A query that is not valid GraphQL text is retried as a JSON AST, which skips maxTokens:
   // accept only documents parsed from text (only parse() sets a Location)
