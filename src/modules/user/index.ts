@@ -1,14 +1,11 @@
-import type { UserRepository } from '#src/modules/user/database/user.repository.port.ts';
-import type { UserModel } from '#src/modules/user/database/user.repository.ts';
+import type userRepository from '#src/modules/user/database/user.repository.ts';
 import type userDomain from '#src/modules/user/domain/user.domain.ts';
-import type { UserEntity } from '#src/modules/user/domain/user.types.ts';
-import type { UserResponseDto } from '#src/modules/user/dtos/user.response.dto.ts';
-import type { Mapper } from '#src/shared/ddd/mapper.interface.ts';
+import type userMapper from '#src/modules/user/user.mapper.ts';
 
 declare global {
   export interface Dependencies {
-    userMapper: Mapper<UserEntity, UserModel, UserResponseDto>;
-    userRepository: UserRepository;
+    userMapper: ReturnType<typeof userMapper>;
+    userRepository: ReturnType<typeof userRepository>;
     userDomain: ReturnType<typeof userDomain>;
   }
 }
