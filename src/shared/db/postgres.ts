@@ -35,9 +35,13 @@ export function getDb(): postgres.Sql {
       max: env.db.poolMax,
       idle_timeout: env.db.idleTimeout,
       connect_timeout: env.db.connectTimeout,
-      debug: (connection: number, query: string, params: unknown[]) => {
-        queryLogger?.debug({ connection, params: params.length }, `SQL: ${query.trim()}`);
-      },
+      // Only at debug level: in debug mode postgres.js also attaches the query parameters to
+      // every error it raises, so a raw driver error that reaches a logger would print them
+      debug:
+        env.log.level === 'debug' &&
+        ((connection: number, query: string, params: unknown[]) => {
+          queryLogger?.debug({ connection, params: params.length }, `SQL: ${query.trim()}`);
+        }),
     });
   }
   return sql;
