@@ -15,7 +15,6 @@ declare global {
   }
 }
 
-/** The dependencies every module gets, taken from the Fastify instance (logger, buses) */
 export function globalDependencies({
   log: logger,
   queryBus,
