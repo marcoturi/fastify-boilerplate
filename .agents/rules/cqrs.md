@@ -4,6 +4,7 @@ paths:
   - "src/modules/**/*.{handler,event-handler,route,resolver,action-creator}.ts"
   - "src/modules/**/domain/**"
   - "doc/CQRS.md"
+  - "src/index.ts"
 ---
 
 # CQRS

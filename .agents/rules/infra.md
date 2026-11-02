@@ -1,6 +1,7 @@
 ---
 paths:
   - "src/config/**"
+  - "src/instrumentation.ts"
   - ".env.example"
   - "Dockerfile"
   - ".dockerignore"

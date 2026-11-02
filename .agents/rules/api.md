@@ -4,6 +4,7 @@ paths:
   - "src/modules/**/dtos/**"
   - "src/shared/api/**"
   - "src/shared/exceptions/**"
+  - "src/shared/utils/validator.util.ts"
   - "src/server/**"
 ---
 
