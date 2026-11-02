@@ -29,7 +29,7 @@ jobs:
     # semantic-release writes with GH_TOKEN (push, GitHub release, comments), not with this token
     permissions:
       contents: read # for checkout
-      id-token: write # to enable use of OIDC for npm provenance
+      id-token: write # npm trusted publishing (OIDC): publish and provenance
 
     services:
       postgres:
