@@ -348,7 +348,7 @@ Written in [Gherkin](https://cucumber.io/docs/gherkin/) and executed with [Cucum
 pnpm test:e2e
 ```
 
-The E2E test server is created via `buildApp()` (in `tests/support/server.ts`) — it boots a full Fastify instance without binding to a port, so tests run fast and don't conflict with a running dev server.
+The E2E test server is created via `buildApp()` (in `tests/support/server.ts`) — it boots a full Fastify instance without binding to a port. Each scenario empties the `users` table of the database in `.env`, the one `pnpm start` uses: don't run the E2E tests against data you want to keep.
 
 ### Load tests
 
