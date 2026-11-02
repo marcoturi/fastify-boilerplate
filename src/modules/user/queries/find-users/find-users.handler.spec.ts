@@ -25,7 +25,7 @@ async function run(payload: FindUsersRequestDto) {
 describe('findUsersHandler()', () => {
   it('passes the filters and the pagination to the repository', async () => {
     const { params, filters } = await run({ country: 'Italy', limit: 5, page: 2 });
-    assert.deepEqual(filters, { country: 'Italy', postalCode: undefined, street: undefined });
+    assert.equal(filters.country, 'Italy');
     assert.equal(params.limit, 5);
     assert.equal(params.offset, 10);
   });

@@ -11,12 +11,9 @@ export const findUsersQuery = userActionCreator<FindUsersRequestDto, Paginated<U
 export default function findUsersHandler({ queryBus, userRepository }: Dependencies) {
   return {
     init() {
-      queryBus.register(findUsersQuery, async ({ payload }) => {
-        // Pick known fields only: the request schema does not reject extra keys (e.g. orderBy)
-        const { limit, page, country, postalCode, street } = payload;
-        const query = paginatedQuery({ limit, page });
-        return userRepository.findAllPaginatedFiltered(query, { country, postalCode, street });
-      });
+      queryBus.register(findUsersQuery, async ({ payload }) =>
+        userRepository.findAllPaginatedFiltered(paginatedQuery(payload), payload),
+      );
     },
   };
 }
