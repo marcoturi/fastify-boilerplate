@@ -8,7 +8,6 @@ describe('paginatedQuery()', () => {
     assert.equal(query.limit, 20);
     assert.equal(query.page, 0);
     assert.equal(query.offset, 0);
-    assert.deepEqual(query.orderBy, { field: 'createdAt', param: 'desc' });
   });
 
   it('computes the offset from page and limit', () => {
@@ -33,7 +32,6 @@ describe('paginatedQuery()', () => {
       limit: 10,
       page: 2,
       offset: 20,
-      orderBy: { field: 'createdAt', param: 'desc' },
     });
   });
 });

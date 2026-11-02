@@ -4,7 +4,7 @@ import type {
   PaginatedQueryParams,
   RepositoryPort,
 } from '#src/shared/db/repository.port.ts';
-import { type Condition, orderByClause, whereClause } from '#src/shared/db/sql-fragments.ts';
+import { type Condition, whereClause } from '#src/shared/db/sql-fragments.ts';
 import type { Mapper } from '#src/shared/ddd/mapper.interface.ts';
 import { NotFoundException } from '#src/shared/exceptions/index.ts';
 
@@ -49,7 +49,9 @@ export function sqlRepositoryBase(db: Dependencies['db']) {
       // One query, so the count and the page come from the same snapshot of the table
       async paginate(params, conditions = []) {
         const where = whereClause(db, conditions);
-        const orderBy = orderByClause(db, params.orderBy);
+        // Newest first, with id as a tiebreaker: rows with the same createdAt keep a stable
+        // order across pages
+        const orderBy = db`ORDER BY "createdAt" DESC, id DESC`;
         const [result] = await db<{ rows: DbModel[] | null; count: string }[]>`
           SELECT
             (SELECT COUNT(*) FROM ${db(tableName)} ${where}) AS count,

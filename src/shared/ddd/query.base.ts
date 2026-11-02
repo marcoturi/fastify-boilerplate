@@ -7,5 +7,5 @@ export function paginatedQuery(
   // `??` rather than destructuring defaults, so explicit nulls also get the default
   const limit = request.limit ?? 20;
   const page = request.page ?? 0;
-  return { limit, page, offset: page * limit, orderBy: { field: 'createdAt', param: 'desc' } };
+  return { limit, page, offset: page * limit };
 }

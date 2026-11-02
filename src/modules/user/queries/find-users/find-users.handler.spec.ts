@@ -30,13 +30,9 @@ describe('findUsersHandler()', () => {
     assert.equal(params.offset, 10);
   });
 
-  it('ignores fields the request schema does not declare, such as orderBy', async () => {
-    const payload = {
-      orderBy: { field: 'email; DROP TABLE users', param: 'asc' },
-      offset: 1000,
-    } as unknown as FindUsersRequestDto;
+  it('computes the offset, ignoring one the request carries', async () => {
+    const payload = { offset: 1000 } as unknown as FindUsersRequestDto;
     const { params } = await run(payload);
-    assert.deepEqual(params.orderBy, { field: 'createdAt', param: 'desc' });
     assert.equal(params.offset, 0);
   });
 });

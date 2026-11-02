@@ -67,16 +67,7 @@ describe('sqlRepositoryBase()', () => {
     for (const [name, call] of [
       ['findOneById', () => failing().findOneById('1')],
       ['findAll', () => failing().findAll()],
-      [
-        'findAllPaginated',
-        () =>
-          failing().findAllPaginated({
-            limit: 10,
-            offset: 0,
-            page: 0,
-            orderBy: { field: 'id', param: 'asc' },
-          }),
-      ],
+      ['findAllPaginated', () => failing().findAllPaginated({ limit: 10, offset: 0, page: 0 })],
       ['delete', () => failing().delete('1')],
     ] as const) {
       it(`${name}() throws DatabaseErrorException on a driver error`, async () => {
@@ -110,12 +101,7 @@ describe('sqlRepositoryBase()', () => {
   });
 
   describe('findAllPaginated()', () => {
-    const params = {
-      limit: 10,
-      offset: 0,
-      page: 0,
-      orderBy: { field: 'id', param: 'asc' },
-    } as const;
+    const params = { limit: 10, offset: 0, page: 0 };
 
     it('returns the page and the total count from a single query', async () => {
       let queries = 0;

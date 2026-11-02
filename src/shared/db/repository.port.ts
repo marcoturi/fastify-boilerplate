@@ -5,16 +5,10 @@ export interface Paginated<T> {
   data: T[];
 }
 
-export interface OrderBy {
-  field: string;
-  param: 'asc' | 'desc';
-}
-
 export interface PaginatedQueryParams {
   limit: number;
   page: number;
   offset: number;
-  orderBy: OrderBy;
 }
 
 export interface RepositoryPort<Entity> {

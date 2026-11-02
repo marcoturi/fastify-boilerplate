@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
-import { orderByClause, whereClause } from './sql-fragments.ts';
+import { whereClause } from './sql-fragments.ts';
 
 type Rendered = { strings: readonly string[]; values: unknown[] } | { identifier: string };
 
@@ -35,19 +35,5 @@ describe('whereClause()', () => {
   it('joins the set conditions with AND, each in parentheses, skipping the unset ones', () => {
     const clause = whereClause(db, [condition('a'), undefined, condition('b')]);
     assert.equal(render(clause), "WHERE ('a') AND ('b')");
-  });
-});
-
-describe('orderByClause()', () => {
-  it('orders by the field, then by id, in the requested direction', () => {
-    assert.equal(
-      render(orderByClause(db, { field: 'createdAt', param: 'asc' })),
-      'ORDER BY "createdAt" ASC, id ASC',
-    );
-  });
-
-  it('falls back to DESC for anything but asc', () => {
-    const injected = { field: 'createdAt', param: 'asc; DROP TABLE users' } as never;
-    assert.equal(render(orderByClause(db, injected)), 'ORDER BY "createdAt" DESC, id DESC');
   });
 });
