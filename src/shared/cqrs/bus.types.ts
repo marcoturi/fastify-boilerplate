@@ -61,7 +61,8 @@ export type CommandBus = RequestBus;
 /** Queries have the same shape on a separate bus: they must be idempotent and side-effect-free. */
 export type QueryBus = RequestBus;
 
-/** Events have no result (`Result` is `void`): a command or a query is rejected at compile time */
+/** Events have no result (`Result` is `void`): a command or a query with a result is rejected
+ *  at compile time */
 export interface EventBus {
   on<P>(
     creator: ActionCreator<P, void>,

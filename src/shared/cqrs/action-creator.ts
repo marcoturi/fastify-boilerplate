@@ -1,7 +1,7 @@
 import type { Action, ActionCreator, Meta } from '#src/shared/cqrs/bus.types.ts';
 
 /** Builds the action creators of a module: their types are `<prefix>/<type>`. Without a
- *  `Result`, a creator makes events: the event bus takes only those */
+ *  `Result`, a creator makes events: the event bus rejects creators with a result */
 export function actionCreatorFactory(prefix: string) {
   return <Payload, Result = void>(type: string): ActionCreator<Payload, Result> => {
     const fullType = `${prefix}/${type}`;
