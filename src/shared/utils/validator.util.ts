@@ -47,9 +47,6 @@ export function toSubErrors(
 /** GraphQL passes `null` for an optional argument the client set to null (e.g. `limit: null`,
  *  or a variable set to null): drop it, so the schema treats it as absent, like REST does */
 function withoutNulls(value: unknown): unknown {
-  if (Array.isArray(value)) {
-    return value.map(withoutNulls);
-  }
   if (value !== null && typeof value === 'object') {
     return Object.fromEntries(
       Object.entries(value).flatMap(([key, item]) =>
