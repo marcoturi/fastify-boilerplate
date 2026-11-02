@@ -1,3 +1,9 @@
+## [4.3.1](https://github.com/marcoturi/fastify-boilerplate/compare/v4.3.0...v4.3.1) (2026-11-02)
+
+### Bug Fixes
+
+* **deps:** update graphql-tools monorepo ([#1231](https://github.com/marcoturi/fastify-boilerplate/issues/1231)) ([6317766](https://github.com/marcoturi/fastify-boilerplate/commit/63177665e04f9bd7b72ad5bd98c4721c9a3468a1))
+
 ## [4.3.0](https://github.com/marcoturi/fastify-boilerplate/compare/v4.2.0...v4.3.0) (2026-11-02)
 
 ### Features
