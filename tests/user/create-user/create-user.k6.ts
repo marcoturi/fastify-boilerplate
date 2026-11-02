@@ -18,7 +18,7 @@ export const options: Options = {
     seed_users: {
       executor: 'constant-arrival-rate',
       duration: '2s',
-      rate: 150, // 150 iterations per timeUnit
+      rate: 150,
       timeUnit: '1s',
       preAllocatedVUs: 150,
       maxVUs: 300,

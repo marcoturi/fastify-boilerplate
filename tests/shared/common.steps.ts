@@ -8,7 +8,6 @@ Then(
   async function (this: CustomWorld, error: string, statusCode: string) {
     const response = this.response;
     assert.strictEqual(response.statusCode, +statusCode);
-    // The body follows the shared error envelope (src/shared/api/api-error.response.ts)
     const body = response.json<ApiErrorResponse>();
     assert.strictEqual(body.statusCode, +statusCode);
     assert.strictEqual(body.error, error);

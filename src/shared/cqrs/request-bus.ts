@@ -9,8 +9,7 @@ import { composeMiddlewares, withMetadata } from '#src/shared/cqrs/middlewares.t
 
 /**
  * Shared factory for command and query buses.
- * The `label` parameter is used in error messages to distinguish between the two
- * (e.g. "Command type of X is not registered" vs "Query type of X is not registered").
+ * The `label` parameter is used in error messages to distinguish between the two.
  */
 export function requestBus(label: string): RequestBus {
   const handlers = new Map<string, CommandHandler>();

@@ -19,8 +19,7 @@ interface QueuedEvent {
 }
 
 /** One subscription for an event type. When `keyExtractor` is set, events are queued
- *  per key and drained one at a time (ordered per key, concurrent across keys): a key has a
- *  queue exactly while its drain loop runs. */
+ *  per key and drained one at a time: a key has a queue exactly while its drain loop runs. */
 interface HandlerRegistration {
   handler: EventHandler;
   keyExtractor?: SequentialProcessingOptions['keyExtractor'];
