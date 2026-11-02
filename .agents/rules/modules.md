@@ -12,8 +12,8 @@ DI uses [Awilix](https://github.com/jeffijoe/awilix) with `@fastify/awilix` (wir
 
 - Global dependencies (logger, buses, DB client, repository base) are defined by `globalDependencies()` in `src/modules/index.ts` and registered in `src/server/di/index.ts`
 - Module-specific dependencies are declared via `declare global { export interface Dependencies { ... } }` in the module's `index.ts`
-- Repositories, mappers, domain services are auto-loaded as singletons from `src/modules/**/*.{repository,mapper,service,domain}.ts`
-- Handlers and event-handlers are auto-loaded with `asyncInit: 'init'` from `src/modules/**/*.{handler,event-handler}.ts`
+- Repositories, mappers and domain services are auto-loaded as singletons, handlers and
+  event-handlers with `asyncInit: 'init'`: the file patterns are in `src/server/di/index.ts`
 - DI naming convention: kebab-case filenames are converted to camelCase identifiers (e.g. `create-user.handler.ts` → `createUserHandler` in the container). Names must be unique across modules: a clash (two `create-user.handler.ts`, or a file named like a global dependency) fails at startup
 
 ## Adding a new module

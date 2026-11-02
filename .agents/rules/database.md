@@ -16,8 +16,8 @@ paths:
   service or a repository: handlers may not import `src/shared/db/` beyond ports
   (dependency-cruiser), so a handler that needs a transaction delegates it to a service
 - Repository base: `sqlRepositoryBase(db)` (in `src/shared/db/sql-repository.base.ts`), registered in DI
-  as `repositoryBase` already bound to the transaction-aware `db`, provides generic CRUD (insert,
-  findOneById, findAll, findAllPaginated, update, delete)
+  as `repositoryBase` already bound to the transaction-aware `db`, provides the generic CRUD of
+  `RepositoryPort`
 - Errors: repository methods throw domain exceptions, never a driver error. The base maps them
   for its methods and for the custom ones it receives (`mapDatabaseErrors` in
   `src/shared/db/database-errors.ts`): a unique violation becomes `AlreadyExistsException`, a
