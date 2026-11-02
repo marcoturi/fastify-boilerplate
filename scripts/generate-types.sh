@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Starts the server, generates REST + GraphQL client types, then stops the server.
-# Used by CI (release pipeline) and can be run locally.
+# Used by both CI workflows and can be run locally.
 set -euo pipefail
 
 PORT=3000
