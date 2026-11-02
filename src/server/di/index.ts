@@ -40,6 +40,5 @@ export async function di(fastify: FastifyInstance) {
   // Create a dependency injection container
   await fastify.register(fastifyAwilixPlugin, {
     container: diContainer,
-    asyncInit: true,
   });
 }
