@@ -9,9 +9,6 @@ paths:
 
 # Database
 
-SQL belongs in repository files only. Handlers use the repository **port** (interface): from
-`src/shared/db/` or `database/` they import only `*.port.ts` files, never the adapter or the DB client.
-
 - Client: `postgres` (postgres.js) — uses tagged template literals for parameterized queries
 - Connection: lazy singleton via `getDb()` in `src/shared/db/postgres.ts`; close with `closeDbConnection()`,
   after which `getDb()` throws instead of opening a new pool
