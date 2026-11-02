@@ -23,7 +23,6 @@ export default function userRepository({
   userMapper,
   repositoryBase,
 }: Dependencies): UserRepository {
-  // Custom methods next to the generic CRUD: the base maps their driver errors too
   return repositoryBase({ tableName: 'users', mapper: userMapper }, ({ paginate }) => ({
     findAllPaginatedFiltered: (params: PaginatedQueryParams, filters: UserFilters) =>
       paginate(params, [
