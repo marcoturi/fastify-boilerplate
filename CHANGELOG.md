@@ -1,3 +1,23 @@
+## [4.3.4](https://github.com/marcoturi/fastify-boilerplate/compare/v4.3.3...v4.3.4) (2026-11-02)
+
+### Bug Fixes
+
+* **db:** let a custom repository method call another one through this ([5382c18](https://github.com/marcoturi/fastify-boilerplate/commit/5382c1816078b6eafa1172a242acc2b14da2f3e0))
+* **graphql:** accept only queries sent as GraphQL text ([845bce8](https://github.com/marcoturi/fastify-boilerplate/commit/845bce8ba4a1faaec417d6c9d489f36496be8a38))
+* **graphql:** turn off the query caches ([63620a8](https://github.com/marcoturi/fastify-boilerplate/commit/63620a8780519698441556a96990af2b63a707ab))
+* **startup:** log and exit when a plugin fails to load ([52ee9ae](https://github.com/marcoturi/fastify-boilerplate/commit/52ee9ae2cb6dd2fcf136b37537b1e18c83aa27c6))
+
+### Refactoring
+
+* **server:** drop the Helmet global option ([08d1806](https://github.com/marcoturi/fastify-boilerplate/commit/08d180650c18e071a80833829c6e54137dff8a28))
+
+### Documentation
+
+* **docker:** name pnpm settings that pnpm-workspace.yaml actually holds ([12a570e](https://github.com/marcoturi/fastify-boilerplate/commit/12a570ed12a43d83ea93748d251552be6a908192))
+* **errors:** drop a comment naming a schema that no longer exists ([9f886df](https://github.com/marcoturi/fastify-boilerplate/commit/9f886dfdc56667cbf10959c01a75c565782959ea))
+* **readme:** link the testing rule instead of repeating where the tests live ([18e9811](https://github.com/marcoturi/fastify-boilerplate/commit/18e9811fc7c26199132b8c2f99fe326354f2b805))
+* **scripts:** generate-types.sh runs in both CI workflows ([c54e2fd](https://github.com/marcoturi/fastify-boilerplate/commit/c54e2fdee05486cc0bba7355cdd6cbabcb998ce8))
+
 ## [4.3.3](https://github.com/marcoturi/fastify-boilerplate/compare/v4.3.2...v4.3.3) (2026-11-02)
 
 ### Bug Fixes
