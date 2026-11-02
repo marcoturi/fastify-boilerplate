@@ -22,8 +22,6 @@ paths:
 - Environment variables are declared and validated in one place, `src/config/env.ts`
   (env-schema + TypeBox). A new variable goes there and in `.env.example`, and in
   `docker-compose.yml` if the containerized app needs it
-- The code reads `env` from `#src/config/index.ts`, never `process.env` (the exception is
-  `src/instrumentation.ts`, which runs before the config is loaded)
 
 ## Docker
 
