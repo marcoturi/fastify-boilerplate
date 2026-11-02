@@ -1,3 +1,28 @@
+## [4.3.6](https://github.com/marcoturi/fastify-boilerplate/compare/v4.3.5...v4.3.6) (2026-11-02)
+
+### Bug Fixes
+
+* **errors:** answer with the error envelope when a handler throws a non-Error ([078c0ea](https://github.com/marcoturi/fastify-boilerplate/commit/078c0ea4d4a799528c6a33cc4f3e6fcef955af77))
+* **validator:** keep list arguments as lists ([2a0953f](https://github.com/marcoturi/fastify-boilerplate/commit/2a0953f35ccd92ba09b74796ba2004cb99506a0b))
+
+### Refactoring
+
+* **di:** load the module files with one loadModules call ([46bd321](https://github.com/marcoturi/fastify-boilerplate/commit/46bd32154754a84e8c7206c432c5fc765e2993bd))
+* **errors:** let INTERNAL exceptions take the generic 5xx path ([4358408](https://github.com/marcoturi/fastify-boilerplate/commit/4358408dfbfcb75734255be1b8d8b051ad7fb756))
+* **graphql:** drop defineMutation, unused when a schema is given ([cd61ef9](https://github.com/marcoturi/fastify-boilerplate/commit/cd61ef9015d6b4d8ed6e8fd290486abbf8724f4f))
+* **user:** derive the module DI types from its factories ([b1fe50c](https://github.com/marcoturi/fastify-boilerplate/commit/b1fe50c752bc04eed717902c954e28d1f7ae4e30))
+
+### Documentation
+
+* **db:** explain why events go out after withTransaction resolves ([1d7749a](https://github.com/marcoturi/fastify-boilerplate/commit/1d7749ad12933343cad6e4338989bdc2a24d1e48))
+* **rules:** closeDbConnection has no JSDoc to point to ([14d49a6](https://github.com/marcoturi/fastify-boilerplate/commit/14d49a639e68d14b67eff4bb2508d34a10d8d4e8))
+* **rules:** leave the driver error mapping to the database-errors.ts JSDoc ([31b5990](https://github.com/marcoturi/fastify-boilerplate/commit/31b5990b3cccda033667aba4ab4b120e96cca20a))
+* **rules:** name docs(readme), the release scope commitlint accepts ([dbb0d12](https://github.com/marcoturi/fastify-boilerplate/commit/dbb0d123cdd746980c16586d4de2d91af1507616))
+* **rules:** only required variables go in .env.example ([6899015](https://github.com/marcoturi/fastify-boilerplate/commit/68990153dd6bd6686f8d9638ecbcec14eeb0ab98))
+* **rules:** point to the DI wiring instead of restating it ([a3b9c78](https://github.com/marcoturi/fastify-boilerplate/commit/a3b9c78e8882d2a3e5f51b38a08a88166a599670))
+* **server:** drop a comment about a plugin order that nothing requires ([f822bc8](https://github.com/marcoturi/fastify-boilerplate/commit/f822bc8fd4c9cadf2a02af2335efd0ff050df281))
+* **server:** say that the COEP line turns COEP on outside development ([ab82cd1](https://github.com/marcoturi/fastify-boilerplate/commit/ab82cd1d7b3dce601dfaa613e66159bd519f6638))
+
 ## [4.3.5](https://github.com/marcoturi/fastify-boilerplate/compare/v4.3.4...v4.3.5) (2026-11-02)
 
 ### Refactoring
