@@ -3,7 +3,7 @@ const findUsersGraphqlSchema = `
     page: Int!
     count: Int!
     limit: Int!
-    data: [User]!
+    data: [User!]!
   }
 
   type Query {
