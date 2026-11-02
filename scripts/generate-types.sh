@@ -4,7 +4,7 @@
 set -euo pipefail
 
 PORT=3000
-SERVER_URL="http://127.0.0.1:$PORT"
+export SERVER_URL="http://127.0.0.1:$PORT"
 MAX_WAIT=30  # seconds
 
 # ── Start the server in the background ──────────────────────────────────────

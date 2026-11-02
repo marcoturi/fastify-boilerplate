@@ -1,7 +1,8 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
-  schema: 'http://127.0.0.1:3000/graphql',
+  // Set by generate-types.sh, which starts the server
+  schema: `${process.env.SERVER_URL}/graphql`,
   generates: {
     './client/graphql.ts': {
       plugins: ['typescript'],
