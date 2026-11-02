@@ -228,7 +228,7 @@ Benefits of the CQRS bus pattern:
 
 Example: [find-users.handler.ts](src/modules/user/queries/find-users/find-users.handler.ts)
 
-**Service** — orchestrates a use case that takes several steps: reads from repositories, asks the domain for decisions, writes, emits events. It decides nothing itself. Add one when a handler grows into orchestration or two handlers share it; the boilerplate has none yet.
+**Service** — orchestrates a use case that takes several steps: reads from repositories, asks the domain for decisions, writes, emits events. It decides nothing itself. Add one when a handler grows into orchestration or two handlers share it.
 
 **Domain** — pure business logic: decisions, computations, invariants, entity creation. It never calls repositories, emits events or does any I/O.
 
@@ -286,7 +286,7 @@ Example: [user.repository.ts](src/modules/user/database/user.repository.ts)
     │       ├── dtos/
     │       │   ├── <module>.graphql-schema.ts       → Shared GraphQL types
     │       │   └── <module>.response.dto.ts         → Shared response DTOs
-    │       ├── <name>.service.ts                    → Optional orchestration layer (none yet)
+    │       ├── <name>.service.ts                    → Optional orchestration layer
     │       ├── <module>.action-creator.ts           → Action creator with the module prefix
     │       ├── <module>.mapper.ts                   → Entity ↔ DB model ↔ DTO mapper
     │       └── index.ts                             → DI declarations
