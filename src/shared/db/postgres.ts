@@ -1,6 +1,7 @@
 import type { FastifyBaseLogger } from 'fastify';
 import postgres from 'postgres';
 import { env } from '#src/config/index.ts';
+import { toDatabaseException } from '#src/shared/db/database-errors.ts';
 import { transactionContext } from '#src/shared/db/transaction-context.ts';
 
 let sql: postgres.Sql | null = null;
@@ -83,7 +84,10 @@ export function transactionAwareDb(): Db {
 
 /**
  * Runs `fn` in a database transaction: committed if it resolves, rolled back if it throws.
- * Repositories called inside it use the transaction automatically. A nested call runs in a
+ * Repositories called inside it use the transaction automatically. A failed query aborts the
+ * transaction even if `fn` catches its error: the call then rejects with it, mapped like a
+ * repository's. To go on after an expected failure (e.g. a duplicate), run that step in a
+ * nested call and catch what the nested call throws. A nested call runs in a
  * savepoint: if it throws, only its own work is undone, and the outer transaction can go on
  * when the caller catches the error. Publish domain events after it resolves: `emit()` starts
  * each handler at once, so a handler started inside runs its first query in the transaction,
@@ -93,8 +97,13 @@ export async function withTransaction<T>(
   fn: (tx: postgres.TransactionSql) => Promise<T>,
 ): Promise<T> {
   const open = transactions.current();
-  if (open) {
-    return open.savepoint((sp) => transactions.run(sp, () => fn(sp))) as Promise<T>;
+  try {
+    return (await (open
+      ? open.savepoint((sp) => transactions.run(sp, () => fn(sp)))
+      : getDb().begin((tx) => transactions.run(tx, () => fn(tx))))) as T;
+  } catch (error) {
+    // A failed query aborts the transaction even when `fn` catches its error: postgres.js then
+    // rejects with that driver error, which repositories map but this call would not
+    throw error instanceof postgres.PostgresError ? toDatabaseException(error) : error;
   }
-  return getDb().begin((tx) => transactions.run(tx, () => fn(tx))) as Promise<T>;
 }
