@@ -25,7 +25,7 @@ async function swaggerGeneratorPlugin(fastify: FastifyInstance) {
     // types). Ranges say "any client/server error looks like this" — clearer than the
     // catch-all `default`, which also implies undeclared success codes. This runs at
     // doc-build time only — it does NOT touch runtime serialization, so success
-    // responses stay intact. Routes may still declare a specific code (409, 404) that
+    // responses stay intact. Routes may still declare a specific code (e.g. 409) that
     // overrides the range for that status; those are preserved (spread last).
     transform: ({ schema, url }) => ({
       url,

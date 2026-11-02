@@ -12,7 +12,6 @@ export default async function createUserRoute(fastify: FastifyRouteInstance) {
       body: createUserRequestDtoSchema,
       response: {
         201: idDtoSchema,
-        // 400/500 come from the shared 4XX/5XX error responses (see swagger plugin).
         // 409 is declared explicitly because clients special-case "already exists".
         409: apiErrorResponseRef,
       },

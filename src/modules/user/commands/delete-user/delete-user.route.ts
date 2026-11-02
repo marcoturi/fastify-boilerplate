@@ -14,7 +14,6 @@ export default async function deleteUserRoute(fastify: FastifyRouteInstance) {
           type: 'null',
           description: 'User Deleted',
         },
-        // 400/500 come from the shared 4XX/5XX error responses (see swagger plugin).
         // 404 is declared explicitly because clients special-case a missing user.
         404: apiErrorResponseRef,
       },
