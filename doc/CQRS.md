@@ -182,13 +182,8 @@ eventBus.on(createUserEvent, provisionDefaultSettings);
 ### Domain events
 
 The domain defines its events (`domain/<module>.events.ts`) and the command handler emits them
-**after the write succeeds**, so a failed write announces nothing:
-
-```typescript
-const user = userDomain.createUser(payload);
-await userRepository.insert(user);
-eventBus.emit(createUserEvent(user));
-```
+**after the write succeeds**, so a failed write announces nothing (see the handler under
+[Commands](#commands)).
 
 Delivery is **at most once**. The bus lives in memory: an event is lost if the process dies
 between the write and `emit()`, and a failing subscriber is logged, not retried. Fine for
