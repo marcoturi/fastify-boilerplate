@@ -48,4 +48,3 @@ db/
 .cache
 traces
 .nvmrc
-client.schema.d.ts
