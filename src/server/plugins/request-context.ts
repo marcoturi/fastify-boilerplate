@@ -1,14 +1,9 @@
-import { fastifyRequestContext } from '@fastify/request-context';
-import type { FastifyInstance } from 'fastify';
-import fp from 'fastify-plugin';
+import { type FastifyRequestContextOptions, fastifyRequestContext } from '@fastify/request-context';
 
-async function requestContextPlugin(fastify: FastifyInstance) {
-  // Every request starts with its id in the context, read by getRequestId()
-  await fastify.register(fastifyRequestContext, {
-    defaultStoreValues: (req) => ({ requestId: req.id }),
-  });
-}
+// Autoload registers the plugin with these options: every request starts with its id in the
+// context, read by getRequestId()
+export const autoConfig: FastifyRequestContextOptions = {
+  defaultStoreValues: (req) => ({ requestId: req.id }),
+};
 
-export default fp(requestContextPlugin, {
-  name: 'requestContext',
-});
+export default fastifyRequestContext;
