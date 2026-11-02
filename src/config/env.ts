@@ -46,8 +46,7 @@ export function parseEnv(data?: Record<string, string>) {
     data ? { schema, data, env: false } : { schema, dotenv: true },
   );
 
-  // POSTGRES_URL holds `host:port` (the port is optional), not a connection URL: the schema
-  // pattern guarantees the host, the port range is checked here
+  // The schema pattern guarantees the host; the port range is checked here
   const [dbHost, dbPort = '5432'] = env.POSTGRES_URL.split(':') as [string, string?];
   if (Number(dbPort) < 1 || Number(dbPort) > 65_535) {
     throw new Error(`POSTGRES_URL: port ${dbPort} is out of range 1-65535`);
