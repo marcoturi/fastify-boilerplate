@@ -208,12 +208,6 @@
           "security": { "noSecrets": "off" }
         }
       }
-    },
-    {
-      "includes": ["*.config.{js,ts,mjs}", ".*.{js,ts,mjs}", "scripts/**/*"],
-      "linter": {
-        "rules": { "correctness": { "noGlobalDirnameFilename": "off" } }
-      }
     }
   ],
   "assist": {
