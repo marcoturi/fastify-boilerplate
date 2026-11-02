@@ -125,7 +125,7 @@ The server starts at **http://localhost:3000** by default. See [API Endpoints](#
 
 | Script | Description |
 |---|---|
-| `pnpm generate:types` | Generate REST and GraphQL client types (starts the server itself: requires Postgres with migrations applied) |
+| `pnpm generate:types` | Generate REST and GraphQL client types (starts the server itself: needs the database settings in `.env`, not a running database) |
 
 ## Running with Docker
 
@@ -380,7 +380,7 @@ import type { User, Query, Mutation } from '@marcoturi/fastify-boilerplate/graph
 
 ### Generate locally
 
-To regenerate the types against a local server (requires running Postgres with migrations applied):
+To regenerate the types locally (the script starts the server itself: the database settings in `.env` are enough, no running database):
 
 ```bash
 pnpm generate:types
