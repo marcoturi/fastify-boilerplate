@@ -126,7 +126,7 @@ Dispatch from a route — the return type is inferred, no manual generic:
 handler: async (req, res) => {
   const id = await fastify.commandBus.execute(createUserCommand(req.body)); // id: string
   return res.status(201).send({ id });
-};
+},
 ```
 
 > `execute()` always returns a promise: a type with no handler (`Error: ... is not registered`)
