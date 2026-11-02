@@ -18,11 +18,9 @@ paths:
 - Repository base: `sqlRepositoryBase(db)` (in `src/shared/db/sql-repository.base.ts`), registered in DI
   as `repositoryBase` already bound to the transaction-aware `db`, provides the generic CRUD of
   `RepositoryPort`
-- Errors: repository methods throw domain exceptions, never a driver error. The base maps them
-  for its methods and for the custom ones it receives (`mapDatabaseErrors` in
-  `src/shared/db/database-errors.ts`): a unique violation becomes `AlreadyExistsException`, a
-  value the column cannot hold (malformed uuid, NUL character) `ArgumentInvalidException`,
-  anything else `DatabaseErrorException`. A repository that does not use the base calls it itself
+- Errors: repository methods throw domain exceptions, never a driver error. The base maps them,
+  custom methods included; the mapping, and what a repository without the base must do, are in
+  the JSDoc of `src/shared/db/database-errors.ts`
 - Repository ports extend `RepositoryPort<Entity>` (in `src/shared/db/repository.port.ts`)
 - Mapper interface: `Mapper<DomainEntity, DbRecord, Response>` with `toPersistence`, `toDomain`, `toResponse` (in `src/shared/ddd/mapper.interface.ts`). The interface does not validate anything: each mapper's
   `toPersistence` validates the record against its schema with the shared Ajv instance, as `userMapper` does
