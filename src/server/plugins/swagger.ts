@@ -33,18 +33,6 @@ async function swaggerGeneratorPlugin(fastify: FastifyInstance) {
         },
       },
     }),
-    // If you don't need to generate client types you could keep swagger
-    // swagger: {
-    //   info: {
-    //     title: 'fastify-boilerplate',
-    //     description:
-    //       'The Swagger API documentation for the fastify-boilerplate project.',
-    //     version: '0.1.0',
-    //   },
-    //   schemes: ['http', 'https'],
-    //   consumes: ['application/json'],
-    //   produces: ['application/json'],
-    // },
   });
 
   await fastify.register(SwaggerUI, {

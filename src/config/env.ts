@@ -9,13 +9,12 @@ const NodeEnv = {
   test: 'test',
 } as const;
 
-export const LogLevel = {
+const LogLevel = {
   debug: 'debug',
   info: 'info',
   warn: 'warn',
   error: 'error',
 } as const;
-export type LogLevel = (typeof LogLevel)[keyof typeof LogLevel];
 
 const schema = Type.Object({
   // `host` or `host:port`, not a connection URL: anything else fails at startup, rather than
@@ -55,7 +54,6 @@ export function parseEnv(data?: Record<string, string>) {
   }
 
   return {
-    nodeEnv: env.NODE_ENV,
     isDevelopment: env.NODE_ENV === NodeEnv.development,
     isProduction: env.NODE_ENV === NodeEnv.production,
     // Read from package.json: npm_package_version is set only when started through pnpm
