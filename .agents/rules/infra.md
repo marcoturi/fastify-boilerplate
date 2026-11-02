@@ -28,7 +28,8 @@ paths:
 
 - The image runs the TypeScript sources directly (no build step) as a non-root user
 - Only `package.json`, the production `node_modules` and `src/` reach the image: a file needed at
-  runtime outside `src/` must be copied explicitly and must not be excluded by `.dockerignore`
+  runtime outside `src/` must be copied explicitly and let in by `.dockerignore`, which admits
+  only what the Dockerfile copies
 - Migrations do not run in the image: `db/` is excluded and `pnpm db:migrate` runs separately
 
 ## CI and release
