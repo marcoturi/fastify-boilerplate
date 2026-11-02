@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
+import { setImmediate } from 'node:timers/promises';
 import { transactionContext } from './transaction-context.ts';
 
 describe('transactionContext()', () => {
@@ -10,7 +11,7 @@ describe('transactionContext()', () => {
   it('exposes the transaction to code running inside run(), across awaits', async () => {
     const transactions = transactionContext<string>();
     const seen = await transactions.run('tx1', async () => {
-      await new Promise((resolve) => setImmediate(resolve));
+      await setImmediate();
       return transactions.current();
     });
     assert.equal(seen, 'tx1');

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { AsyncLocalStorage } from 'node:async_hooks';
 import { describe, it } from 'node:test';
+import { setImmediate, setTimeout } from 'node:timers/promises';
 import type { FastifyBaseLogger } from 'fastify';
 import { actionCreatorFactory } from './action-creator.ts';
 import type { Action } from './bus.types.ts';
@@ -25,7 +26,7 @@ const fakeLogger = () => {
 /** Yields to the event loop until `predicate` holds or the tick budget is exhausted. */
 const flushUntil = async (predicate: () => boolean, ticks = 50): Promise<void> => {
   for (let i = 0; i < ticks && !predicate(); i++) {
-    await new Promise((resolve) => setImmediate(resolve));
+    await setImmediate();
   }
 };
 
@@ -98,7 +99,7 @@ describe('eventBus()', () => {
     bus.on(
       creator<{ id: string; label: string }>('job'),
       async (event) => {
-        await new Promise((resolve) => setImmediate(resolve));
+        await setImmediate();
         done.push(event.payload.label);
       },
       { keyExtractor: (event) => event.payload.id },
@@ -117,10 +118,7 @@ describe('eventBus()', () => {
     const bus = eventBus({ logger });
     // The timestamps each event's subscribers saw, by label
     const seen: Record<string, unknown[]> = { first: [], second: [] };
-    let releaseFirst: () => void = () => undefined;
-    const firstHeld = new Promise<void>((resolve) => {
-      releaseFirst = resolve;
-    });
+    const { promise: firstHeld, resolve: releaseFirst } = Promise.withResolvers<void>();
     bus.on(
       creator<{ label: string }>('job'),
       async (event) => {
@@ -137,7 +135,7 @@ describe('eventBus()', () => {
     bus.emit(makeEvent('job', { label: 'first' }));
     bus.emit(makeEvent('job', { label: 'second' }));
     const emittedAt = Date.now();
-    await new Promise((resolve) => setTimeout(resolve, 10));
+    await setTimeout(10);
     releaseFirst();
 
     await flushUntil(() => seen.first?.length === 2 && seen.second?.length === 2);
@@ -152,21 +150,20 @@ describe('eventBus()', () => {
   it('drain() waits for the running handlers, also those of events emitted meanwhile', async () => {
     const { logger } = fakeLogger();
     const bus = eventBus({ logger });
-    const tick = () => new Promise((resolve) => setImmediate(resolve));
     const done: string[] = [];
     bus.on(creator('first'), async () => {
-      await tick();
+      await setImmediate();
       bus.emit(makeEvent('second', {}));
       done.push('first');
     });
     bus.on(creator('second'), async () => {
-      await tick();
+      await setImmediate();
       done.push('second');
     });
     bus.on(
       creator('queued'),
       async () => {
-        await tick();
+        await setImmediate();
         done.push('queued');
       },
       { keyExtractor: () => 'k' },
@@ -190,10 +187,7 @@ describe('eventBus()', () => {
     // Stands in for the per-request stores (request context, OTel) built on AsyncLocalStorage
     const requestStore = new AsyncLocalStorage<string>();
     const seen: string[] = [];
-    let releaseFirst: () => void = () => undefined;
-    const firstHeld = new Promise<void>((resolve) => {
-      releaseFirst = resolve;
-    });
+    const { promise: firstHeld, resolve: releaseFirst } = Promise.withResolvers<void>();
     bus.on(
       creator<{ id: string; label: string }>('job'),
       async (event) => {
