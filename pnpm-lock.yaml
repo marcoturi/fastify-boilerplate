@@ -196,9 +196,6 @@ importers:
       '@fastify/under-pressure':
         specifier: 9.2.1
         version: 9.2.1
-      '@graphql-tools/load-files':
-        specifier: 8.0.8
-        version: 8.0.8(graphql@17.0.2)
       '@graphql-tools/merge':
         specifier: 10.0.8
         version: 10.0.8(graphql@17.0.2)
@@ -937,12 +934,6 @@ packages:
     engines: {node: '>=16.0.0'}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-
-  '@graphql-tools/load-files@8.0.8':
-    resolution: {integrity: sha512-6+Sw27+A9ggOzelzGCV5IQRwtVnFbHdFjA31qMbDdAH6huyAHZfMFFfj+q5o3c22/EtZnliV3SebvBJOBYXNBA==}
-    engines: {node: '>=22.18.0'}
-    peerDependencies:
-      graphql: ^16.0.0 || ^17.0.0
 
   '@graphql-tools/load@8.1.19':
     resolution: {integrity: sha512-kXgYD7PVBLGiOI7Uf/i91ncv14ckC8pWoiSbZhzCuSE1QemFguofzexSv8B4kIXrr6kqoNLCKSdD2fqAYg+w2g==}
@@ -4788,13 +4779,6 @@ snapshots:
     dependencies:
       '@graphql-tools/utils': 12.0.3(graphql@17.0.2)
       globby: 11.1.0
-      graphql: 17.0.2
-      tslib: 2.8.1
-      unixify: 1.0.0
-
-  '@graphql-tools/load-files@8.0.8(graphql@17.0.2)':
-    dependencies:
-      '@graphql-tools/utils': 13.2.1(graphql@17.0.2)
       graphql: 17.0.2
       tslib: 2.8.1
       unixify: 1.0.0
