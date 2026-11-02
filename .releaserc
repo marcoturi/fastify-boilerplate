@@ -82,7 +82,16 @@
         "pkgRoot": "client"
       }
     ],
-    "@semantic-release/git",
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "CHANGELOG.md",
+          "package.json",
+          "client/package.json"
+        ]
+      }
+    ],
     "@semantic-release/github"
   ]
 }
