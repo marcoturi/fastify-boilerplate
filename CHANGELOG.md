@@ -5,7 +5,7 @@
 * **db:** answer 400 to values the column cannot hold ([735f3cb](https://github.com/marcoturi/fastify-boilerplate/commit/735f3cb7d951c05e8f6266b507f5ad7b14b751c7))
 * **db:** make insert([]) a no-op ([d4fe0af](https://github.com/marcoturi/fastify-boilerplate/commit/d4fe0af225cd185b7e8e351f39749a0e3e638af4))
 * **db:** run a nested withTransaction in a savepoint ([685754e](https://github.com/marcoturi/fastify-boilerplate/commit/685754ef1727ebff610d6f4ed2d2fd3c9174e419))
-* **db:** turn on [secure].js debug mode only at debug log level ([56d88ee](https://github.com/marcoturi/fastify-boilerplate/commit/56d88ee6cca42c7539486237b24bd4c5408360c3))
+* **db:** turn on postgres.js debug mode only at debug log level ([56d88ee](https://github.com/marcoturi/fastify-boilerplate/commit/56d88ee6cca42c7539486237b24bd4c5408360c3))
 * **graphql:** cap a query at 1000 tokens ([42bb469](https://github.com/marcoturi/fastify-boilerplate/commit/42bb469709700e226bd13e82e0ff40de39c02ee1))
 * **graphql:** declare the users of a page non-null ([ea6cbe8](https://github.com/marcoturi/fastify-boilerplate/commit/ea6cbe82e94ab59cce7da67725c3bfbadcfa5a9b))
 * **server:** close keep-alive connections that turn idle during shutdown ([5e469b7](https://github.com/marcoturi/fastify-boilerplate/commit/5e469b717404aee35d7b331c4d1d5b6c216a3e19))
