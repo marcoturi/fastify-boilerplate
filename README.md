@@ -390,17 +390,17 @@ This starts the server, fetches the OpenAPI and GraphQL schemas, writes the type
 
 The project uses GitHub Actions with three workflows, and [Renovate](https://docs.renovatebot.com/) for dependency updates.
 
-**[ci.yml](.github/workflows/ci.yml)** — runs on every pull request to `main`: the checks, unit and E2E tests (against a Postgres service container), architecture boundaries and client type generation. Its `Check and test` job is a required status check of the `main` branch ruleset, so a pull request merges only when it passes.
+**[ci.yml](.github/workflows/ci.yml)** — runs on every pull request to `main`: the checks, unit and E2E tests (against a Postgres service container), architecture boundaries and client type generation.
 
 **[release.yml](.github/workflows/release.yml)** — runs on every push to `main`: the same steps, then semantic-release publishes the release (changelog, GitHub release, npm client package).
 
-semantic-release pushes the release commit with the `GH_TOKEN` secret, a personal access token allowed to bypass the ruleset: the checkout step uses `persist-credentials: false` so that token, not the default workflow credentials, does the push.
+How the ruleset, the release token and the version rules work: [infra rule](.agents/rules/infra.md#ci-and-release).
 
 **[codeql-analysis.yml](.github/workflows/codeql-analysis.yml)** — runs on pushes and PRs to `main`:
 
 - GitHub CodeQL security analysis for JavaScript/TypeScript
 
-**[Renovate](renovate.json)** — opens a pull request for each dependency update; which ones it merges automatically, and how old a release must be, is in its config. pnpm also refuses releases younger than `minimumReleaseAge` in [pnpm-workspace.yaml](pnpm-workspace.yaml) when installing, lockfile included.
+**[Renovate](renovate.json)** — opens a pull request for each dependency update; which ones it merges automatically, and how old a release must be, is in its config.
 
 ## AI-Assisted Development
 
