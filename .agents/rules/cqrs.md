@@ -49,4 +49,4 @@ holds the rules.
 - Typed as `Middleware` (`src/shared/cqrs/bus.types.ts`), one type for the three buses
 - Never mutate the action: spread it into a new one. Always return what `next` returns: the event
   bus awaits it to keep per-key order and isolate failures
-- Registered in `src/shared/cqrs/index.ts`: the first added is the outermost
+- Registered in `src/shared/cqrs/index.ts`
