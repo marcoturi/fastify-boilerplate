@@ -9,8 +9,8 @@ let closed = false;
 let queryLogger: FastifyBaseLogger | undefined;
 const transactions = transactionContext<postgres.TransactionSql>();
 
-/** Logs every SQL query through `logger` at debug level: its text and the number of
- *  parameters, never their values (they can hold personal data). */
+/** Logs through `logger` the Postgres notices and, at debug level, every SQL query: its text
+ *  and the number of parameters, never their values (they can hold personal data). */
 export function setQueryLogger(logger: FastifyBaseLogger): void {
   queryLogger = logger;
 }
@@ -35,6 +35,10 @@ export function getDb(): postgres.Sql {
       max: env.db.poolMax,
       idle_timeout: env.db.idleTimeout,
       connect_timeout: env.db.connectTimeout,
+      // The default prints Postgres notices (e.g. "does not exist, skipping") with console.log,
+      // a multi-line object in the middle of the JSON logs
+      onnotice: (notice) =>
+        queryLogger?.info({ code: notice.code, severity: notice.severity }, notice.message),
       // Only at debug level: in debug mode postgres.js also attaches the query parameters to
       // every error it raises, so a raw driver error that reaches a logger would print them
       debug:
