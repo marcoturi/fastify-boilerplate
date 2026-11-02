@@ -11,16 +11,6 @@ const SHUTDOWN_TIMEOUT_MS = 10_000;
 async function init() {
   const fastify = Fastify(serverOptions);
 
-  await server(fastify);
-
-  // Graceful shutdown: once the HTTP requests are done, let the event handlers they started
-  // finish their queries, then close the DB connection
-  fastify.addHook('onClose', async (instance) => {
-    await instance.eventBus.drain();
-    instance.log.info('Closing database connection…');
-    await closeDbConnection();
-  });
-
   // Graceful shutdown: close the server (and the DB, via onClose), then flush telemetry.
   // A second signal, or a close that hangs, exits at once instead of waiting forever.
   let shuttingDown = false;
@@ -58,7 +48,18 @@ async function init() {
   process.on('SIGTERM', () => shutDown('SIGTERM'));
   process.on('SIGINT', () => shutDown('SIGINT'));
 
+  // Inside the try, so a plugin that fails to load is logged and shuts the server down too
   try {
+    await server(fastify);
+
+    // Graceful shutdown: once the HTTP requests are done, let the event handlers they started
+    // finish their queries, then close the DB connection
+    fastify.addHook('onClose', async (instance) => {
+      await instance.eventBus.drain();
+      instance.log.info('Closing database connection…');
+      await closeDbConnection();
+    });
+
     await fastify.listen({ port: env.server.port, host: env.server.host });
     fastify.log.info('Server is ready');
   } catch (error) {
