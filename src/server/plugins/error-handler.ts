@@ -58,16 +58,11 @@ function sendError(
 
 async function errorHandlerPlugin(fastify: FastifyInstance) {
   fastify.setErrorHandler((error: FastifyError | Error, _, res) => {
-    // Known exceptions: 4xx are expected outcomes (log at warn to avoid alert noise),
-    // 5xx are genuine failures (log at error) and their message stays internal.
-    if (error instanceof ExceptionBase) {
-      const statusCode = httpStatusByCode[error.code];
-      if (statusCode >= 500) {
-        fastify.log.error(error);
-        return sendError(res, statusCode, 'Internal Server Error');
-      }
+    // Known exceptions are expected outcomes (log at warn to avoid alert noise); INTERNAL
+    // ones are genuine failures and take the 5xx path below, which hides their message
+    if (error instanceof ExceptionBase && error.code !== 'INTERNAL') {
       fastify.log.warn(error);
-      return sendError(res, statusCode, error.message, {
+      return sendError(res, httpStatusByCode[error.code], error.message, {
         reason: error.reason,
         subErrors: error instanceof ArgumentInvalidException ? error.subErrors : undefined,
       });
