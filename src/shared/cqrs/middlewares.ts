@@ -13,7 +13,7 @@ export function withMetadata(action: Action<unknown>): Action<unknown> {
       correlationId: action.meta?.correlationId ?? getRequestId(),
       timestamp: action.meta?.timestamp ?? Date.now(),
     },
-  } as Action<unknown>;
+  };
 }
 
 /** Wraps the handler in the middlewares and runs the action: the first one is the outermost */
