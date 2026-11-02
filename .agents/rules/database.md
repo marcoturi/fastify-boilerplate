@@ -17,7 +17,7 @@ SQL belongs in repository files only. Handlers use the repository **port** (inte
   after which `getDb()` throws instead of opening a new pool
 - Transactions: `withTransaction(async () => { ... })` in `src/shared/db/postgres.ts`. The DI `db` is
   transaction-aware, so repositories called inside it join the transaction without receiving `tx`;
-  a nested call joins the outer transaction. Publish domain events after it resolves. Call it from
+  a nested call runs in a savepoint, so a failure the caller catches undoes only its own work. Publish domain events after it resolves. Call it from
   a service or a repository: handlers may not import `src/shared/db/` beyond ports
   (dependency-cruiser), so a handler that needs a transaction delegates it to a service
 - Repository base: `sqlRepositoryBase(db)` (in `src/shared/db/sql-repository.base.ts`), registered in DI

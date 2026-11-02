@@ -75,15 +75,17 @@ export function transactionAwareDb(): postgres.Sql {
 
 /**
  * Runs `fn` in a database transaction: committed if it resolves, rolled back if it throws.
- * Repositories called inside it use the transaction automatically, and a nested call joins
- * the outer transaction. Publish domain events after it resolves, so handlers see the data.
+ * Repositories called inside it use the transaction automatically. A nested call runs in a
+ * savepoint: if it throws, only its own work is undone, and the outer transaction can go on
+ * when the caller catches the error. Publish domain events after it resolves, so handlers see
+ * the data.
  */
 export async function withTransaction<T>(
   fn: (tx: postgres.TransactionSql) => Promise<T>,
 ): Promise<T> {
   const open = transactions.current();
   if (open) {
-    return fn(open);
+    return open.savepoint((sp) => transactions.run(sp, () => fn(sp))) as Promise<T>;
   }
   return getDb().begin((tx) => transactions.run(tx, () => fn(tx))) as Promise<T>;
 }
