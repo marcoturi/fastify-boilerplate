@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # ---- Base ----
-# Node 26 Alpine for small image size; native TS execution (no build step needed)
+# Alpine for small image size; native TS execution (no build step needed)
 FROM node:26-alpine AS base
 WORKDIR /app
 
