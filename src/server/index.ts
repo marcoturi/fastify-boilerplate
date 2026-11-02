@@ -4,7 +4,7 @@ import Cors from '@fastify/cors';
 import Helmet from '@fastify/helmet';
 import UnderPressure from '@fastify/under-pressure';
 import type { FastifyInstance } from 'fastify';
-import { enableDevMode } from 'graphql';
+import { enableDevMode, Location } from 'graphql';
 import mercurius from 'mercurius';
 import { env } from '#src/config/index.ts';
 import { di } from '#src/server/di/index.ts';
@@ -44,6 +44,13 @@ export default async function server(fastify: FastifyInstance) {
     // Caps the size of a query: otherwise one request could repeat under thousands
     // of aliases, each a paginated query. Introspection stays well below it
     graphql: { parseOptions: { maxTokens: 1000 } },
+  });
+  // A query that is not valid GraphQL text is retried as a JSON AST, which skips maxTokens:
+  // accept only documents parsed from text (only parse() sets a Location)
+  fastify.graphql.addHook('preValidation', async (_schema, document) => {
+    if (!(document?.loc instanceof Location)) {
+      throw new mercurius.ErrorWithProps('Syntax Error: the query must be GraphQL text', {}, 400);
+    }
   });
 
   // Auto-load plugins
