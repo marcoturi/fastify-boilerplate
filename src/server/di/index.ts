@@ -27,7 +27,8 @@ export async function di(fastify: FastifyInstance) {
     },
   );
 
-  // Create a dependency injection container
+  // Expose the container on the instance: on ready the plugin runs the handlers' init(), on
+  // close it disposes the container
   await fastify.register(fastifyAwilixPlugin, {
     container: diContainer,
   });
