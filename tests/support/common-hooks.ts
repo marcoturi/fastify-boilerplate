@@ -1,4 +1,4 @@
-import { After, Before, type ITestCaseHookParameter, setDefaultTimeout } from '@cucumber/cucumber';
+import { After, Before, setDefaultTimeout } from '@cucumber/cucumber';
 import { getDb } from '#src/shared/db/postgres.ts';
 import type { CustomWorld } from './custom-world.ts';
 import { buildApp } from './server.ts';
@@ -12,10 +12,7 @@ Before(async function (this: CustomWorld) {
   this.server = await buildApp();
 });
 
-After(async function (this: CustomWorld, { result }: ITestCaseHookParameter) {
-  if (result) {
-    this.attach(`Status: ${result.status}. Duration:${result.duration.seconds}s`);
-  }
+After(async function (this: CustomWorld) {
   // The server is missing when buildApp() failed in Before: let that error surface instead.
   // Let the event handlers finish first, or their queries would hit the next scenario's
   // TRUNCATE (src/index.ts does the same on shutdown)
