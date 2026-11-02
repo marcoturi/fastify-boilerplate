@@ -7,10 +7,9 @@ export interface SubError {
 }
 
 /**
- * Used to indicate that an incorrect argument was provided to a method/function/class constructor
- *
- * @class ArgumentInvalidException
- * @extends {ExceptionBase}
+ * The client's input is invalid: transports send its message and `subErrors` to the client.
+ * A programming error (a wrong argument between internal functions) is an InternalException,
+ * whose message clients never see.
  */
 export class ArgumentInvalidException extends ExceptionBase {
   readonly code = ErrorCode.INVALID_ARGUMENT;
@@ -23,22 +22,12 @@ export class ArgumentInvalidException extends ExceptionBase {
   }
 }
 
-/**
- * Used to indicate that the entity already exists (usually a unique constraint in the database)
- *
- * @class AlreadyExistsException
- * @extends {ExceptionBase}
- */
+/** Used to indicate that the entity already exists (usually a unique constraint in the database) */
 export class AlreadyExistsException extends ExceptionBase {
   readonly code = ErrorCode.ALREADY_EXISTS;
 }
 
-/**
- * Used to indicate that entity is not found
- *
- * @class NotFoundException
- * @extends {ExceptionBase}
- */
+/** Used to indicate that entity is not found */
 export class NotFoundException extends ExceptionBase {
   readonly code = ErrorCode.NOT_FOUND;
 }
@@ -46,9 +35,6 @@ export class NotFoundException extends ExceptionBase {
 /**
  * Used to indicate an internal error that does not fall under all other errors.
  * Transports never show its message to clients.
- *
- * @class InternalException
- * @extends {ExceptionBase}
  */
 export class InternalException extends ExceptionBase {
   readonly code = ErrorCode.INTERNAL;
