@@ -26,6 +26,5 @@
     "noImplicitOverride": true,
     "noImplicitReturns": true
   },
-  "include": ["src", "tests"],
-  "exclude": ["**/*.k6.ts"]
+  "include": ["src", "tests"]
 }
