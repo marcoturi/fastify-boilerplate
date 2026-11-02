@@ -8,7 +8,7 @@ interface OpenTransaction<Tx> {
 /**
  * Tracks the transaction of the current async context, so code called inside a transaction
  * (repositories included) can run its queries on it. A transaction is visible only while it is
- * open: async work it started that runs after the commit (e.g. event handlers) gets none.
+ * open: async work it started gets none once it commits or rolls back.
  */
 export function transactionContext<Tx>() {
   const store = new AsyncLocalStorage<OpenTransaction<Tx>>();

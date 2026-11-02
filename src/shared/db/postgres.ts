@@ -85,8 +85,9 @@ export function transactionAwareDb(): Db {
  * Runs `fn` in a database transaction: committed if it resolves, rolled back if it throws.
  * Repositories called inside it use the transaction automatically. A nested call runs in a
  * savepoint: if it throws, only its own work is undone, and the outer transaction can go on
- * when the caller catches the error. Publish domain events after it resolves, so handlers see
- * the data.
+ * when the caller catches the error. Publish domain events after it resolves: `emit()` starts
+ * each handler at once, so a handler started inside runs its first query in the transaction,
+ * and a rollback silently undoes that query alone.
  */
 export async function withTransaction<T>(
   fn: (tx: postgres.TransactionSql) => Promise<T>,
