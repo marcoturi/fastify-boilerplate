@@ -9,22 +9,7 @@ import { ArgumentInvalidException, type SubError } from '#src/shared/exceptions/
 // actual constructor / function at the type level.
 // `example` is allowed as on the Fastify instance (src/server/options.ts), so the route schemas
 // compile here too (e.g. to validate GraphQL input with the same rules as REST).
-export const ajv = addFormats.default(new Ajv.default({ keywords: ['example'] }), [
-  'date-time',
-  'time',
-  'date',
-  'email',
-  'hostname',
-  'ipv4',
-  'ipv6',
-  'uri',
-  'uri-reference',
-  'uuid',
-  'uri-template',
-  'json-pointer',
-  'relative-json-pointer',
-  'regex',
-]);
+export const ajv = addFormats.default(new Ajv.default({ keywords: ['example'] }));
 
 /** The errors of a failed validation (Ajv's, or Fastify's request validation) as sub-errors,
  *  the shape both transports send: the JSON pointer of the invalid field and the message */
