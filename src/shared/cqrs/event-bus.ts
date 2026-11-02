@@ -102,8 +102,8 @@ export function eventBus({ logger }: EventBusOptions): EventBus {
   }
 
   function on<P>(
-    creator: ActionCreator<P>,
-    handler: (event: Action<P>) => void | Promise<void>,
+    creator: ActionCreator<P, void>,
+    handler: (event: Action<P, void>) => void | Promise<void>,
     options?: SequentialProcessingOptions,
   ): void {
     const existing = handlers.get(creator.type) ?? [];

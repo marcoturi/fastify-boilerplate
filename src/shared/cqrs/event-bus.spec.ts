@@ -7,10 +7,10 @@ import type { Action } from './bus.types.ts';
 import { eventBus } from './event-bus.ts';
 
 /** A creator for `type`, as modules make them with their action creator */
-const creator = <P = unknown, R = unknown>(type: string) => actionCreatorFactory()<P, R>(type);
+const creator = <P = unknown, R = void>(type: string) => actionCreatorFactory()<P, R>(type);
 
-const makeEvent = <P>(type: string, payload: P): Action<P> =>
-  ({ type, payload }) as unknown as Action<P>;
+const makeEvent = <P>(type: string, payload: P): Action<P, void> =>
+  ({ type, payload }) as unknown as Action<P, void>;
 
 const fakeLogger = () => {
   const debugCalls: string[] = [];

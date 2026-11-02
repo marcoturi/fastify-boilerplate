@@ -61,13 +61,14 @@ export type CommandBus = RequestBus;
 /** Queries have the same shape on a separate bus: they must be idempotent and side-effect-free. */
 export type QueryBus = RequestBus;
 
+/** Events have no result (`Result` is `void`): a command or a query is rejected at compile time */
 export interface EventBus {
   on<P>(
-    creator: ActionCreator<P>,
-    handler: (event: Action<P>) => void | Promise<void>,
+    creator: ActionCreator<P, void>,
+    handler: (event: Action<P, void>) => void | Promise<void>,
     options?: SequentialProcessingOptions,
   ): void;
-  emit(event: Action<unknown>): void;
+  emit(event: Action<unknown, void>): void;
   addMiddleware(fn: Middleware): void;
   /** Resolves once no handler is running, including the handlers of events emitted meanwhile */
   drain(): Promise<void>;
