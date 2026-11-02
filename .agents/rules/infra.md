@@ -20,8 +20,9 @@ paths:
 ## Configuration
 
 - Environment variables are declared and validated in one place, `src/config/env.ts`
-  (env-schema + TypeBox). A new variable goes there and in `.env.example`; in
-  `docker-compose.yml` only when the container needs a value other than the one in `.env`
+  (env-schema + TypeBox). A new variable goes there; in `.env.example` only when it is
+  required (no default); in `docker-compose.yml` only when the container needs a value other
+  than the one in `.env`
   (the `app` service reads `.env` through `env_file`)
 
 ## Docker
