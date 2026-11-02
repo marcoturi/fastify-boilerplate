@@ -44,7 +44,8 @@ export function mapDatabaseErrors<T extends AsyncMethods>(methods: T): T {
       name,
       async (...args: never[]) => {
         try {
-          return await method(...args);
+          // `this` is the object, so a method can call another one through it
+          return await method.apply(methods, args);
         } catch (error: unknown) {
           throw toDatabaseException(error);
         }
