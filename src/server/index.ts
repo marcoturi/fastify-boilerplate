@@ -14,8 +14,9 @@ import { loadGraphqlSchema } from '#src/server/graphql-schema.ts';
 export default async function server(fastify: FastifyInstance) {
   // Set sensible default security headers.
   await fastify.register(Helmet, {
-    // The following settings are needed for graphiql, see https://github.com/graphql/graphql-playground/issues/1283
+    // Off in development for graphiql, see https://github.com/graphql/graphql-playground/issues/1283
     contentSecurityPolicy: !env.isDevelopment,
+    // Not a Helmet default: this turns COEP (require-corp) on outside development
     crossOriginEmbedderPolicy: !env.isDevelopment,
   });
 
