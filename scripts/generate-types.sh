@@ -8,6 +8,11 @@ SERVER_URL="http://127.0.0.1:$PORT"
 MAX_WAIT=30  # seconds
 
 # ── Start the server in the background ──────────────────────────────────────
+# A server already on the port would answer the polling below and give its own types
+if curl -sf "$SERVER_URL/health" > /dev/null 2>&1; then
+  echo "Port $PORT is in use: stop the server running there first" >&2
+  exit 1
+fi
 # .env provides the database settings locally (in CI the workflow sets them). Telemetry stays
 # off and the port is the one polled below, whatever .env says: Node keeps a variable already
 # in the environment over the same one in the file.
@@ -19,6 +24,7 @@ trap 'kill $SERVER_PID 2>/dev/null || true' EXIT
 echo "Waiting for server to be ready…"
 elapsed=0
 until curl -sf "$SERVER_URL/health" > /dev/null 2>&1; do
+  kill -0 "$SERVER_PID" 2>/dev/null || { echo "Server exited before becoming ready" >&2; exit 1; }
   sleep 1
   elapsed=$((elapsed + 1))
   if [ "$elapsed" -ge "$MAX_WAIT" ]; then
