@@ -64,13 +64,12 @@ this. Everything else goes through the CQRS buses:
 ## Coding conventions
 
 - Biome enforces formatting and most style rules (quotes, indentation, kebab-case file names,
-  no `enum`, no `any` outside tests, no `console`): rely on `pnpm check` instead of restating them
-- No enums — use `const` objects with derived types (e.g. `UserRoles`)
+  no `enum` (use a `const` object with a derived type, e.g. `UserRoles`), no `any` outside
+  tests, no `console` (use the injected `logger`)): rely on `pnpm check` instead of restating them
 - Code, comments, identifiers, log and error messages are in English
 - Read `process.env` only in `src/config/env.ts`, which validates it; everything else imports
   `env` from `#src/config/index.ts`. The one exception is `src/instrumentation.ts`, which runs
   via `--import` before the config is loaded
-- Use the injected `logger` (Pino), never `console`
 - TypeScript: `strict: true`; always include the `.ts` extension in imports (ESM); prefer
   `import type { Foo } from './bar.ts'`
 - Path aliases: `#src/*` maps to `./src/*`, `#tests/*` maps to `./tests/*` (Node
