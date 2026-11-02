@@ -37,7 +37,6 @@ export default async function server(fastify: FastifyInstance) {
   await fastify.register(mercurius, {
     schema: await loadGraphqlSchema(),
     graphiql: env.isDevelopment,
-    defineMutation: true,
     errorFormatter: graphqlErrorFormatter,
     // Caps the size of a query: otherwise one request could repeat under thousands
     // of aliases, each a paginated query. Introspection stays well below it
