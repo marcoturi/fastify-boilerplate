@@ -52,6 +52,8 @@ paths:
 - pnpm refuses versions younger than `minimumReleaseAge` (`pnpm-workspace.yaml`), also when they
   are already in the lockfile: `pnpm update` picks older versions on its own, while a version
   pinned by hand must wait or go in `minimumReleaseAgeExclude`
+- Renovate's `minimumReleaseAge` (`renovate.json`) must not be shorter than pnpm's: its PRs
+  would pin versions that pnpm refuses to install
 - pnpm installs only reviewed lifecycle scripts: a new dependency with one must be listed in
   `allowBuilds` in `pnpm-workspace.yaml`
 - Husky hooks: pre-commit runs `biome check --staged` (it fails, it does not fix), `type:check`,
