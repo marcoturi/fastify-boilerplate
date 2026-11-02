@@ -33,7 +33,6 @@ export default async function server(fastify: FastifyInstance) {
     enableDevMode();
   }
 
-  // Graphql — registered after Helmet/CORS so the /graphql endpoint inherits their hooks.
   await fastify.register(mercurius, {
     schema: await loadGraphqlSchema(),
     graphiql: env.isDevelopment,
