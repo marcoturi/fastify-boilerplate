@@ -1,5 +1,5 @@
-import { userPaginatedResponseSchema } from '#src/modules/user/dtos/user.paginated.response.dto.ts';
-import { mapPage } from '#src/shared/api/paginated.response.base.ts';
+import { userResponseDtoSchema } from '#src/modules/user/dtos/user.response.dto.ts';
+import { mapPage, paginatedResponseSchema } from '#src/shared/api/paginated.response.base.ts';
 import { findUsersQuery } from './find-users.handler.ts';
 import { findUsersRequestDtoSchema } from './find-users.schema.ts';
 
@@ -11,7 +11,7 @@ export default async function findUsersRoute(fastify: FastifyRouteInstance) {
       description: 'Find users',
       querystring: findUsersRequestDtoSchema,
       response: {
-        200: userPaginatedResponseSchema,
+        200: paginatedResponseSchema(userResponseDtoSchema),
       },
       tags: ['users'],
     },

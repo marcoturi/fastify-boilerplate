@@ -287,7 +287,6 @@ Example: [user.repository.ts](src/modules/user/database/user.repository.ts)
     │       │   └── <module>.types.ts                → Domain types
     │       ├── dtos/
     │       │   ├── <module>.graphql-schema.ts       → Shared GraphQL types
-    │       │   ├── <module>.paginated.response.dto.ts → Paginated response DTO
     │       │   └── <module>.response.dto.ts         → Shared response DTOs
     │       ├── <name>.service.ts                    → Optional orchestration layer (none yet)
     │       ├── <module>.action-creator.ts           → Action creator with the module prefix
