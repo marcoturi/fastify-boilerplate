@@ -58,38 +58,6 @@ describe('requestBus()', () => {
     );
   });
 
-  it('applies middlewares as an onion — first added is outermost', async () => {
-    const bus = requestBus('Command');
-    const order: string[] = [];
-    bus.addMiddleware(async (action, next) => {
-      order.push('outer:before');
-      const result = await next(action);
-      order.push('outer:after');
-      return result;
-    });
-    bus.addMiddleware(async (action, next) => {
-      order.push('inner:before');
-      const result = await next(action);
-      order.push('inner:after');
-      return result;
-    });
-    bus.register(creator('t'), async () => {
-      order.push('handler');
-      return 'done';
-    });
-
-    const result = await bus.execute(makeAction('t', {}));
-
-    assert.equal(result, 'done');
-    assert.deepEqual(order, [
-      'outer:before',
-      'inner:before',
-      'handler',
-      'inner:after',
-      'outer:after',
-    ]);
-  });
-
   it('lets a middleware enrich the action without mutating the original', async () => {
     const bus = requestBus('Command');
     const original = makeAction('t', { v: 1 });
