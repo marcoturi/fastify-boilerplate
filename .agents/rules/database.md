@@ -4,6 +4,7 @@ paths:
   - "src/shared/ddd/**"
   - "src/modules/**/database/**"
   - "src/modules/**/*.mapper.ts"
+  - "src/modules/**/*.service.ts"
   - "db/**"
 ---
 
