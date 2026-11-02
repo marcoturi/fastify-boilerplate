@@ -15,7 +15,7 @@ FROM base AS deps
 ARG COREPACK_VERSION=0.36.0
 RUN npm install -g corepack@${COREPACK_VERSION} && corepack enable
 
-# pnpm-workspace.yaml holds pnpm settings (e.g. overrides) that a frozen install checks
+# pnpm-workspace.yaml holds pnpm settings that a frozen install checks (e.g. minimumReleaseAge)
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 # Corepack downloads pnpm on first use: cache it with the store so rebuilds skip the download
