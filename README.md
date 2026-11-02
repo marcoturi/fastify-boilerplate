@@ -107,7 +107,7 @@ The server starts at **http://localhost:3000** by default. See [API Endpoints](#
 |---|---|
 | `pnpm test` | Run unit tests (alias for `test:unit`) |
 | `pnpm test:unit` | Run unit and integration tests with `node:test` |
-| `pnpm test:coverage` | Run unit tests with c8 coverage |
+| `pnpm test:coverage` | Run unit tests with node:test coverage |
 | `pnpm test:e2e` | Run E2E tests with Cucumber (requires running Postgres) |
 
 ### Database
@@ -336,7 +336,7 @@ Run with `node:test`.
 
 ```bash
 pnpm test:unit           # run tests
-pnpm test:coverage       # run with c8 coverage
+pnpm test:coverage       # run with node:test coverage
 ```
 
 ### E2E tests
