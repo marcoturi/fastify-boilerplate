@@ -1,7 +1,7 @@
-import { createUserCommand } from '#src/modules/user/commands/create-user/create-user.handler.ts';
-import { createUserRequestDtoSchema } from '#src/modules/user/commands/create-user/create-user.schema.ts';
 import { apiErrorResponseRef } from '#src/shared/api/api-error.response.ts';
 import { idDtoSchema } from '#src/shared/api/id.response.dto.ts';
+import { createUserCommand } from './create-user.handler.ts';
+import { createUserRequestDtoSchema } from './create-user.schema.ts';
 
 export default async function createUserRoute(fastify: FastifyRouteInstance) {
   fastify.route({
