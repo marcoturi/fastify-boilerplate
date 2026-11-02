@@ -18,6 +18,14 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    # The app's settings, for the e2e tests and the client type generation
+    env:
+      POSTGRES_URL: localhost:5432
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      LOG_LEVEL: error
+      NODE_ENV: test
     # semantic-release writes with GH_TOKEN (push, GitHub release, comments), not with this token
     permissions:
       contents: read # for checkout
@@ -67,13 +75,6 @@ jobs:
           DBMATE_DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable
       - name: Run e2e tests
         run: pnpm test:e2e
-        env:
-          POSTGRES_URL: localhost:5432
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_DB: postgres
-          LOG_LEVEL: error
-          NODE_ENV: test
       - uses: actions/upload-artifact@v7
         if: always()
         with:
@@ -82,13 +83,6 @@ jobs:
           retention-days: 30
       - name: Generate client types
         run: pnpm generate:types
-        env:
-          POSTGRES_URL: localhost:5432
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_DB: postgres
-          LOG_LEVEL: error
-          NODE_ENV: test
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

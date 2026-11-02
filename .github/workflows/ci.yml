@@ -18,6 +18,14 @@ jobs:
     runs-on: ubuntu-latest
     # A hung step (e.g. a server that never answers) fails the run instead of holding it for 6h
     timeout-minutes: 15
+    # The app's settings, for the e2e tests and the client type generation
+    env:
+      POSTGRES_URL: localhost:5432
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      LOG_LEVEL: error
+      NODE_ENV: test
 
     services:
       postgres:
@@ -58,23 +66,9 @@ jobs:
           DBMATE_DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable
       - name: Run e2e tests
         run: pnpm test:e2e
-        env:
-          POSTGRES_URL: localhost:5432
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_DB: postgres
-          LOG_LEVEL: error
-          NODE_ENV: test
       # The release generates them too: a change that breaks them must fail here, not there
       - name: Generate client types
         run: pnpm generate:types
-        env:
-          POSTGRES_URL: localhost:5432
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_DB: postgres
-          LOG_LEVEL: error
-          NODE_ENV: test
       - uses: actions/upload-artifact@v7
         if: always()
         with:
