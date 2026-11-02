@@ -258,7 +258,7 @@ Example: [user.repository.ts](src/modules/user/database/user.repository.ts)
 ├── client/                        → Generated REST + GraphQL client types (npm package)
 ├── scripts/                       → Type generation scripts
 └── src/
-    ├── index.ts                   → Entry point: logger, server start, graceful shutdown
+    ├── index.ts                   → Entry point: server start, graceful shutdown
     ├── instrumentation.ts         → OpenTelemetry setup (loaded via --import)
     ├── declarations.ts            → Global types and module augmentations (DI cradle, request context)
     ├── config/                    → Environment validation (env-schema + TypeBox)
