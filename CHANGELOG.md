@@ -1,3 +1,66 @@
+## [4.3.0](https://github.com/marcoturi/fastify-boilerplate/compare/v4.2.0...v4.3.0) (2026-11-02)
+
+### Features
+
+* **api:** send the error reason on REST and the invalid fields on GraphQL ([79cac91](https://github.com/marcoturi/fastify-boilerplate/commit/79cac91cc3e8ab05065cb7bc2a42df2bf7b03f7d))
+* **server:** shed load when the event loop is saturated ([99ec0e0](https://github.com/marcoturi/fastify-boilerplate/commit/99ec0e063ccd0d9bbdc951668218f4b92b7be533))
+
+### Bug Fixes
+
+* **api:** cap the page size at 100 ([aa12bf3](https://github.com/marcoturi/fastify-boilerplate/commit/aa12bf397ab2ef1614010a4bb04c2484502664f1))
+* **client:** generate GraphQL enums as union types ([c151bcc](https://github.com/marcoturi/fastify-boilerplate/commit/c151bcc7c08d00be53e07c3c7c70dff2324becc2))
+* **config:** reject a malformed POSTGRES_URL and out-of-range numbers at startup ([15d3e7f](https://github.com/marcoturi/fastify-boilerplate/commit/15d3e7f68acab6302cc13fda5d62010da29657ee))
+* **config:** reject a POSTGRES_URL port out of range ([2ac5983](https://github.com/marcoturi/fastify-boilerplate/commit/2ac5983fa305136c9f6cc89d8fc72f502e51879f))
+* **cqrs:** refuse a second handler for the same command or query ([a8e7a16](https://github.com/marcoturi/fastify-boilerplate/commit/a8e7a16dd6e183b839a4647e28cb122bba653699))
+* **cqrs:** stamp event metadata once, when the event is emitted ([7c607e2](https://github.com/marcoturi/fastify-boilerplate/commit/7c607e28dc02c5b498f358850b4d91fd73218d7b))
+* **db:** keep seeds out of the migrations table and stop them writing schema.sql ([3d20d47](https://github.com/marcoturi/fastify-boilerplate/commit/3d20d472373bd40b806bf1fcee24edf6925a2879))
+* **db:** map driver errors to domain exceptions in every repository method ([a89d2ed](https://github.com/marcoturi/fastify-boilerplate/commit/a89d2ed5413278b9c585847a22bb78fd309e18f6))
+* **db:** stop getDb from opening a new pool after shutdown ([9f86b62](https://github.com/marcoturi/fastify-boilerplate/commit/9f86b626b9dc562914099685a3dd968269bc355d))
+* **db:** verify the server certificate when TLS is on ([f275d4c](https://github.com/marcoturi/fastify-boilerplate/commit/f275d4c55b85bf2d78549a8c0f81912c484a4f07))
+* **db:** wrap each WHERE condition in parentheses ([cf36bcd](https://github.com/marcoturi/fastify-boilerplate/commit/cf36bcd3b55a37f2feb067326e87f7d758b10df1))
+* **graphql:** keep the HTTP status of transport errors instead of a 200 ([3546f7c](https://github.com/marcoturi/fastify-boilerplate/commit/3546f7c5267aa88b86a74fc019b67121f0dfd0aa))
+* **graphql:** treat null optional arguments as absent ([f12ca49](https://github.com/marcoturi/fastify-boilerplate/commit/f12ca49127b07521772ff2a5ea99def2cd1df316))
+* **server:** keep the 5xx status of errors raised by Fastify plugins ([0961aee](https://github.com/marcoturi/fastify-boilerplate/commit/0961aee04c770955b98da18634ec0afb0134a78a))
+* **server:** let running event handlers finish before the database closes ([6ffa2fb](https://github.com/marcoturi/fastify-boilerplate/commit/6ffa2fb011a8caf4f792b3b18ba55e6c983443c9))
+* **user:** ignore the id and dates a client sends when creating a user ([be725aa](https://github.com/marcoturi/fastify-boilerplate/commit/be725aa63c39375434ddb53ebd8963155fa8f3e4))
+* **validation:** point the sub-error of a missing field to the field ([952718a](https://github.com/marcoturi/fastify-boilerplate/commit/952718a28aef8274b864e6ee376800e7e1a818c9))
+
+### Refactoring
+
+* **api:** drop the redundant type provider and share the paginated response schema ([b6a4c20](https://github.com/marcoturi/fastify-boilerplate/commit/b6a4c201c36198982bde083af19828f9bff5d8fd))
+* **cqrs:** drop the runtime argument checks and unregister ([f42f488](https://github.com/marcoturi/fastify-boilerplate/commit/f42f48813a0450fef9ef5a04834ee04ae60ffbdd))
+* **cqrs:** register handlers by their action creator ([dd75bde](https://github.com/marcoturi/fastify-boilerplate/commit/dd75bdea155e11bfb3bb6a64545f3384ed80f4b8))
+* **cqrs:** register handlers inline, typed by their action creator ([b7d9444](https://github.com/marcoturi/fastify-boilerplate/commit/b7d9444c0d47d1ec42a01ce77549a6c127617aaf))
+* **cqrs:** share one middleware type and one tracing middleware across the buses ([4e1ca79](https://github.com/marcoturi/fastify-boilerplate/commit/4e1ca792575f83869455e5f9a251ce73249b89cb))
+* **cqrs:** simplify actionCreatorFactory and call its type ActionCreator ([f64b2cc](https://github.com/marcoturi/fastify-boilerplate/commit/f64b2ccae897795f71d6234bea484a33355841dd))
+* **cqrs:** stamp the metadata of commands and queries in the request bus ([8c07057](https://github.com/marcoturi/fastify-boilerplate/commit/8c07057b4741551e3a853773d633326bc0b389a4))
+* **db:** bind the repository base to the client once ([2dc54f3](https://github.com/marcoturi/fastify-boilerplate/commit/2dc54f371fd18deb7449cbef6ebce5ea1bb10655))
+* **db:** page through a table in one query with paginate() ([388ba70](https://github.com/marcoturi/fastify-boilerplate/commit/388ba70b5ca05620611032a3fcfe16bea088b04f))
+* **di:** build the global dependencies from the Fastify instance ([ab5adf6](https://github.com/marcoturi/fastify-boilerplate/commit/ab5adf6f0ac64e8212d1bc70678558443395a526))
+* **exceptions:** drop the default messages ([c569b35](https://github.com/marcoturi/fastify-boilerplate/commit/c569b35b886d00268634dc8dbc3ae7e480559425))
+* **exceptions:** drop the unused metadata and correlationId, use the native cause ([6dcd76b](https://github.com/marcoturi/fastify-boilerplate/commit/6dcd76b9d1804021ca797005f0b4797f516576c9))
+* **graphql:** validate resolver input with validator(schema) ([7ccd1fe](https://github.com/marcoturi/fastify-boilerplate/commit/7ccd1fe4e17fb3a830b7ccb70c6a4a0eecfee444))
+* keep helper functions inside their factory ([1377cb4](https://github.com/marcoturi/fastify-boilerplate/commit/1377cb4eaa4ab9946a76a54fd7175818d15b717e))
+* reduce the pagination defaults to paginatedQuery({ limit, page }) ([bac2121](https://github.com/marcoturi/fastify-boilerplate/commit/bac2121321b0d89756e6f461eafcf6aeb762fa18))
+* remove dead code ([8d6b624](https://github.com/marcoturi/fastify-boilerplate/commit/8d6b624ae5fa292cbdbfba77e0a3a3483c092fc2))
+* remove unused types, options and a dev dependency ([cc973e1](https://github.com/marcoturi/fastify-boilerplate/commit/cc973e14d224c69477cfbe22a5e2409b759db787))
+* **server:** seed the request context with the request id ([e57870f](https://github.com/marcoturi/fastify-boilerplate/commit/e57870f6e69ec400a41ba403d40fee9b043aac6a))
+* **server:** share the Fastify options with the e2e tests ([8679bc5](https://github.com/marcoturi/fastify-boilerplate/commit/8679bc5aae3cba37223ce483b5779d03ade047e0))
+* **user:** emit the created event from the handler, drop DomainResult ([191a6c1](https://github.com/marcoturi/fastify-boilerplate/commit/191a6c11ac16582e3d1d1f2d78a065e678d776c4))
+* **user:** name each schema after what it describes and narrow the create try ([ff9b2f0](https://github.com/marcoturi/fastify-boilerplate/commit/ff9b2f0b708b8971e5228f572917bd047f27654e))
+
+### Documentation
+
+* **cqrs:** describe meta as the creator takes it now ([f18aa0d](https://github.com/marcoturi/fastify-boilerplate/commit/f18aa0d7eff7962e300f2c2d33d4d6a880dee3c6))
+* **cqrs:** drop the note that contradicts where the outbox goes ([2236c1c](https://github.com/marcoturi/fastify-boilerplate/commit/2236c1c1cef08870b5da9017500dfdb8ef46db3f))
+* **cqrs:** keep handler helpers as inner closures, as AGENTS.md says ([4836c8a](https://github.com/marcoturi/fastify-boilerplate/commit/4836c8a50bf995d77ce668407f59da9df5da5b7d))
+* **cqrs:** state that events are delivered at most once ([7213210](https://github.com/marcoturi/fastify-boilerplate/commit/72132109cfa8c0800c01d05622149c0f58f5e9fc))
+* fix wrong and outdated statements ([0afe27f](https://github.com/marcoturi/fastify-boilerplate/commit/0afe27fbb4e3a441a6dd719d15f1873fdd15a1ac))
+* keep each fact in one place ([3048d47](https://github.com/marcoturi/fastify-boilerplate/commit/3048d477485d0c875f0adcc47648b22e55d56521))
+* keep the release age only in the config files ([64c52bb](https://github.com/marcoturi/fastify-boilerplate/commit/64c52bb44bfa7978b316273c211c62dfd4ac4b03))
+* **README:** give the DBMate flags for commands without a script ([7c88a5a](https://github.com/marcoturi/fastify-boilerplate/commit/7c88a5a47595370d47acd0c1924cf5782ba422e5))
+* **rules:** load the rules for startup, instrumentation and the validator ([7f2d32c](https://github.com/marcoturi/fastify-boilerplate/commit/7f2d32c9a1dcfe6139526ff971ac9583b21a2a2e))
+
 ## [4.2.0](https://github.com/marcoturi/fastify-boilerplate/compare/v4.1.0...v4.2.0) (2026-10-31)
 
 ### Features
