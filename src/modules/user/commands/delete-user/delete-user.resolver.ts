@@ -8,7 +8,6 @@ const validateArgs = validator(idDtoSchema);
 export default async function deleteUserResolver(fastify: FastifyRouteInstance) {
   fastify.graphql.defineResolvers({
     Mutation: {
-      // A missing user is a NOT_FOUND error, as on REST
       deleteUser: async (_, args) =>
         fastify.commandBus.execute(deleteUserCommand({ id: validateArgs(args).id })),
     },
