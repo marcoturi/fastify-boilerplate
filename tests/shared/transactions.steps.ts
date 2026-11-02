@@ -13,7 +13,7 @@ const newUser = {
 /** Inserts a user through the repository from DI, as a handler would, inside a transaction. */
 const insertUser = async (world: CustomWorld) => {
   const { userDomain, userRepository } = world.server.diContainer.cradle;
-  await userRepository.insert(userDomain.createUser(newUser).entity);
+  await userRepository.insert(userDomain.createUser(newUser));
 };
 
 When('I create a user inside a transaction that fails', async function (this: CustomWorld) {

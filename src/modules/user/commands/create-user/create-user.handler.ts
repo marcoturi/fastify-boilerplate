@@ -1,4 +1,5 @@
 import { UserAlreadyExistsError } from '#src/modules/user/domain/user.errors.ts';
+import { createUserEvent } from '#src/modules/user/domain/user.events.ts';
 import { userActionCreator } from '#src/modules/user/index.ts';
 import { AlreadyExistsException } from '#src/shared/exceptions/index.ts';
 import type { CreateUserRequestDto } from './create-user.schema.ts';
@@ -14,17 +15,17 @@ export default function createUserHandler({
   return {
     init() {
       commandBus.register(createUserCommand, async ({ payload }) => {
-        const created = userDomain.createUser(payload);
+        const user = userDomain.createUser(payload);
         try {
-          await userRepository.insert(created.entity);
+          await userRepository.insert(user);
         } catch (error: unknown) {
           if (error instanceof AlreadyExistsException) {
             throw new UserAlreadyExistsError(error);
           }
           throw error;
         }
-        await created.commit(eventBus); // publish recorded domain events after the write succeeds
-        return created.entity.id;
+        eventBus.emit(createUserEvent(user)); // only once the write has succeeded
+        return user.id;
       });
     },
   };

@@ -98,18 +98,17 @@ export default function createUserHandler({
   return {
     init() {
       commandBus.register(createUserCommand, async ({ payload }) => {
-        // The domain returns the entity + the events it produced (see "Domain events" below).
-        const created = userDomain.createUser(payload);
+        const user = userDomain.createUser(payload);
         try {
-          await userRepository.insert(created.entity);
+          await userRepository.insert(user);
         } catch (error: unknown) {
           if (error instanceof AlreadyExistsException) {
             throw new UserAlreadyExistsError(error);
           }
           throw error;
         }
-        await created.commit(eventBus); // publish recorded domain events after the write succeeds
-        return created.entity.id;
+        eventBus.emit(createUserEvent(user)); // only once the write has succeeded (see "Domain events")
+        return user.id;
       });
     },
   };
@@ -182,36 +181,20 @@ eventBus.on(createUserEvent, provisionDefaultSettings);
 
 ### Domain events
 
-Following the DDD **AggregateRoot** idea (functional variant — no classes), a domain
-operation returns the entity **and the events it produced**, and the command handler
-**publishes them after persistence** with a single `commit(eventBus)` call. This keeps "what
-happened" in the domain and ensures events fire only once the write succeeds. The
-`DomainResult<T>` helper (`entity`, `events`, `commit()`) lives in
-`src/shared/ddd/aggregate.ts`.
+The domain defines its events (`domain/<module>.events.ts`) and the command handler emits them
+**after the write succeeds**, so a failed write announces nothing:
 
 ```typescript
-// domain — src/modules/user/domain/user.domain.ts
-createUser: (create: CreateUserProps): DomainResult<UserEntity> => {
-  const user: UserEntity = { id: randomUUID(), /* ... */, role: UserRoles.guest };
-  return withEvents(user, [createUserEvent(user)]); // record the event
-};
-
-// handler — publishes after the repository write, one call (à la NestJS aggregate.commit())
-const created = userDomain.createUser(payload);
-await userRepository.insert(created.entity);
-await created.commit(eventBus);
+const user = userDomain.createUser(payload);
+await userRepository.insert(user);
+eventBus.emit(createUserEvent(user));
 ```
 
 Delivery is **at most once**. The bus lives in memory: an event is lost if the process dies
-between the write and `commit()`, and a failing subscriber is logged, not retried. Fine for
-side effects you can afford to miss (a log, a cache refresh); a subscriber that must never miss
-an event needs the outbox below.
-
-`commit(publisher)` depends on the minimal `EventPublisher` port (`{ emit }`), not the full
-bus, and is async. This is the seam for durability: `commit()` is the single place that
-publishes, so making events at-least-once (a transactional-outbox writer that implements
-`EventPublisher` and writes in the same DB transaction) is a change to `withEvents`/`commit`
-alone — every domain and handler stays the same (they already `await`).
+between the write and `emit()`, and a failing subscriber is logged, not retried. Fine for
+side effects you can afford to miss (a log, a cache refresh). A subscriber that must never miss
+an event needs a transactional outbox, which the boilerplate does not ship: the event is
+written in the same transaction as the change, and a relay publishes it.
 
 ```typescript
 // subscriber — src/modules/settings/commands/create-settings/create-settings.event-handler.ts

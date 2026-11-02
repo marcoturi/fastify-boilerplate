@@ -61,14 +61,7 @@ export type CommandBus = RequestBus;
 /** Queries have the same shape on a separate bus: they must be idempotent and side-effect-free. */
 export type QueryBus = RequestBus;
 
-/** Minimal publishing port. Anything that can publish an event satisfies this — the event
- *  bus today, a transactional-outbox writer tomorrow. Consumers (e.g. `DomainResult.commit`)
- *  should depend on this, not on the full `EventBus`. */
-export interface EventPublisher {
-  emit(event: Action<unknown>): void | Promise<void>;
-}
-
-export interface EventBus extends EventPublisher {
+export interface EventBus {
   on<P>(
     creator: ActionCreator<P>,
     handler: (event: Action<P>) => void | Promise<void>,

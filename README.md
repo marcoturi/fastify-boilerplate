@@ -232,7 +232,7 @@ Example: [find-users.handler.ts](src/modules/user/queries/find-users/find-users.
 
 **Service** — orchestrates a use case that takes several steps: reads from repositories, asks the domain for decisions, writes, emits events. It decides nothing itself. Add one when a handler grows into orchestration or two handlers share it; the boilerplate has none yet.
 
-**Domain** — pure business logic: decisions, computations, invariants, entity creation. It may record domain events (`withEvents`), but never calls repositories, emits events or does any I/O.
+**Domain** — pure business logic: decisions, computations, invariants, entity creation. It never calls repositories, emits events or does any I/O.
 
 Example: [user.domain.ts](src/modules/user/domain/user.domain.ts)
 
@@ -306,7 +306,7 @@ Example: [user.repository.ts](src/modules/user/database/user.repository.ts)
         ├── app/                   → Request context accessors
         ├── cqrs/                  → Command/Query/Event bus, middlewares
         ├── db/                    → Postgres connection, transactions, repository base, SQL helpers
-        ├── ddd/                   → Domain events recording (withEvents), mapper interface, query base
+        ├── ddd/                   → Mapper interface, query base
         ├── exceptions/            → Transport-neutral exceptions
         └── utils/                 → Ajv validator, timeouts
 ```

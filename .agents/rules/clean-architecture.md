@@ -13,7 +13,7 @@ Each layer has one job. Logic in the wrong layer is a smell, even when it works.
 | Transport | `*.route.ts`, `*.resolver.ts` | Validate input, dispatch one action, shape the response | Contain business logic |
 | Handler | `*.handler.ts`, `*.event-handler.ts` | Take the action, call a few domain, service or repository functions, return the result or emit events | Loop over items making business decisions, orchestrate many steps |
 | Service | `*.service.ts` | Orchestrate: read from repositories, ask the domain for decisions, write, emit events | Decide: no status checks, thresholds, aggregations or rule-based conditions |
-| Domain | `domain/*.domain.ts` | Pure decisions and computations: evaluate, compute, aggregate, transform; it may record events with `withEvents` | Call repositories, emit events, do any I/O |
+| Domain | `domain/*.domain.ts` | Pure decisions and computations: evaluate, compute, aggregate, transform | Call repositories, emit events, do any I/O |
 | Repository | `database/*.repository.ts` | Data access (SQL) and mapper delegation | Business logic or orchestration |
 
 **Litmus test:** "Does this function make a decision or compute a value?" → domain. "Does it read
@@ -53,9 +53,9 @@ export default function userActivationService({ userRepository, userDomain, even
   async function activate(id: string) {
     const user = await userRepository.findOneById(id);
     if (!user) throw notFound(id);
-    const activated = userDomain.activate(user); // decision: the domain returns entity + events
-    await userRepository.update(activated.entity);
-    await activated.commit(eventBus); // publish recorded events after the write succeeds
+    const activated = userDomain.activate(user); // decision
+    await userRepository.update(activated);
+    eventBus.emit(userActivatedEvent(activated)); // only once the write has succeeded
   }
 
   return { activate };
