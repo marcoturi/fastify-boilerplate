@@ -332,7 +332,7 @@ All configuration uses [standard OTel environment variables](https://opentelemet
 
 ### Unit and integration tests
 
-Run with `node:test`. Test files live next to their source files as `*.spec.ts`.
+Run with `node:test`.
 
 ```bash
 pnpm test:unit           # run tests
@@ -341,20 +341,18 @@ pnpm test:coverage       # run with c8 coverage
 
 ### E2E tests
 
-Written in [Gherkin](https://cucumber.io/docs/gherkin/) and executed with [Cucumber.js](https://cucumber.io/docs/installation/javascript/). Scenarios live next to the slice they cover, in `tests/<module>/<slice>/<scenario>.feature` (e.g. `tests/user/create-user/`). Step definitions shared by a module's scenarios are in `tests/<module>/*.steps.ts`; cross-module scenarios and common steps are in `tests/shared/`.
+Written in [Gherkin](https://cucumber.io/docs/gherkin/) and executed with [Cucumber.js](https://cucumber.io/docs/installation/javascript/). Where the scenarios, the steps and the test server live: [testing rule](.agents/rules/testing.md).
 
 ```bash
 # Requires a running Postgres with migrations applied
 pnpm test:e2e
 ```
 
-The E2E test server is created via `buildApp()` (in `tests/support/server.ts`) — it boots a full Fastify instance without binding to a port. Each scenario empties the `users` table of the database in `.env`, the one `pnpm start` uses: don't run the E2E tests against data you want to keep.
+Each scenario empties the `users` table of the database in `.env`, the one `pnpm start` uses: don't run the E2E tests against data you want to keep.
 
 ### Load tests
 
-[k6](https://github.com/grafana/k6) scripts live alongside their feature's E2E tests.
-
-Example: [create-user.k6.ts](tests/user/create-user/create-user.k6.ts)
+[k6](https://github.com/grafana/k6) scripts, e.g. [create-user.k6.ts](tests/user/create-user/create-user.k6.ts).
 
 ## Client Types Package
 
