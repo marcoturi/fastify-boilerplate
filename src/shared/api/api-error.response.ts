@@ -13,8 +13,7 @@ export const apiErrorResponseSchema = Type.Object(
     correlationId: Type.String({ example: 'YevPQs' }),
     // Stable reason clients can branch on, when the exception sets one (as GraphQL's code)
     reason: Type.Optional(Type.String({ example: 'USER_ALREADY_EXISTS' })),
-    // Field-level validation errors — only present on 400 validation failures.
-    // Shape matches what the error handler emits from `error.validation`.
+    // Field-level errors of a 400: from request validation or an ArgumentInvalidException
     subErrors: Type.Optional(
       Type.Array(
         Type.Object({
