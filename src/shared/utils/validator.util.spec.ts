@@ -9,6 +9,7 @@ describe('validator()', () => {
     Type.Object({
       email: Type.String({ format: 'email' }),
       street: Type.Optional(Type.String()),
+      tags: Type.Optional(Type.Array(Type.String())),
     }),
   );
 
@@ -19,6 +20,13 @@ describe('validator()', () => {
   it('treats null fields as absent, as GraphQL sends them for optional arguments', () => {
     assert.deepEqual(validate({ email: 'mario.rossi@pec.it', street: null }), {
       email: 'mario.rossi@pec.it',
+    });
+  });
+
+  it('keeps a list argument a list', () => {
+    assert.deepEqual(validate({ email: 'mario.rossi@pec.it', tags: ['a'] }), {
+      email: 'mario.rossi@pec.it',
+      tags: ['a'],
     });
   });
 
