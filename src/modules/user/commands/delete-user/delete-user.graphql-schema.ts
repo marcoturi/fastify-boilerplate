@@ -1,5 +1,5 @@
 const deleteUserGraphqlSchema = `
-  type Mutation {
+  extend type Mutation {
     deleteUser(id: ID!): Boolean!
   }
 `;

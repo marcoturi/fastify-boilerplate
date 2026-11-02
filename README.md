@@ -295,7 +295,7 @@ Example: [user.repository.ts](src/modules/user/database/user.repository.ts)
     │   ├── options.ts             → Fastify instance options (logger, request ids, Ajv), shared with the e2e tests
     │   ├── di/                    → Awilix container: global dependencies and module autoload
     │   ├── plugins/               → Autoloaded plugins (CQRS, error handler, readiness, request context, Swagger)
-    │   ├── graphql-schema.ts      → Merges the modules' GraphQL schemas
+    │   ├── graphql-schema.ts      → Collects the modules' GraphQL schemas
     │   ├── graphql-error-formatter.ts → Maps exceptions to GraphQL errors
     │   └── request-id.ts          → Request id from the `request-id` header, or a new UUID
     └── shared/

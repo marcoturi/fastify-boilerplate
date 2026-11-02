@@ -16,6 +16,8 @@ paths:
   CQRS buses (see the CQRS rule)
 - GraphQL resolvers co-locate with their REST route counterparts (`<slice>.route.ts`,
   `<slice>.resolver.ts`, `<slice>.graphql-schema.ts` in the same folder)
+- A slice adds its root fields with `extend type Query` / `extend type Mutation`: the root types
+  are declared once, in `src/server/graphql-schema.ts`
 
 ## GraphQL input validation
 

@@ -5,7 +5,7 @@ const createUserGraphqlSchema = `
     ${userBaseSchema}
   }
 
-  type Mutation {
+  extend type Mutation {
     createUser(input: CreateUserInput!): ID!
   }
 `;

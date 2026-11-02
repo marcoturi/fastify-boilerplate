@@ -6,7 +6,7 @@ const findUsersGraphqlSchema = `
     data: [User!]!
   }
 
-  type Query {
+  extend type Query {
     findUsers(limit: Int, page: Int, country: String, postalCode: String, street: String): UserPaginatedResponse!
   }
 `;
