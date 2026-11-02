@@ -32,7 +32,6 @@ screenshots/
 biome.json
 tsconfig.json
 commitlint.config.cjs
-cucumber.json
 .specstory
 .history
 
