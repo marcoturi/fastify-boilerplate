@@ -66,8 +66,9 @@ this. Everything else goes through the CQRS buses:
   no `enum` (use a `const` object with a derived type, e.g. `UserRoles`), no `any` outside
   tests, no `console` (use the injected `logger`)): rely on `pnpm check` instead of restating them
 - Code, comments, identifiers, log and error messages are in English
-- Read `process.env` only in `src/config/env.ts`, which validates it; everything else imports
-  `env` from `#src/config/index.ts`. The one exception is `src/instrumentation.ts`, which runs
+- Application code (`src/`, `tests/`) reads `process.env` only in `src/config/env.ts`, which
+  validates it; everything else imports `env` from `#src/config/index.ts`. The one exception is
+  `src/instrumentation.ts`, which runs
   via `--import` before the config is loaded
 - TypeScript: `strict: true`; always include the `.ts` extension in imports (ESM); prefer
   `import type { Foo } from './bar.ts'`
