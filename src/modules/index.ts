@@ -1,14 +1,13 @@
 import { asValue } from 'awilix';
 import type { FastifyBaseLogger, FastifyInstance } from 'fastify';
-import type postgres from 'postgres';
 import type { CommandBus, EventBus, QueryBus } from '#src/shared/cqrs/bus.types.ts';
-import { setQueryLogger, transactionAwareDb } from '#src/shared/db/postgres.ts';
+import { type Db, setQueryLogger, transactionAwareDb } from '#src/shared/db/postgres.ts';
 import { sqlRepositoryBase } from '#src/shared/db/sql-repository.base.ts';
 
 declare global {
   export interface Dependencies {
     logger: FastifyBaseLogger;
-    db: postgres.Sql;
+    db: Db;
     repositoryBase: ReturnType<typeof sqlRepositoryBase>;
     queryBus: QueryBus;
     commandBus: CommandBus;

@@ -61,16 +61,21 @@ function currentDb(): postgres.Sql {
   return (transactions.current() as unknown as postgres.Sql | undefined) ?? getDb();
 }
 
+/** The client repositories get. Its pool-level methods are `never`: inside withTransaction()
+ *  they do not exist, and a transaction opened with `begin` would not reach the repositories */
+export type Db = postgres.Sql &
+  Record<'begin' | 'reserve' | 'listen' | 'subscribe' | 'end' | 'close' | 'largeObject', never>;
+
 /**
  * A client that runs each query on the current transaction (inside withTransaction()) or,
  * outside one, on the pool. Registered in DI as `db`, so repositories join transactions
  * without passing `tx` around.
  */
-export function transactionAwareDb(): postgres.Sql {
+export function transactionAwareDb(): Db {
   return new Proxy(getDb(), {
     apply: (_target, _thisArg, args) => Reflect.apply(currentDb(), undefined, args),
     get: (_target, property) => Reflect.get(currentDb(), property),
-  });
+  }) as Db;
 }
 
 /**
