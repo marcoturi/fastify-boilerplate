@@ -3,7 +3,7 @@ import { type Static, Type } from 'typebox';
 /** Shared `$id` for the error envelope. Registered once on the instance via
  *  `fastify.addSchema(apiErrorResponseSchema)` (see error-handler plugin) and
  *  referenced from routes through {@link apiErrorResponseRef}. */
-export const API_ERROR_RESPONSE_ID = 'ApiErrorResponse';
+const API_ERROR_RESPONSE_ID = 'ApiErrorResponse';
 
 export const apiErrorResponseSchema = Type.Object(
   {
