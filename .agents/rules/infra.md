@@ -29,16 +29,14 @@ paths:
 - The image runs the TypeScript sources directly (no build step) as a non-root user
 - Only `package.json`, the production `node_modules` and `src/` reach the image: a file needed at
   runtime outside `src/` must be copied explicitly and must not be excluded by `.dockerignore`
-- Migrations do not run in the image: `db/` is excluded and `pnpm db:migrate` runs separately.
-  In `docker-compose.yml` the one-shot `migrate` service applies them before `app` starts
+- Migrations do not run in the image: `db/` is excluded and `pnpm db:migrate` runs separately
 
 ## CI and release
 
 - `ci.yml` runs on pull requests; its `Check and test` job is a required status check of the
   `main` ruleset. `release.yml` runs on pushes to `main` and repeats the checks before publishing
 - semantic-release pushes the release commit with the `GH_TOKEN` secret (a personal access token
-  allowed to bypass the ruleset). The release checkout keeps `persist-credentials: false`:
-  otherwise the push uses the workflow credentials and the ruleset rejects it
+  allowed to bypass the ruleset)
 - Actions are pinned to major tags (e.g. `actions/checkout@v7`), not to commit digests: a
   deliberate choice
 - `db:migrate` runs with `--no-dump-schema`: there is no `db/schema.sql` to commit
