@@ -11,7 +11,7 @@ paths:
 # Database
 
 - Client: `postgres` (postgres.js) — uses tagged template literals for parameterized queries
-- Connection and transactions: `getDb()`, `closeDbConnection()` and `withTransaction()` in
+- Connection and transactions: `getDb()` and `withTransaction()` in
   `src/shared/db/postgres.ts`; their JSDoc says how they behave. Call `withTransaction()` from a
   service or a repository: handlers may not import `src/shared/db/` beyond ports
   (dependency-cruiser), so a handler that needs a transaction delegates it to a service
