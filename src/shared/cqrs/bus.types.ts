@@ -1,6 +1,6 @@
 import type { FastifyBaseLogger } from 'fastify';
 
-export type Meta = null | Record<string, unknown>;
+export type Meta = Record<string, unknown>;
 
 /** Unique symbol used to brand Action objects, preventing plain-object misuse. */
 declare const ActionBrand: unique symbol;
