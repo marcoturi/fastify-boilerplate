@@ -1,3 +1,21 @@
+## [4.3.7](https://github.com/marcoturi/fastify-boilerplate/compare/v4.3.6...v4.3.7) (2026-11-02)
+
+### Bug Fixes
+
+* **db:** map the driver error withTransaction rejects with ([7a24c7c](https://github.com/marcoturi/fastify-boilerplate/commit/7a24c7c76bcd1198cecc43f03df78f542e5863fb))
+
+### Refactoring
+
+* **graphql:** let Mercurius join the module schemas, without @graphql-tools/merge ([2b85db7](https://github.com/marcoturi/fastify-boilerplate/commit/2b85db7ae855bed9d7eed8349e4b8f6e492c5648))
+
+### Documentation
+
+* **agents:** scripts may read process.env, application code only in env.ts ([9447581](https://github.com/marcoturi/fastify-boilerplate/commit/9447581b3eb05fd857fe09b38dd443757720e99b))
+* **di:** say what registering the awilix plugin does ([859effc](https://github.com/marcoturi/fastify-boilerplate/commit/859effcedd94d16efa71d63d1525a42e430ed94e))
+* **exceptions:** reserve ArgumentInvalidException for client input ([f8d0a65](https://github.com/marcoturi/fastify-boilerplate/commit/f8d0a65e4e9328c20fe007adc17bf7ab9a68ba92))
+* **readme:** the logger is configured in options.ts, not in index.ts ([8ee38c5](https://github.com/marcoturi/fastify-boilerplate/commit/8ee38c5cc661c3659969feff5f3059d25b544573))
+* **rules:** under Compose the migrate service applies the migrations ([0d74775](https://github.com/marcoturi/fastify-boilerplate/commit/0d74775d6e7c5c3891e471ac070d2d7615a30a43))
+
 ## [4.3.6](https://github.com/marcoturi/fastify-boilerplate/compare/v4.3.5...v4.3.6) (2026-11-02)
 
 ### Bug Fixes
