@@ -97,6 +97,9 @@ export function sqlRepositoryBase(db: Dependencies['db']) {
       },
       async insert(entity: Entity | Entity[]): Promise<void> {
         const entities = Array.isArray(entity) ? entity : [entity];
+        if (entities.length === 0) {
+          return; // an empty INSERT is not valid SQL
+        }
         const records = entities.map(mapper.toPersistence) as Record<string, unknown>[];
         await db`INSERT INTO ${db(tableName)} ${db(records)}`;
       },
