@@ -225,7 +225,7 @@ Example: [find-users.route.ts](src/modules/user/queries/find-users/find-users.ro
 **Command/Query Handler** — runs one use case. Receives a command or query, calls a few domain, service or repository functions, returns a result or emits events. One handler per use case (e.g. `CreateUser`, `FindUsers`).
 
 Benefits of the CQRS bus pattern:
-- **Middlewares** — cross-cutting concerns (metadata, tracing, timing; auth, caching, rate limiting) plug in between route and handler. A middleware wraps every action of its bus: one meant for some actions only checks `action.type` (e.g. the `user/` prefix). See [middlewares.ts](src/shared/cqrs/middlewares.ts).
+- **Middlewares** — cross-cutting concerns (tracing, timing; auth, caching, rate limiting) plug in between route and handler. A middleware wraps every action of its bus: one meant for some actions only checks `action.type` (e.g. the `user/` prefix). See [middlewares.ts](src/shared/cqrs/middlewares.ts).
 - **Decoupling** — modules communicate through the bus instead of direct imports, making future extraction to microservices trivial.
 
 Example: [find-users.handler.ts](src/modules/user/queries/find-users/find-users.handler.ts)
