@@ -16,9 +16,8 @@ holds the rules.
 ## Action creators
 
 - One per module, built with `actionCreatorFactory('<module>')` in
-  `src/modules/<name>/<name>.action-creator.ts`, imported from there (not from `index.ts`). It
-  lives in its own layer-free file so the domain can create events without importing `index.ts`
-  (which would form a domain ↔ index cycle)
+  `src/modules/<name>/<name>.action-creator.ts`, a layer-free file that handlers and
+  `domain/*.events.ts` import directly
 - A command or query creator embeds the payload and the **unwrapped** result type
   (`userActionCreator<CreateUserRequestDto, string>('create')`), never `Promise<X>`; an event
   creator has no result type
