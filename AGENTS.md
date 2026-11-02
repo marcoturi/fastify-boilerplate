@@ -88,7 +88,8 @@ Cucumber World in `tests/support/` is a class because Cucumber requires it.
   finds its factory. No `make` or `create` prefix. Factories outside the container are named
   after what they produce (`requestBus`, `tracingMiddleware`).
 - **Parameter:** one destructured `Dependencies` object, or none when the factory needs nothing
-  (e.g. a pure domain).
+  (e.g. a pure domain). Factories outside the container take what they need
+  (`requestBus(label)`, `tracingMiddleware(bus)`).
 - **Return type:** inferred. Annotate it only when the factory implements an interface, so
   TypeScript checks the implementation against it: a repository port
   (`userRepository(...): UserRepository`), `Mapper<...>`, a bus type.

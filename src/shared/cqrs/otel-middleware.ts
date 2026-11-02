@@ -3,13 +3,6 @@ import type { Middleware } from '#src/shared/cqrs/bus.types.ts';
 
 const tracer = trace.getTracer('cqrs');
 
-/** Marks the span as failed, with the error message, and records the exception on it. */
-function recordFailure(span: Span, error: unknown): void {
-  const exception = error instanceof Error ? error : new Error(String(error));
-  span.setStatus({ code: SpanStatusCode.ERROR, message: exception.message });
-  span.recordException(exception);
-}
-
 /**
  * Creates the tracing middleware of a bus: each action runs in an OTel span named after its
  * type, which also covers an async event handler, so the event bus awaits it. A failure is
@@ -17,6 +10,13 @@ function recordFailure(span: Span, error: unknown): void {
  * When OTel is disabled the API returns noop spans — zero overhead.
  */
 export function tracingMiddleware(bus: 'command' | 'query' | 'event'): Middleware {
+  /** Marks the span as failed, with the error message, and records the exception on it. */
+  function recordFailure(span: Span, error: unknown): void {
+    const exception = error instanceof Error ? error : new Error(String(error));
+    span.setStatus({ code: SpanStatusCode.ERROR, message: exception.message });
+    span.recordException(exception);
+  }
+
   return (action, next) =>
     tracer.startActiveSpan(
       action.type,

@@ -1,24 +1,14 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
-import { formatName, uniqueNameFormatter } from '#src/server/di/util.ts';
-
-describe('Awilix: formatName()', () => {
-  it('should convert hyphenated and dotted file names to camelCase', () => {
-    assert.equal(formatName('user-test.repository'), 'userTestRepository');
-  });
-
-  it('should convert dotted file names to camelCase', () => {
-    assert.equal(formatName('user.repository'), 'userRepository');
-  });
-
-  it('should handle mapper file names', () => {
-    assert.equal(formatName('user.mapper'), 'userMapper');
-  });
-});
+import { uniqueNameFormatter } from '#src/server/di/util.ts';
 
 describe('Awilix: uniqueNameFormatter()', () => {
-  it('formats distinct file names like formatName', () => {
+  it('converts hyphenated and dotted file names to camelCase', () => {
     const format = uniqueNameFormatter();
+    assert.equal(
+      format('user-test.repository', { path: 'user/user-test.repository.ts' }),
+      'userTestRepository',
+    );
     assert.equal(format('user.repository', { path: 'user/user.repository.ts' }), 'userRepository');
     assert.equal(format('user.mapper', { path: 'user/user.mapper.ts' }), 'userMapper');
   });
