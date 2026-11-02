@@ -1,12 +1,11 @@
-import { check, sleep } from 'k6';
+import { check } from 'k6';
 import http, { type RefinedResponse, type ResponseType } from 'k6/http';
-import { Counter, Rate, Trend } from 'k6/metrics';
+import { Counter, Rate } from 'k6/metrics';
 import type { Options } from 'k6/options';
 
 // ---------------------------------------------------------------------------
 // Custom metrics
 // ---------------------------------------------------------------------------
-const createUserDuration = new Trend('create_user_duration', true);
 const createUserFailRate = new Rate('create_user_fail_rate');
 const createdUsers = new Counter('created_users');
 
@@ -29,7 +28,6 @@ export const options: Options = {
     http_req_duration: ['p(95)<500', 'p(99)<1000'],
     http_req_failed: ['rate<0.05'],
     // Custom metrics
-    create_user_duration: ['p(95)<500'],
     create_user_fail_rate: ['rate<0.05'],
   },
 };
@@ -79,15 +77,9 @@ export default function () {
     tags: { name: 'CreateUser' },
   });
 
-  // Record custom metrics
-  createUserDuration.add(res.timings.duration);
-
   const passed = assertCreated(res);
   createUserFailRate.add(!passed);
   if (passed) {
     createdUsers.add(1);
   }
-
-  // Minimal think-time to avoid thundering-herd on the DB
-  sleep(0.01);
 }
