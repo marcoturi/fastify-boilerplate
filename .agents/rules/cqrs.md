@@ -29,10 +29,10 @@ holds the rules.
   handler inline, with `commandBus.register(creator, handler)` (or `queryBus`) or
   `eventBus.on(creator, handler, options?)`. DI calls it at startup
 - `register()` and `on()` type the handler from the creator: no annotations on it
-- Helpers are functions in the factory's closure (at module level when they need no dependency),
-  never methods of the returned object: the bus calls the handler detached from it, and DI reads
-  only `init`. Logic that deserves its own tests, or that several handlers share, goes in the
-  domain or in a service
+- Helpers are inner closures of the factory (AGENTS.md, "Factory functions"), never methods of
+  the returned object: the bus calls the handler detached from it, and DI reads only `init`.
+  Logic that deserves its own tests, or that several handlers share, goes in the domain or in a
+  service
 - A command or query type has exactly one handler (a second `register()` throws); an event type
   can have any number of subscribers
 
