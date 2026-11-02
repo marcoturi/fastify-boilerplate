@@ -57,7 +57,9 @@ function sendError(
 }
 
 async function errorHandlerPlugin(fastify: FastifyInstance) {
-  fastify.setErrorHandler((error: FastifyError | Error, _, res) => {
+  fastify.setErrorHandler((thrown: unknown, _, res) => {
+    // A handler can throw anything: the `in` checks below would fail on a string or null
+    const error = (thrown instanceof Error ? thrown : new Error(String(thrown))) as FastifyError;
     // Known exceptions are expected outcomes (log at warn to avoid alert noise); INTERNAL
     // ones are genuine failures and take the 5xx path below, which hides their message
     if (error instanceof ExceptionBase && error.code !== 'INTERNAL') {
