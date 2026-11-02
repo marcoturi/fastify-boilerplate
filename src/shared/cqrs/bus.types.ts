@@ -31,9 +31,7 @@ export type EventHandler = (event: Action<unknown>) => void | Promise<void>;
 /** Runs the rest of a middleware chain, ending with the handler. */
 export type Next = (action: Action<unknown>) => unknown;
 
-/** Wraps every action of a bus, first added = outermost. It calls `next` with the action, or a
- *  new one (never mutate it), and returns its result: commands and queries resolve to the
- *  handler's result, and the event bus awaits it to keep per-key order and isolate failures. */
+/** Wraps every action of a bus: what it must do is in .agents/rules/cqrs.md (Middlewares) */
 export type Middleware = (action: Action<unknown>, next: Next) => unknown;
 
 /** Opt-in ordering for an event subscription: events whose `keyExtractor` returns the
