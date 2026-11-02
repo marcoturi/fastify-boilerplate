@@ -101,7 +101,7 @@ describe('eventBus()', () => {
         await new Promise((resolve) => setImmediate(resolve));
         done.push(event.payload.label);
       },
-      { keyExtractor: (event) => (event.payload as { id: string }).id },
+      { keyExtractor: (event) => event.payload.id },
     );
 
     bus.emit(makeEvent('job', { id: 'a', label: 'a1' }));
@@ -201,7 +201,7 @@ describe('eventBus()', () => {
         if (event.payload.label === 'a') await firstHeld;
         seen.push(`${event.payload.label}@${requestStore.getStore()}`);
       },
-      { keyExtractor: (event) => (event.payload as { id: string }).id },
+      { keyExtractor: (event) => event.payload.id },
     );
 
     requestStore.run('request-A', () => bus.emit(makeEvent('job', { id: 'k', label: 'a' })));

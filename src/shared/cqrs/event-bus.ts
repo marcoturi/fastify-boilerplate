@@ -104,12 +104,12 @@ export function eventBus({ logger }: EventBusOptions): EventBus {
   function on<P>(
     creator: ActionCreator<P, void>,
     handler: (event: Action<P, void>) => void | Promise<void>,
-    options?: SequentialProcessingOptions,
+    options?: SequentialProcessingOptions<P>,
   ): void {
     const existing = handlers.get(creator.type) ?? [];
     existing.push({
       handler: handler as EventHandler,
-      keyExtractor: options?.keyExtractor,
+      keyExtractor: options?.keyExtractor as HandlerRegistration['keyExtractor'],
       queues: new Map(),
     });
     handlers.set(creator.type, existing);

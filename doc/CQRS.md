@@ -250,7 +250,7 @@ eventBus.on(
   async (event) => {
     await walletRepository.applyTransaction(event.payload); // must not overlap per wallet
   },
-  { keyExtractor: (event) => (event.payload as { walletId: string }).walletId },
+  { keyExtractor: (event) => event.payload.walletId },
 );
 
 // These two are processed sequentially (same walletId), in order:

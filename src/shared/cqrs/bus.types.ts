@@ -39,8 +39,8 @@ export type Middleware = (action: Action<unknown>, next: Next) => unknown;
 /** Opt-in ordering for an event subscription: events whose `keyExtractor` returns the
  *  same key are processed one at a time, in emit order (e.g. per aggregate/entity id),
  *  while different keys run concurrently. */
-export interface SequentialProcessingOptions {
-  keyExtractor: (event: Action<unknown>) => string;
+export interface SequentialProcessingOptions<P = unknown> {
+  keyExtractor: (event: Action<P>) => string;
 }
 
 /** A bus of commands or queries: one handler per type, whose result `execute` returns. */
@@ -66,7 +66,7 @@ export interface EventBus {
   on<P>(
     creator: ActionCreator<P, void>,
     handler: (event: Action<P, void>) => void | Promise<void>,
-    options?: SequentialProcessingOptions,
+    options?: SequentialProcessingOptions<P>,
   ): void;
   emit(event: Action<unknown, void>): void;
   addMiddleware(fn: Middleware): void;
