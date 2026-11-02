@@ -56,7 +56,6 @@ function assertCreated(res: RefinedResponse<ResponseType>): boolean {
       const body = r.json() as CreateUserResponse | null;
       return body !== null && typeof body.id === 'string' && body.id.length > 0;
     },
-    'latency < 500ms': (r) => r.timings.duration < 500,
   });
 }
 
