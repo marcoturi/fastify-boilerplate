@@ -36,6 +36,10 @@ async function init() {
       process.exit(1);
     }, SHUTDOWN_TIMEOUT_MS).unref();
 
+    // close() waits for the requests in flight but drops only the connections idle when it
+    // starts: a keep-alive connection that answers one of them would then hold it open
+    setInterval(() => fastify.server.closeIdleConnections(), 100).unref();
+
     let code = exitCode;
     try {
       await fastify.close();
