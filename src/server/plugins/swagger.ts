@@ -15,6 +15,11 @@ async function swaggerGeneratorPlugin(fastify: FastifyInstance) {
         version: env.version,
       },
     },
+    // Name the shared schemas by their $id: the default `def-<index>` reaches the generated
+    // client types, and changes meaning when another schema is added before it
+    refResolver: {
+      buildLocalReference: (json, _baseUri, _fragment, i) => (json.$id as string) ?? `def-${i}`,
+    },
     // Document the shared error envelope once, globally, as the `4XX`/`5XX` range
     // responses for every schema-bearing route (also flows into the generated client
     // types). Ranges say "any client/server error looks like this" — clearer than the
