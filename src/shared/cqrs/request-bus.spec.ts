@@ -4,11 +4,12 @@ import { actionCreatorFactory } from './action-creator.ts';
 import type { Action } from './bus.types.ts';
 import { requestBus } from './request-bus.ts';
 
-/** A creator for `type`, as modules make them with their action creator */
-const creator = <P = unknown, R = unknown>(type: string) => actionCreatorFactory()<P, R>(type);
+/** A creator for `test/<type>`, as modules make them with their action creator */
+const creator = <P = unknown, R = unknown>(type: string) =>
+  actionCreatorFactory('test')<P, R>(type);
 
 const makeAction = <P>(type: string, payload: P, meta?: Record<string, unknown>): Action<P> =>
-  ({ type, payload, meta }) as unknown as Action<P>;
+  ({ type: `test/${type}`, payload, meta }) as unknown as Action<P>;
 
 describe('requestBus()', () => {
   it('executes the registered handler and returns its result', async () => {
@@ -44,7 +45,7 @@ describe('requestBus()', () => {
     const bus = requestBus('Command');
     await assert.rejects(
       bus.execute(makeAction('missing', {})),
-      /Command type of missing is not registered/,
+      /Command type of test\/missing is not registered/,
     );
   });
 
@@ -53,7 +54,7 @@ describe('requestBus()', () => {
     bus.register(creator('t'), async () => 'first');
     assert.throws(
       () => bus.register(creator('t'), async () => 'second'),
-      /Command type of t is already registered/,
+      /Command type of test\/t is already registered/,
     );
   });
 

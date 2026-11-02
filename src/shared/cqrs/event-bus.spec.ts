@@ -6,11 +6,11 @@ import { actionCreatorFactory } from './action-creator.ts';
 import type { Action } from './bus.types.ts';
 import { eventBus } from './event-bus.ts';
 
-/** A creator for `type`, as modules make them with their action creator */
-const creator = <P = unknown, R = void>(type: string) => actionCreatorFactory()<P, R>(type);
+/** A creator for `test/<type>`, as modules make them with their action creator */
+const creator = <P = unknown, R = void>(type: string) => actionCreatorFactory('test')<P, R>(type);
 
 const makeEvent = <P>(type: string, payload: P): Action<P, void> =>
-  ({ type, payload }) as unknown as Action<P, void>;
+  ({ type: `test/${type}`, payload }) as unknown as Action<P, void>;
 
 const fakeLogger = () => {
   const debugCalls: string[] = [];

@@ -14,12 +14,6 @@ describe('actionCreatorFactory()', () => {
     assert.deepEqual(action.payload, { email: 'a@b.c' });
   });
 
-  it('works without a prefix', () => {
-    const create = actionCreatorFactory();
-    const ping = create<null>('ping');
-    assert.equal(ping.type, 'ping');
-  });
-
   it('adds meta only when the call passes one', () => {
     const create = actionCreatorFactory('user')<null>('x');
     assert.equal('meta' in create(null), false);
