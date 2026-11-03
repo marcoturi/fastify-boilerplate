@@ -78,7 +78,7 @@
     "@types/node": "26.6.6",
     "conventional-changelog-conventionalcommits": "9.3.1",
     "dbmate": "2.37.0",
-    "dependency-cruiser": "18.7.0",
+    "dependency-cruiser": "18.7.1",
     "husky": "9.1.7",
     "openapi-typescript": "7.13.0",
     "pino-pretty": "13.2.0",
