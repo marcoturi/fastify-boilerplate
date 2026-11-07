@@ -1,6 +1,6 @@
 {
   "name": "@marcoturi/fastify-boilerplate",
-  "version": "4.3.14",
+  "version": "4.3.15",
   "description": "Auto-generated REST (OpenAPI) and GraphQL client types for fastify-boilerplate",
   "type": "module",
   "exports": {
