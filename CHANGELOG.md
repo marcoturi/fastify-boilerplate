@@ -1,3 +1,9 @@
+## [4.3.17](https://github.com/marcoturi/fastify-boilerplate/compare/v4.3.16...v4.3.17) (2026-11-14)
+
+### Bug Fixes
+
+* **deps:** update dependency @fastify/cors to v11.4.2 ([#1252](https://github.com/marcoturi/fastify-boilerplate/issues/1252)) ([be1930b](https://github.com/marcoturi/fastify-boilerplate/commit/be1930b55b98ae3234312f037e02dd847fea67ec))
+
 ## [4.3.16](https://github.com/marcoturi/fastify-boilerplate/compare/v4.3.15...v4.3.16) (2026-11-10)
 
 ### Bug Fixes
