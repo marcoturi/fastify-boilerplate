@@ -1,3 +1,9 @@
+## [4.3.23](https://github.com/marcoturi/fastify-boilerplate/compare/v4.3.22...v4.3.23) (2026-11-16)
+
+### Bug Fixes
+
+* **deps:** update dependency env-schema to v8.0.2 ([#1259](https://github.com/marcoturi/fastify-boilerplate/issues/1259)) ([e2cec37](https://github.com/marcoturi/fastify-boilerplate/commit/e2cec37d7e407e2aa8c6eaf2db4369bc10935631))
+
 ## [4.3.22](https://github.com/marcoturi/fastify-boilerplate/compare/v4.3.21...v4.3.22) (2026-11-16)
 
 ### Bug Fixes
