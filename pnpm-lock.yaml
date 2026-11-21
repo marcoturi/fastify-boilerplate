@@ -203,8 +203,8 @@ importers:
         specifier: 6.3.0
         version: 6.3.0(ajv-formats@3.0.1(ajv@8.20.0))(typebox@1.4.7)
       '@fastify/under-pressure':
-        specifier: 9.2.1
-        version: 9.2.1
+        specifier: 9.2.2
+        version: 9.2.2
       '@opentelemetry/api':
         specifier: 1.10.0
         version: 1.10.0
@@ -731,8 +731,8 @@ packages:
       ajv-formats: ^3.0.1
       typebox: ^1.1.14
 
-  '@fastify/under-pressure@9.2.1':
-    resolution: {integrity: sha512-eScrraL3PXJwWAfnpYVVDkctvl/RiQCnRahmsBS+ZhcQ6fy54beMc9Kom4NhlU4aYNgsl3J3ps4KBTndzHUkLQ==}
+  '@fastify/under-pressure@9.2.2':
+    resolution: {integrity: sha512-89/mvl3fWehCzJMs0o5hYl0kKovH222nSaW/w3T5Uutd/996zLvE75LT46sGSJRCucqhQKecgLc6Qwb88R4u2A==}
 
   '@fastify/websocket@11.3.0':
     resolution: {integrity: sha512-g89ag4BCcD9YP5wBZXixzoLnuf5j89p/sXFcfpCiv2pdEkYYukBEoK3heVzqsp0EAtszVDc2BBZG0KZqeAShIA==}
@@ -4338,7 +4338,7 @@ snapshots:
       ajv-formats: 3.0.1(ajv@8.20.0)
       typebox: 1.4.7
 
-  '@fastify/under-pressure@9.2.1':
+  '@fastify/under-pressure@9.2.2':
     dependencies:
       '@fastify/error': 4.2.0
       fastify-plugin: 6.0.1
