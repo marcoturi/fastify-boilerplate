@@ -197,8 +197,8 @@ importers:
         specifier: 9.9.5
         version: 9.9.5(supports-color@10.2.2)
       '@fastify/swagger-ui':
-        specifier: 6.1.4
-        version: 6.1.4
+        specifier: 6.1.5
+        version: 6.1.5
       '@fastify/type-provider-typebox':
         specifier: 6.3.0
         version: 6.3.0(ajv-formats@3.0.1(ajv@8.20.0))(typebox@1.4.7)
@@ -719,8 +719,8 @@ packages:
   '@fastify/static@10.1.2':
     resolution: {integrity: sha512-G/g18cG9tLutT/OVyN1AIsHIl9L1UwmJ+S3dkyhVpplIx0nEMicd7RGQ+uJLyhKKF4a3tTcQydccn3Mop1fX+Q==}
 
-  '@fastify/swagger-ui@6.1.4':
-    resolution: {integrity: sha512-MXlo63IvSGkoi2MRbsRRHSoZD4cm/t2zEpKX20LEdSX8cChAq6phPhOWvgZM78Y2WmM40bmuD+pZFlrCYrCsMQ==}
+  '@fastify/swagger-ui@6.1.5':
+    resolution: {integrity: sha512-OZaIUEbuAO6rb7+j80rie/FppKmT0xlLxjBVjCaTuu3JLEnhqKxycTCPkZxH3jiVA8jLDzTrENVaANUQX/y94w==}
 
   '@fastify/swagger@9.9.5':
     resolution: {integrity: sha512-2X/MXoTv3Jhxegju9DwjOTKcDT86q0SDPIuuZDx9DHfRsHzpVfxVIXzP73X+qcEA1j7N+k7Cm95h9esGy/oBgA==}
@@ -4315,7 +4315,7 @@ snapshots:
       fastq: 1.20.1
       glob: 13.0.6
 
-  '@fastify/swagger-ui@6.1.4':
+  '@fastify/swagger-ui@6.1.5':
     dependencies:
       '@fastify/static': 10.1.2
       fastify-plugin: 6.0.1
