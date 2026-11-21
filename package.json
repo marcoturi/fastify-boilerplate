@@ -40,7 +40,7 @@
   },
   "packageManager": "pnpm@12.21.0",
   "dependencies": {
-    "@fastify/autoload": "6.5.1",
+    "@fastify/autoload": "6.6.0",
     "@fastify/awilix": "8.3.2",
     "@fastify/cors": "11.4.3",
     "@fastify/helmet": "13.2.0",
