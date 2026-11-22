@@ -176,8 +176,8 @@ importers:
   .:
     dependencies:
       '@fastify/autoload':
-        specifier: 6.5.1
-        version: 6.5.1
+        specifier: 6.6.0
+        version: 6.6.0
       '@fastify/awilix':
         specifier: 8.3.2
         version: 8.3.2(awilix@13.0.7)(fastify@5.12.8)
@@ -672,8 +672,8 @@ packages:
   '@fastify/ajv-compiler@4.0.5':
     resolution: {integrity: sha512-KoWKW+MhvfTRWL4qrhUwAAZoaChluo0m0vbiJlGMt2GXvL4LVPQEjt8kSpHI3IBq5Rez8fg+XeH3cneztq+C7A==}
 
-  '@fastify/autoload@6.5.1':
-    resolution: {integrity: sha512-IW2DyejF1+SEEDTwbJriAcKtMcAy+y1cK04ZQj3p7WwwR/zgN+YYxzmM96L+AP48nNOCNKBGpyYJzgZ1HnubKA==}
+  '@fastify/autoload@6.6.0':
+    resolution: {integrity: sha512-AuPwbdsc0PUlfGXx6NgSoP2HnNg5qV1jV+hezugkvQnJ3O4ygaCxF6Xdr5pgNm3t2mokXXmIW4HOLeSdqiAR+A==}
 
   '@fastify/awilix@8.3.2':
     resolution: {integrity: sha512-ANOVy4ax5QYdDbR/p518/HxhOmbyucOC8okwNFl4omzVkBQaNQvZAOtR2HUjacI56v8LlGsqpP1r1tuLiLpa+w==}
@@ -4245,7 +4245,7 @@ snapshots:
       ajv-formats: 3.0.1(ajv@8.20.0)
       fast-uri: 3.1.4
 
-  '@fastify/autoload@6.5.1': {}
+  '@fastify/autoload@6.6.0': {}
 
   '@fastify/awilix@8.3.2(awilix@13.0.7)(fastify@5.12.8)':
     dependencies:
