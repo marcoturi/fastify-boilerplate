@@ -283,8 +283,8 @@ importers:
         specifier: 11.0.1
         version: 11.0.1(semantic-release@25.0.9(supports-color@10.2.2)(typescript@6.0.3))(supports-color@10.2.2)
       '@types/k6':
-        specifier: 2.4.0
-        version: 2.4.0
+        specifier: 2.4.1
+        version: 2.4.1
       '@types/node':
         specifier: 26.6.6
         version: 26.6.6
@@ -1543,8 +1543,8 @@ packages:
     resolution: {integrity: sha512-ID7fosbc50TbT0MK0EG12O+gAP3W3Aa/Pz4DaTtQtEvlc9Odaqi0de+xuZ7Li2GtK4HzEX7IuRWS/JmZLksR3Q==}
     engines: {node: '>=14'}
 
-  '@types/k6@2.4.0':
-    resolution: {integrity: sha512-FGJAyfzNyYiSdWbMjT89k4ltFM0A2Hoq/VMUp0sBA9AjU8M0e/uilJkvv12MHW/KZ3nK3SVyv30IKD4rzjaiOg==}
+  '@types/k6@2.4.1':
+    resolution: {integrity: sha512-kzF2cGnkZJML9Nk2hIgU0d2gdCvuT5Ux/7pk3bw/rd5i5RaqbO3N28l+eFcF+vHJOwU5HoYC7LP2idtmQhi4SQ==}
 
   '@types/node@26.6.6':
     resolution: {integrity: sha512-MzQj+8Kx3XI40OmUAE6Qoh58ZMNstNNMwn2nfd3qWsfe7nDNSqJNzes4njhz6AHwrSHOffSLwXU6yb474Q4aog==}
@@ -5425,7 +5425,7 @@ snapshots:
 
   '@teppeis/multimaps@3.0.0': {}
 
-  '@types/k6@2.4.0': {}
+  '@types/k6@2.4.1': {}
 
   '@types/node@26.6.6':
     dependencies:
