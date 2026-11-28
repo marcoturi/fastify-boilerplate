@@ -1,3 +1,9 @@
+## [4.3.30](https://github.com/marcoturi/fastify-boilerplate/compare/v4.3.29...v4.3.30) (2026-11-28)
+
+### Bug Fixes
+
+* **deps:** update dependency mercurius to v16.13.0 ([#1278](https://github.com/marcoturi/fastify-boilerplate/issues/1278)) ([fcfc650](https://github.com/marcoturi/fastify-boilerplate/commit/fcfc6508545ad25605bcd919741402f7d80c0c4b))
+
 ## [4.3.29](https://github.com/marcoturi/fastify-boilerplate/compare/v4.3.28...v4.3.29) (2026-11-22)
 
 ### Bug Fixes
