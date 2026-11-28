@@ -75,7 +75,7 @@
     "@semantic-release/changelog": "7.0.0",
     "@semantic-release/git": "11.0.1",
     "@types/k6": "2.4.1",
-    "@types/node": "26.6.6",
+    "@types/node": "26.6.11",
     "conventional-changelog-conventionalcommits": "9.3.1",
     "dbmate": "2.38.2",
     "dependency-cruiser": "18.9.0",
